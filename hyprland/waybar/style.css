@@ -1,0 +1,42 @@
+#waybar {
+  background-color: rgba(25,25,25,0.95);
+  color: #ffffff;
+  font-size: 13px;
+  padding: 4px 6px;
+}
+
+/* Universal module style */
+#cpu,
+#memory,
+#disk,
+#network,
+#pulseaudio,
+#battery,
+#clock,
+#tray {
+  padding: 4px 8px;
+  margin: 2px 4px;
+  background-color: rgba(255,255,255,0.10);
+  border-radius: 6px;
+}
+
+/* Make RAM more visible */
+#memory {
+  color: #add8ff;
+  font-weight: bold;
+}
+
+/* Make clock stand out */
+#clock {
+  font-weight: bold;
+}
+
+/* Fix audio text clarity */
+#pulseaudio {
+  font-weight: bold;
+}
+
+/* Highlight battery */
+#battery {
+  color: #95ff8a;
+}

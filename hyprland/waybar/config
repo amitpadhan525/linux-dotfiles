@@ -1,0 +1,65 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+
+  "modules-left": [
+    "cpu",
+    "memory",
+    "disk"
+  ],
+
+  "modules-center": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "network",
+    "pulseaudio",
+    "battery",
+    "tray"
+  ],
+
+  "cpu": {
+    "format": " {usage}%"
+  },
+
+  "memory": {
+    "format": " {used_percent}%"
+  },
+
+  "disk": {
+    "format": " {used_percent}%",
+    "mount": "/"
+  },
+
+  "network": {
+    "format-wifi": " {essid}",
+    "format-ethernet": " {ifname}",
+    "format-disconnected": "Offline"
+  },
+
+  "pulseaudio": {
+    "format": " {volume}%",
+    "format-muted": "Muted"
+  },
+
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}"
+  },
+
+  "tray": {
+    "icon-size": 18
+  }
+}

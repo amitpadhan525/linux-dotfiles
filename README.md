@@ -13,3 +13,4 @@ Personal Linux configuration files.
 - Shell: Bash/Zsh
 
 ⚠️ These configs are tailored for my system.
+

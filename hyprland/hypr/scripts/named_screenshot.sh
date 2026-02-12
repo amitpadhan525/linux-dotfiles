@@ -56,4 +56,3 @@ else
 fi
 
 echo "$FINAL_PATH"
-z

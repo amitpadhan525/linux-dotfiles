@@ -1,0 +1,30 @@
+
+window {
+    border-radius: 12px;
+    background-color: #1e1e1e;
+    padding: 20px;
+}
+
+entry {
+    background-color: #2b2b2b;
+    padding: 12px;
+    border-radius: 8px;
+    text-color: #ffffff;
+}
+
+element {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #1e1e1e;
+    text-color: #ffffff;
+}
+
+element selected {
+    background-color: #2d7dd2;
+    text-color: #ffffff;
+}
+
+listview {
+    spacing: 8px;
+}
+

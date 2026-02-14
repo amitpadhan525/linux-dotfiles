@@ -1,0 +1,152 @@
+#!/bin/bash
+
+# Options
+lock=" Lock"
+logout="󰗽 Logout"
+suspend=" Suspend"
+hibernate="󰒲 Hibernate"
+reboot=" Reboot"
+shutdown=" Shutdown"
+
+# Rofi CMD
+rofi_cmd() {
+	rofi -dmenu \
+		-p "Goodbye ${USER}" \
+		-theme-str '
+    * {
+        font: "JetBrainsMono Nerd Font 14";
+        background-color: #1e1e2e;
+        foreground-color: #cdd6f4;
+        accent-color: #cba6f7;
+        urgent-color: #f38ba8;
+        border-color: #b4befe;
+    }
+
+    window {
+        transparency: "real";
+        background-color: @background-color;
+        text-color: @foreground-color;
+        border: 2px;
+        border-color: @border-color;
+        border-radius: 12px;
+        width: 400px;
+        location: center;
+        x-offset: 0;
+        y-offset: 0;
+    }
+
+    inputbar {
+        enabled: false;
+    }
+
+    mainbox {
+        background-color: transparent;
+        children: [ listview ];
+        padding: 15px;
+    }
+
+    listview {
+        background-color: transparent;
+        columns: 1;
+        lines: 6;
+        spacing: 10px;
+        cycle: true;
+        dynamic: true;
+        layout: vertical;
+    }
+
+    element {
+        background-color: transparent;
+        text-color: @foreground-color;
+        orientation: horizontal;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    element-icon {
+        background-color: transparent;
+        text-color: inherit;
+        size: 24px;
+        border: 0px;
+    }
+
+    element-text {
+        background-color: transparent;
+        text-color: inherit;
+        highlight: inherit;
+        cursor: inherit;
+        vertical-align: 0.5;
+        horizontal-align: 0.0;
+        margin: 0px 0px 0px 10px;
+    }
+
+    element selected.normal {
+        background-color: @accent-color;
+        text-color: #1e1e2e;
+    }
+
+    element normal.urgent {
+        text-color: @urgent-color;
+    }
+    '
+}
+
+# Execute Command
+run_cmd() {
+	if [[ "$1" == "$lock" ]]; then
+		swaylock
+	elif [[ "$1" == "$suspend" ]]; then
+		systemctl suspend
+	elif [[ "$1" == "$hibernate" ]]; then
+		systemctl hibernate
+	elif [[ "$1" == "$logout" ]]; then
+		hyprctl dispatch exit
+	elif [[ "$1" == "$reboot" ]]; then
+		systemctl reboot
+	elif [[ "$1" == "$shutdown" ]]; then
+		systemctl poweroff
+	fi
+}
+
+# Actions
+chosen="$(echo -e "$lock\n$suspend\n$hibernate\n$logout\n$reboot\n$shutdown" | rofi_cmd)"
+run_cmd "$chosen"
+#!/bin/bash
+
+# Options
+lock="🔒 Lock"
+logout="🚪 Logout"
+suspend="😴 Suspend"
+hibernate="💤 Hibernate"
+reboot="🔄 Reboot"
+shutdown="⏻ Shutdown"
+
+# Rofi CMD
+rofi_cmd() {
+	rofi -dmenu \
+		-p "Power" \
+		-theme-str 'window {width: 12em;} listview {lines: 6;}'
+}
+
+# Execute Command
+run_cmd() {
+	if [[ "$1" == "$lock" ]]; then
+		swaylock
+	elif [[ "$1" == "$suspend" ]]; then
+		systemctl suspend
+	elif [[ "$1" == "$hibernate" ]]; then
+		systemctl hibernate
+	elif [[ "$1" == "$logout" ]]; then
+		hyprctl dispatch exit
+	elif [[ "$1" == "$reboot" ]]; then
+		systemctl reboot
+	elif [[ "$1" == "$shutdown" ]]; then
+		systemctl poweroff
+	fi
+}
+
+# Actions
+chosen="$(echo -e "$lock\n$suspend\n$hibernate\n$logout\n$reboot\n$shutdown" | rofi_cmd)"
+run_cmd "$chosen"
+
+

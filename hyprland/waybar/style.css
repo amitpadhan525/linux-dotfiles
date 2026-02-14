@@ -1,42 +1,198 @@
-#waybar {
-  background-color: rgba(25,25,25,0.95);
-  color: #ffffff;
-  font-size: 13px;
-  padding: 4px 6px;
+* {
+    font-family: "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    min-height: 0;
 }
 
-/* Universal module style */
+window#waybar {
+    background: #000000;
+    color: #cdd6f4;
+}
+
+tooltip {
+    background: #1e1e2e;
+    border: 1px solid #cba6f7;
+    border-radius: 10px;
+}
+
+tooltip label {
+    color: #cdd6f4;
+}
+
+/* Common Module Style */
+#network,
+#tray,
+#clock,
+#pulseaudio,
 #cpu,
 #memory,
 #disk,
-#network,
-#pulseaudio,
 #battery,
-#clock,
+#backlight,
+#custom-power {
+    background: #313244;
+    /* Surface0 */
+    padding: 4px 14px;
+    margin: 4px 3px;
+    border-radius: 10px;
+}
+
+/* --- Left Modules --- */
+
+#network {
+    color: #94e2d5;
+    /* Teal */
+    background: rgba(148, 226, 213, 0.1);
+    border: 1px solid rgba(148, 226, 213, 0.2);
+}
+
+#workspaces {
+    background: #1e1e2e;
+    margin: 4px 4px;
+    padding: 2px 2px;
+    border-radius: 10px;
+    border: 1px solid #313244;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    color: #bac2de;
+    background: transparent;
+    border-radius: 5px;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    color: #cdd6f4;
+}
+
+#workspaces button.active {
+    color: #cba6f7;
+    background: rgba(203, 166, 247, 0.1);
+}
+
+#workspaces button.urgent {
+    color: #f38ba8;
+    background: rgba(243, 139, 168, 0.1);
+}
+
 #tray {
-  padding: 4px 8px;
-  margin: 2px 4px;
-  background-color: rgba(255,255,255,0.10);
-  border-radius: 6px;
+    background: #45475a;
+    padding: 4px 10px;
 }
 
-/* Make RAM more visible */
-#memory {
-  color: #add8ff;
-  font-weight: bold;
-}
+/* --- Center Modules --- */
 
-/* Make clock stand out */
 #clock {
-  font-weight: bold;
+    color: #cdd6f4;
+    background: rgba(203, 166, 247, 0.1);
+    /* Mauve tint */
+    border: 1px solid rgba(203, 166, 247, 0.2);
+    font-size: 15px;
 }
 
-/* Fix audio text clarity */
+/* --- Right Modules --- */
+
 #pulseaudio {
-  font-weight: bold;
+    color: #fab387;
+    /* Peach */
+    background: rgba(250, 179, 135, 0.1);
+    border: 1px solid rgba(250, 179, 135, 0.2);
 }
 
-/* Highlight battery */
+#backlight {
+    color: #f9e2af;
+    /* Yellow */
+    background: rgba(249, 226, 175, 0.1);
+    border: 1px solid rgba(249, 226, 175, 0.2);
+}
+
+#cpu {
+    color: #eba0ac;
+    /* Flamingo */
+    background: rgba(235, 160, 172, 0.1);
+}
+
+#memory {
+    color: #f9e2af;
+    /* Yellow */
+    background: rgba(249, 226, 175, 0.1);
+}
+
+#disk {
+    color: #89b4fa;
+    /* Blue */
+    background: rgba(137, 180, 250, 0.1);
+}
+
 #battery {
-  color: #95ff8a;
+    color: #a6e3a1;
+    /* Green */
+    background: rgba(166, 227, 161, 0.1);
+    border: 1px solid rgba(166, 227, 161, 0.2);
+}
+
+#battery.charging {
+    background: rgba(166, 227, 161, 0.2);
+}
+
+#battery.warning {
+    color: #f38ba8;
+    background: rgba(243, 139, 168, 0.15);
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-power {
+    color: #f38ba8;
+    /* Red */
+    background: #181825;
+    padding: 2px 20px;
+    margin-right: 8px;
+    font-size: 22px;
+    border: 1px solid rgba(243, 139, 168, 0.2);
+}
+
+/* Hover Effects */
+#network:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#battery:hover,
+#custom-power:hover,
+#clock:hover,
+#tray:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes blink {
+    to {
+        background-color: #f38ba8;
+        color: #1e1e2e;
+    }
+}
+
+#custom-wifi_switcher {
+    color: #f9e2af;
+    background: rgba(249, 226, 175, 0.1);
+    border: 1px solid rgba(249, 226, 175, 0.2);
+    padding: 4px 14px;
+    margin: 4px 3px;
+    border-radius: 10px;
+}#custom-uptime {
+    color: #cba6f7;
+    background: rgba(203, 166, 247, 0.1);
+    border: 1px solid rgba(203, 166, 247, 0.2);
+    padding: 4px 14px;
+    margin: 4px 3px;
+    border-radius: 10px;
+}
+
+#custom-uptime:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }

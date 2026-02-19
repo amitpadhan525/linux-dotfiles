@@ -1,6 +1,5 @@
-#!/usr/bin/env bash
-# prints: " 42%" or "muted"
-# tries pamixer, then pactl
+#!/bin/bash
+if command -v pamixer >/dev/null 2>&1; then
 if command -v pamixer >/dev/null 2>&1; then
   vol=$(pamixer --get-volume 2>/dev/null)
   muted=$(pamixer --get-mute 2>/dev/null)

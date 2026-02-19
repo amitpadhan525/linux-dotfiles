@@ -99,7 +99,7 @@
     },
     "network": {
         "format-wifi": "  {essid}  {ipaddr}",
-        "format-ethernet": "  Connected  {ipaddr}",
+        "format-ethernet": "  {ipaddr}",
         "format-linked": "{ifname} (No IP)",
         "format-disconnected": "  Disconnected",
         "format-disabled": "  Disabled",

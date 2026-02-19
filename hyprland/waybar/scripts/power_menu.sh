@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Options
+# ----------------------------------------------------- 
+# Menu Options with Icons
+# ----------------------------------------------------- 
 lock=" Lock"
 logout="󰗽 Logout"
 suspend=" Suspend"
@@ -8,9 +10,11 @@ hibernate="󰒲 Hibernate"
 reboot=" Reboot"
 shutdown=" Shutdown"
 
-# Rofi CMD
+# ----------------------------------------------------- 
+# Rofi Configuration String
+# ----------------------------------------------------- 
+# Defines the look and feel of the power menu using Rofi
 rofi_cmd() {
-    # timeout 5s kills rofi after 5 seconds if no selection is made
     timeout 5s rofi -dmenu \
         -p "Power" \
         -theme-str "
@@ -22,7 +26,6 @@ rofi_cmd() {
         urgent-color: #f38ba8;
         border-color: #b4befe;
     }
-
     window {
         transparency: \"real\";
         background-color: @background-color;
@@ -35,17 +38,14 @@ rofi_cmd() {
         y-offset: 45px;
         width: 220px;
     }
-
     inputbar {
         enabled: false;
     }
-
     mainbox {
         background-color: transparent;
         children: [ listview ];
         padding: 10px;
     }
-
     listview {
         background-color: transparent;
         columns: 1;
@@ -55,7 +55,6 @@ rofi_cmd() {
         dynamic: true;
         layout: vertical;
     }
-
     element {
         background-color: transparent;
         text-color: @foreground-color;
@@ -63,7 +62,6 @@ rofi_cmd() {
         border-radius: 6px;
         padding: 10px 10px;
     }
-
     element-icon {
         background-color: transparent;
         text-color: inherit;
@@ -71,7 +69,6 @@ rofi_cmd() {
         border: 0px;
         margin: 0px 10px 0px 0px;
     }
-
     element-text {
         background-color: transparent;
         text-color: inherit;
@@ -79,7 +76,6 @@ rofi_cmd() {
         vertical-align: 0.5;
         horizontal-align: 0.0;
     }
-
     element selected.normal {
         background-color: @accent-color;
         text-color: #1e1e2e;
@@ -87,23 +83,30 @@ rofi_cmd() {
     "
 }
 
-# Execute Command
+# ----------------------------------------------------- 
+# Execute Selected Command
+# ----------------------------------------------------- 
 run_cmd() {
     if [[ "$1" == "$lock" ]]; then
-        swaylock
+        swaylock                          # Lock screen
     elif [[ "$1" == "$suspend" ]]; then
-        systemctl suspend
+        systemctl suspend                 # Suspend system
     elif [[ "$1" == "$hibernate" ]]; then
-        systemctl hibernate
+        systemctl hibernate               # Hibernate system
     elif [[ "$1" == "$logout" ]]; then
-        hyprctl dispatch exit
+        hyprctl dispatch exit             # Logout (Exit Hyprland)
     elif [[ "$1" == "$reboot" ]]; then
-        systemctl reboot
+        systemctl reboot                  # Reboot system
     elif [[ "$1" == "$shutdown" ]]; then
-        systemctl poweroff
+        systemctl poweroff                # Shutdown system
     fi
 }
 
-# Actions
+# ----------------------------------------------------- 
+# Main Execution
+# ----------------------------------------------------- 
+# Pipe options into rofi and capture selection
 chosen="$(echo -e "$lock\n$logout\n$suspend\n$hibernate\n$reboot\n$shutdown" | rofi_cmd)"
+
+# Run the corresponding command
 run_cmd "$chosen"

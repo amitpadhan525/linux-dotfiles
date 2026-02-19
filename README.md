@@ -95,7 +95,7 @@ sudo pacman -S jq bc slurp grim wl-clipboard networkmanager bluez bluez-utils
 yay -S hyprshade
 ```
 
-For a **complete list** of every package used, check the [RESOURCES.txt](./RESOURCES.txt) file included in this repository.
+For a **complete list** of every package used, check the [RESOURCES.md](./RESOURCES.md) file included in this repository.
 
 ### 5. Clone the Repository
 

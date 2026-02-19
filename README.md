@@ -8,7 +8,7 @@ My personal configuration files for Arch Linux, featuring a **Hyprland**-based e
 - **Status Bar**: [Waybar](https://github.com/Alexays/Waybar) - Highly customizable bar with custom scripts for system monitoring (CPU/Mem, Battery, Network, etc.).
 - **Application Launcher**: [Rofi](https://github.com/davatorium/rofi) - A window switcher, application launcher and dmenu replacement.
 - **Scripts**: A collection of custom scripts for screenshots, power management, night mode, and more.
-- **Styling**: Consistent theming across components.
+- **Styling**: Consistent theming across components (e.g., Catppuccin or modern dark themes).
 
 ## 📂 Directory Structure
 
@@ -35,77 +35,144 @@ linux-dotfiles/
 │       ├── simple.rasi       # Rofi theme
 │       └── simple-modern.rasi # Modern Rofi theme variant
 ├── push.sh                   # Quick git push script
+└── RESOURCES.txt             # Detailed list of dependencies
 └── README.md                 # This file
 ```
 
-## 🛠️ Configurations in Detail
+## 🛠️ Step-by-Step Installation Guide
 
-### Hyprland (`hyprland/hypr`)
-The Hyprland configuration is split into multiple files for better organization:
-- `hyprland.conf`: The main configuration file that sources others.
-- `keybinds.conf`: comprehensive keybindings for window management and application launching.
-- `monitors.conf`: Setup for your specific monitor layout.
-- `rules.conf`: Window rules for floating windows, opacity, etc.
-- `theme.conf`: Appearance settings like borders, gaps, and colors.
-- `autostart.sh`: Script to launch background applications on login.
+Follow these steps to set up this environment on a fresh Arch Linux installation.
 
-### Waybar (`hyprland/waybar`)
-Includes a fully featured bar with custom scripts:
-- **Battery**: Notifications for low battery and charging status (`battery_notify.sh`).
-- **Network**: Info and menu (`network_info.sh`, `wifi_menu.sh`).
-- **Power Menu**: Custom power management menu (`power_menu.sh`).
-- **Night Mode**: Toggle for blue light filter (`night_mode.sh`).
-- **System Stats**: CPU, Memory, Disk usage monitoring.
+### 1. Update System & Install Base Dependencies
 
-### Rofi (`hyprland/rofi`)
-Configurations for the application launcher and menus:
-- Includes modern themes (`simple.rasi`, `simple-modern.rasi`) to match the overall aesthetic.
+Ensure your system is up-to-date and has the critical tools.
 
-## 📦 Requirements
+```bash
+sudo pacman -Syu
+sudo pacman -S base-devel git
+```
 
-To use these configurations effectively, you will need an Arch Linux system (or similar) with the following packages installed:
+### 2. Install an AUR Helper
 
-- **Core**: `hyprland`, `waybar`, `rofi`, `alacritty` (or your preferred terminal)
-- **Shell**: `bash`, `zsh`
-- **Fonts**: Nerd Fonts (e.g., `ttf-jetbrains-mono-nerd`, `ttf-font-awesome`) for icons.
-- **Utilities**: 
-  - `git`
-  - `hyprpaper` (wallpapers)
-  - `mako` or `dunst` (notifications)
-  - `pipewire`, `wireplumber` (audio)
-  - `python` (for some scripts)
-  - `jq` (often used in scripts)
-  - `brightnessctl` (brightness control)
-  - `playerctl` (media control)
+You'll likely need packages from the Arch User Repository (AUR). We recommend `yay`.
 
-## 🔧 Installation
+```bash
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd ..
+rm -rf yay
+```
 
-1.  **Clone the repository**:
+### 3. Install Hyprland & Core Components
+
+Install the window manager, status bar, launcher, and terminal.
+
+```bash
+# Core components
+sudo pacman -S hyprland waybar rofi alacritty
+
+# Install fonts (Critical for icons)
+sudo pacman -S ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji
+yay -S ttf-font-awesome
+```
+
+### 4. Install Additional Tools & Utilities
+
+These packages are required for various scripts (audio control, screenshots, etc.) to function correctly.
+
+```bash
+# Audio & Media
+sudo pacman -S pipewire wireplumber pamixer pavucontrol playerctl
+
+# Brightness & Power
+sudo pacman -S brightnessctl acpi
+
+# Script Dependencies
+sudo pacman -S jq bc slurp grim wl-clipboard networkmanager bluez bluez-utils
+
+# Night Mode (via AUR)
+yay -S hyprshade
+```
+
+For a **complete list** of every package used, check the [RESOURCES.txt](./RESOURCES.txt) file included in this repository.
+
+### 5. Clone the Repository
+
+Clone these dotfiles to your preferred location (e.g., `~/github/linux-dotfiles`).
+
+```bash
+mkdir -p ~/github
+git clone https://github.com/amitpadhan525/linux-dotfiles.git ~/github/linux-dotfiles
+```
+
+### 6. Symlink Configurations
+
+This step links the configuration files from the repository to your system's config directory. This way, any changes you make in `~/github/linux-dotfiles` are immediately applied, and you can easily push updates to GitHub.
+
+**Warning**: Back up existing configs in `~/.config/` before running these commands if you have any.
+
+```bash
+# Create base config directory
+mkdir -p ~/.config
+
+# -----------------
+# Hyprland Setup
+# -----------------
+# If ~/.config/hypr exists, rename it first: mv ~/.config/hypr ~/.config/hypr.bak
+ln -s ~/github/linux-dotfiles/hyprland/hypr ~/.config/hypr
+
+# -----------------
+# Waybar Setup
+# -----------------
+# If ~/.config/waybar exists, rename it: mv ~/.config/waybar ~/.config/waybar.bak
+ln -s ~/github/linux-dotfiles/hyprland/waybar ~/.config/waybar
+
+# -----------------
+# Rofi Setup
+# -----------------
+# If ~/.config/rofi exists, rename it: mv ~/.config/rofi ~/.config/rofi.bak
+ln -s ~/github/linux-dotfiles/hyprland/rofi ~/.config/rofi
+```
+
+### 7. Finalize Setup
+
+1.  **Grant Execution Permissions**: Ensure all scripts are executable.
     ```bash
-    git clone https://github.com/amitpadhan525/linux-dotfiles.git ~/github/linux-dotfiles
+    chmod +x ~/.config/hypr/scripts/*.sh
+    chmod +x ~/.config/waybar/scripts/*.sh
+    chmod +x ~/.config/hypr/autostart.sh
     ```
 
-2.  **Symlink configurations**:
-    Backup your existing configurations first, then link these folders to `~/.config/`.
+2.  **Monitor Configuration**:
+    Edit `~/.config/hypr/monitors.conf` to match your screen resolution and refresh rate.
+    Run `hyprctl monitors` to see your connected displays.
 
-    ```bash
-    # Create the config directory if it doesn't exist
-    mkdir -p ~/.config
+3.  **Laptop Specifics** (Optional):
+    If you are on a laptop, ensure `acpi` is installed for battery stats and `brightnessctl` for screen brightness keys.
 
-    # Symlink Hyprland
-    ln -s ~/github/linux-dotfiles/hyprland/hypr ~/.config/hypr
+4.  **Reboot**:
+    Restart your computer and select **Hyprland** from your login manager (e.g., sddm, gdm, or tty).
 
-    # Symlink Waybar
-    ln -s ~/github/linux-dotfiles/hyprland/waybar ~/.config/waybar
+## ⌨️ Keybindings (Quick Start)
 
-    # Symlink Rofi
-    ln -s ~/github/linux-dotfiles/hyprland/rofi ~/.config/rofi
-    ```
+Here are a few default bindings (check `~/.config/hypr/keybinds.conf` for the full list):
 
-3.  **Restart**:
-    - **Hyprland**: Use your exit bind to log out and log back in, or reload if applicable.
-    - **Waybar**: Typically reloads automatically or can be restarted with `pkill waybar && waybar`.
+- `Super + Q`: Open Terminal (Alacritty)
+- `Super + R`: Open Application Launcher (Rofi)
+- `Super + C`: Close active window
+- `Super + M`: Exit Hyprland
+- `Super + E`: Open File Manager
+- `Super + V`: Toggle Floating window
+- `Super + P`: Pseudo Dwindle
+
+## 🔧 Troubleshooting
+
+- **Waybar missing icons**: Ensure you installed `ttf-jetbrains-mono-nerd` and `ttf-font-awesome`.
+- **Audio keys not working**: Make sure `pamixer` is installed (`sudo pacman -S pamixer`).
+- **Screenshots fail**: Ensure `slurp` and `grim` are installed.
+- **Gray screen / no wallpaper**: Install `hyprpaper` and configure a wallpaper in `~/.config/hypr/hyprpaper.conf` or add it to `autostart.sh`.
 
 ## ⚠️ Disclaimer
 
-These configurations are tailored to my specific hardware and preferences. Please review the files (especially `monitors.conf` and `autostart.sh`) before applying them to your system to ensure they match your environment.
+These configurations are tailored to my specific hardware. Please review `monitors.conf` and `autostart.sh` before applying them to avoid issues with different display setups.

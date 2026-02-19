@@ -1,0 +1,69 @@
+# System Resources & Dependencies
+
+This file lists all the packages and resources required to fully utilize the configuration.
+
+## 📦 Core Components
+- **hyprland**: The Wayland compositor (window manager).
+- **waybar**: Highly customizable status bar.
+- **rofi**: Application launcher and window switcher.
+- **dunst** or **mako**: Notification daemon (mako is default for Hyprland, but dunst works too).
+- **hyprpaper**: Wallpaper utility.
+- **hyprlock** (Optional): Screen locker.
+- **hypridle** (Optional): Idle daemon.
+
+## 🛠️ System Utilities
+- **alacritty** / **kitty** / **foot**: Terminal emulator (Alacritty is the default in configs).
+- **git**: Version control.
+- **base-devel**: Build tools (needed for AUR helpers).
+- **slurp**: Select a region in Wayland (for screenshots).
+- **grim**: Grab images from a Wayland compositor (for screenshots).
+- **wl-clipboard**: Command-line copy/paste utilities (`wl-copy`, `wl-paste`).
+- **swappy** (Optional): Screenshot editing tool.
+- **cliphist** (Optional): Clipboard manager.
+
+## 🔊 Audio & Media
+- **pipewire**: Multimedia framework.
+- **wireplumber**: Session / policy manager for PipeWire.
+- **pamixer**: PulseAudio command-line mixer (preferred for volume scripts).
+- **pavucontrol**: PulseAudio Volume Control (GUI).
+- **playerctl**: Media player controller (play/pause logic).
+
+## 🌙 Display & Appearance
+- **brightnessctl**: Control device brightness.
+- **hyprshade**: Blue light filter / screen shader (used in night mode script).
+  - *Alternative*: `gammastep`
+- **nwg-look** (Optional): GTK3 settings editor for Wayland.
+- **qt5ct** / **qt6ct**: Qt configuration tools.
+
+## 🌐 Network & Power
+- **networkmanager**: Network connection manager.
+- **nm-connection-editor**: GUI for NetworkManager (used in network scripts).
+- **acpi**: Client for battery/power information.
+- **bluez** & **bluez-utils**: Bluetooth protocol stack.
+- **blueman**: Bluetooth manager (GUI).
+
+## 🎨 Fonts & Assets
+- **ttf-jetbrains-mono-nerd**: Monospaced font with icons (Nerd Font).
+- **ttf-font-awesome**: Icon font.
+- **noto-fonts**: Standard font family.
+- **noto-fonts-emoji**: Emoji support.
+
+## 🐢 Shell & Scripts
+- **bash** / **zsh**: Command shell.
+- **starship** (Optional): Cross-shell prompt.
+- **jq**: Command-line JSON processor (essential for Waybar scripts).
+- **bc**: An arbitrary precision calculator language (often used in scripts).
+- **socat**: Multipurpose relay (socket piping).
+
+## 📚 Installation Command (Arch Linux)
+
+```bash
+# Core & Utils
+sudo pacman -S hyprland waybar rofi alacritty git pipewire wireplumber \
+               slurp grim wl-clipboard pamixer pavucontrol brightnessctl \
+               networkmanager bluez bluez-utils blueman jq bc acpi \
+               playerctl noto-fonts noto-fonts-emoji ttf-jetbrains-mono-nerd
+
+# AUR Packages (using yay)
+yay -S hyprpaper hyprshade ttf-font-awesome
+```

@@ -7,7 +7,7 @@ My personal configuration files for Arch Linux, featuring a **Hyprland**-based e
 - **Window Manager**: [Hyprland](https://github.com/hyprwm/Hyprland) - A dynamic tiling Wayland compositor with modular configuration.
 - **Status Bar**: [Waybar](https://github.com/Alexays/Waybar) - Highly customizable bar with custom scripts for system monitoring (CPU/Mem, Battery, Network, etc.).
 - **Application Launcher**: [Rofi](https://github.com/davatorium/rofi) - A window switcher, application launcher and dmenu replacement.
-- **Scripts**: A collection of custom scripts for screenshots, power management, night mode, and more.
+- **Scripts**: A collection of custom scripts for screenshots, power management, night mode, Wi-Fi menu, screen time, and more.
 - **Styling**: Consistent theming across components (e.g., Catppuccin or modern dark themes).
 
 ## 📂 Directory Structure
@@ -19,23 +19,44 @@ linux-dotfiles/
 ├── hyprland/
 │   ├── hypr/                 # Hyprland core configurations
 │   │   ├── hyprland.conf     # Main entry point
-│   │   ├── keybinds.conf     # Keybinding definitions
-│   │   ├── monitors.conf     # Display output settings
-│   │   ├── rules.conf        # Window rules
-│   │   ├── env.conf          # Environment variables
-│   │   ├── theme.conf        # Visual theme settings
-│   │   ├── scripts/          # Helper scripts (screenshot, floating toggle, etc.)
-│   │   └── ...
+│   │   ├── autostart.sh      # Autostart execution script
+│   │   ├── conf/             # Modular configuration files
+│   │   │   ├── autostart.conf     # Autostart definitions
+│   │   │   ├── customization.conf # Visual and styling settings
+│   │   │   ├── environment.conf   # Environment variables
+│   │   │   ├── keybinding.conf    # Shortcuts and keybinds
+│   │   │   ├── keyboard.conf      # Input device settings
+│   │   │   ├── monitors.conf      # Display output settings
+│   │   │   ├── windowrules.conf   # Rules for specific window behaviors
+│   │   │   └── workspaces.conf    # Workspace definitions
+│   │   └── scripts/          # Helper scripts 
+│   │       ├── launcher.sh
+│   │       ├── named_screenshot.sh
+│   │       └── toggle_floating.sh
 │   ├── waybar/               # Status bar configuration
 │   │   ├── config            # Main Waybar configuration
+│   │   ├── config-dock.jsonc # Dock mode configuration
 │   │   ├── style.css         # Visual styling
-│   │   ├── scripts/          # Custom modules (battery, network, power menu, etc.)
-│   │   └── ...
+│   │   ├── backups/          # Old/backup configs
+│   │   └── scripts/          # Custom modules
+│   │       ├── battery_info.sh
+│   │       ├── battery_notify.sh
+│   │       ├── cpu_mem.sh
+│   │       ├── disk_info.sh
+│   │       ├── dock.sh
+│   │       ├── network_info.sh
+│   │       ├── night_mode.sh
+│   │       ├── pinned.sh
+│   │       ├── power_menu.sh
+│   │       ├── screen_time.py
+│   │       ├── volume_info.sh
+│   │       └── wifi_menu.sh
 │   └── rofi/                 # Rofi configuration
 │       ├── simple.rasi       # Rofi theme
 │       └── simple-modern.rasi # Modern Rofi theme variant
+├── copy.sh                   # Script to sync current configs to repo
 ├── push.sh                   # Quick git push script
-└── RESOURCES.txt             # Detailed list of dependencies
+├── RESOURCES.md              # Detailed list of dependencies
 └── README.md                 # This file
 ```
 
@@ -85,11 +106,11 @@ These packages are required for various scripts (audio control, screenshots, etc
 # Audio & Media
 sudo pacman -S pipewire wireplumber pamixer pavucontrol playerctl
 
-# Brightness & Power
-sudo pacman -S brightnessctl acpi
+# Brightness, Power & Network
+sudo pacman -S brightnessctl acpi swaylock networkmanager nm-connection-editor
 
 # Script Dependencies
-sudo pacman -S jq bc slurp grim wl-clipboard networkmanager bluez bluez-utils
+sudo pacman -S jq bc slurp grim wl-clipboard bluez bluez-utils python libnotify
 
 # Night Mode (via AUR)
 yay -S hyprshade
@@ -108,7 +129,7 @@ git clone https://github.com/amitpadhan525/linux-dotfiles.git ~/github/linux-dot
 
 ### 6. Symlink Configurations
 
-This step links the configuration files from the repository to your system's config directory. This way, any changes you make in `~/github/linux-dotfiles` are immediately applied, and you can easily push updates to GitHub.
+This step links the configuration files from the repository to your system's config directory. This way, any changes you make in `~/github/linux-dotfiles` are immediately applied, and you can easily push updates to GitHub. Using `copy.sh` can also help you manually sync backwards.
 
 **Warning**: Back up existing configs in `~/.config/` before running these commands if you have any.
 
@@ -140,12 +161,13 @@ ln -s ~/github/linux-dotfiles/hyprland/rofi ~/.config/rofi
 1.  **Grant Execution Permissions**: Ensure all scripts are executable.
     ```bash
     chmod +x ~/.config/hypr/scripts/*.sh
-    chmod +x ~/.config/waybar/scripts/*.sh
     chmod +x ~/.config/hypr/autostart.sh
+    chmod +x ~/.config/waybar/scripts/*.sh
+    chmod +x ~/.config/waybar/scripts/*.py
     ```
 
 2.  **Monitor Configuration**:
-    Edit `~/.config/hypr/monitors.conf` to match your screen resolution and refresh rate.
+    Edit `~/.config/hypr/conf/monitors.conf` to match your screen resolution and refresh rate.
     Run `hyprctl monitors` to see your connected displays.
 
 3.  **Laptop Specifics** (Optional):
@@ -156,7 +178,7 @@ ln -s ~/github/linux-dotfiles/hyprland/rofi ~/.config/rofi
 
 ## ⌨️ Keybindings (Quick Start)
 
-Here are a few default bindings (check `~/.config/hypr/keybinds.conf` for the full list):
+Here are a few default bindings (check `~/.config/hypr/conf/keybinding.conf` for the full list):
 
 - `Super + Q`: Open Terminal (Alacritty)
 - `Super + R`: Open Application Launcher (Rofi)
@@ -171,8 +193,9 @@ Here are a few default bindings (check `~/.config/hypr/keybinds.conf` for the fu
 - **Waybar missing icons**: Ensure you installed `ttf-jetbrains-mono-nerd` and `ttf-font-awesome`.
 - **Audio keys not working**: Make sure `pamixer` is installed (`sudo pacman -S pamixer`).
 - **Screenshots fail**: Ensure `slurp` and `grim` are installed.
-- **Gray screen / no wallpaper**: Install `hyprpaper` and configure a wallpaper in `~/.config/hypr/hyprpaper.conf` or add it to `autostart.sh`.
+- **Gray screen / no wallpaper**: Install `hyprpaper` and configure a wallpaper in `~/.config/hypr/hyprland.conf` (or via autostart) if you are using it.
+- **Wi-Fi Menu / Power Menu not showing**: Make sure `rofi` is installed and scripts have execute permissions (`chmod +x`).
 
 ## ⚠️ Disclaimer
 
-These configurations are tailored to my specific hardware. Please review `monitors.conf` and `autostart.sh` before applying them to avoid issues with different display setups.
+These configurations are tailored to my specific hardware. Please review `conf/monitors.conf` and `autostart.sh` before applying them to avoid issues with different display setups.

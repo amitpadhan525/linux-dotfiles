@@ -22,9 +22,11 @@ tooltip label {
 
 /* Common Module Style */
 #network,
+#custom-hotspot,
 #tray,
 #clock,
 #pulseaudio,
+#temperature,
 #cpu,
 #memory,
 #disk,
@@ -114,6 +116,13 @@ tooltip label {
     background: rgba(235, 160, 172, 0.1);
 }
 
+#temperature {
+    color: #f38ba8;
+    /* Red */
+    background: rgba(243, 139, 168, 0.1);
+    border: 1px solid rgba(243, 139, 168, 0.2);
+}
+
 #memory {
     color: #f9e2af;
     /* Yellow */
@@ -159,8 +168,10 @@ tooltip label {
 
 /* Hover Effects */
 #network:hover,
+#custom-hotspot:hover,
 #pulseaudio:hover,
 #backlight:hover,
+#temperature:hover,
 #battery:hover,
 #custom-power:hover,
 #clock:hover,
@@ -183,7 +194,9 @@ tooltip label {
     padding: 4px 14px;
     margin: 4px 3px;
     border-radius: 10px;
-}#custom-uptime {
+}
+
+#custom-uptime {
     color: #cba6f7;
     background: rgba(203, 166, 247, 0.1);
     border: 1px solid rgba(203, 166, 247, 0.2);
@@ -195,4 +208,22 @@ tooltip label {
 #custom-uptime:hover {
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#custom-hotspot {
+    color: #f9e2af;
+    background: rgba(249, 226, 175, 0.1);
+    border: 1px solid rgba(249, 226, 175, 0.2);
+}
+
+#custom-hotspot.active {
+    color: #a6e3a1;
+    background: rgba(166, 227, 161, 0.1);
+    border: 1px solid rgba(166, 227, 161, 0.2);
+}
+
+#custom-hotspot.inactive {
+    color: #6c7086;
+    background: rgba(108, 112, 134, 0.1);
+    border: 1px solid rgba(108, 112, 134, 0.2);
 }

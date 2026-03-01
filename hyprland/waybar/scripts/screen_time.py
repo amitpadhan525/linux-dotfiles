@@ -9,8 +9,8 @@ def get_screen_time():
     # screen time can be > uptime.
     
     today = datetime.datetime.now()
-    # "Fri Feb 13"
-    today_str = today.strftime("%a %b %e").replace("  ", " ")
+    # "Fri Feb 13" or "Sun Mar  1"
+    today_str = today.strftime("%a %b %e")
     
     current_user = os.environ.get("USER")
     if not current_user:
@@ -29,7 +29,7 @@ def get_screen_time():
 
     total_seconds = 0
     # Regex for duration (days+HH:MM) or (HH:MM)
-    dur_regex = re.compile(r'\((\d+)\+(\d{2}):(\d{2})\)|\((\d{2}):(\d{2})\)')
+    dur_regex = re.compile(r'\(\s*(\d+)\+(\d{2}):(\d{2})\s*\)|\(\s*(\d{2}):(\d{2})\s*\)')
     
     # Track calculated sessions to avoid overlap? 
     # Simple "last" usually doesn't show overlaps for the same TTY.
@@ -48,7 +48,10 @@ def get_screen_time():
             continue
 
         # Must be today
-        if today_str not in line:
+        line_compressed = ' '.join(line.split())
+        today_str_compressed = ' '.join(today_str.split())
+        
+        if today_str_compressed not in line_compressed:
             continue
             
         # Exclude pseudo-terminals (pts) to avoid double counting window usage

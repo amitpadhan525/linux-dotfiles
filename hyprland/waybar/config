@@ -76,7 +76,7 @@
         ]
     },
     "clock": {
-        "format": "\uf017  {:%H:%M   \uf073  %a, %b %d}",
+        "format": "\uf017  {:%I:%M   \uf073  %a, %b %d}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "cpu": {

@@ -21,7 +21,7 @@
         "backlight",
         "temperature",
         "cpu",
-        "memory",
+        "custom/memory",
         "disk",
         "battery",
         "custom/battery_notify",
@@ -83,11 +83,12 @@
             ""
         ]
     },
-    "memory": {
+    "custom/memory": {
+        "exec": "/home/amit/.config/waybar/scripts/custom_mem.sh",
         "interval": 2,
-        "format": "\uf0c9  {percentage}%",
+        "format": "\uf0c9  {}",
+        "return-type": "json",
         "tooltip": true,
-        "tooltip-format": "RAM: {used:0.1f}GiB / {total:0.1f}GiB",
         "on-click": "/home/amit/.config/waybar/scripts/ram_top_5.sh"
     },
     "disk": {

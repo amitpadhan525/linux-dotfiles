@@ -29,6 +29,7 @@ tooltip label {
 #temperature,
 #cpu,
 #memory,
+#custom-memory,
 #disk,
 #battery,
 #backlight,
@@ -123,7 +124,8 @@ tooltip label {
     border: 1px solid rgba(243, 139, 168, 0.2);
 }
 
-#memory {
+#memory,
+#custom-memory {
     color: #f9e2af;
     /* Yellow */
     background: rgba(249, 226, 175, 0.1);

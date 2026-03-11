@@ -10,15 +10,37 @@ window#waybar {
     color: #cdd6f4;
 }
 
+/* ── Tooltip Base ────────────────────────────── */
 tooltip {
-    background: #1e1e2e;
-    border: 1px solid #cba6f7;
-    border-radius: 10px;
+    background: #08080d;
+    border: 1px solid rgba(137, 180, 250, 0.6);
+    border-radius: 12px;
+    padding: 8px 6px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9);
 }
 
 tooltip label {
     color: #cdd6f4;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+    font-weight: normal;
+    padding: 3px 12px;
 }
+
+/* ── Per-module tooltip accent borders ───────── */
+#network        tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#pulseaudio     tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#backlight      tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#cpu            tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#custom-cpu     tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#custom-gpu     tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#temperature    tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#memory         tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#custom-memory  tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#disk           tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#battery        tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#clock          tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#custom-hotspot tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 
 /* Common Module Style */
 #network,
@@ -27,7 +49,8 @@ tooltip label {
 #clock,
 #pulseaudio,
 #temperature,
-#cpu,
+#custom-cpu,
+#custom-gpu,
 #memory,
 #custom-memory,
 #disk,
@@ -111,7 +134,8 @@ tooltip label {
     border: 1px solid rgba(249, 226, 175, 0.2);
 }
 
-#cpu {
+#custom-cpu,
+#custom-gpu {
     color: #eba0ac;
     /* Flamingo */
     background: rgba(235, 160, 172, 0.1);

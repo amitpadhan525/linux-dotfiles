@@ -20,11 +20,11 @@
         "pulseaudio",
         "backlight",
         "temperature",
-        "cpu",
+        "custom/cpu",
+        "custom/gpu",
         "custom/memory",
         "disk",
         "battery",
-        "custom/battery_notify",
         "custom/power"
     ],
     "custom/uptime": {
@@ -41,7 +41,7 @@
         "format": "{}",
         "exec": "/home/amit/.config/waybar/scripts/hotspot_status.sh",
         "return-type": "json",
-        "interval": 2,
+        "interval": 5,
         "on-click": "/home/amit/.config/waybar/scripts/hotspot_toggle.sh",
         "tooltip": true
     },
@@ -69,27 +69,37 @@
         "format": "\uf017  {:%I:%M   \uf073  %a, %b %d}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
-    "cpu": {
-        "interval": 2,
-        "format": "\uf2db  {usage}%",
+    "custom/cpu": {
+        "exec": "/home/amit/.config/waybar/scripts/custom_cpu.sh",
+        "interval": 3,
+        "format": "  {}",
+        "return-type": "json",
+        "tooltip": true
+    },
+    "custom/gpu": {
+        "exec": "bash /home/amit/.config/waybar/scripts/custom_gpu.sh",
+        "interval": 5,
+        "format": "󰢮  {}",
+        "return-type": "json",
         "tooltip": true
     },
     "temperature": {
         "critical-threshold": 80,
+        "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input",
         "format": "{icon} {temperatureC}°C",
         "format-icons": [
             "",
             "",
             ""
-        ]
+        ],
+        "tooltip": false
     },
     "custom/memory": {
         "exec": "/home/amit/.config/waybar/scripts/custom_mem.sh",
-        "interval": 2,
+        "interval": 5,
         "format": "\uf0c9  {}",
         "return-type": "json",
-        "tooltip": true,
-        "on-click": "/home/amit/.config/waybar/scripts/ram_top_5.sh"
+        "tooltip": true
     },
     "disk": {
         "interval": 30,
@@ -149,10 +159,5 @@
             "\uf241",
             "\uf240"
         ]
-    },
-    "custom/battery_notify": {
-        "exec": "/home/amit/.config/waybar/scripts/battery_notify.sh",
-        "interval": 30,
-        "format": ""
     }
 }

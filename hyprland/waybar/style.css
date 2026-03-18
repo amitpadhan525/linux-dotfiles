@@ -40,11 +40,9 @@ tooltip label {
 #disk           tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 #battery        tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 #clock          tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
-#custom-hotspot tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 
 /* Common Module Style */
 #network,
-#custom-hotspot,
 #tray,
 #clock,
 #pulseaudio,
@@ -194,7 +192,6 @@ tooltip label {
 
 /* Hover Effects */
 #network:hover,
-#custom-hotspot:hover,
 #pulseaudio:hover,
 #backlight:hover,
 #temperature:hover,
@@ -234,22 +231,4 @@ tooltip label {
 #custom-uptime:hover {
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-#custom-hotspot {
-    color: #f9e2af;
-    background: rgba(249, 226, 175, 0.1);
-    border: 1px solid rgba(249, 226, 175, 0.2);
-}
-
-#custom-hotspot.active {
-    color: #a6e3a1;
-    background: rgba(166, 227, 161, 0.1);
-    border: 1px solid rgba(166, 227, 161, 0.2);
-}
-
-#custom-hotspot.inactive {
-    color: #6c7086;
-    background: rgba(108, 112, 134, 0.1);
-    border: 1px solid rgba(108, 112, 134, 0.2);
 }

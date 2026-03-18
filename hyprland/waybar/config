@@ -9,7 +9,6 @@
     "modules-left": [
         "hyprland/workspaces",
         "network",
-        "custom/hotspot",
         "tray"
     ],
     "modules-center": [
@@ -36,14 +35,6 @@
     "tray": {
         "icon-size": 20,
         "spacing": 10
-    },
-    "custom/hotspot": {
-        "format": "{}",
-        "exec": "/home/amit/.config/waybar/scripts/hotspot_status.sh",
-        "return-type": "json",
-        "interval": 5,
-        "on-click": "/home/amit/.config/waybar/scripts/hotspot_toggle.sh",
-        "tooltip": true
     },
     "hyprland/workspaces": {
         "format": "{name}",

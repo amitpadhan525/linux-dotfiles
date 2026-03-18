@@ -1,82 +1,103 @@
-# Linux Dotfiles 🐧
+<div align="center">
+  <h1>🐧 Modern Arch Linux Dotfiles</h1>
+  <p><b>A highly optimized, aesthetic, and functional Hyprland environment.</b></p>
 
-My personal configuration files for Arch Linux, featuring a **Hyprland**-based environment. These dotfiles are managed using Git and include setups for my window manager, status bar, application launcher, and various system scripts.
+  [![Window Manager: Hyprland](https://img.shields.io/badge/Window%20Manager-Hyprland-blue?style=for-the-badge&logo=linux)](https://hyprland.org)
+  [![Status Bar: Waybar](https://img.shields.io/badge/Status%20Bar-Waybar-green?style=for-the-badge&logo=linux)](https://github.com/Alexays/Waybar)
+  [![Launcher: Rofi](https://img.shields.io/badge/Launcher-Rofi-purple?style=for-the-badge&logo=linux)](https://github.com/davatorium/rofi)
+  [![Terminal: Kitty](https://img.shields.io/badge/Terminal-Kitty-red?style=for-the-badge&logo=linux)](https://sw.kovidgoyal.net/kitty/)
+</div>
 
-## 🚀 Features
+---
 
-- **Window Manager**: [Hyprland](https://github.com/hyprwm/Hyprland) - A dynamic tiling Wayland compositor with modular configuration.
-- **Status Bar**: [Waybar](https://github.com/Alexays/Waybar) - Highly customizable bar with custom scripts for system monitoring (CPU/Mem, Battery, Network, etc.).
-- **Application Launcher**: [Rofi](https://github.com/davatorium/rofi) - A window switcher, application launcher and dmenu replacement.
-- **Scripts**: A collection of custom scripts for screenshots, power management, night mode, Wi-Fi menu, screen time, and more.
-- **Styling**: Consistent theming across components (e.g., Catppuccin or modern dark themes).
+Welcome to my personal configuration files for Arch Linux. This setup uses **Hyprland** as a dynamic tiling Wayland compositor, tied together with carefully crafted custom scripts to elevate the raw user experience. It's built for speed, aesthetics, and maximum keyboard-driven productivity.
 
-## 📂 Directory Structure
+## ✨ Core Components
 
-Here's an overview of the repository layout:
+- **Window Manager**: `Hyprland` - Buttery smooth Wayland compositor with modular configuration files.
+- **Status Bar**: `Waybar` - Highly customized with modules for CPU, Memory, Disk, Network, Battery, and more.
+- **Application Launcher**: `Rofi` (Wayland fork) - Themed with `simple.rasi` and `simple-modern.rasi` for a beautiful, distraction-free app searching, menus, and more.
+- **Terminal Emulator**: `Kitty` (previously Alacritty) - GPU-accelerated terminal for ultimate performance.
 
-```
-linux-dotfiles/
-├── hyprland/
-│   ├── hypr/                 # Hyprland core configurations
-│   │   ├── hyprland.conf     # Main entry point
-│   │   ├── autostart.sh      # Autostart execution script
-│   │   ├── conf/             # Modular configuration files
-│   │   │   ├── autostart.conf     # Autostart definitions
-│   │   │   ├── customization.conf # Visual and styling settings
-│   │   │   ├── environment.conf   # Environment variables
-│   │   │   ├── keybinding.conf    # Shortcuts and keybinds
-│   │   │   ├── keyboard.conf      # Input device settings
-│   │   │   ├── monitors.conf      # Display output settings
-│   │   │   ├── windowrules.conf   # Rules for specific window behaviors
-│   │   │   └── workspaces.conf    # Workspace definitions
-│   │   └── scripts/          # Helper scripts 
-│   │       ├── launcher.sh
-│   │       ├── named_screenshot.sh
-│   │       └── toggle_floating.sh
-│   ├── waybar/               # Status bar configuration
-│   │   ├── config            # Main Waybar configuration
-│   │   ├── config-dock.jsonc # Dock mode configuration
-│   │   ├── style.css         # Visual styling
-│   │   ├── backups/          # Old/backup configs
-│   │   └── scripts/          # Custom modules
-│   │       ├── battery_info.sh
-│   │       ├── battery_notify.sh
-│   │       ├── cpu_mem.sh
-│   │       ├── disk_info.sh
-│   │       ├── dock.sh
-│   │       ├── network_info.sh
-│   │       ├── night_mode.sh
-│   │       ├── pinned.sh
-│   │       ├── power_menu.sh
-│   │       ├── screen_time.py
-│   │       ├── volume_info.sh
-│   │       └── wifi_menu.sh
-│   └── rofi/                 # Rofi configuration
-│       ├── simple.rasi       # Rofi theme
-│       └── simple-modern.rasi # Modern Rofi theme variant
-├── copy.sh                   # Script to sync current configs to repo
-├── push.sh                   # Quick git push script
-├── RESOURCES.md              # Detailed list of dependencies
-└── README.md                 # This file
-```
+---
 
-## 🛠️ Step-by-Step Installation Guide
+## 🥷 Hidden Features & Custom Superpowers
 
-Follow these steps to set up this environment on a fresh Arch Linux installation.
+This configuration goes beyond basic window management. It includes several custom-built tools injected neatly into the workflow:
 
-### 1. Update System & Install Base Dependencies
+### 📸 Smart Named Screenshots (`Super + S`)
+Instead of just saving a generic timestamped file, hitting `Super + S` triggers `slurp` for region selection, takes the shot with `grim`, and instantly pops open a **Rofi prompt** asking you to name the file! Leave it blank for a timestamp fallback. It also auto-copies the file path to `wl-clipboard` and sends a desktop notification.
 
-Ensure your system is up-to-date and has the critical tools.
+### 🌐 Rofi Wi-Fi Manager
+Clicking the network module in Waybar launches `wifi_menu.sh`, a fully self-contained GUI built with Rofi. It lists available SSIDs, lets you enable/disable Wi-Fi, prompts for WPA/WEP passwords securely using a custom Rofi password field, and connects seamlessly via `nmcli`.
 
+### ⚡ Elegant Power Menu
+A heavily styled Rofi menu (`power_menu.sh`) handles your system's power states: Lock (`swaylock`), Logout, Suspend, Hibernate, Reboot, and Shutdown.
+
+### 🌙 Smart Night Mode (`Super + N`)
+Quickly toggle a blue-light filter to save your eyes at night. It uses `hyprsunset` (or `gammastep` fallback) and writes its state to a hidden file so Waybar's icon (`` / ``) always accurately reflects the active state.
+
+### 🪟 Mass Floating Toggle (`Super + F`)
+Tired of moving windows one by one? The `toggle_floating.sh` script detects all active clients in your workspace and toggles **all of them** simultaneously between floating and tiling mode, complete with system notifications!
+
+### ⏱️ Python Screen Time Tracker
+Ever wondered how much time you've spent on your machine today? A custom python script (`screen_time.py`) parses system login records via `last -R`, accurately ignores overlapped terminal sessions (`pts/X`), and calculates your exact screen time for the day, beautifully displayed on Waybar.
+
+---
+
+## ⌨️ Master Keybindings
+
+A complete map to navigate the interface without ever touching your mouse.
+
+### Applications & System
+| Shortcut | Action | Command/Script Under the Hood |
+|----------|--------|-------------------------------|
+| `Super + Return` | Open Terminal | `kitty` |
+| `Super + D` | App Launcher | `rofi -show drun` |
+| `Super + E` | File Manager | `thunar` |
+| `Super + W` | Toggle Status Bar | `killall waybar` & rerun |
+| `Super + S` | Smart Screenshot | `named_screenshot.sh` |
+| `Super + N` | Toggle Night Mode | `hyprsunset` toggle |
+| `Super + R` | Reload Hyprland | `hyprctl reload` |
+
+### Window Operations
+| Shortcut | Action |
+|----------|--------|
+| `Super + Q` | Close Active Window |
+| `Super + F` | Toggle Floating Mode (Mass Toggle) |
+| `Super + Space`| Toggle Fullscreen |
+| `Super + H/J/K/L`| Vim-like Focus (Left, Down, Up, Right) |
+| `Super + Mouse(L)`| Drag & Move Window |
+| `Super + Mouse(R)`| Drag to Resize Window |
+
+### Workspaces
+| Shortcut | Action |
+|----------|--------|
+| `Super + [1-9]` | Switch to Workspace 1-9 |
+| `Super + Shift + [1-9]` | Move Active Window to Workspace 1-9 |
+
+### Hardware Media Keys
+| Key | Action |
+|-----|--------|
+| `XF86MonBrightnessUp/Down` | Screen Brightness +/- 10% (`brightnessctl`) |
+| `XF86AudioRaise/LowerVolume`| Volume Control +/- 5% (`pamixer`) |
+| `XF86AudioMute` | Toggle Audio Mute (`pamixer -t`) |
+
+---
+
+## 🚀 Installation & Setup
+
+Want this setup on your Arch Linux machine? Follow these simple steps.
+
+### 1. Base System Requirements
+First, make sure your system is up to date and has essential tools:
 ```bash
 sudo pacman -Syu
-sudo pacman -S base-devel git
+sudo pacman -S base-devel git thunar kitty
 ```
 
-### 2. Install an AUR Helper
-
-You'll likely need packages from the Arch User Repository (AUR). We recommend `yay`.
-
+### 2. Install AUR Helper (`yay`)
+If you don't already have `yay`:
 ```bash
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -85,117 +106,70 @@ cd ..
 rm -rf yay
 ```
 
-### 3. Install Hyprland & Core Components
-
-Install the window manager, status bar, launcher, and terminal.
-
+### 3. Install All Dependencies
+*(See [RESOURCES.md](./RESOURCES.md) for a detailed breakdown of what each package does).*
 ```bash
-# Core components
-sudo pacman -S hyprland waybar rofi alacritty
+# Core Environment
+sudo pacman -S hyprland waybar rofi mako swaylock pipewire wireplumber pamixer pavucontrol brightnessctl networkmanager nm-connection-editor blueman acpi slurp grim wl-clipboard jq bc socat playerctl python libnotify
 
-# Install fonts (Critical for icons)
+# Fonts (Crucial for UI Icons)
 sudo pacman -S ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji
 yay -S ttf-font-awesome
+
+# AUR Utilities
+yay -S hyprpaper hyprsunset
 ```
 
-### 4. Install Additional Tools & Utilities
-
-These packages are required for various scripts (audio control, screenshots, etc.) to function correctly.
-
-```bash
-# Audio & Media
-sudo pacman -S pipewire wireplumber pamixer pavucontrol playerctl
-
-# Brightness, Power & Network
-sudo pacman -S brightnessctl acpi swaylock networkmanager nm-connection-editor
-
-# Script Dependencies
-sudo pacman -S jq bc slurp grim wl-clipboard bluez bluez-utils python libnotify
-
-# Night Mode (via AUR)
-yay -S hyprshade
-```
-
-For a **complete list** of every package used, check the [RESOURCES.md](./RESOURCES.md) file included in this repository.
-
-### 5. Clone the Repository
-
-Clone these dotfiles to your preferred location (e.g., `~/github/linux-dotfiles`).
+### 4. Clone & Link Configurations
+Clone the dotfiles into your `~/github` folder and use the provided scripts/symlinks to apply them.
 
 ```bash
-mkdir -p ~/github
+mkdir -p ~/github ~/.config
 git clone https://github.com/amitpadhan525/linux-dotfiles.git ~/github/linux-dotfiles
-```
 
-### 6. Symlink Configurations
+# Backup existing configs to avoid data loss
+mv ~/.config/hypr ~/.config/hypr.bak 2>/dev/null
+mv ~/.config/waybar ~/.config/waybar.bak 2>/dev/null
+mv ~/.config/rofi ~/.config/rofi.bak 2>/dev/null
 
-This step links the configuration files from the repository to your system's config directory. This way, any changes you make in `~/github/linux-dotfiles` are immediately applied, and you can easily push updates to GitHub. Using `copy.sh` can also help you manually sync backwards.
-
-**Warning**: Back up existing configs in `~/.config/` before running these commands if you have any.
-
-```bash
-# Create base config directory
-mkdir -p ~/.config
-
-# -----------------
-# Hyprland Setup
-# -----------------
-# If ~/.config/hypr exists, rename it first: mv ~/.config/hypr ~/.config/hypr.bak
+# Symlink to the repository
 ln -s ~/github/linux-dotfiles/hyprland/hypr ~/.config/hypr
-
-# -----------------
-# Waybar Setup
-# -----------------
-# If ~/.config/waybar exists, rename it: mv ~/.config/waybar ~/.config/waybar.bak
 ln -s ~/github/linux-dotfiles/hyprland/waybar ~/.config/waybar
-
-# -----------------
-# Rofi Setup
-# -----------------
-# If ~/.config/rofi exists, rename it: mv ~/.config/rofi ~/.config/rofi.bak
 ln -s ~/github/linux-dotfiles/hyprland/rofi ~/.config/rofi
 ```
 
-### 7. Finalize Setup
+### 5. Finalizing Operations
+Grant execution permissions to all utility scripts, otherwise buttons/shortcuts will silently fail!
+```bash
+chmod +x ~/.config/hypr/scripts/*.sh
+chmod +x ~/.config/hypr/autostart.sh
+chmod +x ~/.config/waybar/scripts/*.sh
+chmod +x ~/.config/waybar/scripts/*.py
+```
 
-1.  **Grant Execution Permissions**: Ensure all scripts are executable.
-    ```bash
-    chmod +x ~/.config/hypr/scripts/*.sh
-    chmod +x ~/.config/hypr/autostart.sh
-    chmod +x ~/.config/waybar/scripts/*.sh
-    chmod +x ~/.config/waybar/scripts/*.py
-    ```
+Before restarting, explicitly check `~/.config/hypr/conf/monitors.conf` to align with your personal display setup (run `hyprctl monitors` if currently on Hyprland).
 
-2.  **Monitor Configuration**:
-    Edit `~/.config/hypr/conf/monitors.conf` to match your screen resolution and refresh rate.
-    Run `hyprctl monitors` to see your connected displays.
+***
 
-3.  **Laptop Specifics** (Optional):
-    If you are on a laptop, ensure `acpi` is installed for battery stats and `brightnessctl` for screen brightness keys.
+## 📂 Directory Structure Overview
 
-4.  **Reboot**:
-    Restart your computer and select **Hyprland** from your login manager (e.g., sddm, gdm, or tty).
-
-## ⌨️ Keybindings (Quick Start)
-
-Here are a few default bindings (check `~/.config/hypr/conf/keybinding.conf` for the full list):
-
-- `Super + Q`: Open Terminal (Alacritty)
-- `Super + R`: Open Application Launcher (Rofi)
-- `Super + C`: Close active window
-- `Super + M`: Exit Hyprland
-- `Super + E`: Open File Manager
-- `Super + V`: Toggle Floating window
-- `Super + P`: Pseudo Dwindle
-
-## 🔧 Troubleshooting
-
-- **Waybar missing icons**: Ensure you installed `ttf-jetbrains-mono-nerd` and `ttf-font-awesome`.
-- **Audio keys not working**: Make sure `pamixer` is installed (`sudo pacman -S pamixer`).
-- **Screenshots fail**: Ensure `slurp` and `grim` are installed.
-- **Gray screen / no wallpaper**: Install `hyprpaper` and configure a wallpaper in `~/.config/hypr/hyprland.conf` (or via autostart) if you are using it.
-- **Wi-Fi Menu / Power Menu not showing**: Make sure `rofi` is installed and scripts have execute permissions (`chmod +x`).
-
-## ⚠️ Disclaimer
-
-These configurations are tailored to my specific hardware. Please review `conf/monitors.conf` and `autostart.sh` before applying them to avoid issues with different display setups.
+```
+linux-dotfiles/
+├── hyprland/
+│   ├── hypr/                 # Hyprland core brain
+│   │   ├── hyprland.conf     # Standard entry point
+│   │   ├── autostart.sh      # Launch environment daemons
+│   │   ├── conf/             # Modular split configurations (workspaces, keybinds, etc)
+│   │   └── scripts/          # Floating toggler, screenshot taker, etc.
+│   ├── waybar/               # The Status Bar
+│   │   ├── config            # Module layout
+│   │   ├── style.css         # Visual aesthetic rules
+│   │   └── scripts/          # Superpowers: wifi_menu, power_menu, screen_time
+│   └── rofi/                 # Application Launcher + GUIs
+│       ├── simple.rasi       # Custom aesthetic styling
+│       └── simple-modern.rasi
+├── RESOURCES.md              # Exhaustive map of all dependencies
+├── copy.sh                   # Script to pull latest system configs into repo
+├── push.sh                   # Fast GitHub commit/push utility
+└── README.md                 # You are here!
+```

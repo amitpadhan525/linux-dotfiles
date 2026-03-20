@@ -18,14 +18,20 @@
     "modules-right": [
         "pulseaudio",
         "backlight",
-        "temperature",
-        "custom/cpu",
-        "custom/gpu",
-        "custom/memory",
-        "disk",
+        "group/system",
         "battery",
         "custom/power"
     ],
+    "group/system": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/cpu",
+            "custom/gpu",
+            "custom/memory",
+            "disk",
+            "temperature"
+        ]
+    },
     "custom/uptime": {
         "exec": "python3 /home/amit/.config/waybar/scripts/screen_time.py",
         "interval": 60,

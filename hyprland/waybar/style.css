@@ -137,6 +137,7 @@ tooltip label {
     color: #eba0ac;
     /* Flamingo */
     background: rgba(235, 160, 172, 0.1);
+    border: 1px solid rgba(235, 160, 172, 0.2);
 }
 
 #temperature {
@@ -151,12 +152,14 @@ tooltip label {
     color: #f9e2af;
     /* Yellow */
     background: rgba(249, 226, 175, 0.1);
+    border: 1px solid rgba(249, 226, 175, 0.2);
 }
 
 #disk {
     color: #89b4fa;
     /* Blue */
     background: rgba(137, 180, 250, 0.1);
+    border: 1px solid rgba(137, 180, 250, 0.2);
 }
 
 #battery {
@@ -188,6 +191,13 @@ tooltip label {
     margin-right: 8px;
     font-size: 22px;
     border: 1px solid rgba(243, 139, 168, 0.2);
+    transition: all 0.3s ease;
+}
+
+#custom-power:hover {
+    background: #f38ba8;
+    color: #11111b;
+    box-shadow: 0 0 10px #f38ba8, 0 0 20px #f38ba8;
 }
 
 /* Hover Effects */
@@ -195,8 +205,11 @@ tooltip label {
 #pulseaudio:hover,
 #backlight:hover,
 #temperature:hover,
+#custom-cpu:hover,
+#custom-gpu:hover,
+#custom-memory:hover,
+#disk:hover,
 #battery:hover,
-#custom-power:hover,
 #clock:hover,
 #tray:hover {
     background: rgba(255, 255, 255, 0.1);

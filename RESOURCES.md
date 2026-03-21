@@ -17,7 +17,7 @@ These form the very backbone of the environment shell.
 | **File Manager** | `thunar` | Fast GTK-based file manager triggered via `Super + E`. |
 | **Notifications** | `mako` | Handles desktop notifications (used by the screenshot saving script и floating toggler). |
 | **Wallpaper** | `hyprpaper` (или `swaybg`) | Renders background imagery flawlessly on Wayland outputs. |
-| **Locking** | `swaylock` | Secures the system. Invoked directly by the `power_menu.sh` module. |
+| **Locking** | `hyprlock` | Secures the system. Invoked directly by the `power_menu.sh` module. |
 
 ---
 
@@ -69,7 +69,7 @@ To immediately fetch the vast majority of these dependencies on an Arch system:
 ```bash
 # Standard Repositories
 sudo pacman -S hyprland waybar rofi kitty thunar mako \
-    swaylock pipewire wireplumber pamixer pavucontrol \
+    hyprlock pipewire wireplumber pamixer pavucontrol \
     brightnessctl networkmanager nm-connection-editor blueman acpi \
     slurp grim wl-clipboard \
     jq bc socat playerctl python libnotify \

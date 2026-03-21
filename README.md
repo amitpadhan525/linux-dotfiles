@@ -32,7 +32,7 @@ Instead of just saving a generic timestamped file, hitting `Super + S` triggers 
 Clicking the network module in Waybar launches `wifi_menu.sh`, a fully self-contained GUI built with Rofi. It lists available SSIDs, lets you enable/disable Wi-Fi, prompts for WPA/WEP passwords securely using a custom Rofi password field, and connects seamlessly via `nmcli`.
 
 ### ⚡ Elegant Power Menu
-A heavily styled Rofi menu (`power_menu.sh`) handles your system's power states: Lock (`swaylock`), Logout, Suspend, Hibernate, Reboot, and Shutdown.
+A heavily styled Rofi menu (`power_menu.sh`) handles your system's power states: Lock (`hyprlock`), Logout, Suspend, Hibernate, Reboot, and Shutdown.
 
 ### 🌙 Smart Night Mode (`Super + N`)
 Quickly toggle a blue-light filter to save your eyes at night. It uses `hyprsunset` (or `gammastep` fallback) and writes its state to a hidden file so Waybar's icon (`` / ``) always accurately reflects the active state.
@@ -110,7 +110,7 @@ rm -rf yay
 *(See [RESOURCES.md](./RESOURCES.md) for a detailed breakdown of what each package does).*
 ```bash
 # Core Environment
-sudo pacman -S hyprland waybar rofi mako swaylock pipewire wireplumber pamixer pavucontrol brightnessctl networkmanager nm-connection-editor blueman acpi slurp grim wl-clipboard jq bc socat playerctl python libnotify
+sudo pacman -S hyprland waybar rofi mako hyprlock pipewire wireplumber pamixer pavucontrol brightnessctl networkmanager nm-connection-editor blueman acpi slurp grim wl-clipboard jq bc socat playerctl python libnotify
 
 # Fonts (Crucial for UI Icons)
 sudo pacman -S ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji
@@ -131,11 +131,13 @@ git clone https://github.com/amitpadhan525/linux-dotfiles.git ~/github/linux-dot
 mv ~/.config/hypr ~/.config/hypr.bak 2>/dev/null
 mv ~/.config/waybar ~/.config/waybar.bak 2>/dev/null
 mv ~/.config/rofi ~/.config/rofi.bak 2>/dev/null
+mv ~/.config/kitty ~/.config/kitty.bak 2>/dev/null
 
 # Symlink to the repository
 ln -s ~/github/linux-dotfiles/hyprland/hypr ~/.config/hypr
 ln -s ~/github/linux-dotfiles/hyprland/waybar ~/.config/waybar
 ln -s ~/github/linux-dotfiles/hyprland/rofi ~/.config/rofi
+ln -s ~/github/linux-dotfiles/hyprland/kitty ~/.config/kitty
 ```
 
 ### 5. Finalizing Operations
@@ -158,9 +160,13 @@ linux-dotfiles/
 ├── hyprland/
 │   ├── hypr/                 # Hyprland core brain
 │   │   ├── hyprland.conf     # Standard entry point
+│   │   ├── hyprlock.conf     # Lock screen configuration
 │   │   ├── autostart.sh      # Launch environment daemons
+│   │   ├── setup_autostart.sh # Dynamic autostart setup script
 │   │   ├── conf/             # Modular split configurations (workspaces, keybinds, etc)
 │   │   └── scripts/          # Floating toggler, screenshot taker, etc.
+│   ├── kitty/                # Terminal Emulator
+│   │   └── kitty.conf        # Kitty config
 │   ├── waybar/               # The Status Bar
 │   │   ├── config            # Module layout
 │   │   ├── style.css         # Visual aesthetic rules

@@ -11,7 +11,7 @@ CONFIG_DIR="$HOME/.config"
 # Core and Utility Packages (Official Repositories)
 OFFICIAL_PKGS=(
     "hyprland" "waybar" "rofi" "kitty" "thunar" "mako"
-    "swaylock" "pipewire" "wireplumber" "pamixer" "pavucontrol"
+    "hyprlock" "pipewire" "wireplumber" "pamixer" "pavucontrol"
     "brightnessctl" "networkmanager" "nm-connection-editor" "blueman" "acpi"
     "slurp" "grim" "wl-clipboard" "jq" "bc" "socat" "playerctl" "python" "libnotify"
     "ttf-jetbrains-mono-nerd" "noto-fonts" "noto-fonts-emoji" "base-devel" "git"
@@ -110,12 +110,14 @@ backup_config() {
 backup_config "hypr"
 backup_config "waybar"
 backup_config "rofi"
+backup_config "kitty"
 
 # 7. Symlink Configurations
 info "Applying new configuration files..."
 ln -sf "$DOTFILES_DIR/hyprland/hypr" "$CONFIG_DIR/hypr"
 ln -sf "$DOTFILES_DIR/hyprland/waybar" "$CONFIG_DIR/waybar"
 ln -sf "$DOTFILES_DIR/hyprland/rofi" "$CONFIG_DIR/rofi"
+ln -sf "$DOTFILES_DIR/hyprland/kitty" "$CONFIG_DIR/kitty"
 success "Configuration files correctly linked."
 
 # 8. Set Execute Permissions

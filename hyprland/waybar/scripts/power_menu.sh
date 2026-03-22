@@ -88,7 +88,7 @@ rofi_cmd() {
 # ----------------------------------------------------- 
 run_cmd() {
     if [[ "$1" == "$lock" ]]; then
-        hyprlock                          # Lock screen
+        swaylock                          # Lock screen
     elif [[ "$1" == "$suspend" ]]; then
         systemctl suspend                 # Suspend system
     elif [[ "$1" == "$hibernate" ]]; then

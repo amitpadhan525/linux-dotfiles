@@ -28,7 +28,7 @@
             "custom/cpu",
             "custom/gpu",
             "custom/memory",
-            "disk",
+            "custom/disk",
             "temperature"
         ]
     },
@@ -98,12 +98,12 @@
         "return-type": "json",
         "tooltip": true
     },
-    "disk": {
+    "custom/disk": {
         "interval": 30,
-        "format": "\uf0a0  {percentage_used}%",
-        "path": "/",
-        "tooltip": true,
-        "tooltip-format": "HDD: {used} / {total}"
+        "exec": "bash /home/amit/.config/waybar/scripts/disk_info.sh",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true
     },
     "network": {
         "format-wifi": "  {essid}  {ipaddr}",

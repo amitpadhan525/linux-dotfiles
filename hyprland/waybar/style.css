@@ -37,7 +37,7 @@ tooltip label {
 #temperature    tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 #memory         tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 #custom-memory  tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
-#disk           tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#custom-disk   tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 #battery        tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 #clock          tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 
@@ -51,7 +51,7 @@ tooltip label {
 #custom-gpu,
 #memory,
 #custom-memory,
-#disk,
+#custom-disk,
 #battery,
 #backlight,
 #custom-power {
@@ -155,7 +155,7 @@ tooltip label {
     border: 1px solid rgba(249, 226, 175, 0.2);
 }
 
-#disk {
+#custom-disk {
     color: #89b4fa;
     /* Blue */
     background: rgba(137, 180, 250, 0.1);
@@ -208,7 +208,7 @@ tooltip label {
 #custom-cpu:hover,
 #custom-gpu:hover,
 #custom-memory:hover,
-#disk:hover,
+#custom-disk:hover,
 #battery:hover,
 #clock:hover,
 #tray:hover {

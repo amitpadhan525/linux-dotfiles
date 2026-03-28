@@ -14,10 +14,10 @@ Welcome to my personal configuration files for Arch Linux. This setup uses **Hyp
 
 ## ✨ Core Components
 
-- **Window Manager**: `Hyprland` - Buttery smooth Wayland compositor with modular configuration files.
-- **Status Bar**: `Waybar` - Highly customized with modules for CPU, Memory, Disk, Network, Battery, and more.
-- **Application Launcher**: `Rofi` (Wayland fork) - Themed with `simple.rasi` and `simple-modern.rasi` for a beautiful, distraction-free app searching, menus, and more.
-- **Terminal Emulator**: `Kitty` (previously Alacritty) - GPU-accelerated terminal for ultimate performance.
+- **Window Manager**: `Hyprland` - Buttery smooth Wayland compositor with modular configuration files located in `hypr/conf/`.
+- **Status Bar**: `Waybar` - Highly customized with modules for CPU, Memory, GPU, Disk, Network, Battery, and more.
+- **Application Launcher**: `Rofi` (Wayland fork) - Themed with `simple.rasi` and `simple-modern.rasi`.
+- **Terminal Emulator**: `Kitty` - GPU-accelerated terminal for ultimate performance.
 
 ---
 
@@ -28,20 +28,24 @@ This configuration goes beyond basic window management. It includes several cust
 ### 📸 Smart Named Screenshots (`Super + S`)
 Instead of just saving a generic timestamped file, hitting `Super + S` triggers `slurp` for region selection, takes the shot with `grim`, and instantly pops open a **Rofi prompt** asking you to name the file! Leave it blank for a timestamp fallback. It also auto-copies the file path to `wl-clipboard` and sends a desktop notification.
 
+### 📊 Real-time System Monitoring
+The Waybar configuration uses advanced custom scripts for granular monitoring:
+- **CPU & Memory**: Accurate real-time usage using `/proc/stat` and `free` (via `custom_cpu.sh`, `custom_mem.sh`).
+- **GPU Tracker**: Dedicated monitoring for AMD GPUs showing busy percentage, VRAM usage, and temperatures (`custom_gpu.sh`).
+- **Disk Insight**: Hover over the disk icon to see a detailed breakdown of Root and Home partition usage (`disk_info.sh`).
+- **RAM Top 5**: Quickly identify resource hogs; the RAM module can trigger a notification showing the top 5 memory-consuming processes.
+
 ### 🌐 Rofi Wi-Fi Manager
-Clicking the network module in Waybar launches `wifi_menu.sh`, a fully self-contained GUI built with Rofi. It lists available SSIDs, lets you enable/disable Wi-Fi, prompts for WPA/WEP passwords securely using a custom Rofi password field, and connects seamlessly via `nmcli`.
+Clicking the network module in Waybar launches `wifi_menu.sh`, a GUI built with Rofi. It lists available SSIDs, lets you enable/disable Wi-Fi, prompts for passwords securely, and connects via `nmcli`.
 
 ### ⚡ Elegant Power Menu
-A heavily styled Rofi menu (`power_menu.sh`) handles your system's power states: Lock (`hyprlock`), Logout, Suspend, Hibernate, Reboot, and Shutdown.
+A styled Rofi menu (`power_menu.sh`) handles Lock (`hyprlock`), Logout, Suspend, Hibernate, Reboot, and Shutdown.
 
 ### 🌙 Smart Night Mode (`Super + N`)
-Quickly toggle a blue-light filter to save your eyes at night. It uses `hyprsunset` (or `gammastep` fallback) and writes its state to a hidden file so Waybar's icon (`` / ``) always accurately reflects the active state.
+Quickly toggle a blue-light filter to save your eyes. It uses `hyprsunset` for a native Wayland experience, filtering the screen to a comfortable 4500K.
 
-### 🪟 Mass Floating Toggle (`Super + F`)
-Tired of moving windows one by one? The `toggle_floating.sh` script detects all active clients in your workspace and toggles **all of them** simultaneously between floating and tiling mode, complete with system notifications!
-
-### ⏱️ Python Screen Time Tracker
-Ever wondered how much time you've spent on your machine today? A custom python script (`screen_time.py`) parses system login records via `last -R`, accurately ignores overlapped terminal sessions (`pts/X`), and calculates your exact screen time for the day, beautifully displayed on Waybar.
+### 🔋 Battery Intelligence
+Includes `battery_notify.sh` which monitors levels in the background and sends critical desktop notifications when the battery drops below 20% and 10%.
 
 ---
 
@@ -58,13 +62,14 @@ A complete map to navigate the interface without ever touching your mouse.
 | `Super + W` | Toggle Status Bar | `killall waybar` & rerun |
 | `Super + S` | Smart Screenshot | `named_screenshot.sh` |
 | `Super + N` | Toggle Night Mode | `hyprsunset` toggle |
+| `Super + L` | Lock Screen | `hyprlock` |
 | `Super + R` | Reload Hyprland | `hyprctl reload` |
 
 ### Window Operations
 | Shortcut | Action |
 |----------|--------|
 | `Super + Q` | Close Active Window |
-| `Super + F` | Toggle Floating Mode (Mass Toggle) |
+| `Super + F` | Toggle Floating Mode |
 | `Super + Space`| Toggle Fullscreen |
 | `Super + H/J/K/L`| Vim-like Focus (Left, Down, Up, Right) |
 | `Super + Mouse(L)`| Drag & Move Window |
@@ -79,9 +84,9 @@ A complete map to navigate the interface without ever touching your mouse.
 ### Hardware Media Keys
 | Key | Action |
 |-----|--------|
-| `XF86MonBrightnessUp/Down` | Screen Brightness +/- 10% (`brightnessctl`) |
-| `XF86AudioRaise/LowerVolume`| Volume Control +/- 5% (`pamixer`) |
-| `XF86AudioMute` | Toggle Audio Mute (`pamixer -t`) |
+| `XF86MonBrightnessUp/Down` | Screen Brightness +/- 10% |
+| `XF86AudioRaise/LowerVolume`| Volume Control +/- 5% (`wpctl`) |
+| `XF86AudioMute` | Toggle Audio Mute (`wpctl`) |
 
 ---
 
@@ -90,66 +95,24 @@ A complete map to navigate the interface without ever touching your mouse.
 Want this setup on your Arch Linux machine? Follow these simple steps.
 
 ### 1. Base System Requirements
-First, make sure your system is up to date and has essential tools:
+First, make sure your system is up to date:
 ```bash
 sudo pacman -Syu
-sudo pacman -S base-devel git thunar kitty
+sudo pacman -S base-devel git
 ```
 
-### 2. Install AUR Helper (`yay`)
-If you don't already have `yay`:
-```bash
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd ..
-rm -rf yay
-```
-
-### 3. Install All Dependencies
-*(See [RESOURCES.md](./RESOURCES.md) for a detailed breakdown of what each package does).*
-```bash
-# Core Environment
-sudo pacman -S hyprland waybar rofi mako hyprlock pipewire wireplumber pamixer pavucontrol brightnessctl networkmanager nm-connection-editor blueman acpi slurp grim wl-clipboard jq bc socat playerctl python libnotify
-
-# Fonts (Crucial for UI Icons)
-sudo pacman -S ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji
-yay -S ttf-font-awesome
-
-# AUR Utilities
-yay -S hyprpaper hyprsunset
-```
-
-### 4. Clone & Link Configurations
-Clone the dotfiles into your `~/github` folder and use the provided scripts/symlinks to apply them.
+### 2. Auto-Installation
+We provide a comprehensive installer that handles dependencies, AUR packages, and symlinking.
 
 ```bash
-mkdir -p ~/github ~/.config
 git clone https://github.com/amitpadhan525/linux-dotfiles.git ~/github/linux-dotfiles
-
-# Backup existing configs to avoid data loss
-mv ~/.config/hypr ~/.config/hypr.bak 2>/dev/null
-mv ~/.config/waybar ~/.config/waybar.bak 2>/dev/null
-mv ~/.config/rofi ~/.config/rofi.bak 2>/dev/null
-mv ~/.config/kitty ~/.config/kitty.bak 2>/dev/null
-
-# Symlink to the repository
-ln -s ~/github/linux-dotfiles/hyprland/hypr ~/.config/hypr
-ln -s ~/github/linux-dotfiles/hyprland/waybar ~/.config/waybar
-ln -s ~/github/linux-dotfiles/hyprland/rofi ~/.config/rofi
-ln -s ~/github/linux-dotfiles/hyprland/kitty ~/.config/kitty
+cd ~/github/linux-dotfiles
+chmod +x install.sh
+./install.sh
 ```
 
-### 5. Finalizing Operations
-Grant execution permissions to all utility scripts, otherwise buttons/shortcuts will silently fail!
-```bash
-chmod +x ~/.config/hypr/scripts/*.sh
-chmod +x ~/.config/hypr/autostart.sh
-chmod +x ~/.config/waybar/scripts/*.sh
-chmod +x ~/.config/waybar/scripts/*.py
-```
-
-Before restarting, explicitly check `~/.config/hypr/conf/monitors.conf` to align with your personal display setup (run `hyprctl monitors` if currently on Hyprland).
+### 3. Finalizing Operations
+Before restarting, check `~/.config/hypr/conf/monitors.conf` to align with your personal display setup. Run `hyprctl monitors` to see your current display names.
 
 ***
 
@@ -163,18 +126,20 @@ linux-dotfiles/
 │   │   ├── hyprlock.conf     # Lock screen configuration
 │   │   ├── autostart.sh      # Launch environment daemons
 │   │   ├── setup_autostart.sh # Dynamic autostart setup script
-│   │   ├── conf/             # Modular split configurations (workspaces, keybinds, etc)
+│   │   ├── conf/             # Modular split configurations
 │   │   └── scripts/          # Floating toggler, screenshot taker, etc.
 │   ├── kitty/                # Terminal Emulator
 │   │   └── kitty.conf        # Kitty config
 │   ├── waybar/               # The Status Bar
 │   │   ├── config            # Module layout
+│   │   ├── config-dock.jsonc # Alternative dock-style layout
 │   │   ├── style.css         # Visual aesthetic rules
-│   │   └── scripts/          # Superpowers: wifi_menu, power_menu, screen_time
+│   │   └── scripts/          # Waybar powerups (CPU, GPU, RAM, Disk, etc)
 │   └── rofi/                 # Application Launcher + GUIs
 │       ├── simple.rasi       # Custom aesthetic styling
 │       └── simple-modern.rasi
 ├── RESOURCES.md              # Exhaustive map of all dependencies
+├── install.sh                # Main automated installer
 ├── copy.sh                   # Script to pull latest system configs into repo
 ├── push.sh                   # Fast GitHub commit/push utility
 └── README.md                 # You are here!

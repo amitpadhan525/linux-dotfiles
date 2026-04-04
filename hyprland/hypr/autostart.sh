@@ -1,2 +1,3 @@
 #!/bin/bash
-/usr/bin/gnome-keyring-daemon --start --components=secrets &
+# Autostart scripts for Hyprland
+# (Add any other background services here)

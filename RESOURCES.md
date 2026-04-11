@@ -36,6 +36,9 @@ Various utility commands that unlock the "hidden" tools in the `.config` directo
 | **Network GUI** | `nm-connection-editor` | A fallback GTK editor linked within the Rofi Wi-Fi manager. |
 | **Bluetooth** | `blueman` | GTK frontend for handling Bluetooth hardware. |
 | **Hardware Stats** | `acpi` | Scraped by `battery_info.sh` and `battery_notify.sh` to parse percentages and send alerts. |
+| **Secrets Management**| `gnome-keyring` + `polkit-kde-agent` | Enables browser session persistence and securely handles Polkit authentications. |
+| **X/GTK Setting Sync**| `xsettingsd` | Loads X settings for older GTK apps under the Wayland environment. |
+| **Audio CLI Tools**| `libpulse` | Provides the `pactl` command required for some media key shortcuts. |
 
 ---
 
@@ -71,9 +74,9 @@ To immediately fetch the vast majority of these dependencies on an Arch system:
 sudo pacman -S hyprland waybar rofi kitty thunar mako \
     hyprlock pipewire wireplumber pamixer pavucontrol \
     brightnessctl networkmanager nm-connection-editor blueman acpi \
-    slurp grim wl-clipboard \
-    jq bc socat playerctl python libnotify \
-    ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji
+    slurp grim wl-clipboard jq bc socat playerctl python libnotify \
+    xsettingsd polkit-kde-agent gnome-keyring libpulse \
+    ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji base-devel git
 
 # AUR Packages
 yay -S hyprpaper hyprsunset ttf-font-awesome

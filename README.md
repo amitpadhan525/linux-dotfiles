@@ -34,6 +34,7 @@ The Waybar configuration uses advanced custom scripts for granular monitoring:
 - **GPU Tracker**: Dedicated monitoring for AMD GPUs showing busy percentage, VRAM usage, and temperatures (`custom_gpu.sh`).
 - **Disk Insight**: Hover over the disk icon to see a detailed breakdown of Root and Home partition usage (`disk_info.sh`).
 - **RAM Top 5**: Quickly identify resource hogs; the RAM module can trigger a notification showing the top 5 memory-consuming processes.
+- **Screen Time Tracker**: Monitors system uptime logically across suspend states, displayed directly in Waybar via `screen_time.py`.
 
 ### 🌐 Rofi Wi-Fi Manager
 Clicking the network module in Waybar launches `wifi_menu.sh`, a GUI built with Rofi. It lists available SSIDs, lets you enable/disable Wi-Fi, prompts for passwords securely, and connects via `nmcli`.
@@ -46,6 +47,9 @@ Quickly toggle a blue-light filter to save your eyes. It uses `hyprsunset` for a
 
 ### 🔋 Battery Intelligence
 Includes `battery_notify.sh` which monitors levels in the background and sends critical desktop notifications when the battery drops below 20% and 10%.
+
+### 🔐 Seamless Secrets Management
+The environment is built to sustain persistent logins (like Brave browser sessions) across reboots by automatically initializing `gnome-keyring-daemon` and handling privilege elevations through `polkit-kde-agent` on startup.
 
 ---
 

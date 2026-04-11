@@ -14,6 +14,7 @@ OFFICIAL_PKGS=(
     "hyprlock" "pipewire" "wireplumber" "pamixer" "pavucontrol"
     "brightnessctl" "networkmanager" "nm-connection-editor" "blueman" "acpi"
     "slurp" "grim" "wl-clipboard" "jq" "bc" "socat" "playerctl" "python" "libnotify"
+    "xsettingsd" "polkit-kde-agent" "gnome-keyring" "libpulse"
     "ttf-jetbrains-mono-nerd" "noto-fonts" "noto-fonts-emoji" "base-devel" "git"
 )
 

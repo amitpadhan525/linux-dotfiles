@@ -4,7 +4,7 @@ ICO_CPU=""
 
 # /proc/stat diff — accurate real-time CPU %
 read_cpu() { awk '/^cpu / {print $2,$3,$4,$5,$6,$7,$8}' /proc/stat; }
-snap1=$(read_cpu); sleep 0.2; snap2=$(read_cpu)
+snap1=$(read_cpu); sleep 0.05; snap2=$(read_cpu)
 
 cpu_usage=$(awk -v s1="$snap1" -v s2="$snap2" 'BEGIN {
     split(s1,a); split(s2,b)

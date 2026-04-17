@@ -29,18 +29,21 @@ mapfile -t procs < <(ps axch -o cmd:15,rss | awk '{sum[$1]+=$2; count[$1]++} END
 
 left_lines=(); right_lines=()
 for i in "${!procs[@]}"; do
-    name=$(echo "${procs[$i]}" | awk '{print $1}' | sed 's/[<>&]/./g')
-    rss=$(echo "${procs[$i]}"  | awk '{print $2}')
-    mb=$(awk "BEGIN {printf \"%.0f\", $rss/1024}")
+    read -r name rss <<< "${procs[$i]}"
+    name=${name//[<>&]/.}
+    mb=$(( rss / 1024 ))
     rank=$((i + 1))
 
-    mb_color=$(awk -v v="$mb" 'BEGIN {
-        if(v+0>=500) print "#f38ba8"; else if(v+0>=150) print "#f9e2af"; else print "#a6e3a1" }')
+    if (( mb >= 500 )); then mb_color="#f38ba8"
+    elif (( mb >= 150 )); then mb_color="#f9e2af"
+    else mb_color="#a6e3a1"; fi
 
-    mem_str=$(awk -v m="$mb" 'BEGIN {
-        if(m+0>=1000) printf "%.1fG", m/1024
-        else printf "%.0fM", m
-    }')
+    if (( mb >= 1000 )); then
+        gb10=$(( (mb * 10) / 1024 ))
+        mem_str="$((gb10 / 10)).$((gb10 % 10))G"
+    else
+        mem_str="${mb}M"
+    fi
 
     r=$(printf '%2d' "$rank")
     n=$(printf '%-12.12s' "$name")

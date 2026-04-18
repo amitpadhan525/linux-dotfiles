@@ -1,13 +1,23 @@
 #!/bin/bash
 # ----------------------------------------------------- 
-# Wallpaper Script
+# Robust Wallpaper Script for Hyprland
 # ----------------------------------------------------- 
 
-pkill hyprpaper
-sleep 1
-hyprpaper &
-sleep 2
+# Force kill any existing instances to prevent conflicts
+killall -9 hyprpaper 2>/dev/null
 
-# Apply wallpaper using IPC
-hyprctl hyprpaper wallpaper "eDP-1,/home/amit/.config/hypr/bg.jpg" || true
-hyprctl hyprpaper wallpaper "HDMI-A-1,/home/amit/.config/hypr/bg.jpg" || true
+# Wait a moment for the system/monitors to settle
+sleep 1
+
+# Check if the config file exists
+CONFIG="/home/amit/.config/hypr/hyprpaper.conf"
+if [ ! -f "$CONFIG" ]; then
+    echo "Error: Config file not found at $CONFIG"
+    exit 1
+fi
+
+# Start hyprpaper with absolute path to config
+/usr/bin/hyprpaper -c "$CONFIG" &
+
+# Log status
+echo "hyprpaper started with config $CONFIG"

@@ -55,28 +55,27 @@ tooltip label {
 #battery,
 #backlight,
 #custom-power {
-    background: #313244;
-    /* Surface0 */
-    padding: 4px 14px;
-    margin: 4px 3px;
-    border-radius: 10px;
+    background: #45475a; /* Brighter surface */
+    padding: 4px 16px;
+    margin: 0 4px 4px 4px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* --- Left Modules --- */
 
 #network {
     color: #94e2d5;
-    /* Teal */
-    background: rgba(148, 226, 213, 0.1);
-    border: 1px solid rgba(148, 226, 213, 0.2);
+    background: rgba(148, 226, 213, 0.2);
+    border: 1px solid rgba(148, 226, 213, 0.4);
 }
 
 #workspaces {
-    background: #1e1e2e;
-    margin: 4px 4px;
-    padding: 2px 2px;
-    border-radius: 10px;
-    border: 1px solid #313244;
+    background: #313244;
+    margin: 0 4px 4px 4px;
+    padding: 2px 4px;
+    border-radius: 12px;
+    border: 1px solid rgba(203, 166, 247, 0.3);
 }
 
 #workspaces button {
@@ -109,64 +108,57 @@ tooltip label {
 /* --- Center Modules --- */
 
 #clock {
-    color: #cdd6f4;
-    background: rgba(203, 166, 247, 0.1);
-    /* Mauve tint */
-    border: 1px solid rgba(203, 166, 247, 0.2);
+    color: #ffffff;
+    background: rgba(203, 166, 247, 0.2);
+    border: 1px solid rgba(203, 166, 247, 0.4);
     font-size: 15px;
+    font-weight: 800;
 }
 
 /* --- Right Modules --- */
 
 #pulseaudio {
     color: #fab387;
-    /* Peach */
-    background: rgba(250, 179, 135, 0.1);
-    border: 1px solid rgba(250, 179, 135, 0.2);
+    background: rgba(250, 179, 135, 0.2);
+    border: 1px solid rgba(250, 179, 135, 0.4);
 }
 
 #backlight {
     color: #f9e2af;
-    /* Yellow */
-    background: rgba(249, 226, 175, 0.1);
-    border: 1px solid rgba(249, 226, 175, 0.2);
+    background: rgba(249, 226, 175, 0.2);
+    border: 1px solid rgba(249, 226, 175, 0.4);
 }
 
 #custom-cpu,
 #custom-gpu {
     color: #eba0ac;
-    /* Flamingo */
-    background: rgba(235, 160, 172, 0.1);
-    border: 1px solid rgba(235, 160, 172, 0.2);
+    background: rgba(235, 160, 172, 0.2);
+    border: 1px solid rgba(235, 160, 172, 0.4);
 }
 
 #temperature {
     color: #f38ba8;
-    /* Red */
-    background: rgba(243, 139, 168, 0.1);
-    border: 1px solid rgba(243, 139, 168, 0.2);
+    background: rgba(243, 139, 168, 0.2);
+    border: 1px solid rgba(243, 139, 168, 0.4);
 }
 
 #memory,
 #custom-memory {
     color: #f9e2af;
-    /* Yellow */
-    background: rgba(249, 226, 175, 0.1);
-    border: 1px solid rgba(249, 226, 175, 0.2);
+    background: rgba(249, 226, 175, 0.2);
+    border: 1px solid rgba(249, 226, 175, 0.4);
 }
 
 #custom-disk {
     color: #89b4fa;
-    /* Blue */
-    background: rgba(137, 180, 250, 0.1);
-    border: 1px solid rgba(137, 180, 250, 0.2);
+    background: rgba(137, 180, 250, 0.2);
+    border: 1px solid rgba(137, 180, 250, 0.4);
 }
 
 #battery {
     color: #a6e3a1;
-    /* Green */
-    background: rgba(166, 227, 161, 0.1);
-    border: 1px solid rgba(166, 227, 161, 0.2);
+    background: rgba(166, 227, 161, 0.2);
+    border: 1px solid rgba(166, 227, 161, 0.4);
 }
 
 #battery.charging {
@@ -185,12 +177,11 @@ tooltip label {
 
 #custom-power {
     color: #f38ba8;
-    /* Red */
-    background: #181825;
+    background: #313244;
     padding: 2px 20px;
     margin-right: 8px;
     font-size: 22px;
-    border: 1px solid rgba(243, 139, 168, 0.2);
+    border: 1px solid rgba(243, 139, 168, 0.4);
     transition: all 0.3s ease;
 }
 
@@ -225,20 +216,20 @@ tooltip label {
 
 #custom-wifi_switcher {
     color: #f9e2af;
-    background: rgba(249, 226, 175, 0.1);
-    border: 1px solid rgba(249, 226, 175, 0.2);
+    background: rgba(249, 226, 175, 0.2);
+    border: 1px solid rgba(249, 226, 175, 0.4);
     padding: 4px 14px;
-    margin: 4px 3px;
-    border-radius: 10px;
+    margin: 0 3px 4px 3px;
+    border-radius: 12px;
 }
 
 #custom-uptime {
     color: #cba6f7;
-    background: rgba(203, 166, 247, 0.1);
-    border: 1px solid rgba(203, 166, 247, 0.2);
+    background: rgba(203, 166, 247, 0.2);
+    border: 1px solid rgba(203, 166, 247, 0.4);
     padding: 4px 14px;
-    margin: 4px 3px;
-    border-radius: 10px;
+    margin: 0 3px 4px 3px;
+    border-radius: 12px;
 }
 
 #custom-uptime:hover {

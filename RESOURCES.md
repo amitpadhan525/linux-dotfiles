@@ -1,83 +1,75 @@
-# 📦 System Resources & Hidden Dependencies
+# 📦 Resource Blueprint
 
-This document provides absolute transparency on every tool, font, and dependency required for this dotfiles environment to function perfectly. It maps out **what** you are installing and **why** it sits inside this ecosystem.
-
----
-
-## 🖥️ Core Desktop Foundation
-
-These form the very backbone of the environment shell.
-
-| Component | Package | Purpose in Dotfiles |
-|-----------|---------|---------------------|
-| **Compositor** | `hyprland` | The Wayland tiling manager that handles everything visual. |
-| **Status Bar** | `waybar` | Renders our system dashboard, holding our custom Python/Bash scripts. |
-| **App Launcher** | `rofi` | Triggers apps via `Super + D`, and serves as the UI engine for Wi-Fi and Power menus. |
-| **Terminal** | `kitty` | High-performance, GPU-accelerated terminal. |
-| **File Manager** | `thunar` | Fast GTK-based file manager triggered via `Super + E`. |
-| **Notifications** | `mako` | Handles desktop notifications (used by scripts for battery, screenshots, and floating toggles). |
-| **Wallpaper** | `swaybg` / `hyprpaper` | Renders background imagery flawlessly on Wayland outputs. |
-| **Locking** | `hyprlock` | Secures the system. Invoked directly by the `power_menu.sh` module and upon autostart. |
+This document outlines the software stack and dependencies that power the **Astraeus** environment. Understanding these components is key to maintaining a stable and efficient system.
 
 ---
 
-## 🛠️ Superpower / Script Dependencies
+## 🏗️ Core Stack
+The fundamental building blocks of the desktop experience.
 
-Various utility commands that unlock the "hidden" tools in the `.config` directories. Missing these will cause keyboard shortcuts or Waybar modules to silently fail!
-
-| Category | Package | Script / Feature Integration |
-|----------|---------|------------------------------|
-| **Screen Capture** | `grim` + `slurp` + `wl-clipboard` | Powers `named_screenshot.sh` (Super+S). `slurp` grabs the region, `grim` takes the image, `wl-clipboard` copies the path. |
-| **Night Mode** | `hyprsunset` | Triggered by `Super + N` to filter blue light (fallback `gammastep` or `hyprshade` also supported). |
-| **Audio Mgmt** | `pamixer` + `pavucontrol` | `pamixer` controls volume directly via media keys. `pavucontrol` is the GUI mixer. |
-| **Audio Core** | `pipewire` + `wireplumber` | Modern audio routing layer required for Wayland compositors. |
-| **Brightness** | `brightnessctl` | Managed strictly by laptop display hardware keys. |
-| **Network Manager** | `networkmanager` (nmcli) | Crucial for `wifi_menu.sh`, directly parsing interfaces and connecting. |
-| **Network GUI** | `nm-connection-editor` | A fallback GTK editor linked within the Rofi Wi-Fi manager. |
-| **Bluetooth** | `blueman` | GTK frontend for handling Bluetooth hardware. |
-| **Hardware Stats** | `acpi` | Scraped by `battery_info.sh` and `battery_notify.sh` to parse percentages and send alerts. |
-| **Secrets Management**| `gnome-keyring` + `polkit-kde-agent` | Enables browser session persistence and securely handles Polkit authentications. |
-| **X/GTK Setting Sync**| `xsettingsd` | Loads X settings for older GTK apps under the Wayland environment. |
-| **Audio CLI Tools**| `libpulse` | Provides the `pactl` command required for some media key shortcuts. |
+| Component | Package | Role |
+| :--- | :--- | :--- |
+| **Compositor** | `hyprland` | The heart of the system—Wayland tiling compositor. |
+| **Status Bar** | `waybar` | Highly customized system monitor and dashboard. |
+| **App Launcher** | `rofi-wayland` | The graphical interface for apps and custom menus. |
+| **Terminal** | `kitty` | Fast, GPU-based terminal emulator. |
+| **File Manager** | `thunar` | Lightweight GTK file explorer. |
+| **Notification** | `mako` | Lightweight Wayland notification daemon. |
 
 ---
 
-## 🐍 String Processing & Math Tools
+## 🛠️ Utility Layer
+Scripts and small binaries that enable "Superpowers" like screenshots and brightness control.
 
-These dependencies act as the "glue" inside our `.sh` and `.py` files.
+### 📸 Imaging & Media
+- **`grim` & `slurp`**: Screen capture and region selection.
+- **`wl-clipboard`**: System-wide clipboard management for Wayland.
+- **`pamixer` & `playerctl`**: Audio volume and media playback control.
 
-- **`jq`**: JSON processor—used by `toggle_floating.sh` to mass-toggle windows and by various Waybar custom scripts for JSON output formatting.
-- **`python`**: Runs the custom `screen_time.py` tracker mapping out login histories.
-- **`bc`**: Command line calculator, necessary for division and rounding inside custom system metric scripts.
-- **`socat`**: Socket relay processor used heavily in communicating with Hyprland's IPC socket.
-- **`playerctl`**: Utility used by Waybar to control media playback.
-- **`libnotify`**: Provides the `notify-send` binary, allowing scripts to talk to the user via UI popups.
+### 🔌 System Management
+- **`brightnessctl`**: Backlight control for laptop displays.
+- **`networkmanager`**: Backend for Wi-Fi and Ethernet connectivity.
+- **`blueman`**: Bluetooth device management.
+- **`acpi`**: Hardware state monitoring (Battery/Thermal).
 
----
-
-## 🎨 Fonts (Critical for UI integrity)
-
-If these are not installed, Waybar and Rofi will display broken squares instead of icons!
-
-- **`ttf-jetbrains-mono-nerd`**: Primary font rendering clean text alongside vast glyph options.
-- **`ttf-font-awesome`**: Provides legacy icon mappings required by standard Waybar modules.
-- **`noto-fonts` & `noto-fonts-emoji`**: Crucial fallbacks for colored emojis and broad unicode ranges.
+### 🔐 Security & Integration
+- **`gnome-keyring`**: Secure storage for passwords and keys.
+- **`polkit-kde-agent`**: Privilege elevation GUI.
+- **`xsettingsd`**: Bridges X11 settings to Wayland applications.
 
 ---
 
-## 🚀 The Universal Install Command
+## 🧠 Scripting Glue
+Tools used within our internal logic to parse data and automate tasks.
 
-To immediately fetch the vast majority of these dependencies on an Arch system:
+- **`jq`**: Lightweight JSON processor (critical for Waybar and Hyprland IPC).
+- **`socat`**: Multipurpose relay—used to talk to the Hyprland socket.
+- **`bc`**: Arbitrary precision calculator for system metrics.
+- **`python`**: Powers complex logic like uptime tracking and telemetry.
+
+---
+
+## 🎨 Visual Assets
+Required for the UI to render correctly without missing icons or weird spacing.
+
+- **`ttf-jetbrains-mono-nerd`**: The primary UI and terminal font.
+- **`ttf-font-awesome`**: Icon glyphs for Waybar modules.
+- **`noto-fonts-emoji`**: Full emoji support across the system.
+
+---
+
+## 📥 Manual Provisioning
+If you wish to install everything manually without the `install.sh` script:
 
 ```bash
-# Standard Repositories
-sudo pacman -S hyprland waybar rofi kitty thunar mako \
+# Core & Utilities
+sudo pacman -S hyprland waybar rofi-wayland kitty thunar mako \
     hyprlock pipewire wireplumber pamixer pavucontrol \
     brightnessctl networkmanager nm-connection-editor blueman acpi \
     slurp grim wl-clipboard jq bc socat playerctl python libnotify \
     xsettingsd polkit-kde-agent gnome-keyring libpulse \
     ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji base-devel git
 
-# AUR Packages
+# AUR Specifics
 yay -S hyprpaper hyprsunset ttf-font-awesome
 ```

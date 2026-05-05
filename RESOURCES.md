@@ -24,13 +24,13 @@ Scripts and small binaries that enable "Superpowers" like screenshots and bright
 ### 📸 Imaging & Media
 - **`grim` & `slurp`**: Screen capture and region selection.
 - **`wl-clipboard`**: System-wide clipboard management for Wayland.
-- **`pamixer` & `playerctl`**: Audio volume and media playback control.
+- **`pamixer`**: Audio volume control.
 
 ### 🔌 System Management
 - **`brightnessctl`**: Backlight control for laptop displays.
 - **`networkmanager`**: Backend for Wi-Fi and Ethernet connectivity.
 - **`blueman`**: Bluetooth device management.
-- **`acpi`**: Hardware state monitoring (Battery/Thermal).
+- **`acpi` & `upower`**: Hardware state monitoring (Battery/Thermal).
 
 ### 🔐 Security & Integration
 - **`gnome-keyring`**: Secure storage for passwords and keys.
@@ -43,8 +43,6 @@ Scripts and small binaries that enable "Superpowers" like screenshots and bright
 Tools used within our internal logic to parse data and automate tasks.
 
 - **`jq`**: Lightweight JSON processor (critical for Waybar and Hyprland IPC).
-- **`socat`**: Multipurpose relay—used to talk to the Hyprland socket.
-- **`bc`**: Arbitrary precision calculator for system metrics.
 - **`python`**: Powers complex logic like uptime tracking and telemetry.
 
 ---
@@ -66,7 +64,7 @@ If you wish to install everything manually without the `install.sh` script:
 sudo pacman -S hyprland waybar rofi-wayland kitty thunar mako \
     hyprlock pipewire wireplumber pamixer pavucontrol \
     brightnessctl networkmanager nm-connection-editor blueman acpi \
-    slurp grim wl-clipboard jq bc socat playerctl python libnotify \
+    upower slurp grim wl-clipboard jq python libnotify \
     xsettingsd polkit-kde-agent gnome-keyring libpulse \
     ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji base-devel git
 

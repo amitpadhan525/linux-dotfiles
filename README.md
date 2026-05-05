@@ -8,47 +8,74 @@
   [![Waybar](https://img.shields.io/badge/Bar-Waybar-40a02b?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/Alexays/Waybar)
   [![Rofi](https://img.shields.io/badge/Launcher-Rofi-df8e1d?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/davatorium/rofi)
   [![Kitty](https://img.shields.io/badge/Terminal-Kitty-d20f39?style=for-the-badge&logo=kitty&logoColor=white)](https://sw.kovidgoyal.net/kitty/)
+  [![Catppuccin](https://img.shields.io/badge/Theme-Catppuccin-f5c2e7?style=for-the-badge)](https://github.com/catppuccin/catppuccin)
 </div>
 
 ---
 
 ## 🌟 Vision
+
 Welcome to **Astraeus**, a meticulously crafted dotfiles repository designed for users who demand both **extreme performance** and **premium aesthetics**. This isn't just a configuration; it's a fully integrated ecosystem built on top of Arch Linux and Hyprland.
 
-- **🎨 Aesthetic Excellence**: Hand-picked color palettes and glassmorphic UI elements.
-- **⚡ Blazing Performance**: Minimal background overhead and GPU-accelerated components.
-- **🛠️ Modular Architecture**: Easy to customize and extend without breaking the core system.
-- **⌨️ Keyboard Centric**: Navigate your entire workflow without lifting a finger from the home row.
+- **🎨 Aesthetic Excellence**: A gorgeous, meticulously tuned **Catppuccin Mocha** color palette integrated across Hyprland, Waybar, Rofi, and Kitty.
+- **⚡ Blazing Performance**: Minimal background overhead utilizing native Wayland tools and customized parsing scripts.
+- **🛠️ Modular Architecture**: Configurations are split by function, making it trivial to drop in your own tweaks without breaking the core system.
+- **⌨️ Keyboard Centric**: Navigate your entire workflow, control music, toggle network settings, and manage floating windows seamlessly without lifting a finger.
 
 ---
 
-## ✨ Key Enhancements
+## ✨ Standout Features
 
-### 🛡️ Smart System Daemons
-- **🔋 Battery Sentinel**: Intelligent monitoring with critical alerts at 20% and 10%.
-- **🌙 Night Shift**: native blue light filtering via `hyprsunset` (`Super + N`).
-- **🔐 Vault Persistence**: Seamless session management through `gnome-keyring` and `polkit`.
+### 🛡️ Smart System Integrations
+- **🌙 Night Shift**: Native hardware-level blue light filtering toggled on demand via `hyprsunset` (`Super + N`).
+- **🔐 Vault Persistence**: Seamless session and credential management through `gnome-keyring` and `polkit`.
+- **🔋 Battery Sentinel**: Intelligent monitoring with automated critical alerts.
 
 ### 🚀 Custom Workflow Powerups
-- **📸 Precision Capture**: `Super + S` triggers a region selector with a name prompt—no more messy filenames.
-- **🌐 Network Pulse**: A sleek Rofi-based Wi-Fi manager integrated directly into Waybar.
-- **📊 Live Telemetry**: Real-time tracking of CPU, GPU (AMD), VRAM, and RAM with per-module deep-dives.
+- **🧠 Smart Window Snapping**: `Super + H/J/K/L` acts as intelligent VIM-keys. In tiled workspaces, they move focus. In floating workspaces, they automatically resize and snap floating windows into exact quadrant layouts.
+- **📸 Precision Capture**: `Super + S` triggers a region selector with a custom Rofi name-prompt. Screenshots are cleanly named, saved, and copied to your clipboard instantly.
+- **🌐 Network Pulse**: A sleek, fully custom Rofi-based Wi-Fi manager integrated directly into Waybar for instant network switching without bloated GUI apps.
+- **📊 Live Telemetry**: Custom backend bash/python scripts tracking real-time CPU usage, AMD GPU metrics, VRAM, and RAM, presenting them elegantly in Waybar.
+- **⌛ Screen Time Tracker**: Custom python analytics providing daily screen-time metrics natively inside your status bar.
 
 ---
 
 ## ⌨️ Essential Grimoire (Keybindings)
 
-| Binding | Action | Detail |
+### Application Control
+| Binding | Action | Description |
 | :--- | :--- | :--- |
-| `Super + Enter` | **Kitty** | GPU Accelerated Terminal |
-| `Super + D` | **Launcher** | Rofi Application Runner |
-| `Super + E` | **Files** | Thunar File Manager |
-| `Super + S` | **Snap** | Named Region Screenshot |
-| `Super + N` | **Night** | Toggle Blue Light Filter |
-| `Super + L` | **Lock** | Secure System Lock |
+| `Super + Enter` | **Terminal** | Launch GPU-Accelerated Kitty |
+| `Super + D` | **Launcher** | Launch Rofi App Menu |
+| `Super + E` | **Files** | Launch Thunar File Manager |
+| `Super + S` | **Screenshot** | Trigger Named Region Screenshot |
+
+### System & Desktop
+| Binding | Action | Description |
+| :--- | :--- | :--- |
+| `Super + W` | **Waybar** | Restart/Toggle Waybar |
+| `Super + R` | **Reload** | Hot-reload Hyprland Configuration |
+| `Super + N` | **Night Mode** | Toggle Blue Light Filter |
+| `Super + Shift + L` | **Lock** | Secure System Lock (`hyprlock`) |
+
+### Window Management
+| Binding | Action | Description |
+| :--- | :--- | :--- |
 | `Super + Q` | **Close** | Terminate Active Window |
 | `Super + F` | **Float** | Toggle Floating State |
-| `Super + [1-9]` | **Switch** | Jump to Workspace |
+| `Super + Space` | **Fullscreen**| Toggle Fullscreen |
+| `Super + H/J/K/L` | **Focus/Snap**| Move Focus or Snap Floating Windows to Quadrants |
+| `Super + LMB` | **Move** | Click & Drag to Move Window |
+| `Super + RMB` | **Resize** | Click & Drag to Resize Window |
+| `Super + [1-9]` | **Workspace** | Jump to Workspace 1-9 |
+| `Super + Shift + [1-9]` | **Move To** | Move Window to Workspace 1-9 |
+
+### Media & Hardware
+| Binding | Action |
+| :--- | :--- |
+| `Media Volume Up/Down` | Increase/Decrease Volume by 5% |
+| `Media Mute` | Toggle Audio Mute |
+| `Brightness Up/Down` | Adjust Screen Brightness by 5% |
 
 ---
 
@@ -62,7 +89,7 @@ sudo pacman -Syu --noconfirm base-devel git
 ```
 
 ### 2. Deployment
-Clone the repository and run the automated installer. It will handle dependencies, AUR packages, and configuration links.
+Clone the repository and run the automated installer. The script is highly robust—it automatically installs all required dependencies (both official and AUR), backs up your current dotfiles to a timestamped archive, and cleanly symlinks the new configuration files.
 
 ```bash
 git clone https://github.com/amitpadhan525/linux-dotfiles.git
@@ -71,21 +98,26 @@ chmod +x install.sh
 ./install.sh
 ```
 
+### 3. Post-Installation
+1. **Monitor Setup**: Check `~/.config/hypr/conf/monitors.conf` to align with your specific displays.
+2. **Review Resources**: Deep dive into the stack dependencies by checking out [`RESOURCES.md`](./RESOURCES.md).
+
 ---
 
-## 📂 Architecture
+## 📂 Architecture Overview
 
 ```text
 .
 ├── hyprland/
-│   ├── hypr/                 # Core logic & rules
-│   │   ├── conf/             # Modular split configs
-│   │   └── scripts/          # Workflow automation
-│   ├── waybar/               # Aesthetic status engine
-│   ├── rofi/                 # Application & menu UIs
-│   └── kitty/                # Terminal environment
-├── RESOURCES.md              # Dependency deep-dive
-└── install.sh                # Main orchestration script
+│   ├── hypr/                 # Core Hyprland logic & rules
+│   │   ├── conf/             # Modular split configs (monitors, binds, rules)
+│   │   └── scripts/          # Workflow automation (snapping, screenshots)
+│   ├── waybar/               # Aesthetic status engine (Catppuccin themed)
+│   │   ├── scripts/          # Telemetry, Power menu, and Wifi modules
+│   ├── rofi/                 # Application menus & prompt UIs
+│   └── kitty/                # Terminal emulator configs
+├── RESOURCES.md              # Extensive dependency deep-dive
+└── install.sh                # Automated deployment orchestration
 ```
 
 ---

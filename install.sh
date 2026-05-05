@@ -19,7 +19,7 @@ readonly OFFICIAL_PKGS=(
     "hyprland" "waybar" "rofi-wayland" "kitty" "thunar" "mako"
     "hyprlock" "pipewire" "wireplumber" "pamixer" "pavucontrol"
     "brightnessctl" "networkmanager" "nm-connection-editor" "blueman" "acpi"
-    "slurp" "grim" "wl-clipboard" "jq" "bc" "socat" "playerctl" "python" "libnotify"
+    "upower" "slurp" "grim" "wl-clipboard" "jq" "python" "libnotify"
     "xsettingsd" "polkit-kde-agent" "gnome-keyring" "libpulse"
     "ttf-jetbrains-mono-nerd" "noto-fonts" "noto-fonts-emoji" "base-devel" "git"
 )

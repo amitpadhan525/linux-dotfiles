@@ -24,6 +24,7 @@ end
 -- Run only once on the very first startup
 hl.on("hyprland.start", autostart)
 
+
 -- On reload, we only want to refresh the wallpaper
 -- We don't call autostart() here to avoid duplicate logic
 hl.on("config.reloaded", function()

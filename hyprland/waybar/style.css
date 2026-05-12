@@ -34,8 +34,7 @@ tooltip label {
 #cpu            tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 #custom-cpu     tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 #custom-gpu     tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
-#temperature    tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
-#memory         tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
+#custom-temperature tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 #custom-memory  tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 #custom-disk   tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
 #battery        tooltip { border: 1px solid rgba(137, 180, 250, 0.6); }
@@ -46,10 +45,9 @@ tooltip label {
 #tray,
 #clock,
 #pulseaudio,
-#temperature,
+#custom-temperature,
 #custom-cpu,
 #custom-gpu,
-#memory,
 #custom-memory,
 #custom-disk,
 #battery,
@@ -100,6 +98,11 @@ tooltip label {
     background: rgba(243, 139, 168, 0.1);
 }
 
+#workspaces button.empty {
+    color: #585b70;
+    background: transparent;
+}
+
 #tray {
     background: #45475a;
     padding: 4px 10px;
@@ -136,13 +139,12 @@ tooltip label {
     border: 1px solid rgba(235, 160, 172, 0.4);
 }
 
-#temperature {
+#custom-temperature {
     color: #f38ba8;
     background: rgba(243, 139, 168, 0.2);
     border: 1px solid rgba(243, 139, 168, 0.4);
 }
 
-#memory,
 #custom-memory {
     color: #f9e2af;
     background: rgba(249, 226, 175, 0.2);
@@ -195,7 +197,7 @@ tooltip label {
 #network:hover,
 #pulseaudio:hover,
 #backlight:hover,
-#temperature:hover,
+#custom-temperature:hover,
 #custom-cpu:hover,
 #custom-gpu:hover,
 #custom-memory:hover,
@@ -236,3 +238,28 @@ tooltip label {
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
+
+/* ── Night Mode ───────────────────────────────── */
+#custom-night_mode {
+    color: #585b70;
+    background: rgba(88, 91, 112, 0.15);
+    border: 1px solid rgba(88, 91, 112, 0.3);
+    padding: 4px 14px;
+    margin: 0 3px 4px 3px;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+#custom-night_mode.active {
+    color: #fab387;
+    background: rgba(250, 179, 135, 0.2);
+    border: 1px solid rgba(250, 179, 135, 0.5);
+    box-shadow: 0 0 8px rgba(250, 179, 135, 0.3);
+}
+
+#custom-night_mode:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+

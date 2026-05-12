@@ -1,3 +1,3 @@
 ---@diagnostic disable: undefined-global
 -- Workspace rules (monitor assignments, etc.) can be added here.
--- Default floating/tiling is now handled in windowrules.lua to ensure compatibility.
+

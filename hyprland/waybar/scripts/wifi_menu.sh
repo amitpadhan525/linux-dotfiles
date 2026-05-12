@@ -63,9 +63,9 @@ ROFI_CMD="rofi -dmenu -i -p 'Wi-Fi' -theme-str '
 CURRENT_SSID=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)
 STATE=$(nmcli -fields WIFI g | tail -n 1 | tr -d ' ')
 if [ "$STATE" = "enabled" ]; then
-    TOGGLE="睊  Disable Wi-Fi"
+    TOGGLE="e  Disable Wi-Fi"
 else
-    TOGGLE="直  Enable Wi-Fi"
+    TOGGLE="8  Enable Wi-Fi"
 fi
 SAVED_CONNECTIONS=$(nmcli -g NAME connection show)
 if [ "$STATE" = "enabled" ]; then
@@ -109,17 +109,17 @@ get_password() {
         listview { lines: 0; }
     ' 
 }
-OPTIONS="$TOGGLE\n漣  Open Connection Editor\n$WIFI_LIST"
+OPTIONS="$TOGGLE\n3  Open Connection Editor\n$WIFI_LIST"
 CHOSEN=$(echo -e "$OPTIONS" | eval "$ROFI_CMD")
 if [ -z "$CHOSEN" ]; then
     exit 0
-elif [ "$CHOSEN" = "直  Enable Wi-Fi" ]; then
+elif [ "$CHOSEN" = "8  Enable Wi-Fi" ]; then
     nmcli radio wifi on
     notify "Wi-Fi Enabled"
-elif [ "$CHOSEN" = "睊  Disable Wi-Fi" ]; then
+elif [ "$CHOSEN" = "e  Disable Wi-Fi" ]; then
     nmcli radio wifi off
     notify "Wi-Fi Disabled"
-elif [ "$CHOSEN" = "漣  Open Connection Editor" ]; then
+elif [ "$CHOSEN" = "3  Open Connection Editor" ]; then
     nm-connection-editor &
 else
     RAW_SELECTION="${CHOSEN#*  }" 

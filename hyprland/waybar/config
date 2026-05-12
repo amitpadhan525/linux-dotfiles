@@ -20,6 +20,7 @@
         "backlight",
         "group/system",
         "battery",
+        "custom/night_mode",
         "custom/power"
     ],
     "group/system": {
@@ -29,7 +30,7 @@
             "custom/gpu",
             "custom/memory",
             "custom/disk",
-            "temperature"
+            "custom/temperature"
         ]
     },
     "custom/uptime": {
@@ -42,10 +43,20 @@
         "icon-size": 20,
         "spacing": 10
     },
+    "custom/night_mode": {
+        "exec": "~/.config/waybar/scripts/night_mode.sh",
+        "on-click": "~/.config/waybar/scripts/night_mode.sh toggle",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 8,
+        "tooltip": true
+    },
     "hyprland/workspaces": {
         "format": "{name}",
-        "on-click": "activate",
-        "sort-by-number": true
+        "on-click": "hyprctl dispatch workspace {name}",
+        "sort-by-number": true,
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1"
     },
     "backlight": {
         "device": "intel_backlight",
@@ -80,16 +91,11 @@
         "return-type": "json",
         "tooltip": true
     },
-    "temperature": {
-        "critical-threshold": 80,
-        "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input",
-        "format": "{icon} {temperatureC}°C",
-        "format-icons": [
-            "",
-            "",
-            ""
-        ],
-        "tooltip": false
+    "custom/temperature": {
+        "exec": "/home/amit/.config/waybar/scripts/cpu_temp.sh",
+        "interval": 5,
+        "return-type": "json",
+        "tooltip": true
     },
     "custom/memory": {
         "exec": "/home/amit/.config/waybar/scripts/custom_mem.sh",

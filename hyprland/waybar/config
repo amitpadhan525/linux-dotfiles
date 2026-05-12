@@ -20,7 +20,6 @@
         "backlight",
         "group/system",
         "battery",
-        "custom/night_mode",
         "custom/power"
     ],
     "group/system": {
@@ -43,14 +42,7 @@
         "icon-size": 20,
         "spacing": 10
     },
-    "custom/night_mode": {
-        "exec": "~/.config/waybar/scripts/night_mode.sh",
-        "on-click": "~/.config/waybar/scripts/night_mode.sh toggle",
-        "return-type": "json",
-        "interval": "once",
-        "signal": 8,
-        "tooltip": true
-    },
+
     "hyprland/workspaces": {
         "format": "{name}",
         "on-click": "hyprctl dispatch workspace {name}",

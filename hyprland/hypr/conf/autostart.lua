@@ -1,11 +1,33 @@
 ---@diagnostic disable: undefined-global
 
-hl.on("hyprland.start", function()
+-- Function to run autostart apps only if they aren't already running
+local function autostart()
+    -- wallpaper.sh already handles its own killing/restarting
     hl.exec_cmd("/home/amit/.config/hypr/scripts/wallpaper.sh")
+    
+    local apps = {
+        "waybar",
+        "nm-applet",
+        "swaync",
+        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+    }
+    
+    for _, app in ipairs(apps) do
+        local bin = app:match("([^/]+)$") or app
+        hl.exec_cmd("pgrep -x " .. bin .. " > /dev/null || " .. app .. " &")
+    end
+    
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
     hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-    hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
-    hl.exec_cmd("waybar")
-    hl.exec_cmd("nm-applet --indicator")
-    hl.exec_cmd("swaync")
+end
+
+-- Run only once on the very first startup
+hl.on("hyprland.start", autostart)
+
+-- On reload, we only want to refresh the wallpaper
+-- We don't call autostart() here to avoid duplicate logic
+hl.on("config.reloaded", function()
+    hl.exec_cmd("/home/amit/.config/hypr/scripts/wallpaper.sh")
 end)
+
+-- Note: We removed the top-level autostart() call to prevent double execution during reload.

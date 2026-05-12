@@ -10,6 +10,7 @@ hl.bind("SUPER + W", hl.dsp.exec_cmd("pgrep waybar >/dev/null && pkill waybar ||
 -- System
 hl.bind("SUPER + N", hl.dsp.exec_cmd("bash -c 'pgrep hyprsunset && pkill hyprsunset || hyprsunset --temperature 4500'"))
 hl.bind("SUPER + S", hl.dsp.exec_cmd("/home/amit/.config/hypr/scripts/named_screenshot.sh"))
+hl.bind("SUPER + ALT + W", hl.dsp.exec_cmd("/home/amit/.config/hypr/scripts/wallpaper.sh"))
 hl.bind("SUPER + R", hl.dsp.exec_cmd("hyprctl reload"))
 hl.bind("SUPER + SHIFT + X", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("SUPER + Q", hl.dsp.window.close())

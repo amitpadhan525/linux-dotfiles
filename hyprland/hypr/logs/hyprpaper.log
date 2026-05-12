@@ -1,0 +1,11 @@
+--- Starting IPC Wallpaper Script ---
+Tue May 12 09:36:08 AM IST 2026
+[1;32mDEBUG [0m]: Welcome to hyprpaper!
+built from commit  ()
+[1;32mDEBUG [0m]: Found 1 output(s)
+[1;32mDEBUG [0m]: Monitor eDP-1 has no target: no wp will be created
+Preloading /home/amit/Pictures/prime2.png...
+error: invalid hyprpaper request
+Detected monitors: eDP-1
+Applying to monitor via IPC: eDP-1
+Wallpaper applied successfully.

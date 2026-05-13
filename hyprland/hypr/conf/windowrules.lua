@@ -1,38 +1,28 @@
 ---@diagnostic disable: undefined-global
 
--- Force TILING and disable floating for workspaces 1-6
-for i = 1, 6 do
-    hl.window_rule({
-        "tile",
-        match = { workspace = tostring(i) },
-        float = false
-    })
-end
+-- ─────────────────────────────────────────────────────────────────────────────
+-- WINDOW RULES: Force TILING on workspaces 1-6
+-- ─────────────────────────────────────────────────────────────────────────────
 
--- Specifically target the file picker/portal to ensure it tiles on 1-6
-for i = 1, 6 do
-    hl.window_rule({
-        "tile",
-        match = { 
-            class = "xdg-desktop-portal-gtk",
-            workspace = tostring(i)
-        },
-        float = false
-    })
-    hl.window_rule({
-        "tile",
-        match = { 
-            initial_class = "xdg-desktop-portal-gtk",
-            workspace = tostring(i)
-        },
-        float = false
-    })
-end
+-- One rule per workspace to ensure tiling is always applied
+hl.window_rule({ "tile", match = { workspace = "1" } })
+hl.window_rule({ "tile", match = { workspace = "2" } })
+hl.window_rule({ "tile", match = { workspace = "3" } })
+hl.window_rule({ "tile", match = { workspace = "4" } })
+hl.window_rule({ "tile", match = { workspace = "5" } })
+hl.window_rule({ "tile", match = { workspace = "6" } })
 
--- Force FLOATING for workspaces 7-9
-for i = 7, 9 do
-    hl.window_rule({
-        "float",
-        match = { workspace = tostring(i) }
-    })
-end
+-- Tile common floating offenders globally (file pickers, dialogs, etc.)
+hl.window_rule({ "tile", match = { class = "xdg-desktop-portal-gtk" } })
+hl.window_rule({ "tile", match = { class = "thunar" } })
+hl.window_rule({ "tile", match = { class = "nemo" } })
+hl.window_rule({ "tile", match = { class = "nautilus" } })
+hl.window_rule({ "tile", match = { class = "dolphin" } })
+hl.window_rule({ "tile", match = { class = "pcmanfm" } })
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- WINDOW RULES: Force FLOATING on workspaces 7-9
+-- ─────────────────────────────────────────────────────────────────────────────
+hl.window_rule({ "float", match = { workspace = "7" } })
+hl.window_rule({ "float", match = { workspace = "8" } })
+hl.window_rule({ "float", match = { workspace = "9" } })

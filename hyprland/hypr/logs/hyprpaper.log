@@ -1,5 +1,5 @@
 --- Starting IPC Wallpaper Script ---
-Wed May 13 10:08:25 AM IST 2026
+Wed May 13 10:36:26 PM IST 2026
 [1;32mDEBUG [0m]: Welcome to hyprpaper!
 built from commit  ()
 [1;32mDEBUG [0m]: Found 1 output(s)
@@ -9,4 +9,3 @@ error: invalid hyprpaper request
 Detected monitors: eDP-1
 Applying to monitor via IPC: eDP-1
 Wallpaper applied successfully.
-ied successfully.

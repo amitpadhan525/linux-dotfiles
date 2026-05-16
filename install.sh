@@ -22,10 +22,6 @@ readonly OFFICIAL_PKGS=(
     "upower" "slurp" "grim" "wl-clipboard" "jq" "python" "libnotify"
     "xsettingsd" "polkit-kde-agent" "gnome-keyring" "libpulse"
     "ttf-jetbrains-mono-nerd" "noto-fonts" "noto-fonts-emoji" "base-devel" "git"
-)
-
-# AUR Packages
-readonly AUR_PKGS=(
     "hyprpaper" "hyprsunset" "ttf-font-awesome"
 )
 
@@ -47,8 +43,15 @@ error()   { echo -e "${RED}${BOLD}[x]${RESET} ${RED}$1${RESET}"; }
 header()  { echo -e "\n${MAGENTA}${BOLD}─── $1 ───${RESET}\n"; }
 
 # --- Error Handling -----------------------------------------------------------
+TEMP_DIR=""
+
 cleanup() {
     local exit_code=$?
+    
+    if [[ -n "$TEMP_DIR" && -d "$TEMP_DIR" ]]; then
+        rm -rf "$TEMP_DIR"
+    fi
+
     if [ $exit_code -ne 0 ]; then
         echo -e "\n"
         error "Installation failed with exit code $exit_code."
@@ -60,7 +63,7 @@ trap cleanup EXIT
 # --- Components ---------------------------------------------------------------
 
 show_banner() {
-    clear
+    clear || true
     echo -e "${CYAN}${BOLD}"
     echo "    █████╗ ███████╗████████╗██████╗  █████╗ ███████╗██╗   ██╗███████╗"
     echo "   ██╔══██╗██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║   ██║██╔════╝"
@@ -75,13 +78,18 @@ show_banner() {
 check_env() {
     header "System Validation"
     
+    if [ "$EUID" -eq 0 ]; then
+        error "Fatal: Do not run this script as root. Run it as your normal user."
+        exit 1
+    fi
+
     if [ ! -f /etc/arch-release ]; then
         error "Fatal: This script requires an Arch Linux-based system."
         exit 1
     fi
     success "Arch Linux detected."
 
-    if ! ping -c 1 google.com &>/dev/null; then
+    if ! ping -c 1 google.com &>/dev/null && ! curl -sI https://google.com &>/dev/null; then
         error "Fatal: No internet connection detected."
         exit 1
     fi
@@ -96,19 +104,6 @@ sync_system() {
     
     info "Ensuring development toolchain is present..."
     sudo pacman -S --needed --noconfirm base-devel git
-    
-    # AUR Helper check/install
-    if ! command -v yay &> /dev/null; then
-        warn "'yay' not found. Installing from source..."
-        local temp_dir
-        temp_dir=$(mktemp -d)
-        git clone https://aur.archlinux.org/yay.git "$temp_dir"
-        (cd "$temp_dir" && makepkg -si --noconfirm)
-        rm -rf "$temp_dir"
-        success "yay installed successfully."
-    else
-        success "AUR helper 'yay' detected."
-    fi
 }
 
 install_dependencies() {
@@ -116,9 +111,6 @@ install_dependencies() {
     
     info "Installing official repository packages..."
     sudo pacman -S --needed --noconfirm "${OFFICIAL_PKGS[@]}"
-    
-    info "Installing AUR packages via yay..."
-    yay -S --needed --noconfirm "${AUR_PKGS[@]}"
     
     success "All system dependencies are now satisfied."
 }
@@ -152,10 +144,10 @@ deploy_configs() {
         fi
         
         info "Linking module: $mod"
-        ln -sf "$source" "$target"
+        ln -snf "$source" "$target"
     done
     
-    success "Configurations successfully linked to ~/.config"
+    success "Configurations successfully linked to $HOME/.config"
 }
 
 finalize_system() {
@@ -167,12 +159,6 @@ finalize_system() {
     if [ -d "$CONFIG_DIR/hypr/scripts" ]; then
         find "$CONFIG_DIR/hypr/scripts" -type f -name "*.sh" -exec chmod +x {} +
     fi
-    
-    # Global entry points
-    local entry_scripts=("autostart.sh" "setup_autostart.sh")
-    for script in "${entry_scripts[@]}"; do
-        [ -f "$CONFIG_DIR/hypr/$script" ] && chmod +x "$CONFIG_DIR/hypr/$script"
-    done
     
     # Waybar scripts
     if [ -d "$CONFIG_DIR/waybar/scripts" ]; then
@@ -209,7 +195,7 @@ main() {
     echo -e "${GREEN}${BOLD}=======================================================================${RESET}"
     
     echo -e "\n${BOLD}Post-Installation Guide:${RESET}"
-    echo -e "  ${BLUE}1.${RESET} Review display settings: ${BOLD}~/.config/hypr/conf/monitors.conf${RESET}"
+    echo -e "  ${BLUE}1.${RESET} Review display settings: ${BOLD}$HOME/.config/hypr/conf/monitors.lua${RESET}"
     echo -e "  ${BLUE}2.${RESET} Logout and select the ${CYAN}Hyprland${RESET} session."
     echo -e "  ${BLUE}3.${RESET} Press ${BOLD}Super + Enter${RESET} to launch your terminal."
     echo -e "  ${BLUE}4.${RESET} Explore the keybindings in ${BOLD}README.md${RESET}."

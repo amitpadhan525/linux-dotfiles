@@ -1,0 +1,10 @@
+# Ignore logs and state files
+*.log
+.night_mode_state
+
+# Ignore backup archives
+*.zip
+*.tar.gz
+*.bak
+backups/
+backup/

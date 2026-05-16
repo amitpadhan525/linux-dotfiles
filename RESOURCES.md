@@ -42,8 +42,16 @@ Scripts and small binaries that enable "Superpowers" like screenshots and bright
 ## 🧠 Scripting Glue
 Tools used within our internal logic to parse data and automate tasks.
 
+- **`lua`**: The core language for configuring and orchestrating Hyprland settings, window rules, and startup logic in v0.55+.
 - **`jq`**: Lightweight JSON processor (critical for Waybar and Hyprland IPC).
 - **`python`**: Powers complex logic like uptime tracking and telemetry.
+
+### Example Lua IPC Hook
+If you want to interact programmatically with Hyprland inside your configs:
+```lua
+-- Execute a system command via Hyprland Lua API
+hl.execute("waybar &")
+```
 
 ---
 

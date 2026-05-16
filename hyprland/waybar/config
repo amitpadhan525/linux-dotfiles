@@ -33,7 +33,7 @@
         ]
     },
     "custom/uptime": {
-        "exec": "python3 /home/amit/.config/waybar/scripts/screen_time.py",
+        "exec": "python3 ~/.config/waybar/scripts/screen_time.py",
         "interval": 60,
         "format": "  {}",
         "tooltip": false
@@ -70,27 +70,27 @@
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "custom/cpu": {
-        "exec": "/home/amit/.config/waybar/scripts/custom_cpu.sh",
+        "exec": "~/.config/waybar/scripts/custom_cpu.sh",
         "interval": 3,
         "format": "  {}",
         "return-type": "json",
         "tooltip": true
     },
     "custom/gpu": {
-        "exec": "bash /home/amit/.config/waybar/scripts/custom_gpu.sh",
+        "exec": "bash ~/.config/waybar/scripts/custom_gpu.sh",
         "interval": 5,
         "format": "󰢮  {}",
         "return-type": "json",
         "tooltip": true
     },
     "custom/temperature": {
-        "exec": "/home/amit/.config/waybar/scripts/cpu_temp.sh",
+        "exec": "~/.config/waybar/scripts/cpu_temp.sh",
         "interval": 5,
         "return-type": "json",
         "tooltip": true
     },
     "custom/memory": {
-        "exec": "/home/amit/.config/waybar/scripts/custom_mem.sh",
+        "exec": "~/.config/waybar/scripts/custom_mem.sh",
         "interval": 5,
         "format": "\uf0c9  {}",
         "return-type": "json",
@@ -98,7 +98,7 @@
     },
     "custom/disk": {
         "interval": 30,
-        "exec": "bash /home/amit/.config/waybar/scripts/disk_info.sh",
+        "exec": "bash ~/.config/waybar/scripts/disk_info.sh",
         "return-type": "json",
         "format": "{}",
         "tooltip": true
@@ -110,7 +110,7 @@
         "format-disconnected": "  Disconnected",
         "format-disabled": "  Disabled",
         "tooltip-format": "{ifname} via {gwaddr}",
-        "on-click": "/home/amit/.config/waybar/scripts/wifi_menu.sh",
+        "on-click": "~/.config/waybar/scripts/wifi_menu.sh",
         "on-click-right": "nm-connection-editor"
     },
     "pulseaudio": {
@@ -134,7 +134,7 @@
     },
     "custom/power": {
         "format": "\u23fb ",
-        "on-click": "/home/amit/.config/waybar/scripts/power_menu.sh",
+        "on-click": "~/.config/waybar/scripts/power_menu.sh",
         "tooltip": false
     },
     "battery": {

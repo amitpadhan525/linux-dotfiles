@@ -99,18 +99,18 @@ chmod +x install.sh
 ```
 
 ### 3. Post-Installation
-1. **Monitor Setup**: Check `~/.config/hypr/conf/monitors.conf` to align with your specific displays.
+1. **Monitor Setup**: Check `~/.config/hypr/conf/monitors.lua` to align with your specific displays.
 2. **Review Resources**: Deep dive into the stack dependencies by checking out [`RESOURCES.md`](./RESOURCES.md).
 
 ---
 
-## 📂 Architecture Overview
+## 📂 Architecture Overview (Lua-based)
 
 ```text
 .
 ├── hyprland/
-│   ├── hypr/                 # Core Hyprland logic & rules
-│   │   ├── conf/             # Modular split configs (monitors, binds, rules)
+│   ├── hypr/                 # Core Hyprland logic (Lua API)
+│   │   ├── conf/             # Modular split lua configs (monitors, binds, rules)
 │   │   └── scripts/          # Workflow automation (snapping, screenshots)
 │   ├── waybar/               # Aesthetic status engine (Catppuccin themed)
 │   │   ├── scripts/          # Telemetry, Power menu, and Wifi modules
@@ -118,6 +118,29 @@ chmod +x install.sh
 │   └── kitty/                # Terminal emulator configs
 ├── RESOURCES.md              # Extensive dependency deep-dive
 └── install.sh                # Automated deployment orchestration
+```
+
+---
+
+## 💻 Config Example (Lua)
+
+Hyprland now utilizes a modular **Lua-based** configuration system for better programmatic control. Here is a highlighted example from `~/.config/hypr/conf/windowrules.lua`:
+
+```lua
+-- ─────────────────────────────────────────────────────────────────────────────
+-- WINDOW RULES: FORCE TILING (Workspaces 1-6)
+-- ─────────────────────────────────────────────────────────────────────────────
+
+for i = 1, 6 do
+    hl.window_rule({ match = { workspace = tostring(i) }, tile = true })
+end
+
+-- Force Tile by Class
+local forced_tiling_apps = { "code", "thunar", "dolphin" }
+
+for _, app in ipairs(forced_tiling_apps) do
+    hl.window_rule({ match = { class = app }, tile = true })
+end
 ```
 
 ---

@@ -3,8 +3,8 @@
 # IPC-Based Wallpaper Script (Final Robust Version)
 # ----------------------------------------------------- 
 
-LOG="/home/amit/.config/hypr/logs/hyprpaper.log"
-WALLPAPER="/home/amit/Pictures/prime2.png"
+LOG="$HOME/.config/hypr/logs/hyprpaper.log"
+WALLPAPER="$HOME/Pictures/prime2.png"
 
 # Redirect all output to log
 exec > "$LOG" 2>&1
@@ -46,4 +46,4 @@ else
 fi
 
 echo "Wallpaper applied successfully."
-date >> "/home/amit/.config/hypr/logs/wallpaper_script.log"
+date >> "$HOME/.config/hypr/logs/wallpaper_script.log"

@@ -9,6 +9,7 @@
   [![Rofi](https://img.shields.io/badge/Launcher-Rofi-df8e1d?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/davatorium/rofi)
   [![Kitty](https://img.shields.io/badge/Terminal-Kitty-d20f39?style=for-the-badge&logo=kitty&logoColor=white)](https://sw.kovidgoyal.net/kitty/)
   [![Catppuccin](https://img.shields.io/badge/Theme-Catppuccin-f5c2e7?style=for-the-badge)](https://github.com/catppuccin/catppuccin)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 </div>
 
 ---

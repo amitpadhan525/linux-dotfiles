@@ -1,49 +1,29 @@
 #!/bin/bash
 # ----------------------------------------------------- 
-# IPC-Based Wallpaper Script (Final Robust Version)
+# Instant Wallpaper Script
 # ----------------------------------------------------- 
 
-LOG="$HOME/.config/hypr/logs/hyprpaper.log"
-WALLPAPER="$HOME/Pictures/prime2.png"
+LOG="/home/amit/.config/hypr/logs/hyprpaper.log"
 
 # Redirect all output to log
 exec > "$LOG" 2>&1
 
-echo "--- Starting IPC Wallpaper Script ---"
+echo "--- Starting Instant Wallpaper Script ---"
 date
 
-# Kill existing instances
-/usr/bin/killall hyprpaper 2>/dev/null
-sleep 1
+# Kill existing instances and wait for them to fully die
+/usr/bin/killall -q hyprpaper
+while pgrep -x hyprpaper >/dev/null; do sleep 0.1; done
 
-# Start hyprpaper with a minimal config
-echo "splash = false" > /tmp/hyprpaper_minimal.conf
-echo "ipc = on" >> /tmp/hyprpaper_minimal.conf
-/usr/bin/hyprpaper -c /tmp/hyprpaper_minimal.conf &
+# Start hyprpaper natively, disown it so it stays alive, and detach its output
+nohup /usr/bin/hyprpaper -c /home/amit/.config/hypr/hyprpaper.conf > /home/amit/.config/hypr/logs/hyprpaper_debug.log 2>&1 & disown
 
-# Wait for hyprpaper to initialize and see monitors
-sleep 3
+# Give hyprpaper a moment to start
+sleep 0.5
 
-# Preload the wallpaper
-echo "Preloading $WALLPAPER..."
-hyprctl hyprpaper preload "$WALLPAPER"
-sleep 1
-
-# Detect monitors and apply via IPC
-MONITORS=$(hyprctl monitors | grep "Monitor" | awk '{print $2}')
-echo "Detected monitors: $MONITORS"
-
-if [ -z "$MONITORS" ]; then
-    echo "No monitors detected, using catch-all."
-    hyprctl hyprpaper wallpaper ",$WALLPAPER"
-else
-    for m in $MONITORS; do
-        echo "Applying to monitor via IPC: $m"
-        hyprctl hyprpaper wallpaper "$m,$WALLPAPER"
-    done
-    # Also apply catch-all for any new monitors
-    hyprctl hyprpaper wallpaper ",$WALLPAPER"
-fi
-
-echo "Wallpaper applied successfully."
-date >> "$HOME/.config/hypr/logs/wallpaper_script.log"
+# Force load via IPC in case config fails
+hyprctl hyprpaper preload "/home/amit/.config/hypr/wallpapers/prime2.png"
+hyprctl hyprpaper wallpaper "eDP-1,/home/amit/.config/hypr/wallpapers/prime2.png"
+hyprctl hyprpaper wallpaper ",/home/amit/.config/hypr/wallpapers/prime2.png"
+echo "Wallpaper applied instantly."
+date >> "/home/amit/.config/hypr/logs/wallpaper_script.log"

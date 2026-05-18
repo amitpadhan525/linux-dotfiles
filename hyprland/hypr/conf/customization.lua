@@ -36,9 +36,6 @@ hl.config({
         vrr = 1,
         animate_manual_resizes = true,
         animate_mouse_windowdragging = true
-    },
-    debug = {
-        vfr = true
     }
 })
 

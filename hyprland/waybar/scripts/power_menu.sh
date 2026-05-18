@@ -3,110 +3,94 @@
 # ----------------------------------------------------- 
 # Menu Options with Icons
 # ----------------------------------------------------- 
-lock=" Lock"
-logout="󰗽 Logout"
-suspend=" Suspend"
-hibernate="󰒲 Hibernate"
-reboot=" Reboot"
-shutdown=" Shutdown"
+lock="  Lock"
+logout="󰗽  Logout"
+suspend="  Suspend"
+hibernate="󰒲  Hibernate"
+reboot="  Reboot"
+shutdown="  Shutdown"
 
 # ----------------------------------------------------- 
 # Rofi Configuration String
 # ----------------------------------------------------- 
-# Defines the look and feel of the power menu using Rofi
 rofi_cmd() {
-    timeout 5s rofi -dmenu \
-        -p "Power" \
-        -theme-str "
-    * {
-        font: \"JetBrainsMono Nerd Font 14\";
-        background-color: #1e1e2e;
-        foreground-color: #ffffff;
-        accent-color: #89b4fa;
-        urgent-color: #f38ba8;
-        border-color: #b4befe;
-    }
-    window {
-        transparency: \"real\";
-        background-color: @background-color;
-        text-color: @foreground-color;
-        border: 2px;
-        border-color: @border-color;
-        border-radius: 12px;
-        location: northeast;
-        x-offset: -10px;
-        y-offset: 45px;
-        width: 220px;
-    }
-    inputbar {
-        enabled: false;
-    }
-    mainbox {
-        background-color: transparent;
-        children: [ listview ];
-        padding: 10px;
-    }
-    listview {
-        background-color: transparent;
-        columns: 1;
-        lines: 6;
-        spacing: 5px;
-        cycle: true;
-        dynamic: true;
-        layout: vertical;
-    }
-    element {
-        background-color: transparent;
-        text-color: @foreground-color;
-        orientation: horizontal;
-        border-radius: 6px;
-        padding: 10px 10px;
-    }
-    element-icon {
-        background-color: transparent;
-        text-color: inherit;
-        size: 24px;
-        border: 0px;
-        margin: 0px 10px 0px 0px;
-    }
-    element-text {
-        background-color: transparent;
-        text-color: inherit;
-        cursor: inherit;
-        vertical-align: 0.5;
-        horizontal-align: 0.0;
-    }
-    element selected.normal {
-        background-color: @accent-color;
-        text-color: #1e1e2e;
-    }
-    "
+    timeout 5 rofi -dmenu \
+        -theme-str '
+* {
+    font: "JetBrainsMono Nerd Font 13";
+    background-color: transparent;
+    text-color: #cdd6f4;
+}
+window {
+    transparency: "real";
+    background-color: rgba(8, 8, 13, 0.95);
+    border: 1px solid;
+    border-color: rgba(243, 139, 168, 0.6);
+    border-radius: 12px;
+    width: 160px;
+    location: northeast;
+    x-offset: -10px;
+    y-offset: 45px;
+}
+mainbox {
+    background-color: transparent;
+    children: [ listview ];
+    padding: 8px;
+}
+listview {
+    background-color: transparent;
+    columns: 1;
+    lines: 6;
+    spacing: 4px;
+    cycle: true;
+    dynamic: true;
+    layout: vertical;
+}
+element {
+    background-color: transparent;
+    text-color: #cdd6f4;
+    orientation: horizontal;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    cursor: inherit;
+    vertical-align: 0.5;
+}
+element selected.normal {
+    background-color: #f38ba8;
+    text-color: #11111b;
+}
+'
 }
 
 # ----------------------------------------------------- 
 # Execute Selected Command
 # ----------------------------------------------------- 
 run_cmd() {
-    if [[ "$1" == "$lock" ]]; then
-        hyprlock                          # Lock screen
-    elif [[ "$1" == "$suspend" ]]; then
-        systemctl suspend                 # Suspend system
-    elif [[ "$1" == "$hibernate" ]]; then
-        systemctl hibernate               # Hibernate system
-    elif [[ "$1" == "$logout" ]]; then
-        hyprctl dispatch exit             # Logout (Exit Hyprland)
-    elif [[ "$1" == "$reboot" ]]; then
-        systemctl reboot                  # Reboot system
-    elif [[ "$1" == "$shutdown" ]]; then
-        systemctl poweroff                # Shutdown system
+    if [[ "$1" == *Lock* ]]; then
+        hyprlock                          
+    elif [[ "$1" == *Suspend* ]]; then
+        systemctl suspend                 
+    elif [[ "$1" == *Hibernate* ]]; then
+        systemctl hibernate               
+    elif [[ "$1" == *Logout* ]]; then
+        killall Hyprland
+    elif [[ "$1" == *Reboot* ]]; then
+        systemctl reboot                  
+    elif [[ "$1" == *Shutdown* ]]; then
+        systemctl poweroff                
     fi
 }
 
 # ----------------------------------------------------- 
 # Main Execution
 # ----------------------------------------------------- 
-# Pipe options into rofi and capture selection
 chosen="$(echo -e "$lock\n$logout\n$suspend\n$hibernate\n$reboot\n$shutdown" | rofi_cmd)"
 
-# Run the corresponding command
-run_cmd "$chosen"
+if [[ -n "$chosen" ]]; then
+    run_cmd "$chosen"
+fi

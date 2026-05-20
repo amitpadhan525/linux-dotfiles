@@ -42,28 +42,6 @@ Get a visual preview of Astraeus in action! Below is a gallery of the system int
 
 ---
 
-### 🎥 Fluid Motion & Workflows (Demos)
-
-To appreciate the high performance and fluid micro-animations, play these recordings:
-
-#### ⚡ 1. Dynamic Window Arrangement & Snapping
-Demonstrates the programmatic snapping grid resizing windows smoothly into perfect quadrant layouts:
-![Arranging Windows](./assets/arranging_windows.mp4)
-
-#### 🌀 2. Fluid Workspace Transitions
-Watch the workspace-switching transition effects and window rendering speed in real-time:
-![Changing Workspaces](./assets/changing_workspaces.mp4)
-
-#### 📊 3. Waybar Custom Telemetry & WiFi Pulse
-Watch the hardware status, live graphs, and the dynamic Wifi menu prompting inside Rofi:
-![Waybar Telemetry](./assets/waybar_features.mp4)
-
-#### 🗂️ 4. Quad-Grid Floating Organization
-A demonstration of custom quadrant alignment rules executing programmatically across workspace zones:
-![Windows Arrangement](./assets/windows_arrangement.mp4)
-
----
-
 ## ✨ Custom Superpowers (Unique Features)
 
 Astraeus goes far beyond aesthetic eye-candy. It includes a custom suite of high-efficiency utility engines designed to optimize your day-to-day workflow.

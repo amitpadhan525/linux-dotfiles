@@ -239,3 +239,25 @@ tooltip label {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
+#custom-recording {
+    color: #ff3b30;
+    background: rgba(255, 59, 48, 0.25);
+    border: 1px solid rgba(255, 59, 48, 0.5);
+    padding: 4px 14px;
+    margin: 0 4px 4px 4px;
+    border-radius: 12px;
+    animation-name: recording_blink;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes recording_blink {
+    to {
+        background-color: rgba(255, 59, 48, 0.45);
+        border: 1px solid rgba(255, 59, 48, 0.8);
+    }
+}
+
+

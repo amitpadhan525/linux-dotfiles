@@ -7,6 +7,7 @@
     "margin-left": 0,
     "margin-right": 0,
     "modules-left": [
+        "custom/recording",
         "hyprland/workspaces",
         "network",
         "tray"
@@ -37,6 +38,15 @@
         "interval": 60,
         "format": "  {}",
         "tooltip": false
+    },
+    "custom/recording": {
+        "exec": "python3 /home/amit/.config/waybar/scripts/recording_status.py",
+        "return-type": "json",
+        "format": "{}",
+        "interval": 1,
+        "on-click": "/home/amit/.config/hypr/scripts/screen_record.sh",
+        "tooltip": true,
+        "signal": 8
     },
     "tray": {
         "icon-size": 20,

@@ -1,6 +1,4 @@
 <div align="center">
-  <img src="https://github.com/amitpadhan525/linux-dotfiles/raw/main/assets/banner.png" alt="Astraeus Banner" width="100%">
-
   # 🌌 Astraeus Hyprland
   **A premium, high-performance, and modular Lua-orchestrated Wayland environment for Arch Linux.**
 
@@ -25,6 +23,44 @@ Unlike traditional dotfiles that rely on monolithic configurations, Astraeus int
 *   **🧠 Programmatic Lua Configs**: Configs are split into independent modular structures (`environment`, `keybindings`, `windowrules`, `monitors`, `customization`), keeping your main loop pristine.
 *   **🛡️ Self-Healing & Stable**: Custom scripts feature process-level safety locks, PID monitors, and graceful hardware-interrupt handling to prevent system state leakage.
 *   **⌨️ Absolute Keyboard Mastery**: Navigate, manage audio/visual assets, control background utilities, and resize layouts seamlessly.
+
+---
+
+## 📸 Desktop Showcase & Live Demos
+
+Get a visual preview of Astraeus in action! Below is a gallery of the system interfaces, status telemetry, and live recordings demonstrating the fluid desktop mechanics.
+
+### 🖼️ System Interfaces & Telemetry
+
+| 🌌 Main Homescreen | 🛠️ Modular Workspace Grid |
+| :---: | :---: |
+| ![Homescreen](./assets/homescreen.png) | ![Workspace Layout](./assets/workspace.png) |
+
+| 📊 Catppuccin Waybar Status Bar |
+| :---: |
+| ![Waybar Status Bar Layout](./assets/waybar.png) |
+
+---
+
+### 🎥 Fluid Motion & Workflows (Demos)
+
+To appreciate the high performance and fluid micro-animations, play these recordings:
+
+#### ⚡ 1. Dynamic Window Arrangement & Snapping
+Demonstrates the programmatic snapping grid resizing windows smoothly into perfect quadrant layouts:
+![Arranging Windows](./assets/arranging_windows.mp4)
+
+#### 🌀 2. Fluid Workspace Transitions
+Watch the workspace-switching transition effects and window rendering speed in real-time:
+![Changing Workspaces](./assets/changing_workspaces.mp4)
+
+#### 📊 3. Waybar Custom Telemetry & WiFi Pulse
+Watch the hardware status, live graphs, and the dynamic Wifi menu prompting inside Rofi:
+![Waybar Telemetry](./assets/waybar_features.mp4)
+
+#### 🗂️ 4. Quad-Grid Floating Organization
+A demonstration of custom quadrant alignment rules executing programmatically across workspace zones:
+![Windows Arrangement](./assets/windows_arrangement.mp4)
 
 ---
 

@@ -21,11 +21,17 @@ readonly CORE_WM=(
     "waybar" "rofi-wayland" "kitty" "mako" "thunar"
 )
 readonly MULTIMEDIA=(
-    "pipewire" "wireplumber" "pamixer" "pavucontrol" "libpulse"
+    "pipewire" "pipewire-pulse" "wireplumber" "pamixer" "pavucontrol" "libpulse"
 )
 readonly SYSTEM_UTILS=(
     "brightnessctl" "networkmanager" "nm-connection-editor" "blueman"
     "acpi" "upower" "slurp" "grim" "wl-clipboard" "jq" "python" "libnotify"
+)
+readonly SESSION_SERVICES=(
+    "wf-recorder" "swaync" "network-manager-applet" "polkit-gnome"
+)
+readonly PORTAL_SERVICES=(
+    "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk"
 )
 readonly DECO_TYPO=(
     "ttf-jetbrains-mono-nerd" "noto-fonts" "noto-fonts-emoji" "ttf-font-awesome"
@@ -39,6 +45,8 @@ readonly ALL_PKGS=(
     "${CORE_WM[@]}"
     "${MULTIMEDIA[@]}"
     "${SYSTEM_UTILS[@]}"
+    "${SESSION_SERVICES[@]}"
+    "${PORTAL_SERVICES[@]}"
     "${DECO_TYPO[@]}"
     "${SYSTEM_INTEGRATION[@]}"
 )
@@ -163,14 +171,20 @@ check_env() {
         error "Fatal: This deployment script requires an Arch Linux-based distribution."
         exit 1
     fi
+    # shellcheck disable=SC1091
+    . /etc/os-release
+    if [[ "${ID:-}" != "arch" && "${ID_LIKE:-}" != *"arch"* ]]; then
+        error "Fatal: This deployment script requires Arch Linux or an Arch-based distribution."
+        exit 1
+    fi
     success "Arch Linux system architecture detected."
 
     # 3. Check for internet connectivity
     info "Verifying internet connectivity..."
-    local domains=("google.com" "archlinux.org" "github.com")
+    local domains=("archlinux.org" "github.com" "aur.archlinux.org")
     local connected=false
     for domain in "${domains[@]}"; do
-        if ping -c 1 -W 2 "$domain" &>/dev/null || curl -sI --connect-timeout 3 "https://$domain" &>/dev/null; then
+        if timeout 3 bash -c "exec 3<>/dev/tcp/$domain/443" &>/dev/null; then
             connected=true
             break
         fi
@@ -221,6 +235,7 @@ detect_aur_helper() {
         
         if [ "$NON_INTERACTIVE" = "true" ]; then
             info "Non-interactive mode: Bootstrapping 'yay-bin' automatically..."
+            install_bootstrap_dependencies
             bootstrap_yay
         else
             read -p "  Would you like to install 'yay' now? (Y/n): " -n 1 -r
@@ -228,10 +243,23 @@ detect_aur_helper() {
             if [[ $REPLY =~ ^[Nn]$ ]]; then
                 warn "Skipping AUR helper installation. AUR package support will be unavailable."
             else
+                install_bootstrap_dependencies
                 bootstrap_yay
             fi
         fi
     fi
+}
+
+install_bootstrap_dependencies() {
+    header "Bootstrap Dependencies"
+
+    info "Ensuring the minimal build tools required for AUR bootstrap are available..."
+    if [ "$DRY_RUN" = "false" ]; then
+        sudo pacman -S --needed --noconfirm git base-devel
+    else
+        debug "Would install bootstrap tools: git base-devel"
+    fi
+    success "Bootstrap dependencies are ready."
 }
 
 bootstrap_yay() {

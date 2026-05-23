@@ -60,7 +60,10 @@ ROFI_CMD="rofi -dmenu -i -p 'Wi-Fi' -theme-str '
         size: 20px;
     }
 '"
-CURRENT_SSID=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)
+# Trigger an asynchronous scan in the background to update the cache for next time
+nmcli dev wifi rescan &>/dev/null &
+
+CURRENT_SSID=$(nmcli -t -f active,ssid dev wifi list --rescan no | grep '^yes' | cut -d: -f2)
 STATE=$(nmcli -fields WIFI g | tail -n 1 | tr -d ' ')
 if [ "$STATE" = "enabled" ]; then
     TOGGLE="e  Disable Wi-Fi"
@@ -69,7 +72,7 @@ else
 fi
 SAVED_CONNECTIONS=$(nmcli -g NAME connection show)
 if [ "$STATE" = "enabled" ]; then
-    WIFI_LIST=$(nmcli --colors no -f BARS,SSID,SECURITY dev wifi list | tail -n +2 | \
+    WIFI_LIST=$(nmcli --colors no -f BARS,SSID,SECURITY dev wifi list --rescan no | tail -n +2 | \
         awk -F'  +' '{ 
             if($2=="") next;
             printf "%s  %s  (%s)\n", $1, $2, $3 

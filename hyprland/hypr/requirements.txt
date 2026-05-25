@@ -48,7 +48,6 @@ E. HYPRLOCK LOCK SCREEN
    * Purpose: Desktop lock screen utility.
    * Styling Configurations (~/.config/hypr/hyprlock.conf):
      - Customized clock spacing using tight Pango text padding markup.
-     - Sleek circular user profile image centering.
      - Password text input dots size optimized to perfectly match system aesthetic constraints.
 
 F. HYPRPAPER WALLPAPER DAEMON

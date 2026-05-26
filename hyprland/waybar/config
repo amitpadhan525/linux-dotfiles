@@ -76,8 +76,8 @@
         ]
     },
     "clock": {
-        "format": "\uf017  {:%I:%M   \uf073  %a, %b %d}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        "format": "\uf017  {:%I:%M   %d/%m/%Y}",
+        "tooltip-format": "<big>{:%d/%m/%Y}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "custom/cpu": {
         "exec": "/home/amit/.config/waybar/scripts/custom_cpu.sh",
@@ -140,7 +140,8 @@
             ]
         },
         "scroll-step": 1,
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "max-volume": 100
     },
     "custom/power": {
         "format": "\u23fb ",

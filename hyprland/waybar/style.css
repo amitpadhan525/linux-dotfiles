@@ -58,6 +58,7 @@ tooltip label {
     margin: 0 4px 4px 4px;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 /* --- Left Modules --- */
@@ -193,20 +194,66 @@ tooltip label {
     box-shadow: 0 0 10px #f38ba8, 0 0 20px #f38ba8;
 }
 
-/* Hover Effects */
-#network:hover,
-#pulseaudio:hover,
-#backlight:hover,
-#custom-temperature:hover,
+/* --- Premium Colored Hover Glows --- */
+#network:hover {
+    background: rgba(148, 226, 213, 0.35);
+    border-color: rgba(148, 226, 213, 0.7);
+    box-shadow: 0 0 12px rgba(148, 226, 213, 0.45);
+}
+
+#pulseaudio:hover {
+    background: rgba(250, 179, 135, 0.35);
+    border-color: rgba(250, 179, 135, 0.7);
+    box-shadow: 0 0 12px rgba(250, 179, 135, 0.45);
+}
+
+#backlight:hover {
+    background: rgba(249, 226, 175, 0.35);
+    border-color: rgba(249, 226, 175, 0.7);
+    box-shadow: 0 0 12px rgba(249, 226, 175, 0.45);
+}
+
 #custom-cpu:hover,
-#custom-gpu:hover,
-#custom-memory:hover,
-#custom-disk:hover,
-#battery:hover,
-#clock:hover,
+#custom-gpu:hover {
+    background: rgba(235, 160, 172, 0.35);
+    border-color: rgba(235, 160, 172, 0.7);
+    box-shadow: 0 0 12px rgba(235, 160, 172, 0.45);
+}
+
+#custom-temperature:hover {
+    background: rgba(243, 139, 168, 0.35);
+    border-color: rgba(243, 139, 168, 0.7);
+    box-shadow: 0 0 12px rgba(243, 139, 168, 0.45);
+}
+
+#custom-memory:hover {
+    background: rgba(249, 226, 175, 0.35);
+    border-color: rgba(249, 226, 175, 0.7);
+    box-shadow: 0 0 12px rgba(249, 226, 175, 0.45);
+}
+
+#custom-disk:hover {
+    background: rgba(137, 180, 250, 0.35);
+    border-color: rgba(137, 180, 250, 0.7);
+    box-shadow: 0 0 12px rgba(137, 180, 250, 0.45);
+}
+
+#battery:hover {
+    background: rgba(166, 227, 161, 0.35);
+    border-color: rgba(166, 227, 161, 0.7);
+    box-shadow: 0 0 12px rgba(166, 227, 161, 0.45);
+}
+
+#clock:hover {
+    background: rgba(203, 166, 247, 0.35);
+    border-color: rgba(203, 166, 247, 0.7);
+    box-shadow: 0 0 12px rgba(203, 166, 247, 0.45);
+}
+
 #tray:hover {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
 }
 
 @keyframes blink {
@@ -223,6 +270,13 @@ tooltip label {
     padding: 4px 14px;
     margin: 0 3px 4px 3px;
     border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#custom-wifi_switcher:hover {
+    background: rgba(249, 226, 175, 0.35);
+    border-color: rgba(249, 226, 175, 0.7);
+    box-shadow: 0 0 12px rgba(249, 226, 175, 0.45);
 }
 
 #custom-uptime {
@@ -232,11 +286,13 @@ tooltip label {
     padding: 4px 14px;
     margin: 0 3px 4px 3px;
     border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 #custom-uptime:hover {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background: rgba(203, 166, 247, 0.35);
+    border-color: rgba(203, 166, 247, 0.7);
+    box-shadow: 0 0 12px rgba(203, 166, 247, 0.45);
 }
 
 #custom-recording {

@@ -7,9 +7,9 @@ local function autostart()
     
     local apps = {
         "waybar",
+        "dunst",
         "nm-applet",
-        "swaync",
-        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+        "/usr/lib/hyprpolkitagent/hyprpolkitagent"
     }
     
     for _, app in ipairs(apps) do

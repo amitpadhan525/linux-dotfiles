@@ -54,6 +54,14 @@ F. HYPRPAPER WALLPAPER DAEMON
    * Purpose: Native utility to pre-load and swap desktop screen wallpaper canvases.
    * Requirements: Requires `/home/amit/.config/hypr/hyprpaper.conf` to preload background images on compositor startup.
 
+G. DUNST NOTIFICATION DAEMON (v1.13+)
+   * Purpose: Lightweight, highly customizable notification daemon.
+   * Note: Active notification daemon (replaces `mako` and `swaync`). Autostarted inside `conf/autostart.lua`.
+
+H. POLICYKIT (POLKIT) AUTHENTICATION AGENT (hyprpolkitagent)
+   * Purpose: Handles privilege elevation requests for GUI applications.
+   * Note: Active authentication agent is `hyprpolkitagent`. Autostarted inside `conf/autostart.lua`.
+
 ================================================================================
 2. UTILITIES & GRADIENT SYSTEM MECHANICS
 ================================================================================
@@ -74,6 +82,18 @@ C. GRIM (Arch: `sudo pacman -S grim`)
 
 D. LIBNOTIFY / NOTIFY-SEND (Arch: `sudo pacman -S libnotify`)
    * Purpose: Standard desktop notification system. Send status notifications on start/stop and provides click-action prompts and save paths.
+
+E. WL-CLIPBOARD (Arch: `sudo pacman -S wl-clipboard`)
+   * Purpose: Command-line copy/paste utilities for Wayland (provides `wl-copy`). Used by screenshots to copy raw image data directly to system clipboard.
+
+F. PAMIXER (Arch: `sudo pacman -S pamixer`)
+   * Purpose: Command-line volume mixer for PulseAudio/PipeWire. Used by keybindings to control sound level and muting.
+
+G. BRIGHTNESSCTL (Arch: `sudo pacman -S brightnessctl`)
+   * Purpose: Command-line tool to control device brightness. Used by keybindings to adjust monitor screen brightness.
+
+H. HYPRSUNSET (Arch: `sudo pacman -S hyprsunset`)
+   * Purpose: Blue light filter and color temperature tool for Hyprland, used to set temperature to 4500K dynamically.
 
 ================================================================================
 3. SYSTEM TYPOGRAPHY REQUIREMENTS
@@ -133,7 +153,7 @@ B. SCREEN RECORDER CORE FLOW (screen_record.sh):
 ================================================================================
 
 A. INSTALL ALL REQUIRED PACKAGES:
-   `sudo pacman -S hyprland waybar kitty hyprlock hyprpaper wf-recorder slurp grim libnotify ttf-jetbrains-mono-nerd`
+   `sudo pacman -S hyprland waybar kitty hyprlock hyprpaper wf-recorder slurp grim libnotify ttf-jetbrains-mono-nerd rofi wl-clipboard pamixer brightnessctl hyprsunset dunst hyprpolkitagent`
 
 B. ENSURE SCRIPTS ARE FULLY EXECUTABLE:
    `chmod +x /home/amit/.config/hypr/scripts/screen_record.sh`

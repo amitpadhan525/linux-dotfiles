@@ -72,9 +72,11 @@ else
 fi
 SAVED_CONNECTIONS=$(nmcli -g NAME connection show)
 if [ "$STATE" = "enabled" ]; then
-    WIFI_LIST=$(nmcli --colors no -f BARS,SSID,SECURITY dev wifi list --rescan no | tail -n +2 | \
-        awk -F'  +' '{ 
+    WIFI_LIST=$(nmcli -t -f BARS,SSID,SECURITY dev wifi list --rescan no | \
+        sed 's/\\:/\x01/g' | \
+        awk -F: '{ 
             if($2=="") next;
+            gsub(/\x01/, ":", $2);
             printf "%s  %s  (%s)\n", $1, $2, $3 
         }' | sort -u)
 fi
@@ -126,8 +128,7 @@ elif [ "$CHOSEN" = "3  Open Connection Editor" ]; then
     nm-connection-editor &
 else
     RAW_SELECTION="${CHOSEN#*  }" 
-    SSID=$(echo "$RAW_SELECTION" | sed 's/  (.*)$//')
-    SSID=$(echo "$SSID" | xargs)
+    SSID=$(echo "$RAW_SELECTION" | sed 's/  ([^)]*)$//')
     if [ -z "$SSID" ]; then exit 1; fi
     if echo "$SAVED_CONNECTIONS" | grep -q "^$SSID$"; then
         notify "Connecting to saved network: $SSID"

@@ -298,11 +298,38 @@ install_packages() {
     
     info "Resolving system packages from official repositories..."
     if [ "$DRY_RUN" = "false" ]; then
-        sudo pacman -S --needed --noconfirm "${ALL_PKGS[@]}"
+        local to_install_official=()
+        local to_install_aur=()
+
+        for pkg in "${ALL_PKGS[@]}"; do
+            if pacman -Si "$pkg" >/dev/null 2>&1; then
+                to_install_official+=("$pkg")
+            else
+                to_install_aur+=("$pkg")
+            fi
+        done
+
+        if [ ${#to_install_official[@]} -gt 0 ]; then
+            info "Installing official repo packages: ${to_install_official[*]}"
+            sudo pacman -S --needed --noconfirm "${to_install_official[@]}"
+        else
+            info "No official repository packages to install."
+        fi
+
+        if [ ${#to_install_aur[@]} -gt 0 ]; then
+            if [ -n "$AUR_HELPER" ] && command -v "$AUR_HELPER" >/dev/null 2>&1; then
+                info "Installing AUR packages via $AUR_HELPER: ${to_install_aur[*]}"
+                "$AUR_HELPER" -S --needed --noconfirm "${to_install_aur[@]}"
+            else
+                warn "AUR packages detected but no AUR helper available. Skipping: ${to_install_aur[*]}"
+            fi
+        else
+            info "No AUR packages detected."
+        fi
     else
-        debug "Would install via pacman: ${ALL_PKGS[*]}"
+        debug "Would resolve and install packages: ${ALL_PKGS[*]}"
     fi
-    success "All official repository dependencies are now satisfied."
+    success "Package provisioning step completed."
 }
 
 deploy_configs() {

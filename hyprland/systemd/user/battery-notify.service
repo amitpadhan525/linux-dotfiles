@@ -1,0 +1,8 @@
+[Unit]
+Description=Battery Low Notification
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/amit/.config/waybar/scripts/battery_notify.sh
+Environment=DISPLAY=:0

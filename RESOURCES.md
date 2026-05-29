@@ -15,7 +15,10 @@ These are the fundamental building blocks of the desktop environment, responsibl
 | **App Menu** | `rofi-wayland` | Wayland-native keyboard-driven selection portal for menus, WiFi lists, and prompts. |
 | **Terminal** | `kitty` | Ultra-fast, GPU-accelerated terminal emulator displaying developer outputs. |
 | **File Manager** | `thunar` | Lightweight, robust GTK-based file explorer. |
-| **Notification** | `mako` | Lightweight notification daemon designed explicitly for Wayland. |
+| **Notification (Active)**| `dunst` | Advanced notification daemon styled cohesive with the theme. |
+| **Notification (Alt)** | `mako` | Lightweight notification daemon designed explicitly for Wayland. |
+| **Desktop Dock** | `nwg-dock-hyprland` (AUR)| Custom CSS styled floating launcher dock. |
+| **GTK Customizer** | `nwg-look` | Custom visual setting and GTK theme configuration exporter. |
 | **Wallpaper** | `hyprpaper` | Hardware-accelerated wallpaper render daemon. |
 | **Night Shift** | `hyprsunset` | System-level blue light filter supporting physical display voltage scaling. |
 
@@ -65,6 +68,11 @@ Astraeus integrates custom scripts to link components dynamically. To run these 
 *   **`python`**: Powers system telemetry daemons, dynamic island timers, and screen-time tracking metrics natively inside Waybar.
 *   **`jq`**: High-performance, lightweight command-line JSON processor. It formats the system outputs of Wayland and Hyprland IPC channels into parsed parameters.
 
+Additionally, the following root-level utility scripts are provided:
+*   [copy.sh](file:///home/amit/github/linux-dotfiles/copy.sh): Collects/syncs all active local system configurations into your repository.
+*   [push.sh](file:///home/amit/github/linux-dotfiles/push.sh): Commits and pushes modifications to the GitHub remote repository.
+*   [update.sh](file:///home/amit/github/linux-dotfiles/update.sh): Pulls the latest configurations from GitHub, redeploys links, and restarts service environments.
+
 ---
 
 ## 🎨 Typographical & Visual Design
@@ -104,6 +112,8 @@ sudo pacman -S --needed --noconfirm \
     kitty \
     thunar \
     mako \
+    dunst \
+    nwg-look \
     pipewire \
     wireplumber \
     pamixer \
@@ -132,7 +142,14 @@ sudo pacman -S --needed --noconfirm \
     git
 ```
 
-### 3. Deploy Custom Shell & Python Permissions
+### 3. Install AUR Packages
+Install the custom floating dock using your preferred AUR helper (e.g. `yay`):
+
+```bash
+yay -S --needed --noconfirm nwg-dock-hyprland
+```
+
+### 4. Deploy Custom Shell & Python Permissions
 Ensure execution flags are configured correctly across the script ecosystem to permit proper scheduling:
 
 ```bash
@@ -144,7 +161,7 @@ chmod +x ~/.config/waybar/scripts/*.sh
 chmod +x ~/.config/waybar/scripts/*.py
 ```
 
-### 4. Apply Configurations
+### 5. Apply Configurations
 To load the newly deployed configs without rebooting:
 *   **Hyprland**: Press `Super + R` to recompile the active Lua configurations.
 *   **Waybar**: Run `pkill waybar && waybar &` in your terminal to restart the status panel.

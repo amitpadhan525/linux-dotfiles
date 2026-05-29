@@ -1,0 +1,96 @@
+# ----------------------------------------------------- 
+# Dunst configuration file
+# Styled to match Waybar, Hyprland & Catppuccin Theme
+# ----------------------------------------------------- 
+
+[global]
+    ### Display ###
+    monitor = 0
+    follow = none
+
+    ### Geometry ###
+    width = 360
+    height = 110
+    origin = top-right
+    offset = (20, 20)
+    scale = 0
+    notification_limit = 5
+
+    ### Progress bar ###
+    progress_bar = true
+    progress_bar_height = 6
+    progress_bar_frame_width = 0
+    progress_bar_min_width = 150
+    progress_bar_max_width = 320
+    progress_bar_corner_radius = 4
+    progress_bar_corners = all
+
+    ### Icon ###
+    icon_corner_radius = 6
+    icon_corners = all
+    enable_recursive_icon_lookup = true
+    icon_theme = Papirus-Dark
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 64
+    text_icon_padding = 14
+
+    ### History ###
+    sticky_history = yes
+    history_length = 20
+
+    ### Styling ###
+    separator_height = 2
+    padding = 14
+    horizontal_padding = 18
+    frame_width = 2
+    gap_size = 8
+    separator_color = frame
+    corner_radius = 12
+    corners = all
+
+    ### Text ###
+    font = Outfit 10
+    line_height = 4
+    markup = full
+    format = "<span font_desc='Outfit Bold 11'>%s</span>\n<span font_desc='Outfit 10'>%b</span>"
+    alignment = left
+    vertical_alignment = center
+    show_age_threshold = 60
+    ellipsize = middle
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+
+    ### Mouse ###
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+[urgency_low]
+    # Muted dark theme with surface1 frame and green progress bar
+    background = "#08080de0"
+    foreground = "#a6adc8"
+    frame_color = "#45475a"
+    highlight = "#a6e3a1"
+    timeout = 5
+    default_icon = dialog-information
+
+[urgency_normal]
+    # Dark theme with mauve/blue frame and blue highlight
+    background = "#08080de0"
+    foreground = "#cdd6f4"
+    frame_color = "#89b4fa"
+    highlight = "#89b4fa"
+    timeout = 5
+    default_icon = dialog-information
+
+[urgency_critical]
+    # Red accent theme with red highlight
+    background = "#08080df0"
+    foreground = "#f38ba8"
+    frame_color = "#f38ba8"
+    highlight = "#f38ba8"
+    timeout = 10
+    default_icon = dialog-warning

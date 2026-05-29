@@ -9,12 +9,14 @@ local function autostart()
         "waybar",
         "dunst",
         "nm-applet",
-        "/usr/lib/hyprpolkitagent/hyprpolkitagent"
+        "/usr/lib/hyprpolkitagent/hyprpolkitagent",
+        "/home/amit/.config/hypr/scripts/battery-notification.sh"
     }
     
     for _, app in ipairs(apps) do
         local bin = app:match("([^/]+)$") or app
-        hl.exec_cmd("pgrep -x " .. bin .. " > /dev/null || " .. app .. " &")
+        local pgrep_opt = app:find("/") and "-f" or "-x"
+        hl.exec_cmd("pgrep " .. pgrep_opt .. " " .. bin .. " > /dev/null || " .. app .. " &")
     end
     
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")

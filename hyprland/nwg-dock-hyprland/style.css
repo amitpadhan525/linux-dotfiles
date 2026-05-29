@@ -1,0 +1,66 @@
+/* =========================================
+   nwg-dock-hyprland
+   Compact Floating macOS-style Dock
+   ========================================= */
+
+window {
+    background: rgba(18,18,20,0.82);
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    padding: 2px 8px;
+}
+
+/* Main container */
+#box {
+    padding: 0;
+}
+
+/* Dock buttons */
+button {
+    background: transparent;
+
+    border: none;
+
+    border-radius: 12px;
+
+    margin: 0 3px;
+
+    padding: 3px;
+
+    transition: 160ms ease;
+}
+
+/* Hover effect */
+button:hover {
+    background: rgba(255,255,255,0.10);
+}
+
+/* Active/running app */
+#active {
+    background: rgba(255,255,255,0.12);
+
+    border-radius: 12px;
+
+    border-bottom: 2px solid rgba(255,255,255,0.9);
+}
+
+/* Remove ugly GTK focus outline */
+button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Workspace buttons if shown */
+#task-box {
+    padding: 0;
+    margin: 0;
+}
+
+/* Better spacing */
+#box > * {
+    margin-left: 2px;
+    margin-right: 2px;
+}

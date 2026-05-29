@@ -18,7 +18,8 @@ readonly BACKUP_DIR="$CONFIG_DIR/backups"
 # Categorized Environment Packages
 readonly CORE_WM=(
     "hyprland" "hyprpaper" "hyprlock" "hyprsunset"
-    "waybar" "rofi-wayland" "kitty" "mako" "thunar"
+    "waybar" "rofi-wayland" "kitty" "mako" "dunst" "thunar"
+    "nwg-dock-hyprland" "nwg-look"
 )
 readonly MULTIMEDIA=(
     "pipewire" "pipewire-pulse" "wireplumber" "pamixer" "pavucontrol" "libpulse"
@@ -342,7 +343,7 @@ deploy_configs() {
             mkdir -p "$BACKUP_DIR"
         fi
         
-        local modules=("hypr" "waybar" "rofi" "kitty")
+        local modules=("hypr" "waybar" "rofi" "kitty" "dunst" "mako" "nwg-dock-hyprland" "nwg-look" "gtk-3.0" "gtk-4.0" "xsettingsd" "systemd/user")
         local backed_up_count=0
         
         for mod in "${modules[@]}"; do
@@ -355,7 +356,7 @@ deploy_configs() {
                         rm "$target"
                     fi
                 else
-                    local archive_file="astraeus_backup_${mod}_$(date +%Y%m%d_%H%M%S).tar.gz"
+                    local archive_file="astraeus_backup_${mod//\//_}_$(date +%Y%m%d_%H%M%S).tar.gz"
                     info "Creating secure archive: ${target#$HOME/} -> $archive_file"
                     if [ "$DRY_RUN" = "false" ]; then
                         tar -czf "$BACKUP_DIR/$archive_file" -C "$CONFIG_DIR" "$mod"
@@ -388,7 +389,7 @@ deploy_configs() {
         mkdir -p "$CONFIG_DIR"
     fi
     
-    local config_modules=("hypr" "waybar" "rofi" "kitty")
+    local config_modules=("hypr" "waybar" "rofi" "kitty" "dunst" "mako" "nwg-dock-hyprland" "nwg-look" "gtk-3.0" "gtk-4.0" "xsettingsd" "systemd/user")
     
     for mod in "${config_modules[@]}"; do
         local source="$DOTFILES_DIR/hyprland/$mod"
@@ -403,6 +404,7 @@ deploy_configs() {
         if [ "$DRY_RUN" = "false" ]; then
             # Clean up trailing file/links to avoid nesting links
             rm -rf "$target"
+            mkdir -p "$(dirname "$target")"
             ln -snf "$source" "$target"
         else
             debug "Would execute: ln -snf $source $target"
@@ -410,6 +412,49 @@ deploy_configs() {
     done
     
     success "Symbolic configurations mapped cleanly to $CONFIG_DIR"
+
+    # 3. Handle Home-level Dotfiles
+    info "Deploying home-level dotfiles..."
+    
+    local home_files=(
+        "bash/bashrc:.bashrc"
+        "bash/bash_profile:.bash_profile"
+        "git/gitconfig:.gitconfig"
+    )
+    
+    for item in "${home_files[@]}"; do
+        local source_rel="${item%%:*}"
+        local target_name="${item#*:}"
+        local source="$DOTFILES_DIR/hyprland/$source_rel"
+        local target="$HOME/$target_name"
+        
+        if [ ! -f "$source" ]; then
+            error "Home file source not found: $source"
+            continue
+        fi
+        
+        if [ "$SKIP_BACKUP" = "false" ] && [ -f "$target" ] && [ ! -L "$target" ]; then
+            local archive_file="astraeus_backup_${target_name#.}_$(date +%Y%m%d_%H%M%S).tar.gz"
+            info "Archiving existing home file: $target_name -> $archive_file"
+            if [ "$DRY_RUN" = "false" ]; then
+                tar -czf "$BACKUP_DIR/$archive_file" -C "$HOME" "$target_name"
+                rm -f "$target"
+            fi
+        elif [ -e "$target" ]; then
+            if [ "$DRY_RUN" = "false" ]; then
+                rm -rf "$target"
+            fi
+        fi
+        
+        info "Linking home file: $target_name -> ${target#$HOME/}"
+        if [ "$DRY_RUN" = "false" ]; then
+            ln -snf "$source" "$target"
+        else
+            debug "Would execute: ln -snf $source $target"
+        fi
+    done
+    
+    success "Home-level dotfiles linked cleanly to $HOME"
 }
 
 finalize_system() {

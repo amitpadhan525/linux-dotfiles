@@ -129,7 +129,16 @@ The repository is modularized cleanly to support quick customization without bre
 │   │   ├── config            # Waybar panel layout map
 │   │   └── style.css         # Glassmorphism and gradient styles
 │   ├── rofi/                 # Search panels and custom system menus
-│   └── kitty/                # Kitty terminal color mapping and font sets
+│   ├── kitty/                # Kitty terminal color mapping and font sets
+│   ├── dunst/                # Dunst notification daemon customization (dunstrc)
+│   ├── mako/                 # Mako notification config fallback
+│   ├── nwg-dock-hyprland/    # macOS-style floating dock styling
+│   ├── nwg-look/             # GTK settings theme exporter setup
+│   ├── gtk-3.0/ & gtk-4.0/   # GTK 3 & GTK 4 visual theme specifications
+│   ├── xsettingsd/           # X11 settings daemon synchronization config
+│   ├── systemd/user/         # User systemd service & timer units (e.g. battery checks)
+│   ├── bash/                 # Shell rc and environment configurations (bashrc, bash_profile)
+│   └── git/                  # Personal git user parameters profile
 ├── install.sh                # Premium CLI automated deployment installer
 └── RESOURCES.md              # In-depth package list and documentation manual
 ```
@@ -193,18 +202,35 @@ If you wish to restore your previous desktop configuration at any time, it can b
 
 1.  **Remove Astraeus Symlinks**:
     ```bash
-    rm -rf ~/.config/{hypr,waybar,rofi,kitty}
+    rm -rf ~/.config/{hypr,waybar,rofi,kitty,dunst,mako,nwg-dock-hyprland,nwg-look,gtk-3.0,gtk-4.0,xsettingsd} ~/.config/systemd/user ~/.bashrc ~/.bash_profile ~/.gitconfig
     ```
 2.  **Unpack your archived backups**:
     ```bash
-    # Extract your backups directly back to the .config directory
-    tar -xzf ~/.config/backups/astraeus_backup_hypr_*.tar.gz -C ~/.config/
-    tar -xzf ~/.config/backups/astraeus_backup_waybar_*.tar.gz -C ~/.config/
-    tar -xzf ~/.config/backups/astraeus_backup_rofi_*.tar.gz -C ~/.config/
-    tar -xzf ~/.config/backups/astraeus_backup_kitty_*.tar.gz -C ~/.config/
+    # Extract your configuration backups directly back to the .config directory
+    for archive in ~/.config/backups/astraeus_backup_*.tar.gz; do
+        if [[ "$archive" == *bashrc* || "$archive" == *bash_profile* || "$archive" == *gitconfig* ]]; then
+            tar -xzf "$archive" -C ~/
+        else
+            tar -xzf "$archive" -C ~/.config/
+        fi
+    done
     ```
 
-### 7. Post-installation Setup
+### 7. 🔄 Quick & Automated Updates
+If you have already installed Astraeus and want to sync your system with the latest configurations and files from the upstream repository, run the update utility:
+
+```bash
+chmod +x update.sh
+./update.sh
+```
+
+**Advanced Update Options**:
+*   `--packages` (or `-p`): Also verify and sync new package requirements.
+*   `--dry-run` (or `-d`): Perform a safe dry-run synchronization simulation.
+*   `--no-backup` (or `-n`): Overwrite configs without creating backup archives.
+*   `--non-interactive` (or `-y`): Automatically stash changes and pull updates without interactive prompts.
+
+### 8. Post-installation Setup
 1.  **Monitor Setup**: Open `~/.config/hypr/conf/monitors.lua` and adjust your display resolutions, refresh rates, and scale factors.
 2.  **Display Manager Setup**: Log out of your current session and select the **Hyprland** option from your display manager (SDDM/GDM/LightDM).
 3.  **Start Coding**: Press `Super + Enter` to open Kitty and begin customizing!

@@ -1,0 +1,21 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+#PS1='[\u@\h \W]\$ '
+PS1='\[\e[1;32m\][\u@\h]\[\e[0m\] \[\e[1;34m\]\w\[\e[0m\] $ '
+
+alias conda-on='source /home/amit/anaconda3/etc/profile.d/conda.sh && conda activate base'
+
+alias vmware-start="sudo systemctl start vmware-networks vmware-usbarbitrator"
+
+#export PATH="$HOME/.local/bin:$PATH"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/amit/.local/bin:$PATH"

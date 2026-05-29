@@ -12,6 +12,29 @@
 
 ---
 
+## 🎯 Motive & Purpose
+
+`linux-dotfiles` exists to make a polished Hyprland desktop both **repeatable** and **maintainable**.  
+The core motive is to eliminate the usual friction of building a custom Linux desktop from scattered snippets by providing a single, structured source of truth.
+
+### What this project aims to accomplish
+- Deliver a complete, cohesive Hyprland-based environment (visual theme + workflow tools + system integrations).
+- Automate installation, backup, and updates so users can deploy safely without manually wiring every config.
+- Keep customization modular so users can adapt parts of the setup without breaking the whole desktop.
+
+### Target use case
+- Arch Linux users who want an opinionated, keyboard-first Wayland setup.
+- Developers, creators, and power users who care about both performance and aesthetics.
+- People migrating from ad-hoc dotfile collections to a more reliable, scripted setup.
+
+### Value for users
+- **Time savings:** avoids hours of manual configuration and package/setup guesswork.
+- **Consistency:** same behavior and look across reinstalls or multiple machines.
+- **Safety:** backup-aware install/update scripts reduce risk when applying changes.
+- **Productivity:** integrated workflows (launcher, status bar, screenshots, recording, network menu) are ready out of the box.
+
+---
+
 ## 🌟 Core Philosophy & Vision
 
 Welcome to **Astraeus**, a meticulously engineered Linux dotfiles ecosystem. Astraeus is tailored specifically for power users, developers, and designers who refuse to compromise between **lightning-fast performance** and **premium desktop aesthetics**. 

@@ -3,6 +3,28 @@ import os
 import sys
 import time
 import subprocess
+import fcntl
+
+# Acquire lockfile to prevent duplicate instances
+lock_fd = open("/tmp/device-notifier.lock", "w")
+try:
+    fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+except IOError:
+    # Exit silently if another instance is already running
+    sys.exit(0)
+
+# Redirect stdout and stderr to a log file for troubleshooting
+log_path = "/home/amit/.config/hypr/logs/device-notifier.log"
+try:
+    os.makedirs(os.path.dirname(log_path), exist_ok=True)
+    log_file = open(log_path, "a", buffering=1)
+    os.dup2(log_file.fileno(), sys.stdout.fileno())
+    os.dup2(log_file.fileno(), sys.stderr.fileno())
+except Exception as e:
+    pass
+
+print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] device-notifier started. Environment: PATH={os.environ.get('PATH')}, DBUS_SESSION_BUS_ADDRESS={os.environ.get('DBUS_SESSION_BUS_ADDRESS')}")
+
 
 def find_ac_supply():
     base = "/sys/class/power_supply"

@@ -2,26 +2,27 @@
 
 -- Function to run autostart apps only if they aren't already running
 local function autostart()
+    -- Import environment variables to D-Bus and systemd before spawning any processes
+    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+    hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+
     -- wallpaper.sh already handles its own killing/restarting
     hl.exec_cmd("/home/amit/.config/hypr/scripts/wallpaper.sh")
     
-    local apps = {
-        "waybar",
-        "dunst",
-        "nm-applet",
-        "/usr/lib/hyprpolkitagent/hyprpolkitagent",
-        "/home/amit/.config/hypr/scripts/battery-notification.sh",
-        "/home/amit/.config/hypr/scripts/device-notifier.py"
+    local system_apps = {
+        { name = "waybar", path = "waybar" },
+        { name = "dunst", path = "dunst" },
+        { name = "nm-applet", path = "nm-applet" },
+        { name = "hyprpolkitagent", path = "/usr/lib/hyprpolkitagent/hyprpolkitagent" }
     }
     
-    for _, app in ipairs(apps) do
-        local bin = app:match("([^/]+)$") or app
-        local pgrep_opt = app:find("/") and "-f" or "-x"
-        hl.exec_cmd("pgrep " .. pgrep_opt .. " " .. bin .. " > /dev/null || " .. app .. " &")
+    for _, app in ipairs(system_apps) do
+        hl.exec_cmd("pgrep -x \"" .. app.name .. "\" > /dev/null || " .. app.path .. " &")
     end
-    
-    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-    hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+
+    -- Run scripts directly (concurrency and single-instance locks are handled inside the scripts)
+    hl.exec_cmd("/home/amit/.config/hypr/scripts/battery-notification.sh &")
+    hl.exec_cmd("/home/amit/.config/hypr/scripts/device-notifier.py &")
 end
 
 -- Run only once on the very first startup

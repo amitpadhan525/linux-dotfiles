@@ -10,7 +10,8 @@ local function autostart()
         "dunst",
         "nm-applet",
         "/usr/lib/hyprpolkitagent/hyprpolkitagent",
-        "/home/amit/.config/hypr/scripts/battery-notification.sh"
+        "/home/amit/.config/hypr/scripts/battery-notification.sh",
+        "/home/amit/.config/hypr/scripts/device-notifier.py"
     }
     
     for _, app in ipairs(apps) do

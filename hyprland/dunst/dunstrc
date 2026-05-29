@@ -94,3 +94,6 @@
     highlight = "#f38ba8"
     timeout = 10
     default_icon = dialog-warning
+
+[log_all]
+    script = /home/amit/.config/dunst/log-notifications.sh

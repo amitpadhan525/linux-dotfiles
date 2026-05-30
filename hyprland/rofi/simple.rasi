@@ -1,148 +1,122 @@
 /*******************************************************************************
- * ROFI Color theme
- * User: Amit
- * Copyright: Google DeepMind (Agentic Coding)
+ * ROFI — App Launcher Theme
+ * Accent: Neon Teal #00ffe1 — unified with Waybar / Hyprland / Power Menu
+ * Rofi 2.0 — uses 8-digit hex (#rrggbbaa) for transparency
  *******************************************************************************/
 
 configuration {
     modi:                       "drun,run,filebrowser,window";
     show-icons:                 true;
-    display-drun:               " Apps";
-    display-run:                " Run";
-    display-filebrowser:        " Files";
-    display-window:             " Windows";
+    display-drun:               " Apps";
+    display-run:                " Run";
+    display-filebrowser:        " Files";
+    display-window:             " Windows";
     drun-display-format:        "{name}";
     window-format:              "{w} · {c} · {t}";
 }
 
 * {
     font:                        "JetBrainsMono Nerd Font Bold 12";
-    background:                  #000000ff;
-    background-alt:              #101010ff;
-    foreground:                  #cdd6f4ff;
-    selected:                    #cba6f7ff;
-    active:                      #89b4faff;
-    urgent:                      #f38ba8ff;
-    
-    border-col:                  #cba6f7ff;
+
+    /* ── Colour Tokens ── */
+    bg-base:                     #000000fa;    /* pure black 98% opaque   */
+    bg-alt:                      #0c0c0cff;    /* slightly lifted surface  */
+    fg-main:                     #ffffffff;   /* crisp white              */
+    fg-dim:                      #888888ff;    /* clean gray               */
+    accent:                      #00ffe1ff;    /* neon teal                */
+    accent-dim:                  #00ffe10a;    /* teal tint ~4%            */
+    accent-mid:                  #00ffe12e;    /* teal tint ~18%           */
+    accent-hover:                #00ffe14d;    /* teal tint ~30%           */
+    border-subtle:               #00ffe133;    /* teal border ~20%         */
+    urgent:                      #f38ba8ff;    /* red for urgent           */
+
+    background-color:            transparent;
+    text-color:                  @fg-main;
 }
 
 window {
     transparency:                "real";
+    background-color:            @bg-base;
+    border:                      2px solid;
+    border-color:                @accent;
+    border-radius:               16px;
+    width:                       680px;
     location:                    center;
     anchor:                      center;
-    fullscreen:                  false;
-    width:                       800px;
     x-offset:                    0px;
     y-offset:                    0px;
-
-    enabled:                     true;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      3px solid;
-    border-radius:               16px;
-    border-color:                @border-col;
     cursor:                      "default";
-    background-color:            @background;
 }
 
 mainbox {
-    enabled:                     true;
-    spacing:                     20px;
-    margin:                      0px;
-    padding:                     30px;
-    border:                      0px solid;
-    border-radius:               0px 0px 0px 0px;
-    border-color:                @selected;
     background-color:            transparent;
     children:                    [ "inputbar", "listview" ];
+    padding:                     24px;
+    spacing:                     16px;
 }
 
 inputbar {
-    enabled:                     true;
-    spacing:                     10px;
-    margin:                      0px;
-    padding:                     12px 16px;
-    border:                      0px solid;
+    background-color:            @bg-alt;
+    border:                      1px solid;
+    border-color:                @accent;
     border-radius:               12px;
-    border-color:                @selected;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
+    padding:                     12px 16px;
+    spacing:                     10px;
     children:                    [ "prompt", "entry" ];
+    text-color:                  @fg-main;
 }
 
 prompt {
-    enabled:                     true;
-    background-color:            inherit;
-    text-color:                  inherit;
-}
-
-textbox-prompt-colon {
-    enabled:                     true;
-    expand:                      false;
-    str:                         "::";
-    background-color:            inherit;
-    text-color:                  inherit;
+    background-color:            transparent;
+    text-color:                  @accent;
 }
 
 entry {
-    enabled:                     true;
-    background-color:            inherit;
-    text-color:                  inherit;
+    background-color:            transparent;
+    text-color:                  @fg-main;
     cursor:                      text;
-    placeholder:                 "Search...";
-    placeholder-color:           inherit;
+    placeholder:                 "Search…";
+    placeholder-color:           @fg-dim;
 }
 
 listview {
-    enabled:                     true;
+    background-color:            transparent;
     columns:                     2;
-    lines:                       8;
+    lines:                       6;
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;
     layout:                      vertical;
-    reverse:                     false;
+    spacing:                     8px;
     fixed-height:                true;
     fixed-columns:               true;
-    
-    spacing:                     10px;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @selected;
-    background-color:            transparent;
-    text-color:                  @foreground;
-    cursor:                      "default";
 }
 
 element {
-    enabled:                     true;
-    spacing:                     10px;
-    margin:                      0px;
+    background-color:            @accent-dim;
+    border:                      1px solid;
+    border-color:                @border-subtle;
+    border-radius:               10px;
     padding:                     10px;
-    border:                      0px solid;
-    border-radius:               12px;
-    border-color:                @selected;
-    background-color:            transparent;
-    text-color:                  @foreground;
+    spacing:                     10px;
     cursor:                      pointer;
+    text-color:                  @fg-main;
 }
 
 element normal.normal {
-    background-color:            transparent;
-    text-color:                  @foreground;
+    background-color:            @accent-dim;
+    text-color:                  @fg-main;
 }
 
 element alternate.normal {
-    background-color:            transparent;
-    text-color:                  @foreground;
+    background-color:            @accent-dim;
+    text-color:                  @fg-main;
 }
 
 element selected.normal {
-    background-color:            @selected;
-    text-color:                  @background;
+    background-color:            @accent;
+    border-color:                @accent;
+    text-color:                  #000000ff;
 }
 
 element-icon {

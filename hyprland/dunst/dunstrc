@@ -69,25 +69,25 @@
     mouse_right_click = close_all
 
 [urgency_low]
-    # Muted dark theme with surface1 frame and green progress bar
+    # Muted — dark bg, dimmed teal frame
     background = "#08080de0"
     foreground = "#a6adc8"
-    frame_color = "#45475a"
-    highlight = "#a6e3a1"
+    frame_color = "#00ffe155"
+    highlight = "#00ffe1"
     timeout = 5
     default_icon = dialog-information
 
 [urgency_normal]
-    # Dark theme with mauve/blue frame and blue highlight
+    # Neon teal accent — matches Waybar / Hyprland border
     background = "#08080de0"
     foreground = "#cdd6f4"
-    frame_color = "#89b4fa"
-    highlight = "#89b4fa"
+    frame_color = "#00ffe1"
+    highlight = "#00ffe1"
     timeout = 5
     default_icon = dialog-information
 
 [urgency_critical]
-    # Red accent theme with red highlight
+    # Red — kept distinct for critical alerts
     background = "#08080df0"
     foreground = "#f38ba8"
     frame_color = "#f38ba8"

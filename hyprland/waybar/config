@@ -55,10 +55,10 @@
 
     "hyprland/workspaces": {
         "format": "{name}",
-        "on-click": "hyprctl dispatch workspace {name}",
+        "on-click": "activate",
         "sort-by-number": true,
-        "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1"
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'"
     },
     "backlight": {
         "device": "intel_backlight",
@@ -155,15 +155,15 @@
             "critical": 15
         },
         "format": "{icon}  {capacity}%",
-        "format-charging": "\uf0e7  {capacity}%",
-        "format-plugged": "\uf0e7  {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
         "format-alt": "{time} {icon}",
         "format-icons": [
-            "\uf244",
-            "\uf243",
-            "\uf242",
-            "\uf241",
-            "\uf240"
+            "",
+            "",
+            "",
+            "",
+            ""
         ]
     }
 }

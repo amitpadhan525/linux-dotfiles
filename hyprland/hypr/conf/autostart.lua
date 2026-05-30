@@ -22,7 +22,7 @@ local function autostart()
 
     -- Run scripts directly (concurrency and single-instance locks are handled inside the scripts)
     hl.exec_cmd("/home/amit/.config/hypr/scripts/battery-notification.sh &")
-    hl.exec_cmd("/home/amit/.config/hypr/scripts/device-notifier.py &")
+    hl.exec_cmd("/home/amit/.config/hypr/scripts/device-notifier.sh &")
 end
 
 -- Run only once on the very first startup

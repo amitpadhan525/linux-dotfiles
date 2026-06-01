@@ -102,22 +102,54 @@ tooltip label {
     color: rgba(0, 255, 225, 0.5);
     background: transparent;
     border-radius: 10px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Smooth transitions using GTK-supported properties only */
+    transition:
+        background  0.3s ease,
+        color       0.25s ease,
+        box-shadow  0.3s ease,
+        min-width   0.3s ease,
+        padding     0.3s ease,
+        opacity     0.25s ease;
     font-weight: 800;
+    min-width: 24px;
+    opacity: 0.7;
 }
 #workspaces button:hover {
     background: rgba(0, 255, 225, 0.18);
     color: #00ffe1;
+    opacity: 1;
+    padding: 2px 13px;
 }
 #workspaces button.active {
     color: #000000;
     background: #00ffe1;
-    box-shadow: 0 0 8px rgba(0, 255, 225, 0.55);
+    opacity: 1;
+    padding: 2px 14px;
+    animation: ws-glow 0.45s ease forwards;
+    box-shadow:
+        0 0 10px rgba(0, 255, 225, 0.70),
+        0 0 20px rgba(0, 255, 225, 0.30);
 }
 #workspaces button.urgent {
     color: #11111b;
     background: #f38ba8;
+    opacity: 1;
+    animation: ws-urgent-pulse 0.6s ease forwards;
     box-shadow: 0 0 6px rgba(243, 139, 168, 0.5);
+}
+
+/* Active: glow fades in while box expands via padding */
+@keyframes ws-glow {
+    0%   { opacity: 0.4; box-shadow: none; }
+    60%  { opacity: 1.0; box-shadow: 0 0 14px rgba(0, 255, 225, 0.85); }
+    100% { opacity: 1.0; box-shadow: 0 0 10px rgba(0, 255, 225, 0.70), 0 0 20px rgba(0, 255, 225, 0.30); }
+}
+
+/* Urgent: pulsing glow */
+@keyframes ws-urgent-pulse {
+    0%   { opacity: 0.5; box-shadow: none; }
+    50%  { opacity: 1.0; box-shadow: 0 0 12px rgba(243, 139, 168, 0.8); }
+    100% { opacity: 1.0; box-shadow: 0 0 6px rgba(243, 139, 168, 0.5); }
 }
 
 /* ── Layout Overrides ── */

@@ -76,8 +76,10 @@
         ]
     },
     "clock": {
-        "format": "\uf017  {:%I:%M   %d/%m/%Y}",
-        "tooltip-format": "<big>{:%d/%m/%Y}</big>\n<tt><small>{calendar}</small></tt>"
+        "format": " {:%I:%M %p  |  %d %m %Y}",
+        "format-alt": " {:%H:%M:%S  |  %d %m %Y}",
+        "interval": 1,
+        "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "custom/cpu": {
         "exec": "/home/amit/.config/waybar/scripts/custom_cpu.sh",
@@ -110,7 +112,7 @@
         "interval": 30,
         "exec": "bash /home/amit/.config/waybar/scripts/disk_info.sh",
         "return-type": "json",
-        "format": "{}",
+        "format": "{text}",
         "tooltip": true
     },
     "network": {

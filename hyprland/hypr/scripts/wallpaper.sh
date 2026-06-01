@@ -1,29 +1,43 @@
 #!/bin/bash
 # ----------------------------------------------------- 
-# Instant Wallpaper Script
+# Wallpaper launcher for hyprpaper v0.8.x
+#
+# Problem: hyprpaper v0.8.x ignores the "wallpaper =" line in the config
+# and exits immediately unless a wallpaper is applied via IPC first.
+# This script races to apply the wallpaper via IPC as fast as possible.
 # ----------------------------------------------------- 
 
+WALLPAPER="/home/amit/.config/hypr/wallpapers/prime2.png"
+CONF="/home/amit/.config/hypr/hyprpaper.conf"
 LOG="/home/amit/.config/hypr/logs/hyprpaper.log"
 
-# Redirect all output to log
 exec > "$LOG" 2>&1
+echo "--- Wallpaper launcher started: $(date) ---"
 
-echo "--- Starting Instant Wallpaper Script ---"
-date
+# Kill old instance and remove stale socket
+killall -q hyprpaper
+while pgrep -x hyprpaper > /dev/null; do sleep 0.05; done
 
-# Kill existing instances and wait for them to fully die
-/usr/bin/killall -q hyprpaper
-while pgrep -x hyprpaper >/dev/null; do sleep 0.1; done
+SOCK="${XDG_RUNTIME_DIR}/hypr/${HYPRLAND_INSTANCE_SIGNATURE}/.hyprpaper.sock"
+rm -f "$SOCK"
 
-# Start hyprpaper natively, disown it so it stays alive, and detach its output
-nohup /usr/bin/hyprpaper -c /home/amit/.config/hypr/hyprpaper.conf > /home/amit/.config/hypr/logs/hyprpaper_debug.log 2>&1 & disown
+# Start hyprpaper in background
+hyprpaper -c "$CONF" &
 
-# Give hyprpaper a moment to start
-sleep 0.5
+# Tight loop: apply wallpaper via IPC as soon as socket is alive
+for i in $(seq 1 100); do
+    result=$(hyprctl hyprpaper wallpaper "eDP-1,$WALLPAPER" 2>&1)
+    if [ -z "$result" ]; then
+        echo "Wallpaper set on attempt $i"
+        break
+    fi
+    sleep 0.05
+done
 
-# Force load via IPC in case config fails
-hyprctl hyprpaper preload "/home/amit/.config/hypr/wallpapers/prime2.png"
-hyprctl hyprpaper wallpaper "eDP-1,/home/amit/.config/hypr/wallpapers/prime2.png"
-hyprctl hyprpaper wallpaper ",/home/amit/.config/hypr/wallpapers/prime2.png"
-echo "Wallpaper applied instantly."
+if pgrep -x hyprpaper > /dev/null; then
+    echo "hyprpaper is running. Done."
+else
+    echo "ERROR: hyprpaper failed to stay alive."
+fi
+
 date >> "/home/amit/.config/hypr/logs/wallpaper_script.log"

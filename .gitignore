@@ -1,5 +1,7 @@
 # Ignore logs and state files
 *.log
+*.log.*
+**/logs/
 .night_mode_state
 
 # Ignore backup archives

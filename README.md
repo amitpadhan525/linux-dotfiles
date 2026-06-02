@@ -224,6 +224,8 @@ chmod +x update.sh
 ./update.sh
 ```
 
+The updater now resolves the repository root automatically, so it can also be launched by absolute path from another directory.
+
 **Advanced Update Options**:
 *   `--packages` (or `-p`): Also verify and sync new package requirements.
 *   `--dry-run` (or `-d`): Perform a safe dry-run synchronization simulation.

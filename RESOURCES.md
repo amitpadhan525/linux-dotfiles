@@ -71,7 +71,7 @@ Astraeus integrates custom scripts to link components dynamically. To run these 
 Additionally, the following root-level utility scripts are provided:
 *   [copy.sh](file:///home/amit/github/linux-dotfiles/copy.sh): Collects/syncs all active local system configurations into your repository.
 *   [push.sh](file:///home/amit/github/linux-dotfiles/push.sh): Commits and pushes modifications to the GitHub remote repository.
-*   [update.sh](file:///home/amit/github/linux-dotfiles/update.sh): Pulls the latest configurations from GitHub, redeploys links, and restarts service environments.
+*   [update.sh](file:///home/amit/github/linux-dotfiles/update.sh): Pulls the latest configurations from GitHub, redeploys links, and restarts service environments. It now anchors itself to the repository root automatically.
 
 ---
 

@@ -2,12 +2,9 @@
   # 🌌 Astraeus Hyprland
   **A premium, high-performance, and modular Lua-orchestrated Wayland environment for Arch Linux.**
 
-  [![WM: Hyprland](https://img.shields.io/badge/WM-Hyprland--v0.55+-8839ef?style=for-the-badge&logo=archlinux&logoColor=white)](https://hyprland.org)
-  [![Bar: Waybar](https://img.shields.io/badge/Bar-Waybar--v0.10+-40a02b?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/Alexays/Waybar)
-  [![Launcher: Rofi](https://img.shields.io/badge/Launcher-Rofi--Wayland-df8e1d?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/davatorium/rofi)
-  [![Terminal: Kitty](https://img.shields.io/badge/Terminal-Kitty-d20f39?style=for-the-badge&logo=kitty&logoColor=white)](https://sw.kovidgoyal.net/kitty/)
-  [![Theme: Catppuccin Mocha](https://img.shields.io/badge/Theme-Catppuccin--Mocha-f5c2e7?style=for-the-badge)](https://github.com/catppuccin/catppuccin)
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+    Hyprland v0.55+ | Waybar v0.10+ | Rofi Wayland | Kitty | Catppuccin Mocha | MIT License
+
+    [Hyprland](https://hyprland.org) | [Waybar](https://github.com/Alexays/Waybar) | [Rofi](https://github.com/davatorium/rofi) | [Kitty](https://sw.kovidgoyal.net/kitty/) | [Catppuccin](https://github.com/catppuccin/catppuccin) | [MIT License](https://opensource.org/licenses/MIT)
 </div>
 
 ---
@@ -28,17 +25,7 @@ Unlike traditional dotfiles that rely on monolithic configurations, Astraeus int
 
 ## 📸 Desktop Showcase & Live Demos
 
-Get a visual preview of Astraeus in action! Below is a gallery of the system interfaces, status telemetry, and live recordings demonstrating the fluid desktop mechanics.
-
-### 🖼️ System Interfaces & Telemetry
-
-| 🌌 Main Homescreen | 🛠️ Modular Workspace Grid |
-| :---: | :---: |
-| ![Homescreen](./assets/homescreen.png) | ![Workspace Layout](./assets/workspace.png) |
-
-| 📊 Catppuccin Waybar Status Bar |
-| :---: |
-| ![Waybar Status Bar Layout](./assets/waybar.png) |
+Astraeus is designed to stay compact, responsive, and easy to audit without depending on embedded media in the documentation. The configuration focuses on a clean Hyprland workspace, a tightly integrated Waybar setup, and lightweight scripts that keep the desktop predictable.
 
 ---
 

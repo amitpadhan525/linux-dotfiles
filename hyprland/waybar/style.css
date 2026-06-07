@@ -10,35 +10,39 @@ window#waybar {
     color: #cdd6f4;
 }
 
-/* ── Tooltip Base ────────────────────────────── */
+/* ══════════════════════════════════════════════════════════
+   TOOLTIPS — Neon Teal theme — mirrors rofi simple.rasi
+   bg: #000000fa  accent: #00ffe1  font: JetBrainsMono NF
+   ══════════════════════════════════════════════════════════ */
+
 tooltip {
-    background: #08080d;
-    border: 1px solid rgba(0, 255, 225, 0.6);
-    border-radius: 12px;
-    padding: 8px 6px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9);
+    /* Deep black, same opacity as rofi bg-base (#000000fa) */
+    background: rgba(0, 0, 0, 0.98);
+
+    /* 2px solid neon-teal border — matches rofi window border */
+    border: 2px solid #00ffe1;
+    border-radius: 14px;
+
+    /* Layered glow: inner soft teal + outer deep shadow */
+    box-shadow:
+        0 0 0 1px rgba(0, 255, 225, 0.08),
+        0 0 14px rgba(0, 255, 225, 0.35),
+        0 0 40px rgba(0, 255, 225, 0.10),
+        0 12px 40px rgba(0, 0, 0, 0.95);
+
+    padding: 10px 4px;
 }
 
 tooltip label {
-    color: #cdd6f4;
+    /* Crisp white text — same as rofi fg-main (#ffffff) */
+    color: #ffffff;
     font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 13px;
     font-weight: normal;
-    padding: 3px 12px;
+    padding: 4px 18px;
+    /* Subtle text-shadow to lift it off the dark bg */
+    text-shadow: 0 0 8px rgba(0, 255, 225, 0.15);
 }
-
-/* ── Tooltip borders ── */
-#network        tooltip { border: 1px solid rgba(0, 255, 225, 0.6); }
-#pulseaudio     tooltip { border: 1px solid rgba(0, 255, 225, 0.6); }
-#backlight      tooltip { border: 1px solid rgba(0, 255, 225, 0.6); }
-#cpu            tooltip { border: 1px solid rgba(0, 255, 225, 0.6); }
-#custom-cpu     tooltip { border: 1px solid rgba(0, 255, 225, 0.6); }
-#custom-gpu     tooltip { border: 1px solid rgba(0, 255, 225, 0.6); }
-#custom-temperature tooltip { border: 1px solid rgba(0, 255, 225, 0.6); }
-#custom-memory  tooltip { border: 1px solid rgba(0, 255, 225, 0.6); }
-#custom-disk    tooltip { border: 1px solid rgba(0, 255, 225, 0.6); }
-#battery        tooltip { border: 1px solid rgba(0, 255, 225, 0.6); }
-#clock          tooltip { border: 1px solid rgba(0, 255, 225, 0.6); }
 
 /* ── Uniform accent: #00ffe1 (Neon Teal — matches Hyprland active border & Kitty) ── */
 

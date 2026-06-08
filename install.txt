@@ -1,112 +1,95 @@
-================================================================================
-🌌 ASTRAEUS HYPRLAND - TERMINAL INSTALLATION MANUAL & bluePRINT
-================================================================================
-This is a lightweight, terminal-friendly reference manual for deploying the 
-Astraeus Environment. Keep this file handy if you are executing configurations 
-manually or from a headless TTY session.
+Linux dotfiles install guide
 
---------------------------------------------------------------------------------
-1. PRE-INSTALLATION SYSTEM SYNCHRONIZATION
---------------------------------------------------------------------------------
-Before executing any script, ensure your Arch Linux system databases are fully
-synchronized and essential development headers/runtimes are present:
+This repo contains Arch Linux dotfiles and helper scripts for a Hyprland-based
+Wayland desktop. The installer links the configs in this repo into your home
+directory and installs the packages needed for the desktop to work.
 
-    sudo pacman -Syu --noconfirm base-devel git
+1. Prerequisites
 
---------------------------------------------------------------------------------
-2. AUTOMATED DEPLOYMENT ORCHESTRATION (install.sh)
---------------------------------------------------------------------------------
-The most reliable deployment path is utilizing the robust "install.sh" script:
+Before you run the installer, make sure you are on Arch Linux or an Arch-based
+system and have network access.
+
+Install the basic build tools needed for the installer and for AUR packages:
+
+    sudo pacman -Syu --noconfirm git base-devel
+
+2. Clone the repo
 
     git clone https://github.com/amitpadhan525/linux-dotfiles.git
     cd linux-dotfiles
+
+3. Run the installer
+
+The default install script does three things:
+it updates packages, installs the required desktop packages, and links the
+configs from this repo into ~/.config and your home directory.
+
     chmod +x install.sh
     ./install.sh
 
---------------------------------------------------------------------------------
-3. COMMAND-LINE OPTION FLAGS (Advanced Setup)
---------------------------------------------------------------------------------
-For administrators, the installer can be configured with specific flags:
+The script will ask before it makes changes. It also tries to back up existing
+config folders before replacing them.
 
-    ./install.sh --help               - Display help banner and CLI flags.
-    ./install.sh -y                   - Non-interactive (bypasses prompt checks).
-    ./install.sh --dry-run            - Safe simulation without disk writes.
-    ./install.sh --configs-only       - Maps symbolic links only (skips pacman).
-    ./install.sh --packages-only      - Provision package dependencies only.
-    ./install.sh --no-backup          - Bypasses backup and overrides configs.
+4. Useful installer flags
 
---------------------------------------------------------------------------------
-4. THE ATOMIC BACKUP SYSTEM & DIRECT OVERWRITING
---------------------------------------------------------------------------------
-* AUTOMATED SAFE BACKUP (Default Behavior):
-  If the installer detects pre-existing configuration folders (such as ~/.config/hypr),
-  it automatically compresses them into a tarball backup before deploying Astraeus:
-  
-      Destination: ~/.config/backups/astraeus_backup_<mod>_<timestamp>.tar.gz
+    ./install.sh --help
+    ./install.sh -y              non-interactive install
+    ./install.sh -d              dry run, no changes written
+    ./install.sh -c              configs only, skip package install
+    ./install.sh -p              packages only, skip linking configs
+    ./install.sh -n              skip backup creation
+    ./install.sh -f              force through some checks
 
-  If the compression fails, the script halts instantly to protect your data.
+5. What the installer installs
 
-* HARD OVERWRITE MODE (Bypass Backup):
-  If you wish to do a clean slate installation and avoid creating backup files,
-  pass the '--no-backup' (or '-n') flag to the installer:
-  
-      ./install.sh --no-backup
+The installer pulls in the core Hyprland desktop stack, bar, terminal, file
+manager, notifications, wallpaper tools, audio tools, clipboard helpers,
+fonts, and session services such as:
 
---------------------------------------------------------------------------------
-5. MANUAL ROLLBACK & RESTORATION GUIDE
---------------------------------------------------------------------------------
-If you ever want to revert your system and restore your exact pre-Astraeus
-configurations, execute these terminal commands:
+    hyprland hyprpaper hyprlock hyprsunset waybar rofi-wayland kitty thunar
+    dunst mako nwg-dock-hyprland nwg-look pipewire wireplumber pamixer
+    pavucontrol libpulse brightnessctl networkmanager nm-connection-editor
+    blueman acpi upower slurp grim wf-recorder wl-clipboard jq python
+    libnotify polkit-kde-agent polkit-gnome gnome-keyring xsettingsd
+    ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji ttf-font-awesome
 
-    # 1. Remove symbolic links pointing to the Astraeus repository
-    rm -rf ~/.config/{hypr,waybar,rofi,kitty}
+It also installs AUR packages through your AUR helper if one is available.
+If no helper is installed, the script can bootstrap one after confirming that
+git and base-devel are present.
 
-    # 2. Extract your compressed backups directly back into your config path
-    tar -xzf ~/.config/backups/astraeus_backup_hypr_*.tar.gz -C ~/.config/
-    tar -xzf ~/.config/backups/astraeus_backup_waybar_*.tar.gz -C ~/.config/
-    tar -xzf ~/.config/backups/astraeus_backup_rofi_*.tar.gz -C ~/.config/
-    tar -xzf ~/.config/backups/astraeus_backup_kitty_*.tar.gz -C ~/.config/
+6. Manual install path
 
---------------------------------------------------------------------------------
-6. COMPLETE ECOSYSTEM DEPENDENCY DIRECTORY (Package List)
---------------------------------------------------------------------------------
-If you prefer not to use the automated script, you can install the exact package
-stack using the pacman command:
+If you want to install packages by hand, use the package list above and then
+link the configs from this repo into the matching locations under ~/.config.
 
-    sudo pacman -S --needed --noconfirm \
-        hyprland hyprpaper hyprlock hyprsunset waybar rofi-wayland kitty thunar \
-        mako pipewire wireplumber pamixer pavucontrol libpulse brightnessctl \
-        networkmanager nm-connection-editor blueman acpi upower slurp grim \
-        wl-clipboard jq python libnotify polkit-kde-agent gnome-keyring \
-        xsettingsd ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji \
-        ttf-font-awesome base-devel git
+Typical config paths are:
 
---------------------------------------------------------------------------------
-7. MANUAL SCRIPT PERMISSIONS ENFORCEMENT
---------------------------------------------------------------------------------
-Astraeus relies on internal scripting modules. If configuring manually, ensure
-executable execution bits are correctly registered:
+    ~/.config/hypr
+    ~/.config/waybar
+    ~/.config/rofi
+    ~/.config/kitty
+    ~/.config/dunst
+    ~/.config/mako
+    ~/.config/nwg-dock-hyprland
+    ~/.config/nwg-look
+    ~/.config/gtk-3.0
+    ~/.config/gtk-4.0
+    ~/.config/xsettingsd
+    ~/.config/systemd/user
 
-    chmod +x ~/.config/hypr/scripts/*.sh
-    chmod +x ~/.config/waybar/scripts/*.sh
-    chmod +x ~/.config/waybar/scripts/*.py
+The installer also links these home files:
 
---------------------------------------------------------------------------------
-8. POST-INSTALLATION ADJUSTMENTS
---------------------------------------------------------------------------------
-1. Adjust Monitors: Edit '~/.config/hypr/conf/monitors.lua' for displays.
-2. Load Compositor: Log out and select the "Hyprland" session from your Login DM.
-3. System Console: Press 'Super + Enter' to open Kitty terminal.
-4. Keybindings Guide: Open 'README.md' or use the keys below:
-   * Super + D              - Open Application Grid (Rofi)
-   * Super + E              - Open File Manager (Thunar)
-   * Super + S              - Save Area Screenshot (Rofi Named)
-   * Super + Shift + S      - Record Screen Selector (Region/Fullscreen)
-   * Super + R              - Hot-Reload Compositor (Lua Engine)
-   * Super + N              - Night Mode Toggle (Blue light control)
-   * Super + Shift + L      - Lock Desktop Session (Hyprlock)
-   * Super + Q              - Terminate Active Window
+    ~/.bashrc
+    ~/.bash_profile
+    ~/.gitconfig
 
-================================================================================
-🌌 Astraeus Environment | Designed with Precision by Amit Padhan | Licensed: MIT
-================================================================================
+7. After installation
+
+Log out and choose the Hyprland session from your display manager.
+Then check your monitor settings in ~/.config/hypr/conf/monitors.lua and
+review the keybindings in README.md if you want to customize the desktop.
+
+8. Roll back if needed
+
+If you want to undo the install, remove the symlinks and restore any backups
+you created from ~/.config/backups.

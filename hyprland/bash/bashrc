@@ -11,7 +11,7 @@ alias grep='grep --color=auto'
 PS1='\[\e[1;32m\][\u@\h]\[\e[0m\] \[\e[1;34m\]\w\[\e[0m\] $ '
 
 alias conda-on='source /home/amit/anaconda3/etc/profile.d/conda.sh && conda activate base'
-
+alias jupyterlab='source ~/venvs/ds-env/bin/activate && BROWSER=/usr/bin/brave python -m jupyter lab'
 alias vmware-start="sudo systemctl start vmware-networks vmware-usbarbitrator"
 
 #export PATH="$HOME/.local/bin:$PATH"
@@ -19,3 +19,7 @@ alias vmware-start="sudo systemctl start vmware-networks vmware-usbarbitrator"
 
 # Added by Antigravity CLI installer
 export PATH="/home/amit/.local/bin:$PATH"
+#  alias ubuntu='qemu-system-x86_64 -enable-kvm -machine q35,accel=kvm -cpu host -smp 4 -m 8G -device virtio-vga -display gtk -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2/x64/OVMF_CODE.4m.fd -drive file=$HOME/VMs/ubuntu26/ubuntu.qcow2,format=qcow2,if=virtio -netdev user,id=internet -device virtio-net-pci,netdev=internet -netdev tap,id=lab,ifname=tap0,script=no,downscript=no -device virtio-net-pci,netdev=lab -daemonize'
+# alias metasploitable='qemu-system-x86_64 -enable-kvm -machine q35,accel=kvm -cpu host -smp 2 -m 2G -device virtio-vga -display gtk -drive file=$HOME/VMs/Metasploitable2-Linux/Metasploitable.vmdk,format=vmdk -netdev user,id=internet -device e1000,netdev=internet -netdev tap,id=lab,ifname=tap1,script=no,downscript=no -device e1000,netdev=lab -daemonize'
+alias ubuntu='qemu-system-x86_64 -enable-kvm -machine q35,accel=kvm -cpu host -smp 4 -m 8G -device virtio-vga -display gtk -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2/x64/OVMF_CODE.4m.fd -drive file=$HOME/VMs/ubuntu26/ubuntu.qcow2,format=qcow2,if=virtio -netdev user,id=internet -device virtio-net-pci,netdev=internet -netdev tap,id=lab,ifname=tap0,script=no,downscript=no -device virtio-net-pci,netdev=lab,mac=52:54:00:AA:00:10 -daemonize'
+alias metasploitable='qemu-system-x86_64 -enable-kvm -machine q35,accel=kvm -cpu host -smp 2 -m 2G -device virtio-vga -display gtk -drive file=$HOME/VMs/Metasploitable2-Linux/Metasploitable.vmdk,format=vmdk -netdev user,id=internet -device e1000,netdev=internet -netdev tap,id=lab,ifname=tap1,script=no,downscript=no -device e1000,netdev=lab,mac=52:54:00:AA:00:11 -daemonize'

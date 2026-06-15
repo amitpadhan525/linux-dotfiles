@@ -1,20 +1,49 @@
 #!/bin/bash
 # ----------------------------------------------------- 
-# Wallpaper launcher for hyprpaper v0.8.x
-#
-# Problem: hyprpaper v0.8.x ignores the "wallpaper =" line in the config
-# and exits immediately unless a wallpaper is applied via IPC first.
-# This script races to apply the wallpaper via IPC as fast as possible.
+# Wallpaper launcher for hyprpaper v0.8.x (Dynamic)
 # ----------------------------------------------------- 
 
-WALLPAPER="/home/amit/.config/hypr/wallpapers/prime2.png"
+DEFAULT_WALLPAPER="/home/amit/.config/hypr/wallpapers/prime2.png"
+STATE_FILE="/home/amit/.config/hypr/.current_wallpaper"
 CONF="/home/amit/.config/hypr/hyprpaper.conf"
 LOG="/home/amit/.config/hypr/logs/hyprpaper.log"
 
 exec > "$LOG" 2>&1
 echo "--- Wallpaper launcher started: $(date) ---"
 
-# Kill old instance and remove stale socket
+# 1. Determine active wallpaper path
+if [ -n "$1" ]; then
+    # Resolve relative paths to absolute paths
+    TARGET_WP=$(realpath "$1")
+    if [ -f "$TARGET_WP" ]; then
+        WALLPAPER="$TARGET_WP"
+        echo "$WALLPAPER" > "$STATE_FILE"
+    else
+        echo "ERROR: File $1 does not exist." >&2
+        exit 1
+    fi
+else
+    if [ -f "$STATE_FILE" ]; then
+        WALLPAPER=$(cat "$STATE_FILE")
+    else
+        WALLPAPER="$DEFAULT_WALLPAPER"
+    fi
+fi
+
+echo "Selected Wallpaper: $WALLPAPER"
+
+# 2. Update hyprpaper configuration dynamically
+cat <<EOF > "$CONF"
+preload = $WALLPAPER
+wallpaper = eDP-1,$WALLPAPER
+splash = false
+ipc = on
+EOF
+
+# 3. Update lockscreen wallpaper to match
+cp "$WALLPAPER" "/home/amit/.config/hypr/wallpapers/lockscreen.png"
+
+# 4. Restart hyprpaper
 killall -q hyprpaper
 while pgrep -x hyprpaper > /dev/null; do sleep 0.05; done
 

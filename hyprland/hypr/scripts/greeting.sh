@@ -13,4 +13,4 @@ else
 fi
 
 # Output with premium Pango markup letter spacing and accent highlight
-echo "<span letter_spacing='3000'>${GREETING}</span> <span foreground='#00e5ff'><b>AMIT</b></span>"
+echo "<span weight='light' letter_spacing='6000'>${GREETING}</span> <span foreground='#00ffb3'><b>AMIT</b></span>"

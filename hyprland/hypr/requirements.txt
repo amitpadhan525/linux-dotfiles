@@ -49,6 +49,7 @@ E. HYPRLOCK LOCK SCREEN
    * Styling Configurations (~/.config/hypr/hyprlock.conf):
      - Customized clock spacing using tight Pango text padding markup.
      - Password text input dots size optimized to perfectly match system aesthetic constraints.
+     - Integrated a dynamic glassmorphic battery status capsule driven by a custom monitoring shell script (`~/.config/hypr/scripts/battery.sh`).
 
 F. HYPRPAPER WALLPAPER DAEMON
    * Purpose: Native utility to pre-load and swap desktop screen wallpaper canvases.
@@ -157,6 +158,7 @@ A. INSTALL ALL REQUIRED PACKAGES:
 
 B. ENSURE SCRIPTS ARE FULLY EXECUTABLE:
    `chmod +x /home/amit/.config/hypr/scripts/screen_record.sh`
+   `chmod +x /home/amit/.config/hypr/scripts/battery.sh`
    `chmod +x /home/amit/.config/waybar/scripts/recording_status.py`
 
 C. APPLY THE NEW LUA AND WAYBAR SCHEMES:

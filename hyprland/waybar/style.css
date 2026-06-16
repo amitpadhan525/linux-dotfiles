@@ -12,7 +12,7 @@ window#waybar {
 
 /* ══════════════════════════════════════════════════════════
    TOOLTIPS — Neon Teal theme — mirrors rofi simple.rasi
-   bg: #000000fa  accent: #00ffe1  font: JetBrainsMono NF
+   bg: #000000fa  accent: #00ffb3  font: JetBrainsMono NF
    ══════════════════════════════════════════════════════════ */
 
 tooltip {
@@ -20,14 +20,14 @@ tooltip {
     background: rgba(0, 0, 0, 0.98);
 
     /* 2px solid neon-teal border — matches rofi window border */
-    border: 2px solid #00ffe1;
+    border: 2px solid #00ffb3;
     border-radius: 14px;
 
     /* Layered glow: inner soft teal + outer deep shadow */
     box-shadow:
-        0 0 0 1px rgba(0, 255, 225, 0.08),
-        0 0 14px rgba(0, 255, 225, 0.35),
-        0 0 40px rgba(0, 255, 225, 0.10),
+        0 0 0 1px rgba(0, 255, 179, 0.08),
+        0 0 14px rgba(0, 255, 179, 0.35),
+        0 0 40px rgba(0, 255, 179, 0.10),
         0 12px 40px rgba(0, 0, 0, 0.95);
 
     padding: 10px 4px;
@@ -41,10 +41,10 @@ tooltip label {
     font-weight: normal;
     padding: 4px 18px;
     /* Subtle text-shadow to lift it off the dark bg */
-    text-shadow: 0 0 8px rgba(0, 255, 225, 0.15);
+    text-shadow: 0 0 8px rgba(0, 255, 179, 0.15);
 }
 
-/* ── Uniform accent: #00ffe1 (Neon Teal — matches Hyprland active border & Kitty) ── */
+/* ── Uniform accent: #00ffb3 (Neon Teal — matches Hyprland active border & Kitty) ── */
 
 #network,
 #tray,
@@ -61,12 +61,12 @@ tooltip label {
 #custom-wifi_switcher,
 #custom-uptime,
 #custom-recording {
-    background: rgba(0, 255, 225, 0.08);
-    border: 1px solid rgba(0, 255, 225, 0.40);
-    color: #00ffe1;
-    box-shadow: 0 0 4px rgba(0, 255, 225, 0.12);
+    background: rgba(0, 255, 179, 0.08);
+    border: 1px solid rgba(0, 255, 179, 0.40);
+    color: #00ffb3;
+    box-shadow: 0 0 4px rgba(0, 255, 179, 0.12);
     padding: 4px 14px;
-    margin: 0 4px 4px 4px;
+    margin: 4px 4px;
     border-radius: 12px;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -86,16 +86,16 @@ tooltip label {
 #custom-wifi_switcher:hover,
 #custom-uptime:hover,
 #custom-recording:hover {
-    background: rgba(0, 255, 225, 0.18);
-    box-shadow: 0 0 8px rgba(0, 255, 225, 0.35);
+    background: rgba(0, 255, 179, 0.18);
+    box-shadow: 0 0 8px rgba(0, 255, 179, 0.35);
 }
 
 /* ── Workspaces ── */
 #workspaces {
-    background: rgba(0, 255, 225, 0.08);
-    border: 1px solid rgba(0, 255, 225, 0.40);
-    box-shadow: 0 0 4px rgba(0, 255, 225, 0.12);
-    margin: 0 4px 4px 4px;
+    background: rgba(0, 255, 179, 0.08);
+    border: 1px solid rgba(0, 255, 179, 0.40);
+    box-shadow: 0 0 4px rgba(0, 255, 179, 0.12);
+    margin: 4px 4px;
     padding: 3px 6px;
     border-radius: 14px;
     transition: all 0.3s ease;
@@ -103,7 +103,7 @@ tooltip label {
 #workspaces button {
     padding: 2px 10px;
     margin: 0 2px;
-    color: rgba(0, 255, 225, 0.5);
+    color: rgba(0, 255, 179, 0.5);
     background: transparent;
     border-radius: 10px;
     /* Smooth transitions using GTK-supported properties only */
@@ -119,20 +119,20 @@ tooltip label {
     opacity: 0.7;
 }
 #workspaces button:hover {
-    background: rgba(0, 255, 225, 0.18);
-    color: #00ffe1;
+    background: rgba(0, 255, 179, 0.18);
+    color: #00ffb3;
     opacity: 1;
     padding: 2px 13px;
 }
 #workspaces button.active {
     color: #000000;
-    background: #00ffe1;
+    background: #00ffb3;
     opacity: 1;
     padding: 2px 14px;
     animation: ws-glow 0.45s ease forwards;
     box-shadow:
-        0 0 10px rgba(0, 255, 225, 0.70),
-        0 0 20px rgba(0, 255, 225, 0.30);
+        0 0 10px rgba(0, 255, 179, 0.70),
+        0 0 20px rgba(0, 255, 179, 0.30);
 }
 #workspaces button.urgent {
     color: #11111b;
@@ -145,8 +145,8 @@ tooltip label {
 /* Active: glow fades in while box expands via padding */
 @keyframes ws-glow {
     0%   { opacity: 0.4; box-shadow: none; }
-    60%  { opacity: 1.0; box-shadow: 0 0 14px rgba(0, 255, 225, 0.85); }
-    100% { opacity: 1.0; box-shadow: 0 0 10px rgba(0, 255, 225, 0.70), 0 0 20px rgba(0, 255, 225, 0.30); }
+    60%  { opacity: 1.0; box-shadow: 0 0 14px rgba(0, 255, 179, 0.85); }
+    100% { opacity: 1.0; box-shadow: 0 0 10px rgba(0, 255, 179, 0.70), 0 0 20px rgba(0, 255, 179, 0.30); }
 }
 
 /* Urgent: pulsing glow */
@@ -159,7 +159,7 @@ tooltip label {
 /* ── Layout Overrides ── */
 
 #clock {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 800;
 }
 
@@ -193,7 +193,7 @@ tooltip label {
 }
 
 #battery.charging {
-    background-color: rgba(0, 255, 225, 0.18);
+    background-color: rgba(0, 255, 179, 0.18);
 }
 #battery.warning {
     background-color: rgba(250, 179, 135, 0.15);

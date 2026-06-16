@@ -11,7 +11,7 @@ trap 'rm -f "$THEME_FILE" "$PASS_THEME_FILE"' EXIT
 # ── Main Wi-Fi list theme — mirrors simple.rasi design language ──────────────
 cat > "$THEME_FILE" << 'ROFI_THEME'
 /*******************************************************************************
- * Wi-Fi Menu — Neon Teal #00ffe1
+ * Wi-Fi Menu — Neon Teal #00ffb3
  * Mirrors simple.rasi (Super+D launcher) design language exactly
  ******************************************************************************/
 
@@ -22,10 +22,10 @@ cat > "$THEME_FILE" << 'ROFI_THEME'
     bg-alt:              #0c0c0cff;
     fg-main:             #ffffffff;
     fg-dim:              #888888ff;
-    accent:              #00ffe1ff;
-    accent-dim:          #00ffe10a;
-    accent-mid:          #00ffe12e;
-    border-subtle:       #00ffe133;
+    accent:              #00ffb3ff;
+    accent-dim:          #00ffb30a;
+    accent-mid:          #00ffb32e;
+    border-subtle:       #00ffb333;
     urgent:              #f38ba8ff;
 
     background-color:    transparent;
@@ -162,7 +162,7 @@ cat > "$PASS_THEME_FILE" << 'PASS_THEME'
     bg-alt:              #0c0c0cff;
     fg-main:             #ffffffff;
     fg-dim:              #888888ff;
-    accent:              #00ffe1ff;
+    accent:              #00ffb3ff;
 
     background-color:    transparent;
     text-color:          @fg-main;

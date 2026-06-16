@@ -1,11 +1,11 @@
 {
     "layer": "top",
     "position": "top",
-    "spacing": 4,
     "height": 40,
     "margin-top": 0,
     "margin-left": 0,
     "margin-right": 0,
+    "spacing": 0,
     "modules-left": [
         "custom/recording",
         "hyprland/workspaces",

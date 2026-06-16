@@ -46,4 +46,4 @@ else
     fi
 fi
 
-echo -n "$icon $capacity%"
+echo -n "$icon"

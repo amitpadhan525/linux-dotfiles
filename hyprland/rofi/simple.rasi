@@ -1,6 +1,6 @@
 /*******************************************************************************
  * ROFI — App Launcher Theme
- * Accent: Neon Teal #00ffe1 — unified with Waybar / Hyprland / Power Menu
+ * Accent: Neon Teal #00ffb3 — unified with Waybar / Hyprland / Power Menu
  * Rofi 2.0 — uses 8-digit hex (#rrggbbaa) for transparency
  *******************************************************************************/
 
@@ -23,11 +23,11 @@ configuration {
     bg-alt:                      #0c0c0cff;    /* slightly lifted surface  */
     fg-main:                     #ffffffff;   /* crisp white              */
     fg-dim:                      #888888ff;    /* clean gray               */
-    accent:                      #00ffe1ff;    /* neon teal                */
-    accent-dim:                  #00ffe10a;    /* teal tint ~4%            */
-    accent-mid:                  #00ffe12e;    /* teal tint ~18%           */
-    accent-hover:                #00ffe14d;    /* teal tint ~30%           */
-    border-subtle:               #00ffe133;    /* teal border ~20%         */
+    accent:                      #00ffb3ff;    /* neon teal                */
+    accent-dim:                  #00ffb30a;    /* teal tint ~4%            */
+    accent-mid:                  #00ffb32e;    /* teal tint ~18%           */
+    accent-hover:                #00ffb34d;    /* teal tint ~30%           */
+    border-subtle:               #00ffb333;    /* teal border ~20%         */
     urgent:                      #f38ba8ff;    /* red for urgent           */
 
     background-color:            transparent;

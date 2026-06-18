@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Dynamic colors generated from active wallpaper
 
-accent='#edf8f9'
-accent_two='#c2c6cc'
-bg_color='#0f0f0f'
+accent='#00ffb3'
+accent_two='#a7f3d0'
+bg_color='#010403'
 text_color='#ffffff'
-secondary_text='#c8c8c8'
-check_color='#3c76f2'
-fail_color='#f22424'
+secondary_text='#e0fcf0'
+check_color='#10b981'
+fail_color='#f87171'

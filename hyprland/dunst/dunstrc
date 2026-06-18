@@ -70,8 +70,8 @@
 
 [urgency_low]
     # Muted — dark bg, dimmed teal frame
-    background = "#08080de0"
-    foreground = "#a6adc8"
+    background = "#010d0ae0"
+    foreground = "#e0fcf0"
     frame_color = "#00ffb355"
     highlight = "#00ffb3"
     timeout = 5
@@ -79,8 +79,8 @@
 
 [urgency_normal]
     # Neon teal accent — matches Waybar / Hyprland border
-    background = "#08080de0"
-    foreground = "#cdd6f4"
+    background = "#010d0ae0"
+    foreground = "#ffffff"
     frame_color = "#00ffb3"
     highlight = "#00ffb3"
     timeout = 5
@@ -88,10 +88,10 @@
 
 [urgency_critical]
     # Red — kept distinct for critical alerts
-    background = "#08080df0"
-    foreground = "#f38ba8"
-    frame_color = "#f38ba8"
-    highlight = "#f38ba8"
+    background = "#010d0af0"
+    foreground = "#f87171"
+    frame_color = "#f87171"
+    highlight = "#f87171"
     timeout = 10
     default_icon = dialog-warning
 

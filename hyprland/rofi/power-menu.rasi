@@ -24,9 +24,10 @@ window {
     border-color:     @accent;
     border-radius:    14px;
     width:            220px;
-    location:         northeast;
-    x-offset:         -10px;
-    y-offset:         45px;
+    location:         center;
+    anchor:           center;
+    x-offset:         0;
+    y-offset:         0;
 }
 
 mainbox {

@@ -5,7 +5,7 @@ local mainMod = "SUPER"
 hl.bind("SUPER + E", hl.dsp.exec_cmd("thunar"))
 hl.bind("SUPER + Return", hl.dsp.exec_cmd("kitty --config /home/amit/.config/kitty/kitty.conf"))
 hl.bind("SUPER + D", hl.dsp.exec_cmd("rofi -show drun -theme /home/amit/.config/rofi/simple.rasi"))
-hl.bind("SUPER + W", hl.dsp.exec_cmd("pgrep waybar >/dev/null && pkill waybar || waybar &"))
+hl.bind("SUPER + W", hl.dsp.exec_cmd("/home/amit/.config/waybar/scripts/cycle_waybar.sh"))
 
 -- System
 hl.bind("SUPER + N", hl.dsp.exec_cmd("bash -c 'pgrep hyprsunset && pkill hyprsunset || hyprsunset --temperature 4500'"))

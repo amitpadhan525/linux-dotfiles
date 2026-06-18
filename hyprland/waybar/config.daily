@@ -1,0 +1,110 @@
+{
+    "name": "daily",
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "spacing": 0,
+    "modules-left": [
+        "custom/arch"
+    ],
+    "modules-center": [
+        "hyprland/workspaces",
+        "clock",
+        "network",
+        "custom/cpu",
+        "custom/temperature",
+        "custom/memory",
+        "battery"
+    ],
+    "modules-right": [],
+    "custom/recording": {
+        "exec": "python3 /home/amit/.config/waybar/scripts/recording_status.py",
+        "return-type": "json",
+        "format": "{}",
+        "interval": 1,
+        "on-click": "/home/amit/.config/hypr/scripts/screen_record.sh",
+        "tooltip": true,
+        "signal": 8
+    },
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "sort-by-number": true,
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'"
+    },
+    "clock": {
+        "format": "  {:%I:%M %p}",
+        "format-alt": "  {:%d %m %Y}",
+        "interval": 1,
+        "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "custom/temperature": {
+        "exec": "/home/amit/.config/waybar/scripts/cpu_temp.sh",
+        "interval": 5,
+        "return-type": "json",
+        "tooltip": true
+    },
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": "  Connected",
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "  Disconnected",
+        "format-disabled": "  Disabled",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "on-click": "/home/amit/.config/waybar/scripts/wifi_menu.sh",
+        "on-click-right": "nm-connection-editor"
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}  {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "custom/cpu": {
+        "exec": "/home/amit/.config/waybar/scripts/custom_cpu.sh",
+        "interval": 3,
+        "format": "  {}",
+        "return-type": "json",
+        "tooltip": true
+    },
+    "custom/memory": {
+        "exec": "/home/amit/.config/waybar/scripts/custom_mem.sh",
+        "interval": 5,
+        "format": "  {}",
+        "return-type": "json",
+        "tooltip": true
+    },
+    "custom/disk": {
+        "interval": 30,
+        "exec": "bash /home/amit/.config/waybar/scripts/disk_info.sh",
+        "return-type": "json",
+        "format": "{text}",
+        "tooltip": true
+    },
+    "custom/power": {
+        "format": "⏻ ",
+        "on-click": "/home/amit/.config/waybar/scripts/power_menu.sh",
+        "tooltip": false
+    },
+    "custom/arch": {
+        "format": " ",
+        "tooltip": true,
+        "tooltip-format": "Switch to System Layout",
+        "on-click": "/home/amit/.config/waybar/scripts/toggle_layout.sh"
+    }
+}

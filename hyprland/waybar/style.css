@@ -1,50 +1,77 @@
+/* =========================================================================
+   WAYBAR GLASSMORPHIC THEME - SMOOTH LIQUID GLASS
+   High-fidelity 3D liquid gel capsule style with continuous smooth reflections
+   ========================================================================= */
+
 * {
     font-family: "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
-    font-weight: bold;
+    font-weight: 800; /* Extra bold text for high legibility on liquid glass */
     font-size: 14px;
     min-height: 0;
 }
 
+/* Base transparent window to allow Hyprland's blur layer rule to execute */
 window#waybar {
-    background: #000000;
-    color: #cdd6f4;
+    background: transparent;
+    color: #ffffff;
+}
+
+window#waybar.daily {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* Center capsule - Smooth 3D Liquid Glass Body */
+window#waybar.daily .modules-center {
+    background-color: rgba(0, 0, 0, 0.45);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(0, 0, 0, 0.25) 75%, rgba(0, 255, 179, 0.12) 100%);
+    border: 1px solid rgba(0, 255, 179, 0.32);
+    border-radius: 22px;
+    padding: 3px 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+window#waybar.system {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* System Layout - Smooth 3D Liquid Glass Body */
+window#waybar.system .modules-center {
+    background-color: rgba(0, 0, 0, 0.45);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(0, 0, 0, 0.25) 75%, rgba(0, 255, 179, 0.12) 100%);
+    border: 1px solid rgba(0, 255, 179, 0.32);
+    border-radius: 22px;
+    padding: 3px 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* ══════════════════════════════════════════════════════════
-   TOOLTIPS — Neon Teal theme — mirrors rofi simple.rasi
-   bg: #000000fa  accent: #00ffb3  font: JetBrainsMono NF
+   TOOLTIPS — Glossy Liquid Glass Tooltip
    ══════════════════════════════════════════════════════════ */
 
 tooltip {
-    /* Deep black, same opacity as rofi bg-base (#000000fa) */
-    background: rgba(0, 0, 0, 0.98);
-
-    /* 2px solid neon-teal border — matches rofi window border */
-    border: 2px solid #00ffb3;
-    border-radius: 14px;
-
-    /* Layered glow: inner soft teal + outer deep shadow */
-    box-shadow:
-        0 0 0 1px rgba(0, 255, 179, 0.08),
-        0 0 14px rgba(0, 255, 179, 0.35),
-        0 0 40px rgba(0, 255, 179, 0.10),
-        0 12px 40px rgba(0, 0, 0, 0.95);
-
+    background-color: rgba(0, 0, 0, 0.94);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.0) 45%, rgba(0, 0, 0, 0.35) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     padding: 10px 4px;
 }
 
 tooltip label {
-    /* Crisp white text — same as rofi fg-main (#ffffff) */
     color: #ffffff;
     font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 13px;
-    font-weight: normal;
+    font-weight: bold;
     padding: 4px 18px;
-    /* Subtle text-shadow to lift it off the dark bg */
-    text-shadow: 0 0 8px rgba(0, 255, 179, 0.15);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-/* ── Uniform accent: #00ffb3 (Neon Teal — matches Hyprland active border & Kitty) ── */
+/* ── Common Module Glass Capsule Structure ── */
+/* Specular white top edge fading smoothly into a dark pool at the bottom */
 
 #network,
 #tray,
@@ -60,15 +87,17 @@ tooltip label {
 #custom-power,
 #custom-wifi_switcher,
 #custom-uptime,
-#custom-recording {
-    background: rgba(0, 255, 179, 0.08);
-    border: 1px solid rgba(0, 255, 179, 0.40);
-    color: #00ffb3;
-    box-shadow: 0 0 4px rgba(0, 255, 179, 0.12);
+#bluetooth,
+#custom-recording,
+#custom-arch {
+    background-color: rgba(0, 0, 0, 0.22);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.15) 75%, rgba(255, 255, 255, 0.04) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
     padding: 4px 14px;
-    margin: 4px 4px;
-    border-radius: 12px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin: 4px 3px;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #network:hover,
@@ -85,100 +114,158 @@ tooltip label {
 #custom-power:hover,
 #custom-wifi_switcher:hover,
 #custom-uptime:hover,
-#custom-recording:hover {
-    background: rgba(0, 255, 179, 0.18);
-    box-shadow: 0 0 8px rgba(0, 255, 179, 0.35);
+#bluetooth:hover,
+#custom-recording:hover,
+#custom-arch:hover {
+    background-color: rgba(0, 0, 0, 0.35);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(0, 0, 0, 0.25) 70%, rgba(255, 255, 255, 0.1) 100%);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.15);
+}
+
+/* ── Clear, Sharp Module Colorways ── */
+
+/* Clock: Pure White */
+#clock {
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+#clock:hover {
+    color: #e0fcf0;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(255, 255, 255, 0.05) 70%, rgba(255, 255, 255, 0.15) 100%);
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Network, Battery, Pulseaudio, Backlight, Bluetooth, CPU, Memory, Disk, Temperature: Unified Neon Aqua-Teal */
+#network,
+#battery,
+#pulseaudio,
+#backlight,
+#bluetooth,
+#custom-cpu,
+#custom-memory,
+#custom-disk,
+#custom-temperature,
+#custom-arch {
+    color: #00ffb3;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 255, 179, 0.35);
+}
+
+#network:hover,
+#battery:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#bluetooth:hover,
+#custom-cpu:hover,
+#custom-memory:hover,
+#custom-disk:hover,
+#custom-temperature:hover,
+#custom-arch:hover {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(0, 255, 179, 0.1) 70%, rgba(0, 255, 179, 0.25) 100%);
+    border-color: #00ffb3;
+    box-shadow: 0 0 8px rgba(0, 255, 179, 0.4);
+    color: #ffffff;
+}
+
+/* Specific styling for Arch Logo Button size and padding */
+#custom-arch {
+    font-size: 24px;
+    padding: 2px 14px;
+    margin-left: 10px;
+}
+
+/* Power Button: Rose Red */
+#custom-power {
+    color: #fca5a5;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+#custom-power:hover {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(252, 165, 165, 0.1) 70%, rgba(252, 165, 165, 0.25) 100%);
+    border-color: #fca5a5;
+    box-shadow: 0 0 8px rgba(252, 165, 165, 0.4);
+    color: #ffffff;
+}
+
+/* Wifi Switcher & Uptime: Soft Gold */
+#custom-wifi_switcher,
+#custom-uptime {
+    color: #fde047;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+#custom-wifi_switcher:hover,
+#custom-uptime:hover {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(253, 224, 71, 0.1) 70%, rgba(253, 224, 71, 0.25) 100%);
+    border-color: #fde047;
+    box-shadow: 0 0 8px rgba(253, 224, 71, 0.4);
+    color: #ffffff;
+}
+
+/* Tray: Clean White */
+#tray {
+    color: #ffffff;
+}
+#tray:hover {
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* ── Workspaces ── */
 #workspaces {
-    background: rgba(0, 255, 179, 0.08);
-    border: 1px solid rgba(0, 255, 179, 0.40);
-    box-shadow: 0 0 4px rgba(0, 255, 179, 0.12);
-    margin: 4px 4px;
-    padding: 3px 6px;
+    background-color: rgba(0, 0, 0, 0.22);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 255, 179, 0.06) 100%);
+    border: 1px solid rgba(0, 255, 179, 0.16);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 4px 3px;
+    padding: 2px 6px;
     border-radius: 14px;
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#workspaces:hover {
+    background-color: rgba(0, 0, 0, 0.35);
+    border-color: rgba(0, 255, 179, 0.3);
 }
 #workspaces button {
     padding: 2px 10px;
-    margin: 0 2px;
-    color: rgba(0, 255, 179, 0.5);
+    margin: 0 3px;
+    color: rgba(255, 255, 255, 0.55);
     background: transparent;
     border-radius: 10px;
-    /* Smooth transitions using GTK-supported properties only */
-    transition:
-        background  0.3s ease,
-        color       0.25s ease,
-        box-shadow  0.3s ease,
-        min-width   0.3s ease,
-        padding     0.3s ease,
-        opacity     0.25s ease;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     font-weight: 800;
     min-width: 24px;
-    opacity: 0.7;
 }
 #workspaces button:hover {
-    background: rgba(0, 255, 179, 0.18);
-    color: #00ffb3;
-    opacity: 1;
-    padding: 2px 13px;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    padding: 2px 12px;
 }
 #workspaces button.active {
-    color: #000000;
-    background: #00ffb3;
-    opacity: 1;
+    color: #010403;
+    background-color: rgba(0, 255, 179, 0.65);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(16, 185, 129, 0.4) 100%);
+    border: 1px solid rgba(0, 255, 179, 0.5);
     padding: 2px 14px;
-    animation: ws-glow 0.45s ease forwards;
-    box-shadow:
-        0 0 10px rgba(0, 255, 179, 0.70),
-        0 0 20px rgba(0, 255, 179, 0.30);
-}
-#workspaces button.urgent {
-    color: #11111b;
-    background: #f38ba8;
-    opacity: 1;
-    animation: ws-urgent-pulse 0.6s ease forwards;
-    box-shadow: 0 0 6px rgba(243, 139, 168, 0.5);
+    animation: ws-glow-daily 0.45s ease forwards;
+    box-shadow: 0 0 8px rgba(0, 255, 179, 0.35);
 }
 
-/* Active: glow fades in while box expands via padding */
-@keyframes ws-glow {
-    0%   { opacity: 0.4; box-shadow: none; }
-    60%  { opacity: 1.0; box-shadow: 0 0 14px rgba(0, 255, 179, 0.85); }
-    100% { opacity: 1.0; box-shadow: 0 0 10px rgba(0, 255, 179, 0.70), 0 0 20px rgba(0, 255, 179, 0.30); }
+@keyframes ws-glow-daily {
+    0%   { opacity: 0.7; }
+    100% { opacity: 1.0; }
 }
 
-/* Urgent: pulsing glow */
 @keyframes ws-urgent-pulse {
     0%   { opacity: 0.5; box-shadow: none; }
-    50%  { opacity: 1.0; box-shadow: 0 0 12px rgba(243, 139, 168, 0.8); }
-    100% { opacity: 1.0; box-shadow: 0 0 6px rgba(243, 139, 168, 0.5); }
+    50%  { opacity: 1.0; box-shadow: 0 0 12px rgba(248, 113, 113, 0.8); }
+    100% { opacity: 1.0; box-shadow: 0 0 6px rgba(248, 113, 113, 0.5); }
 }
 
-/* ── Layout Overrides ── */
-
-#clock {
-    font-size: 16px;
-    font-weight: 800;
-}
-
-#tray {
-    padding: 4px 12px;
-}
-
-#custom-power {
-    padding: 2px 20px;
-    margin-right: 8px;
-    font-size: 22px;
-}
-
-/* ── Functional Alerts ── */
+/* ── Functional Alerts & Blinking ── */
 
 #custom-temperature.hot {
-    background-color: rgba(243, 139, 168, 0.25);
-    border-color: #f38ba8;
-    color: #f38ba8;
+    background-color: rgba(248, 113, 113, 0.2);
+    border-color: rgba(248, 113, 113, 0.4);
+    color: #f87171;
     animation-name: temp_blink;
     animation-duration: 1s;
     animation-timing-function: linear;
@@ -187,35 +274,40 @@ tooltip label {
 }
 @keyframes temp_blink {
     to {
-        background-color: rgba(243, 139, 168, 0.5);
-        box-shadow: 0 0 10px rgba(243, 139, 168, 0.6);
+        background-color: rgba(248, 113, 113, 0.45);
+        box-shadow: 0 0 10px rgba(248, 113, 113, 0.4);
     }
 }
 
 #battery.charging {
-    background-color: rgba(0, 255, 179, 0.18);
+    background-color: rgba(34, 197, 94, 0.12);
+    color: #22c55e;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    border-color: rgba(34, 197, 94, 0.25);
 }
 #battery.warning {
-    background-color: rgba(250, 179, 135, 0.15);
-    border-color: #fab387;
-    color: #fab387;
+    background-color: rgba(245, 158, 11, 0.12);
+    border-color: rgba(245, 158, 11, 0.25);
+    color: #fde047;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 #battery.critical {
-    background-color: rgba(243, 139, 168, 0.2);
-    border-color: #f38ba8;
-    color: #f38ba8;
-    box-shadow: 0 0 8px rgba(243, 139, 168, 0.5);
+    background-color: rgba(248, 113, 113, 0.15);
+    border-color: rgba(248, 113, 113, 0.4);
+    color: #fca5a5;
+    box-shadow: 0 0 8px rgba(248, 113, 113, 0.3);
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 @keyframes blink {
     to {
-        background-color: #f38ba8;
-        color: #11111b;
-        box-shadow: 0 0 10px rgba(243, 139, 168, 0.6);
+        background-color: rgba(248, 113, 113, 0.5);
+        color: #ffffff;
+        box-shadow: 0 0 10px rgba(248, 113, 113, 0.5);
     }
 }
 
@@ -225,10 +317,12 @@ tooltip label {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+    color: #f43f5e;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 @keyframes recording_blink {
     to {
-        background-color: rgba(243, 139, 168, 0.45);
-        box-shadow: 0 0 8px rgba(243, 139, 168, 0.6);
+        background-color: rgba(244, 63, 94, 0.35);
+        box-shadow: 0 0 8px rgba(244, 63, 94, 0.6);
     }
 }

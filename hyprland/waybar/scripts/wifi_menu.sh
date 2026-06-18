@@ -39,10 +39,10 @@ window {
     border-color:        @accent;
     border-radius:       16px;
     width:               520px;
-    location:            north west;
-    anchor:              north west;
-    x-offset:            100px;
-    y-offset:            44px;
+    location:            center;
+    anchor:              center;
+    x-offset:            0;
+    y-offset:            0;
     cursor:              "default";
 }
 

@@ -54,7 +54,7 @@ accent_rgba_dim = hex_to_rgba(accent, 0.05)
 accent_rgba_hover = hex_to_rgba(accent, 0.1)
 accent_rgba_glow = hex_to_rgba(accent, 0.35)
 bg_rgba_fullscreen = "rgba(0, 0, 0, 0.05)" # Low alpha to trigger full-screen blur
-bg_rgba_dialog = hex_to_rgba(bg_color, 0.85) # Centered compact dialog background
+bg_rgba_dialog = "rgba(0, 0, 0, 0.85)" # Obsidian black glass background
 timer_border_color = hex_to_rgba(accent, 0.25)
 card_border_color = hex_to_rgba(accent, 0.15)
 accent_two_dim = hex_to_rgba(accent_two, 0.3)
@@ -72,10 +72,11 @@ CSS_TEMPLATE = f"""
 
 .powermenu-dialog {{
     background-color: {bg_rgba_dialog};
-    border: 1px solid {card_border_color};
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.005));
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 24px;
-    padding: 30px 45px;
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 255, 179, 0.04);
+    padding: 35px 50px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(0, 255, 179, 0.05);
 }}
 
 .powermenu-container {{
@@ -86,9 +87,9 @@ CSS_TEMPLATE = f"""
     font-size: 28px;
     font-weight: 800;
     color: {text_color};
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     margin-bottom: 5px;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }}
 
 .subtitle-label {{
@@ -96,17 +97,18 @@ CSS_TEMPLATE = f"""
     font-weight: 300;
     color: {accent_two};
     letter-spacing: 2px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     opacity: 0.8;
 }}
 
 .timer-box {{
-    background-color: {accent_rgba_dim};
-    border: 1px solid {timer_border_color};
+    background-color: rgba(0, 255, 179, 0.03);
+    background-image: linear-gradient(90deg, rgba(0, 255, 179, 0.15), rgba(0, 255, 179, 0.02));
+    border: 1px solid rgba(0, 255, 179, 0.4);
     border-radius: 30px;
     padding: 10px 24px;
     margin-bottom: 35px;
-    box-shadow: 0 0 20px rgba(0, 255, 179, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 179, 0.15);
 }}
 
 .timer-label {{
@@ -119,7 +121,7 @@ CSS_TEMPLATE = f"""
 .timer-highlight {{
     color: {accent};
     font-weight: 800;
-    text-shadow: 0 0 10px rgba(0, 255, 179, 0.5);
+    text-shadow: 0 0 10px rgba(0, 255, 179, 0.6);
 }}
 
 .cards-box {{
@@ -127,8 +129,9 @@ CSS_TEMPLATE = f"""
 }}
 
 .power-card {{
-    background-color: {accent_rgba_dim};
-    border: 1px solid {card_border_color};
+    background-color: rgba(0, 0, 0, 0.45);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.002));
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     padding: 25px 15px;
     min-width: 110px;
@@ -138,7 +141,8 @@ CSS_TEMPLATE = f"""
 }}
 
 .power-card:hover {{
-    background-color: {accent_rgba_hover};
+    background-color: rgba(0, 255, 179, 0.06);
+    background-image: linear-gradient(135deg, rgba(0, 255, 179, 0.22), rgba(0, 255, 179, 0.01));
     border-color: {accent};
     box-shadow: 0 0 35px {accent_rgba_glow};
     margin-top: 0px;
@@ -149,7 +153,7 @@ CSS_TEMPLATE = f"""
     font-family: 'JetBrainsMono Nerd Font', 'Outfit';
     font-size: 38px;
     font-weight: bold;
-    color: rgba(0, 255, 179, 0.6);
+    color: rgba(0, 255, 179, 0.55);
     margin-bottom: 12px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }}
@@ -163,7 +167,7 @@ CSS_TEMPLATE = f"""
 .card-label {{
     font-size: 12px;
     font-weight: 800;
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.6);
     letter-spacing: 1.5px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }}

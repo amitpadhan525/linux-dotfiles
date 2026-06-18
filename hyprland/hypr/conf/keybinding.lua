@@ -8,6 +8,7 @@ hl.bind("SUPER + D", hl.dsp.exec_cmd("rofi -show drun -theme /home/amit/.config/
 hl.bind("SUPER + W", hl.dsp.exec_cmd("/home/amit/.config/waybar/scripts/cycle_waybar.sh"))
 
 -- System
+hl.bind("SUPER + p", hl.dsp.exec_cmd("/home/amit/.config/hypr/scripts/power_menu.sh"))
 hl.bind("SUPER + N", hl.dsp.exec_cmd("bash -c 'pgrep hyprsunset && pkill hyprsunset || hyprsunset --temperature 4500'"))
 hl.bind("SUPER + S", hl.dsp.exec_cmd("/home/amit/.config/hypr/scripts/named_screenshot.sh"))
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("/home/amit/.config/hypr/scripts/screen_record.sh"))

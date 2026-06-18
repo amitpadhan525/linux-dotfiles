@@ -81,3 +81,9 @@ hl.layer_rule({ match = { namespace = "rofi" }, ignore_alpha = 0.2 })
 -- ─────────────────────────────────────────────────────────────────────────────
 hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
 hl.layer_rule({ match = { namespace = "waybar" }, ignore_alpha = 0.01 })
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- LAYER RULES: GLASSMORPHIC BLUR FOR POWERMENU
+-- ─────────────────────────────────────────────────────────────────────────────
+hl.layer_rule({ match = { namespace = "powermenu" }, blur = true })
+hl.layer_rule({ match = { namespace = "powermenu" }, ignore_alpha = 0.02 })

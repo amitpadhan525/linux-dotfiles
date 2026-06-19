@@ -39,21 +39,21 @@ window#waybar.daily .modules-center {
    ══════════════════════════════════════════════════════════ */
 
 tooltip {
-    background-color: rgba(0, 0, 0, 0.94);
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.0) 45%, rgba(0, 0, 0, 0.35) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(10, 10, 15, 0.94);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.0) 45%, rgba(0, 0, 0, 0.35) 85%, rgba(0, 255, 179, 0.06) 100%);
+    border: 1px solid rgba(0, 255, 179, 0.32);
     border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 12px rgba(0, 255, 179, 0.25);
     padding: 10px 4px;
 }
 
 tooltip label {
-    color: #ffffff;
+    color: #00ffb3;
     font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 13px;
     font-weight: bold;
     padding: 4px 18px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 255, 179, 0.35);
 }
 
 /* ── Common Module Glass Capsule Structure ── */
@@ -104,24 +104,11 @@ tooltip label {
 #custom-recording:hover,
 #custom-arch:hover {
     background-color: rgba(0, 0, 0, 0.35);
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(0, 0, 0, 0.25) 70%, rgba(255, 255, 255, 0.1) 100%);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 6px rgba(255, 255, 255, 0.15);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(255, 255, 255, 0.1) 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 8px rgba(255, 255, 255, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.45);
 }
 
 /* ── Clear, Sharp Module Colorways ── */
-
-/* Clock: Pure White */
-#clock {
-    color: #ffffff;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-}
-#clock:hover {
-    color: #e0fcf0;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(255, 255, 255, 0.05) 70%, rgba(255, 255, 255, 0.15) 100%);
-    border-color: rgba(255, 255, 255, 0.45);
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-}
 
 /* Network, Battery, Pulseaudio, Backlight, Bluetooth, CPU, Memory, Disk, Temperature: Unified Neon Aqua-Teal */
 #network,
@@ -133,6 +120,7 @@ tooltip label {
 #custom-memory,
 #custom-disk,
 #custom-temperature,
+#clock,
 #custom-arch {
     color: #00ffb3;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 255, 179, 0.35);
@@ -147,10 +135,11 @@ tooltip label {
 #custom-memory:hover,
 #custom-disk:hover,
 #custom-temperature:hover,
+#clock:hover,
 #custom-arch:hover {
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(0, 255, 179, 0.1) 70%, rgba(0, 255, 179, 0.25) 100%);
-    border-color: #00ffb3;
-    box-shadow: 0 0 8px rgba(0, 255, 179, 0.4);
+    background-color: rgba(0, 0, 0, 0.35);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 255, 179, 0.15) 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 255, 179, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.45), inset 0 -2px 6px rgba(0, 255, 179, 0.2);
     color: #ffffff;
 }
 
@@ -167,9 +156,9 @@ tooltip label {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 #custom-power:hover {
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(252, 165, 165, 0.1) 70%, rgba(252, 165, 165, 0.25) 100%);
-    border-color: #fca5a5;
-    box-shadow: 0 0 8px rgba(252, 165, 165, 0.4);
+    background-color: rgba(0, 0, 0, 0.35);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(252, 165, 165, 0.15) 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 8px rgba(252, 165, 165, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.45), inset 0 -2px 6px rgba(252, 165, 165, 0.2);
     color: #ffffff;
 }
 
@@ -181,9 +170,9 @@ tooltip label {
 }
 #custom-wifi_switcher:hover,
 #custom-uptime:hover {
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(253, 224, 71, 0.1) 70%, rgba(253, 224, 71, 0.25) 100%);
-    border-color: #fde047;
-    box-shadow: 0 0 8px rgba(253, 224, 71, 0.4);
+    background-color: rgba(0, 0, 0, 0.35);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(253, 224, 71, 0.15) 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 8px rgba(253, 224, 71, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.45), inset 0 -2px 6px rgba(253, 224, 71, 0.2);
     color: #ffffff;
 }
 
@@ -191,10 +180,6 @@ tooltip label {
 #tray {
     color: #ffffff;
 }
-#tray:hover {
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
 /* ── Workspaces ── */
 #workspaces {
     background-color: rgba(0, 0, 0, 0.22);
@@ -208,7 +193,8 @@ tooltip label {
 }
 #workspaces:hover {
     background-color: rgba(0, 0, 0, 0.35);
-    border-color: rgba(0, 255, 179, 0.3);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 255, 179, 0.15) 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 255, 179, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.45), inset 0 -2px 6px rgba(0, 255, 179, 0.2);
 }
 #workspaces button {
     padding: 2px 10px;
@@ -363,9 +349,9 @@ tooltip label {
 }
 
 #custom-volume_brightness_osd:hover {
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(0, 255, 179, 0.1) 70%, rgba(0, 255, 179, 0.25) 100%);
-    border-color: #00ffb3;
-    box-shadow: 0 0 8px rgba(0, 255, 179, 0.4);
+    background-color: rgba(0, 0, 0, 0.35);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 255, 179, 0.15) 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 255, 179, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.45), inset 0 -2px 6px rgba(0, 255, 179, 0.2);
     color: #ffffff;
 }
 

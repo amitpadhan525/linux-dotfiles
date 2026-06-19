@@ -47,7 +47,22 @@
         "format": "  {:%I:%M %p}",
         "format-alt": "  {:%d %m %Y}",
         "interval": 1,
-        "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+        "tooltip-format": "<span color='#cba6f7'><big>{:%A, %d %B %Y}</big></span>\n<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#cba6f7'><b>{}</b></span>",
+                "days": "<span color='#cdd6f4'>{}</span>",
+                "weeks": "<span color='#6c7086'><b>W{}</b></span>",
+                "weekdays": "<span color='#fde047'><b>{}</b></span>",
+                "today": "<span color='#00ffb3'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode"
+        }
     },
     "custom/temperature": {
         "exec": "/home/amit/.config/waybar/scripts/cpu_temp.sh",

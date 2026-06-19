@@ -74,8 +74,7 @@ tooltip label {
 #custom-wifi_switcher,
 #custom-uptime,
 #bluetooth,
-#custom-recording,
-#custom-arch {
+#custom-recording {
     background-color: rgba(0, 0, 0, 0.22);
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.15) 75%, rgba(255, 255, 255, 0.04) 100%);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -101,8 +100,7 @@ tooltip label {
 #custom-wifi_switcher:hover,
 #custom-uptime:hover,
 #bluetooth:hover,
-#custom-recording:hover,
-#custom-arch:hover {
+#custom-recording:hover {
     background-color: rgba(0, 0, 0, 0.35);
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(255, 255, 255, 0.1) 100%);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 8px rgba(255, 255, 255, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.45);
@@ -120,8 +118,7 @@ tooltip label {
 #custom-memory,
 #custom-disk,
 #custom-temperature,
-#clock,
-#custom-arch {
+#clock {
     color: #00ffb3;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 255, 179, 0.35);
 }
@@ -135,20 +132,14 @@ tooltip label {
 #custom-memory:hover,
 #custom-disk:hover,
 #custom-temperature:hover,
-#clock:hover,
-#custom-arch:hover {
+#clock:hover {
     background-color: rgba(0, 0, 0, 0.35);
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 255, 179, 0.15) 100%);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 255, 179, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.45), inset 0 -2px 6px rgba(0, 255, 179, 0.2);
     color: #ffffff;
 }
 
-/* Specific styling for Arch Logo Button size and padding */
-#custom-arch {
-    font-size: 24px;
-    padding: 2px 14px;
-    margin-left: 10px;
-}
+
 
 /* Power Button: Rose Red */
 #custom-power {

@@ -7,9 +7,7 @@
     "margin-left": 0,
     "margin-right": 0,
     "spacing": 0,
-    "modules-left": [
-        "custom/arch"
-    ],
+    "modules-left": [],
     "modules-center": [
         "custom/recording",
         "custom/volume_brightness_osd",
@@ -110,11 +108,5 @@
         "format": "  {}",
         "return-type": "json",
         "tooltip": true
-    },
-    "custom/arch": {
-        "format": " ",
-        "tooltip": true,
-        "tooltip-format": "Applications Menu",
-        "on-click": "rofi -show drun -theme /home/amit/.config/rofi/simple.rasi"
     }
 }

@@ -11,6 +11,7 @@
         "custom/arch"
     ],
     "modules-center": [
+        "custom/recording",
         "hyprland/workspaces",
         "clock",
         "network",

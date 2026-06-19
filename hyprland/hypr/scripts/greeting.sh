@@ -12,5 +12,5 @@ else
     GREETING="GOOD EVENING"
 fi
 
-# Output with premium Pango markup letter spacing and accent highlight
-echo "<span weight='light' letter_spacing='6000'>${GREETING}</span> <span foreground='#00ffb3'><b>AMIT</b></span>"
+# Output with premium Pango markup letter spacing and clean white text
+echo "<span weight='light' letter_spacing='6000'>${GREETING}</span> <span weight='semibold'>AMIT</span>"

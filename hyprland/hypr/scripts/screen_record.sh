@@ -38,15 +38,38 @@ if pgrep -u "$USER" -x "wf-recorder" >/dev/null; then
     pkill -RTMIN+8 waybar || true
     
     if [ -f "$TEMP_PATH" ]; then
-        # Prompt user to enter a name for the video file using a super compact single-line Rofi input box (starts empty)
-        USER_NAME=$(echo "" | rofi -dmenu -p "Save as (empty for default)" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'listview { enabled: false; } window { width: 500px; }' -i)
-        
-        if [ -n "$USER_NAME" ]; then
-            SAVED_PATH="$SAVE_DIR/${USER_NAME}.mp4"
-            mv "$TEMP_PATH" "$SAVED_PATH"
-        else
-            SAVED_PATH="$TEMP_PATH"
-        fi
+        SAVED_PATH=""
+        while true; do
+            # Prompt user to enter a name for the video file using a super compact single-line Rofi input box (starts empty)
+            USER_NAME=$(echo "" | rofi -dmenu -p "Save as (empty for default)" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'listview { enabled: false; } window { width: 500px; }' -i)
+            
+            if [ -z "$USER_NAME" ]; then
+                SAVED_PATH="$TEMP_PATH"
+                break
+            fi
+            
+            TARGET_PATH="$SAVE_DIR/${USER_NAME}.mp4"
+            if [ -f "$TARGET_PATH" ]; then
+                # File already exists, ask the user to rename or replace
+                CHOICE=$(echo -e "Replace\nRename" | rofi -dmenu -p "File is alrady exist" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 2; lines: 1; }' -i)
+                
+                if [[ "$CHOICE" == *"Replace"* ]]; then
+                    SAVED_PATH="$TARGET_PATH"
+                    mv -f "$TEMP_PATH" "$SAVED_PATH"
+                    break
+                elif [[ "$CHOICE" == *"Rename"* ]]; then
+                    continue
+                else
+                    # User closed rofi, fallback to default temp file
+                    SAVED_PATH="$TEMP_PATH"
+                    break
+                fi
+            else
+                SAVED_PATH="$TARGET_PATH"
+                mv "$TEMP_PATH" "$SAVED_PATH"
+                break
+            fi
+        done
         
         notify-send -t 5000 "Recording Saved" "Video saved to:\n$SAVED_PATH"
     else

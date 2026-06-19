@@ -43,17 +43,17 @@
     separator_height = 2
     padding = 14
     horizontal_padding = 18
-    frame_width = 2
+    frame_width = 1
     gap_size = 8
     separator_color = frame
-    corner_radius = 12
+    corner_radius = 16
     corners = all
 
     ### Text ###
-    font = Outfit 10
+    font = JetBrainsMono Nerd Font 10
     line_height = 4
     markup = full
-    format = "<span font_desc='Outfit Bold 11'>%s</span>\n<span font_desc='Outfit 10'>%b</span>"
+    format = "<span font_desc='JetBrainsMono Nerd Font Bold 11' foreground='#eba0ac'>%s</span>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#cdd6f4'>%b</span>"
     alignment = left
     vertical_alignment = center
     show_age_threshold = 60
@@ -69,17 +69,17 @@
     mouse_right_click = close_all
 
 [urgency_low]
-    # Muted — dark bg, dimmed teal frame
-    background = "#010d0ae0"
-    foreground = "#e0fcf0"
-    frame_color = "#00ffb355"
-    highlight = "#00ffb3"
+    # Muted — dark bg, blue frame matching ZRAM
+    background = "#0a0a0f"
+    foreground = "#cdd6f4"
+    frame_color = "#89b4fa"
+    highlight = "#89b4fa"
     timeout = 5
     default_icon = dialog-information
 
 [urgency_normal]
     # Neon teal accent — matches Waybar / Hyprland border
-    background = "#010d0ae0"
+    background = "#0a0a0f"
     foreground = "#ffffff"
     frame_color = "#00ffb3"
     highlight = "#00ffb3"
@@ -88,7 +88,7 @@
 
 [urgency_critical]
     # Red — kept distinct for critical alerts
-    background = "#010d0af0"
+    background = "#0a0a0f"
     foreground = "#f87171"
     frame_color = "#f87171"
     highlight = "#f87171"

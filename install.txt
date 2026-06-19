@@ -50,8 +50,10 @@ fonts, and session services such as:
     dunst mako nwg-dock-hyprland nwg-look pipewire wireplumber pamixer
     pavucontrol libpulse brightnessctl networkmanager nm-connection-editor
     blueman acpi upower slurp grim wf-recorder wl-clipboard jq python
-    libnotify polkit-kde-agent polkit-gnome gnome-keyring xsettingsd
+    libnotify hyprpolkitagent gnome-keyring xsettingsd network-manager-applet
+    xdg-desktop-portal-hyprland xdg-desktop-portal-gtk pipewire-pulse
     ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji ttf-font-awesome
+    ttf-inter ttf-outfit
 
 It also installs AUR packages through your AUR helper if one is available.
 If no helper is installed, the script can bootstrap one after confirming that

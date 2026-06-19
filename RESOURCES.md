@@ -82,8 +82,8 @@ Astraeus uses specific typography selections to ensure layout alignments, icon m
 *   **`ttf-jetbrains-mono-nerd`**: The primary monospaced system font. Used across Kitty, Waybar telemetry readouts, and standard console inputs. Includes thousands of developer icons.
 *   **`ttf-font-awesome`**: Provides graphical vector icon glyphs for core status bar modules.
 *   **`noto-fonts` & `noto-fonts-emoji`**: Crucial system-wide fallback fonts for general international characters and modern high-definition emoji symbols.
-*   **`Outfit`** (Sans-Serif): A geometric font family utilized within custom user widgets, notifications, and the lockscreen typography layouts.
-*   **`Inter`** (Sans-Serif): Premium fallback font optimized for high legibility on computer screens.
+*   **`ttf-outfit`** (AUR) / **`Outfit`**: A geometric font family utilized within custom user widgets, notifications, and the lockscreen typography layouts.
+*   **`ttf-inter`** (AUR) / **`Inter`**: Premium font optimized for high legibility on computer screens.
 
 ---
 
@@ -99,7 +99,7 @@ sudo pacman -Syu
 ```
 
 ### 2. Install Primary Official Packages
-Copy and execute this composite installation block to install all system dependencies:
+Before compiling or downloading AUR configurations, install all standard official dependencies:
 
 ```bash
 sudo pacman -S --needed --noconfirm \
@@ -115,6 +115,7 @@ sudo pacman -S --needed --noconfirm \
     dunst \
     nwg-look \
     pipewire \
+    pipewire-pulse \
     wireplumber \
     pamixer \
     pavucontrol \
@@ -122,18 +123,22 @@ sudo pacman -S --needed --noconfirm \
     brightnessctl \
     networkmanager \
     nm-connection-editor \
+    network-manager-applet \
     blueman \
     acpi \
     upower \
     slurp \
     grim \
+    wf-recorder \
     wl-clipboard \
     jq \
     python \
     libnotify \
-    polkit-kde-agent \
+    hyprpolkitagent \
     gnome-keyring \
     xsettingsd \
+    xdg-desktop-portal-hyprland \
+    xdg-desktop-portal-gtk \
     ttf-jetbrains-mono-nerd \
     noto-fonts \
     noto-fonts-emoji \
@@ -143,10 +148,10 @@ sudo pacman -S --needed --noconfirm \
 ```
 
 ### 3. Install AUR Packages
-Install the custom floating dock using your preferred AUR helper (e.g. `yay`):
+Install the custom floating dock and required system fonts using your preferred AUR helper (e.g. `yay`):
 
 ```bash
-yay -S --needed --noconfirm nwg-dock-hyprland
+yay -S --needed --noconfirm nwg-dock-hyprland ttf-inter ttf-outfit
 ```
 
 ### 4. Deploy Custom Shell & Python Permissions

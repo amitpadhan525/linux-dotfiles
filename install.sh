@@ -29,16 +29,17 @@ readonly SYSTEM_UTILS=(
     "acpi" "upower" "slurp" "grim" "wl-clipboard" "jq" "python" "libnotify"
 )
 readonly SESSION_SERVICES=(
-    "wf-recorder" "swaync" "network-manager-applet" "polkit-gnome"
+    "wf-recorder" "network-manager-applet"
 )
 readonly PORTAL_SERVICES=(
     "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk"
 )
 readonly DECO_TYPO=(
     "ttf-jetbrains-mono-nerd" "noto-fonts" "noto-fonts-emoji" "ttf-font-awesome"
+    "ttf-inter" "ttf-outfit"
 )
 readonly SYSTEM_INTEGRATION=(
-    "polkit-kde-agent" "gnome-keyring" "xsettingsd" "base-devel" "git"
+    "hyprpolkitagent" "gnome-keyring" "xsettingsd" "base-devel" "git"
 )
 
 # Combined Package List

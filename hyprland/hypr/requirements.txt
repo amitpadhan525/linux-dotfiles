@@ -107,9 +107,11 @@ A. JetBrainsMono Nerd Font
 B. Outfit Font Family
    * Usage: High-end UI widgets, custom overlays, notifications, and lock screen typography.
    * Style: Sans-serif geometric font with premium spacing.
+   * Requirement: Installed via AUR helper (Arch: `ttf-outfit`).
 
 C. Inter Font Family
    * Usage: Clean interface readability, fallback system stacks, and default rofi prompt labels.
+   * Requirement: Installed via AUR helper (Arch: `ttf-inter`).
 
 ================================================================================
 4. PYTHON 3 CONTROLLERS & SERVICES
@@ -154,7 +156,10 @@ B. SCREEN RECORDER CORE FLOW (screen_record.sh):
 ================================================================================
 
 A. INSTALL ALL REQUIRED PACKAGES:
-   `sudo pacman -S hyprland waybar kitty hyprlock hyprpaper wf-recorder slurp grim libnotify ttf-jetbrains-mono-nerd rofi wl-clipboard pamixer brightnessctl hyprsunset dunst hyprpolkitagent`
+   * Official Pacman Packages:
+     `sudo pacman -S hyprland waybar kitty hyprlock hyprpaper wf-recorder slurp grim libnotify ttf-jetbrains-mono-nerd rofi-wayland wl-clipboard pamixer brightnessctl hyprsunset dunst hyprpolkitagent network-manager-applet xdg-desktop-portal-hyprland xdg-desktop-portal-gtk pipewire-pulse`
+   * AUR Packages:
+     `yay -S nwg-dock-hyprland ttf-inter ttf-outfit`
 
 B. ENSURE SCRIPTS ARE FULLY EXECUTABLE:
    `chmod +x /home/amit/.config/hypr/scripts/screen_record.sh`

@@ -248,7 +248,10 @@ tooltip label {
 
 /* ── Functional Alerts & Blinking ── */
 
-#custom-temperature.hot {
+#custom-temperature.hot,
+#custom-cpu.hot,
+#custom-memory.hot,
+#custom-volume_brightness_osd.hot {
     background-color: rgba(248, 113, 113, 0.2);
     border-color: rgba(248, 113, 113, 0.4);
     color: #f87171;

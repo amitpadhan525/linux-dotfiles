@@ -34,6 +34,7 @@ def main():
     # OSD state variables
     state = "hidden"  # hidden, showing, hiding
     current_text = ""
+    current_class = ""
     active_until = 0.0
     hide_until = 0.0
     lock = threading.Lock()
@@ -48,7 +49,7 @@ def main():
 
     # Timer/OSD state machine thread
     def OSD_state_thread():
-        nonlocal state, active_until, hide_until, current_text
+        nonlocal state, active_until, hide_until, current_text, current_class
         while True:
             time.sleep(0.02)
             with lock:
@@ -57,22 +58,26 @@ def main():
                     # Switch to hiding state and trigger hide class
                     state = "hiding"
                     hide_until = now + 0.35  # 0.35s hide animation duration (slightly longer than CSS 0.3s)
-                    output_json(current_text, "hide")
+                    output_class = f"hide {current_class}".strip()
+                    output_json(current_text, output_class)
                 elif state == "hiding" and now > hide_until:
                     # Completely hide
                     state = "hidden"
                     current_text = ""
+                    current_class = ""
                     output_json("")
 
     threading.Thread(target=OSD_state_thread, daemon=True).start()
 
-    def trigger_osd(text):
-        nonlocal state, active_until, current_text
+    def trigger_osd(text, extra_class=""):
+        nonlocal state, active_until, current_text, current_class
         with lock:
             current_text = text
+            current_class = extra_class
             state = "showing"
             active_until = time.time() + 1.7  # 1.7s show duration
-            output_json(text, "show")
+            output_class = f"show {extra_class}".strip()
+            output_json(text, output_class)
 
     def volume_listener():
         nonlocal last_vol, last_mute
@@ -84,6 +89,7 @@ def main():
                     if vol is not None:
                         if vol != last_vol or mute != last_mute:
                             last_vol, last_mute = vol, mute
+                            extra_class = "hot" if (vol > 80 and not mute) else ""
                             if mute:
                                 text = "󰝟 Muted"
                             elif vol == 0:
@@ -92,7 +98,7 @@ def main():
                                 text = f" {vol}%"
                             else:
                                 text = f" {vol}%"
-                            trigger_osd(text)
+                            trigger_osd(text, extra_class)
         except Exception:
             pass
 

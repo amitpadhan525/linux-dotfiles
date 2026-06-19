@@ -19,6 +19,12 @@ cpu_color=$(awk -v v="$cpu_usage" 'BEGIN {
 
 tooltip="${ICO_CPU} <span color='#eba0ac'>CPU:</span> <span color='${cpu_color}'>${cpu_usage}%</span>"
 
-printf '{"text":"%s%%","tooltip":"%s"}\n' \
-    "$cpu_usage" \
+if (( cpu_usage >= 80 )); then
+    cpu_class="hot"
+else
+    cpu_class="normal"
+fi
+
+printf '{"text":"%s%%","class":"%s","tooltip":"%s"}\n' \
+    "$cpu_usage" "$cpu_class" \
     "$(printf '%b' "$tooltip" | sed 's/"/\\"/g' | awk '{printf "%s\\n",$0}' | tr -d '\n' | sed 's/\\n$//')"

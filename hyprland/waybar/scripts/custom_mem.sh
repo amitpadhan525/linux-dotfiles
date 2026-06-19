@@ -69,6 +69,12 @@ tooltip="${ICO_RAM} <span color='${ram_color}'>${used_gb}/${total_gb} GiB</span>
 tooltip+=" \n"
 tooltip+=" ${col_header}\n ${col_divider}\n${rows}"
 
-printf '{"text":"%s%%","tooltip":"%s"}\n' \
-    "$percentage" \
+if (( percentage >= 80 )); then
+    mem_class="hot"
+else
+    mem_class="normal"
+fi
+
+printf '{"text":"%s%%","class":"%s","tooltip":"%s"}\n' \
+    "$percentage" "$mem_class" \
     "$(printf '%b' "$tooltip" | sed 's/"/\\"/g' | awk '{printf "%s\\n",$0}' | tr -d '\n' | sed 's/\\n$//')"

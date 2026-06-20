@@ -1,5 +1,5 @@
 # Hyprland & Waybar Environment Master Requirements & Configurations Guide
-# Location: /home/amit/.config/hypr/requirements.txt
+# Location: ~/.config/hypr/requirements.txt
 # Generated: 2026-05-20
 # Purpose: Extremely detailed setup, configuration, and dependencies manual.
 
@@ -53,7 +53,7 @@ E. HYPRLOCK LOCK SCREEN
 
 F. HYPRPAPER WALLPAPER DAEMON
    * Purpose: Native utility to pre-load and swap desktop screen wallpaper canvases.
-   * Requirements: Requires `/home/amit/.config/hypr/hyprpaper.conf` to preload background images on compositor startup.
+   * Requirements: Requires `~/.config/hypr/hyprpaper.conf` to preload background images on compositor startup.
 
 G. DUNST NOTIFICATION DAEMON (v1.13+)
    * Purpose: Lightweight, highly customizable notification daemon.
@@ -130,7 +130,7 @@ C. Inter Font Family
 ================================================================================
 
 A. KEYBINDING TRIGGERS:
-   - When the user presses `SUPER + SHIFT + S` hotkey, `/home/amit/.config/hypr/scripts/screen_record.sh` is executed.
+   - When the user presses `SUPER + SHIFT + S` hotkey, `~/.config/hypr/scripts/screen_record.sh` is executed.
 
 B. SCREEN RECORDER CORE FLOW (screen_record.sh):
    1. If `wf-recorder` is currently active:
@@ -157,9 +157,9 @@ A. INSTALL ALL REQUIRED PACKAGES:
    `sudo pacman -S hyprland waybar kitty hyprlock hyprpaper wf-recorder slurp grim libnotify ttf-jetbrains-mono-nerd rofi wl-clipboard pamixer brightnessctl hyprsunset dunst hyprpolkitagent`
 
 B. ENSURE SCRIPTS ARE FULLY EXECUTABLE:
-   `chmod +x /home/amit/.config/hypr/scripts/screen_record.sh`
-   `chmod +x /home/amit/.config/hypr/scripts/battery.sh`
-   `chmod +x /home/amit/.config/waybar/scripts/recording_status.py`
+   `chmod +x ~/.config/hypr/scripts/screen_record.sh`
+   `chmod +x ~/.config/hypr/scripts/battery.sh`
+   `chmod +x ~/.config/waybar/scripts/recording_status.py`
 
 C. APPLY THE NEW LUA AND WAYBAR SCHEMES:
    - Reload Hyprland configuration: Press `SUPER + R`

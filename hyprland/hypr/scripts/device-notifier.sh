@@ -5,7 +5,7 @@ exec 9>/tmp/device-notifier-bash.lock
 flock -n 9 || exit 0
 
 # Redirect stdout and stderr to a log file for troubleshooting
-log_path="/home/amit/.config/hypr/logs/device-notifier.log"
+log_path="$HOME/.config/hypr/logs/device-notifier.log"
 mkdir -p "$(dirname "$log_path")"
 exec >> "$log_path" 2>&1
 

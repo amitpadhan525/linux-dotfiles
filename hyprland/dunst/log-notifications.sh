@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Path to the notification log file
-LOG_FILE="/home/amit/.config/hypr/logs/notifications.log"
+LOG_FILE="$HOME/.config/hypr/logs/notifications.log"
 
 # Get current timestamp
 TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")

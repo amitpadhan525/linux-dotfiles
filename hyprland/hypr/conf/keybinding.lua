@@ -1,18 +1,19 @@
 ---@diagnostic disable: undefined-global
+local home = os.getenv("HOME")
 local mainMod = "SUPER"
 
 -- Applications
 hl.bind("SUPER + E", hl.dsp.exec_cmd("thunar"))
-hl.bind("SUPER + Return", hl.dsp.exec_cmd("kitty --config /home/amit/.config/kitty/kitty.conf"))
-hl.bind("SUPER + D", hl.dsp.exec_cmd("rofi -show drun -theme /home/amit/.config/rofi/simple.rasi"))
-hl.bind("SUPER + W", hl.dsp.exec_cmd("/home/amit/.config/waybar/scripts/cycle_waybar.sh"))
+hl.bind("SUPER + Return", hl.dsp.exec_cmd("kitty --config " .. home .. "/.config/kitty/kitty.conf"))
+hl.bind("SUPER + D", hl.dsp.exec_cmd("rofi -show drun -theme " .. home .. "/.config/rofi/simple.rasi"))
+hl.bind("SUPER + W", hl.dsp.exec_cmd(home .. "/.config/waybar/scripts/cycle_waybar.sh"))
 
 -- System
-hl.bind("SUPER + p", hl.dsp.exec_cmd("/home/amit/.config/hypr/scripts/power_menu.sh"))
+hl.bind("SUPER + p", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/power_menu.sh"))
 hl.bind("SUPER + N", hl.dsp.exec_cmd("bash -c 'pgrep hyprsunset && pkill hyprsunset || hyprsunset --temperature 4500'"))
-hl.bind("SUPER + S", hl.dsp.exec_cmd("/home/amit/.config/hypr/scripts/named_screenshot.sh"))
-hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("/home/amit/.config/hypr/scripts/screen_record.sh"))
-hl.bind("SUPER + ALT + W", hl.dsp.exec_cmd("/home/amit/.config/hypr/scripts/wallpaper.sh"))
+hl.bind("SUPER + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/named_screenshot.sh"))
+hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screen_record.sh"))
+hl.bind("SUPER + ALT + W", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/wallpaper.sh"))
 hl.bind("SUPER + R", hl.dsp.exec_cmd("hyprctl reload"))
 hl.bind("SUPER + l", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("SUPER + Q", hl.dsp.window.close())

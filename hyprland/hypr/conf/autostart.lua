@@ -1,4 +1,6 @@
 ---@diagnostic disable: undefined-global
+local home = os.getenv("HOME")
+
 
 -- Function to run autostart apps only if they aren't already running
 local function autostart()
@@ -7,7 +9,7 @@ local function autostart()
     hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 
     -- wallpaper.sh works around a hyprpaper v0.8.x bug where config wallpaper= is ignored
-    hl.exec_cmd("/home/amit/.config/hypr/scripts/wallpaper.sh &")
+    hl.exec_cmd(home .. "/.config/hypr/scripts/wallpaper.sh &")
 
     local system_apps = {
         { name = "waybar", path = "waybar" },
@@ -21,8 +23,8 @@ local function autostart()
     end
 
     -- Run scripts directly (concurrency and single-instance locks are handled inside the scripts)
-    hl.exec_cmd("/home/amit/.config/hypr/scripts/battery-notification.sh &")
-    hl.exec_cmd("/home/amit/.config/hypr/scripts/device-notifier.sh &")
+    hl.exec_cmd(home .. "/.config/hypr/scripts/battery-notification.sh &")
+    hl.exec_cmd(home .. "/.config/hypr/scripts/device-notifier.sh &")
 end
 
 -- Run only once on the very first startup
@@ -30,5 +32,5 @@ hl.on("hyprland.start", autostart)
 
 -- On reload, restart hyprpaper via the script
 hl.on("config.reloaded", function()
-    hl.exec_cmd("/home/amit/.config/hypr/scripts/wallpaper.sh &")
+    hl.exec_cmd(home .. "/.config/hypr/scripts/wallpaper.sh &")
 end)

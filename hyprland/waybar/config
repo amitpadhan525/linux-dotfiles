@@ -21,11 +21,11 @@
     ],
     "modules-right": [],
     "custom/recording": {
-        "exec": "python3 /home/amit/.config/waybar/scripts/recording_status.py",
+        "exec": "python3 $HOME/.config/waybar/scripts/recording_status.py",
         "return-type": "json",
         "format": "{}",
         "interval": 1,
-        "on-click": "/home/amit/.config/hypr/scripts/screen_record.sh",
+        "on-click": "$HOME/.config/hypr/scripts/screen_record.sh",
         "tooltip": true,
         "signal": 8
     },
@@ -37,7 +37,7 @@
         "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'"
     },
     "custom/volume_brightness_osd": {
-        "exec": "python3 /home/amit/.config/waybar/scripts/volume_brightness_osd.py",
+        "exec": "python3 $HOME/.config/waybar/scripts/volume_brightness_osd.py",
         "return-type": "json",
         "format": "{text}"
     },
@@ -63,7 +63,7 @@
         }
     },
     "custom/temperature": {
-        "exec": "/home/amit/.config/waybar/scripts/cpu_temp.sh",
+        "exec": "$HOME/.config/waybar/scripts/cpu_temp.sh",
         "interval": 5,
         "return-type": "json",
         "tooltip": true
@@ -75,7 +75,7 @@
         "format-disconnected": "  Disconnected",
         "format-disabled": "  Disabled",
         "tooltip-format": "{ifname} via {gwaddr}",
-        "on-click": "/home/amit/.config/waybar/scripts/wifi_menu.sh",
+        "on-click": "$HOME/.config/waybar/scripts/wifi_menu.sh",
         "on-click-right": "nm-connection-editor"
     },
     "battery": {
@@ -96,14 +96,14 @@
         ]
     },
     "custom/cpu": {
-        "exec": "/home/amit/.config/waybar/scripts/custom_cpu.sh",
+        "exec": "$HOME/.config/waybar/scripts/custom_cpu.sh",
         "interval": 3,
         "format": "  {}",
         "return-type": "json",
         "tooltip": true
     },
     "custom/memory": {
-        "exec": "/home/amit/.config/waybar/scripts/custom_mem.sh",
+        "exec": "$HOME/.config/waybar/scripts/custom_mem.sh",
         "interval": 5,
         "format": "  {}",
         "return-type": "json",

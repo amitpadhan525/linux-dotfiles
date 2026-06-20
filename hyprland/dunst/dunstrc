@@ -96,4 +96,4 @@
     default_icon = dialog-warning
 
 [log_all]
-    script = /home/amit/.config/dunst/log-notifications.sh
+    script = $HOME/.config/dunst/log-notifications.sh

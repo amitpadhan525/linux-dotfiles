@@ -3,10 +3,10 @@
 # Wallpaper launcher for hyprpaper v0.8.x (Dynamic)
 # ----------------------------------------------------- 
 
-DEFAULT_WALLPAPER="/home/amit/.config/hypr/wallpapers/prime2.png"
-STATE_FILE="/home/amit/.config/hypr/.current_wallpaper"
-CONF="/home/amit/.config/hypr/hyprpaper.conf"
-LOG="/home/amit/.config/hypr/logs/hyprpaper.log"
+DEFAULT_WALLPAPER="$HOME/.config/hypr/wallpapers/prime2.png"
+STATE_FILE="$HOME/.config/hypr/.current_wallpaper"
+CONF="$HOME/.config/hypr/hyprpaper.conf"
+LOG="$HOME/.config/hypr/logs/hyprpaper.log"
 
 exec > "$LOG" 2>&1
 echo "--- Wallpaper launcher started: $(date) ---"
@@ -41,7 +41,7 @@ ipc = on
 EOF
 
 # 3. Update lockscreen wallpaper to match
-cp "$WALLPAPER" "/home/amit/.config/hypr/wallpapers/lockscreen.png"
+cp "$WALLPAPER" "$HOME/.config/hypr/wallpapers/lockscreen.png"
 
 # 4. Restart hyprpaper
 killall -q hyprpaper
@@ -51,7 +51,7 @@ SOCK="${XDG_RUNTIME_DIR}/hypr/${HYPRLAND_INSTANCE_SIGNATURE}/.hyprpaper.sock"
 rm -f "$SOCK"
 
 # Start hyprpaper in background
-hyprpaper -c "$CONF" &
+nohup hyprpaper -c "$CONF" >/dev/null 2>&1 &
 
 # Tight loop: apply wallpaper via IPC as soon as socket is alive
 for i in $(seq 1 100); do
@@ -69,4 +69,4 @@ else
     echo "ERROR: hyprpaper failed to stay alive."
 fi
 
-date >> "/home/amit/.config/hypr/logs/wallpaper_script.log"
+date >> "$HOME/.config/hypr/logs/wallpaper_script.log"

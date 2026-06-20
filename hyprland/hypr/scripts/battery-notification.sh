@@ -5,7 +5,7 @@ exec 9>/tmp/battery-notification.lock
 flock -n 9 || exit 0
 
 # Redirect stdout and stderr to a log file
-exec >> /home/amit/.config/hypr/logs/battery-notification.log 2>&1
+exec >> "$HOME/.config/hypr/logs/battery-notification.log" 2>&1
 echo "[$(date +'%Y-%m-%d %H:%M:%S')] battery-notification started. PATH=$PATH, DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS"
 
 

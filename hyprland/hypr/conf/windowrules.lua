@@ -67,8 +67,8 @@ hl.window_rule({ match = { xwayland = true, float = true }, tile = true })
 -- ─────────────────────────────────────────────────────────────────────────────
 -- LAYER RULES: GLASSMORPHIC BLUR FOR DUNST NOTIFICATIONS
 -- ─────────────────────────────────────────────────────────────────────────────
-hl.layer_rule({ match = { namespace = "dunst" }, blur = true })
-hl.layer_rule({ match = { namespace = "dunst" }, ignore_alpha = 0.2 })
+hl.layer_rule({ match = { namespace = "notifications" }, blur = true })
+hl.layer_rule({ match = { namespace = "notifications" }, ignore_alpha = 0.1 })
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- LAYER RULES: GLASSMORPHIC BLUR FOR ROFI

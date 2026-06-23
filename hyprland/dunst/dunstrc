@@ -12,7 +12,7 @@
     width = (350, 480)
     height = 130
     origin = top-right
-    offset = (24, 60)
+    offset = (24, 24)
     scale = 0
     notification_limit = 5
 
@@ -43,7 +43,7 @@
     separator_height = 3
     padding = 20
     horizontal_padding = 24
-    frame_width = 3
+    frame_width = 1
     gap_size = 16
     separator_color = frame
     corner_radius = 22
@@ -70,31 +70,31 @@
 
 [urgency_low]
     # Muted Blue — matching Waybar / Hyprland low-urgency glass aesthetics
-    background = "#010403a0"
+    background = "#0000004d"
     foreground = "#89b4fa"
-    frame_color = "#89b4facc"
+    frame_color = "#89b4fa3d"
     highlight = "#89b4fa"
-    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#89b4fa'>󰂚  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#a6adc8'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#bac2de'>%b</span>"
+    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 14' foreground='#89b4fa'>󰂚  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#a6adc8'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 12' foreground='#bac2de'>%b</span>"
     timeout = 5
     default_icon = dialog-information
 
 [urgency_normal]
     # Neon Teal — matches the main Waybar capsule & Hyprland active border
-    background = "#010403a0"
+    background = "#0000004d"
     foreground = "#00ffb3"
-    frame_color = "#00ffb3cc"
+    frame_color = "#00ffb33d"
     highlight = "#00ffb3"
-    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#00ffb3'>󰂚  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#e0fcf0'>%b</span>"
+    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 14' foreground='#00ffb3'>󰂚  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 12' foreground='#e0fcf0'>%b</span>"
     timeout = 5
     default_icon = dialog-information
 
 [urgency_critical]
     # Rose Red — distinct critical alert styled as a vibrant glow capsule
-    background = "#010403d0"
+    background = "#0000008c"
     foreground = "#f87171"
-    frame_color = "#f87171ff"
+    frame_color = "#f8717166"
     highlight = "#f87171"
-    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#f87171'>󰂛  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#fca5a5'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#ffffff'>%b</span>"
+    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 14' foreground='#f87171'>󰂛  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#fca5a5'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 12' foreground='#ffffff'>%b</span>"
     timeout = 10
     default_icon = dialog-warning
 

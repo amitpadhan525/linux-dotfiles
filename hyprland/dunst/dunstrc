@@ -9,51 +9,51 @@
     follow = none
 
     ### Geometry ###
-    width = 360
-    height = 110
+    width = (350, 480)
+    height = 130
     origin = top-right
-    offset = (20, 20)
+    offset = (24, 60)
     scale = 0
     notification_limit = 5
 
     ### Progress bar ###
     progress_bar = true
-    progress_bar_height = 6
+    progress_bar_height = 8
     progress_bar_frame_width = 0
     progress_bar_min_width = 150
-    progress_bar_max_width = 320
-    progress_bar_corner_radius = 4
+    progress_bar_max_width = 300
+    progress_bar_corner_radius = 8
     progress_bar_corners = all
 
     ### Icon ###
-    icon_corner_radius = 6
+    icon_corner_radius = 12
     icon_corners = all
     enable_recursive_icon_lookup = true
     icon_theme = Papirus-Dark
     icon_position = left
-    min_icon_size = 32
+    min_icon_size = 48
     max_icon_size = 64
-    text_icon_padding = 14
+    text_icon_padding = 16
 
     ### History ###
     sticky_history = yes
     history_length = 20
 
     ### Styling ###
-    separator_height = 2
-    padding = 14
-    horizontal_padding = 18
-    frame_width = 1
-    gap_size = 8
+    separator_height = 3
+    padding = 20
+    horizontal_padding = 24
+    frame_width = 3
+    gap_size = 16
     separator_color = frame
-    corner_radius = 16
+    corner_radius = 22
     corners = all
 
     ### Text ###
     font = JetBrainsMono Nerd Font 10
     line_height = 4
     markup = full
-    format = "<span font_desc='JetBrainsMono Nerd Font Bold 11' foreground='#eba0ac'>%s</span>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#cdd6f4'>%b</span>"
+    format = "<span font_desc='JetBrainsMono Nerd Font ExtraBold 11'>%s</span>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#ffffff'>%b</span>"
     alignment = left
     vertical_alignment = center
     show_age_threshold = 60
@@ -69,29 +69,32 @@
     mouse_right_click = close_all
 
 [urgency_low]
-    # Muted — dark bg, blue frame matching ZRAM
-    background = "#0a0a0f"
-    foreground = "#cdd6f4"
-    frame_color = "#89b4fa"
+    # Muted Blue — matching Waybar / Hyprland low-urgency glass aesthetics
+    background = "#010403a0"
+    foreground = "#89b4fa"
+    frame_color = "#89b4facc"
     highlight = "#89b4fa"
+    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#89b4fa'>󰂚  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#a6adc8'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#bac2de'>%b</span>"
     timeout = 5
     default_icon = dialog-information
 
 [urgency_normal]
-    # Neon teal accent — matches Waybar / Hyprland border
-    background = "#0a0a0f"
-    foreground = "#ffffff"
-    frame_color = "#00ffb3"
+    # Neon Teal — matches the main Waybar capsule & Hyprland active border
+    background = "#010403a0"
+    foreground = "#00ffb3"
+    frame_color = "#00ffb3cc"
     highlight = "#00ffb3"
+    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#00ffb3'>󰂚  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#e0fcf0'>%b</span>"
     timeout = 5
     default_icon = dialog-information
 
 [urgency_critical]
-    # Red — kept distinct for critical alerts
-    background = "#0a0a0f"
+    # Rose Red — distinct critical alert styled as a vibrant glow capsule
+    background = "#010403d0"
     foreground = "#f87171"
-    frame_color = "#f87171"
+    frame_color = "#f87171ff"
     highlight = "#f87171"
+    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#f87171'>󰂛  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#fca5a5'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#ffffff'>%b</span>"
     timeout = 10
     default_icon = dialog-warning
 

@@ -33,7 +33,7 @@ hl.config({
         disable_autoreload = false,
         force_default_wallpaper = 0,
         disable_hyprland_logo = true,
-        vrr = 1,
+        vrr = 0,
         animate_manual_resizes = true,
         animate_mouse_windowdragging = true
     }
@@ -48,4 +48,4 @@ hl.animation({ leaf = "layersOut", enabled = true, speed = 5, bezier = "myBezier
 hl.animation({ leaf = "border", enabled = true, speed = 10, bezier = "default" })
 hl.animation({ leaf = "borderangle", enabled = true, speed = 8, bezier = "default" })
 hl.animation({ leaf = "fade", enabled = true, speed = 5, bezier = "default" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 5, bezier = "default" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 5, bezier = "myBezier", style = "slidefade 20%" })

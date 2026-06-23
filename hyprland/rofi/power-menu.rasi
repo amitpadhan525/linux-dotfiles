@@ -9,7 +9,7 @@
     text-color:       #ffffff;
 
     /* ── colour tokens ── */
-    bg-base:          #000000fa;       /* pure black, 98% opaque  */
+    bg-base:          #00000073;       /* glass background, 45% opaque  */
     accent:           #00ffb3ff;       /* neon teal, full opaque   */
     accent-dim:       #00ffb30a;       /* teal tint  ~4%           */
     accent-mid:       #00ffb32e;       /* teal tint ~18%           */
@@ -20,9 +20,9 @@
 window {
     transparency:     "real";
     background-color: @bg-base;
-    border:           2px solid;
-    border-color:     @accent;
-    border-radius:    14px;
+    border:           1px solid;
+    border-color:     @accent-mid;
+    border-radius:    22px;
     width:            220px;
     location:         center;
     anchor:           center;

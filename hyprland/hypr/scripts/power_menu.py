@@ -54,7 +54,7 @@ accent_rgba_dim = hex_to_rgba(accent, 0.05)
 accent_rgba_hover = hex_to_rgba(accent, 0.1)
 accent_rgba_glow = hex_to_rgba(accent, 0.35)
 bg_rgba_fullscreen = "rgba(0, 0, 0, 0.05)" # Low alpha to trigger full-screen blur
-bg_rgba_dialog = "rgba(0, 0, 0, 0.85)" # Obsidian black glass background
+bg_rgba_dialog = "rgba(0, 0, 0, 0.45)" # Matching Waybar's capsule transparency
 timer_border_color = hex_to_rgba(accent, 0.25)
 card_border_color = hex_to_rgba(accent, 0.15)
 accent_two_dim = hex_to_rgba(accent_two, 0.3)
@@ -73,10 +73,10 @@ CSS_TEMPLATE = f"""
 .powermenu-dialog {{
     background-color: {bg_rgba_dialog};
     background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.005));
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(0, 255, 179, 0.32);
     border-radius: 24px;
     padding: 35px 50px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(0, 255, 179, 0.05);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(0, 255, 179, 0.15);
 }}
 
 .powermenu-container {{
@@ -292,7 +292,7 @@ class PowerMenuWindow(Gtk.Window):
             card_btn = Gtk.Button()
             card_btn.get_style_context().add_class("power-card")
             card_btn.set_relief(Gtk.ReliefStyle.NONE)
-            card_btn.connect("clicked", lambda w, cb=callback: cb())
+            card_btn.connect("button-press-event", lambda w, e, cb=callback: cb() or True)
 
             # Card inner layout
             card_inner = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)

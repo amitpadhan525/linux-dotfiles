@@ -19,8 +19,8 @@ configuration {
     font:                        "JetBrainsMono Nerd Font Bold 12";
 
     /* ── Colour Tokens ── */
-    bg-base:                     #000000fa;    /* pure black 98% opaque   */
-    bg-alt:                      #0c0c0cff;    /* slightly lifted surface  */
+    bg-base:                     #00000073;    /* glass background 45% opaque */
+    bg-alt:                      #ffffff14;    /* soft white sheen for search bar */
     fg-main:                     #ffffffff;   /* crisp white              */
     fg-dim:                      #888888ff;    /* clean gray               */
     accent:                      #00ffb3ff;    /* neon teal                */
@@ -37,9 +37,9 @@ configuration {
 window {
     transparency:                "real";
     background-color:            @bg-base;
-    border:                      2px solid;
-    border-color:                @accent;
-    border-radius:               16px;
+    border:                      1px solid;
+    border-color:                @accent-mid;
+    border-radius:               22px;
     width:                       680px;
     location:                    center;
     anchor:                      center;

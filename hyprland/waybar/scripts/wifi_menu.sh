@@ -18,8 +18,8 @@ cat > "$THEME_FILE" << 'ROFI_THEME'
 * {
     font:                "JetBrainsMono Nerd Font Bold 12";
 
-    bg-base:             #000000fa;
-    bg-alt:              #0c0c0cff;
+    bg-base:             #00000073;
+    bg-alt:              #ffffff14;
     fg-main:             #ffffffff;
     fg-dim:              #888888ff;
     accent:              #00ffb3ff;
@@ -35,14 +35,10 @@ cat > "$THEME_FILE" << 'ROFI_THEME'
 window {
     transparency:        "real";
     background-color:    @bg-base;
-    border:              2px solid;
-    border-color:        @accent;
-    border-radius:       16px;
+    border:              1px solid;
+    border-color:        @accent-mid;
+    border-radius:       22px;
     width:               520px;
-    location:            center;
-    anchor:              center;
-    x-offset:            0;
-    y-offset:            0;
     cursor:              "default";
 }
 
@@ -83,7 +79,7 @@ listview {
     lines:               9;
     cycle:               true;
     dynamic:             true;
-    scrollbar:           true;
+    scrollbar:           false;
     layout:              vertical;
     spacing:             6px;
     fixed-height:        false;
@@ -158,8 +154,8 @@ cat > "$PASS_THEME_FILE" << 'PASS_THEME'
 * {
     font:                "JetBrainsMono Nerd Font Bold 12";
 
-    bg-base:             #000000fa;
-    bg-alt:              #0c0c0cff;
+    bg-base:             #00000073;
+    bg-alt:              #ffffff14;
     fg-main:             #ffffffff;
     fg-dim:              #888888ff;
     accent:              #00ffb3ff;
@@ -171,12 +167,10 @@ cat > "$PASS_THEME_FILE" << 'PASS_THEME'
 window {
     transparency:        "real";
     background-color:    @bg-base;
-    border:              2px solid;
-    border-color:        @accent;
-    border-radius:       16px;
+    border:              1px solid;
+    border-color:        #00ffb32e;
+    border-radius:       22px;
     width:               520px;
-    location:            center;
-    anchor:              center;
     cursor:              "default";
 }
 
@@ -238,7 +232,8 @@ if [ "$STATE" = "enabled" ]; then
 fi
 
 get_password() {
-    rofi -dmenu -password -p "  Password" -theme "$PASS_THEME_FILE"
+    rofi -dmenu -password -p "  Password" -theme "$PASS_THEME_FILE" \
+        -location 2 -xoffset 0 -yoffset 48
 }
 
 if [ -n "$CURRENT_SSID" ]; then
@@ -255,6 +250,7 @@ trap 'rm -f "$THEME_FILE" "$PASS_THEME_FILE" "$OPTS_FILE" "$CHOSEN_FILE"' EXIT
 echo -e "$OPTIONS" > "$OPTS_FILE"
 
 rofi -dmenu -i -p '󰤨  Wi-Fi' -theme "$THEME_FILE" \
+    -location 2 -xoffset 0 -yoffset 48 \
     < "$OPTS_FILE" > "$CHOSEN_FILE" &
 ROFI_PID=$!
 

@@ -70,9 +70,9 @@
 
 [urgency_low]
     # Muted Blue — matching Waybar / Hyprland low-urgency glass aesthetics
-    background = "#0000004d"
+    background = "#0c0c0c"
     foreground = "#89b4fa"
-    frame_color = "#89b4fa3d"
+    frame_color = "#89b4fab3"
     highlight = "#89b4fa"
     format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 14' foreground='#89b4fa'>󰂚  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#a6adc8'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 12' foreground='#bac2de'>%b</span>"
     timeout = 5
@@ -80,9 +80,9 @@
 
 [urgency_normal]
     # Neon Teal — matches the main Waybar capsule & Hyprland active border
-    background = "#0000004d"
+    background = "#0c0c0c"
     foreground = "#00ffb3"
-    frame_color = "#00ffb33d"
+    frame_color = "#00ffb3b3"
     highlight = "#00ffb3"
     format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 14' foreground='#00ffb3'>󰂚  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 12' foreground='#e0fcf0'>%b</span>"
     timeout = 5
@@ -90,9 +90,9 @@
 
 [urgency_critical]
     # Rose Red — distinct critical alert styled as a vibrant glow capsule
-    background = "#0000008c"
+    background = "#0c0c0c"
     foreground = "#f87171"
-    frame_color = "#f8717166"
+    frame_color = "#f87171b3"
     highlight = "#f87171"
     format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 14' foreground='#f87171'>󰂛  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#fca5a5'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 12' foreground='#ffffff'>%b</span>"
     timeout = 10

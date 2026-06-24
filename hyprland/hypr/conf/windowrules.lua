@@ -65,22 +65,22 @@ hl.window_rule({ match = { modal = true }, tile = true })
 hl.window_rule({ match = { xwayland = true, float = true }, tile = true })
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- LAYER RULES: GLASSMORPHIC BLUR FOR DUNST NOTIFICATIONS
+-- LAYER RULES: DISABLED BLUR FOR DUNST NOTIFICATIONS
 -- ─────────────────────────────────────────────────────────────────────────────
-hl.layer_rule({ match = { namespace = "notifications" }, blur = true })
-hl.layer_rule({ match = { namespace = "notifications" }, ignore_alpha = 0.1 })
+-- hl.layer_rule({ match = { namespace = "notifications" }, blur = true })
+-- hl.layer_rule({ match = { namespace = "notifications" }, ignore_alpha = 0.1 })
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- LAYER RULES: GLASSMORPHIC BLUR FOR ROFI
+-- LAYER RULES: DISABLED BLUR FOR ROFI
 -- ─────────────────────────────────────────────────────────────────────────────
-hl.layer_rule({ match = { namespace = "rofi" }, blur = true })
-hl.layer_rule({ match = { namespace = "rofi" }, ignore_alpha = 0.2 })
+-- hl.layer_rule({ match = { namespace = "rofi" }, blur = true })
+-- hl.layer_rule({ match = { namespace = "rofi" }, ignore_alpha = 0.2 })
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- LAYER RULES: GLASSMORPHIC BLUR FOR WAYBAR
+-- LAYER RULES: DISABLED BLUR FOR WAYBAR
 -- ─────────────────────────────────────────────────────────────────────────────
-hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
-hl.layer_rule({ match = { namespace = "waybar" }, ignore_alpha = 0.01 })
+-- hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
+-- hl.layer_rule({ match = { namespace = "waybar" }, ignore_alpha = 0.01 })
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- LAYER RULES: GLASSMORPHIC BLUR FOR POWERMENU

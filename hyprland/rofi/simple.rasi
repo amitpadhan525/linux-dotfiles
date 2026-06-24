@@ -19,7 +19,7 @@ configuration {
     font:                        "JetBrainsMono Nerd Font Bold 12";
 
     /* ── Colour Tokens ── */
-    bg-base:                     #00000073;    /* glass background 45% opaque */
+    bg-base:                     #0c0c0cff;    /* opaque background */
     bg-alt:                      #ffffff14;    /* soft white sheen for search bar */
     fg-main:                     #ffffffff;   /* crisp white              */
     fg-dim:                      #888888ff;    /* clean gray               */

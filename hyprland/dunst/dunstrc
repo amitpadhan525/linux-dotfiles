@@ -9,8 +9,8 @@
     follow = none
 
     ### Geometry ###
-    width = (350, 480)
-    height = 130
+    width = (360, 480)
+    height = 120
     origin = top-right
     offset = (24, 24)
     scale = 0
@@ -22,11 +22,11 @@
     progress_bar_frame_width = 0
     progress_bar_min_width = 150
     progress_bar_max_width = 300
-    progress_bar_corner_radius = 8
+    progress_bar_corner_radius = 12
     progress_bar_corners = all
 
     ### Icon ###
-    icon_corner_radius = 12
+    icon_corner_radius = 16
     icon_corners = all
     enable_recursive_icon_lookup = true
     icon_theme = Papirus-Dark

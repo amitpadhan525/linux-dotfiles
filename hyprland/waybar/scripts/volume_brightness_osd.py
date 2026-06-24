@@ -57,7 +57,7 @@ def main():
                 if state == "showing" and now > active_until:
                     # Switch to hiding state and trigger hide class
                     state = "hiding"
-                    hide_until = now + 0.35  # 0.35s hide animation duration (slightly longer than CSS 0.3s)
+                    hide_until = now + 0.22  # 0.22s hide animation duration (slightly longer than CSS 0.2s)
                     output_class = f"hide {current_class}".strip()
                     output_json(current_text, output_class)
                 elif state == "hiding" and now > hide_until:

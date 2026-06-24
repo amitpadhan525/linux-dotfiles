@@ -303,26 +303,22 @@ tooltip label {
     font-weight: bold;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
     
-    /* Native transitions */
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Native transitions - optimized to 0.2s for snappiness */
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     
     /* Base Hidden State */
     opacity: 0;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
+    margin: 4px 0px;
+    padding: 4px 0px;
     border: 1px solid transparent;
     color: transparent;
-    font-size: 0px;
+    font-size: 14px;
 }
 
 #custom-volume_brightness_osd.show {
     opacity: 1;
-    margin-left: 3px;
-    margin-right: 3px;
-    padding-left: 14px;
-    padding-right: 14px;
+    margin: 4px 3px;
+    padding: 4px 14px;
     border: 1px solid rgba(255, 255, 255, 0.28); /* Sharper border */
     color: #00ffb3;
     font-size: 14px;
@@ -330,13 +326,11 @@ tooltip label {
 
 #custom-volume_brightness_osd.hide {
     opacity: 0;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
+    margin: 4px 0px;
+    padding: 4px 0px;
     border: 1px solid transparent;
     color: transparent;
-    font-size: 0px;
+    font-size: 14px;
 }
 
 #custom-volume_brightness_osd:hover {

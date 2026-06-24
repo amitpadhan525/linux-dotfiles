@@ -3,6 +3,8 @@
 *.log.*
 **/logs/
 .night_mode_state
+nohup.out
+**/nohup.out
 
 # Ignore backup archives
 *.zip

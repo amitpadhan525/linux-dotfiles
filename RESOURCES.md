@@ -69,9 +69,9 @@ Astraeus integrates custom scripts to link components dynamically. To run these 
 *   **`jq`**: High-performance, lightweight command-line JSON processor. It formats the system outputs of Wayland and Hyprland IPC channels into parsed parameters.
 
 Additionally, the following root-level utility scripts are provided:
-*   [copy.sh](file:///home/amit/github/linux-dotfiles/copy.sh): Collects/syncs all active local system configurations into your repository.
-*   [push.sh](file:///home/amit/github/linux-dotfiles/push.sh): Commits and pushes modifications to the GitHub remote repository.
-*   [update.sh](file:///home/amit/github/linux-dotfiles/update.sh): Pulls the latest configurations from GitHub, redeploys links, and restarts service environments. It now anchors itself to the repository root automatically.
+*   [copy.sh](copy.sh): Collects/syncs all active local system configurations into your repository.
+*   [push.sh](push.sh): Commits and pushes modifications to the GitHub remote repository.
+*   [update.sh](update.sh): Pulls the latest configurations from GitHub, redeploys links, and restarts service environments. It now anchors itself to the repository root automatically.
 
 ---
 

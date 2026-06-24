@@ -1,8 +1,0 @@
-[2026-06-18 10:34:37.107] [info] Using configuration file /home/amit/.config/waybar/config
-[2026-06-18 10:34:37.109] [info] Discovered appearance 'dark'
-[2026-06-18 10:34:37.109] [info] Using CSS file /home/amit/.config/waybar/style.css
-[2026-06-18 10:34:37.115] [info] Hyprland IPC starting
-[2026-06-18 10:34:37.115] [info] Loading persistent workspaces from Hyprland workspace rules
-Full
-[2026-06-18 10:34:37.184] [warning] Requested height: 40 is less than the minimum height: 48 required by the modules
-[2026-06-18 10:34:37.184] [info] Bar configured (width: 1920, height: 48) for output: eDP-1

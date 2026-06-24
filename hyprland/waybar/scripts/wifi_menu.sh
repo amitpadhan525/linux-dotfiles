@@ -18,13 +18,13 @@ cat > "$THEME_FILE" << 'ROFI_THEME'
 * {
     font:                "JetBrainsMono Nerd Font Bold 12";
 
-    bg-base:             #00000073;
+    bg-base:             #000000ff;
     bg-alt:              #ffffff14;
     fg-main:             #ffffffff;
     fg-dim:              #888888ff;
     accent:              #00ffb3ff;
     accent-dim:          #00ffb30a;
-    accent-mid:          #00ffb32e;
+    accent-mid:          #00ffb3b3;
     border-subtle:       #00ffb333;
     urgent:              #f38ba8ff;
 
@@ -154,7 +154,7 @@ cat > "$PASS_THEME_FILE" << 'PASS_THEME'
 * {
     font:                "JetBrainsMono Nerd Font Bold 12";
 
-    bg-base:             #00000073;
+    bg-base:             #000000ff;
     bg-alt:              #ffffff14;
     fg-main:             #ffffffff;
     fg-dim:              #888888ff;
@@ -168,7 +168,7 @@ window {
     transparency:        "real";
     background-color:    @bg-base;
     border:              1px solid;
-    border-color:        #00ffb32e;
+    border-color:        #00ffb3b3;
     border-radius:       22px;
     width:               520px;
     cursor:              "default";

@@ -77,10 +77,10 @@ hl.window_rule({ match = { xwayland = true, float = true }, tile = true })
 -- hl.layer_rule({ match = { namespace = "rofi" }, ignore_alpha = 0.2 })
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- LAYER RULES: DISABLED BLUR FOR WAYBAR
+-- LAYER RULES: GLASSMORPHIC BLUR FOR WAYBAR
 -- ─────────────────────────────────────────────────────────────────────────────
--- hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
--- hl.layer_rule({ match = { namespace = "waybar" }, ignore_alpha = 0.01 })
+hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
+hl.layer_rule({ match = { namespace = "waybar" }, ignore_alpha = 0.01 })
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- LAYER RULES: GLASSMORPHIC BLUR FOR POWERMENU

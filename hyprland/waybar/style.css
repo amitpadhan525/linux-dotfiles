@@ -197,7 +197,7 @@ tooltip label {
     color: rgba(255, 255, 255, 0.75); /* Increased contrast from 0.55 */
     background: transparent;
     border-radius: 10px;
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
     font-weight: 800;
     min-width: 24px;
 }
@@ -210,10 +210,9 @@ tooltip label {
     color: #010403;
     background-color: rgba(0, 255, 179, 0.95); /* Fully solid active background */
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 0%, rgba(16, 185, 129, 0.6) 100%);
-    border: 1px solid rgba(0, 255, 179, 0.7); /* Sharper border */
-    padding: 2px 14px;
-    animation: ws-glow-daily 0.45s ease forwards;
-    box-shadow: 0 0 10px rgba(0, 255, 179, 0.5); /* Stronger active glow */
+    border: 1px solid rgba(0, 255, 179, 0.85); /* Sharper border */
+    padding: 2px 18px;
+    box-shadow: 0 0 14px rgba(0, 255, 179, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.6); /* Stronger active glow */
 }
 
 @keyframes ws-glow-daily {

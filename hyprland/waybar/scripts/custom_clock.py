@@ -7,6 +7,22 @@ import subprocess
 import json
 
 STATE_FILE = "/tmp/waybar_custom_clock_state"
+PID_FILE = "/tmp/waybar_custom_clock_parent_pid"
+
+def get_waybar_pid():
+    pid = os.getpid()
+    while pid > 1:
+        try:
+            with open(f"/proc/{pid}/stat", "r") as f:
+                stat = f.read().split()
+                name = stat[1].strip("()")
+                ppid = int(stat[3])
+                if name == "waybar":
+                    return pid
+                pid = ppid
+        except Exception:
+            break
+    return None
 
 def get_state():
     try:
@@ -28,6 +44,26 @@ def toggle_state():
     set_state(new_state)
     # Signal waybar to refresh. Signal 9 corresponds to RTMIN+9.
     subprocess.run(["pkill", "-RTMIN+9", "waybar"])
+
+def check_parent_reset():
+    # If the parent waybar process has changed, reset state to 0
+    waybar_pid = get_waybar_pid()
+    if waybar_pid is not None:
+        last_pid = None
+        try:
+            with open(PID_FILE, 'r') as f:
+                last_pid = int(f.read().strip())
+        except Exception:
+            pass
+        
+        if last_pid != waybar_pid:
+            # New Waybar instance! Reset state to 0
+            set_state(0)
+            try:
+                with open(PID_FILE, 'w') as f:
+                    f.write(str(waybar_pid))
+            except Exception:
+                pass
 
 def get_calendar_html(now):
     cal = calendar.TextCalendar(firstweekday=6) # Sunday start
@@ -98,4 +134,5 @@ if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "--toggle":
         toggle_state()
     else:
+        check_parent_reset()
         print(get_clock_json())

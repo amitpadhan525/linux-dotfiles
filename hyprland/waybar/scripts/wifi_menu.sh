@@ -216,9 +216,9 @@ if [ -z "$CURRENT_SSID" ]; then
 fi
 STATE=$(nmcli -fields WIFI g | tail -n 1 | tr -d ' ')
 if [ "$STATE" = "enabled" ]; then
-    TOGGLE="e  Disable Wi-Fi"
+    TOGGLE="Disable Wi-Fi"
 else
-    TOGGLE="8  Enable Wi-Fi"
+    TOGGLE="Enable Wi-Fi"
 fi
 SAVED_CONNECTIONS=$(nmcli -g NAME connection show)
 if [ "$STATE" = "enabled" ]; then
@@ -237,10 +237,10 @@ get_password() {
 }
 
 if [ -n "$CURRENT_SSID" ]; then
-    DISCONNECT="d  Disconnect from $CURRENT_SSID"
-    OPTIONS="$TOGGLE\n$DISCONNECT\n3  Open Connection Editor\n$WIFI_LIST"
+    DISCONNECT="Disconnect from $CURRENT_SSID"
+    OPTIONS="$TOGGLE\n$DISCONNECT\nOpen Connection Editor\n$WIFI_LIST"
 else
-    OPTIONS="$TOGGLE\n3  Open Connection Editor\n$WIFI_LIST"
+    OPTIONS="$TOGGLE\nOpen Connection Editor\n$WIFI_LIST"
 fi
 
 # ── Launch rofi in background for idle watchdog support ────────────────────
@@ -314,13 +314,13 @@ CHOSEN=$(cat "$CHOSEN_FILE")
 
 if [ -z "$CHOSEN" ]; then
     exit 0
-elif [ "$CHOSEN" = "8  Enable Wi-Fi" ]; then
+elif [ "$CHOSEN" = "Enable Wi-Fi" ]; then
     nmcli radio wifi on
     notify "Wi-Fi Enabled"
-elif [ "$CHOSEN" = "e  Disable Wi-Fi" ]; then
+elif [ "$CHOSEN" = "Disable Wi-Fi" ]; then
     nmcli radio wifi off
     notify "Wi-Fi Disabled"
-elif [ "$CHOSEN" = "d  Disconnect from $CURRENT_SSID" ]; then
+elif [ "$CHOSEN" = "Disconnect from $CURRENT_SSID" ]; then
     ACTIVE_UUID=$(nmcli -t -f TYPE,UUID connection show --active | grep '^802-11-wireless:' | cut -d: -f2)
     if [ -n "$ACTIVE_UUID" ]; then
         notify "Disconnecting from $CURRENT_SSID..."
@@ -332,7 +332,7 @@ elif [ "$CHOSEN" = "d  Disconnect from $CURRENT_SSID" ]; then
     else
         notify "No active Wi-Fi connection found"
     fi
-elif [ "$CHOSEN" = "3  Open Connection Editor" ]; then
+elif [ "$CHOSEN" = "Open Connection Editor" ]; then
     nm-connection-editor &
 else
     RAW_SELECTION="${CHOSEN#*  }"

@@ -87,3 +87,22 @@ hl.layer_rule({ match = { namespace = "waybar" }, ignore_alpha = 0.01 })
 -- ─────────────────────────────────────────────────────────────────────────────
 hl.layer_rule({ match = { namespace = "powermenu" }, blur = true })
 hl.layer_rule({ match = { namespace = "powermenu" }, ignore_alpha = 0.02 })
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- HYPRLAND 0.56 WINDOW RULES ENHANCEMENTS
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Disable Auto-HDR for video players and steam games
+local no_hdr_apps = { "mpv", "vlc", "steam_app_.*" }
+for _, app in ipairs(no_hdr_apps) do
+    hl.window_rule({ match = { class = app }, no_auto_hdr = true })
+end
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- SPECIAL WORKSPACE (SCRATCHPAD) & SMART GAPS
+-- ─────────────────────────────────────────────────────────────────────────────
+
+-- Auto-float and place windows with class 'scratchpad' into special workspace
+hl.window_rule({ match = { class = "scratchpad" }, float = true, workspace = "special:scratchpad" })
+
+-- Smart Gaps: Remove border and rounding when only 1 tiled window is present
+hl.window_rule({ match = { workspace = "w[tv1]", float = false }, border_size = 0, rounding = 0 })

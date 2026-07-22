@@ -7,6 +7,14 @@ hl.bind("SUPER + E", hl.dsp.exec_cmd("thunar"))
 hl.bind("SUPER + Return", hl.dsp.exec_cmd("kitty --config " .. home .. "/.config/kitty/kitty.conf"))
 hl.bind("SUPER + D", hl.dsp.exec_cmd("rofi -show drun -theme " .. home .. "/.config/rofi/simple.rasi"))
 hl.bind("SUPER + W", hl.dsp.exec_cmd(home .. "/.config/waybar/scripts/cycle_waybar.sh"))
+hl.bind("SUPER + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu -p '📋 Clipboard' -theme " .. home .. "/.config/rofi/clipboard.rasi | cliphist decode | wl-copy"))
+
+
+-- Scratchpad (Special Workspace)
+hl.bind("SUPER + U", hl.dsp.exec_cmd("hyprctl dispatch togglespecialworkspace scratchpad"))
+hl.bind("SUPER + SHIFT + U", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace special:scratchpad"))
+hl.bind("SUPER + SHIFT + Return", hl.dsp.exec_cmd("bash -c 'hyprctl clients | grep -q \"class: scratchpad\" && hyprctl dispatch togglespecialworkspace scratchpad || kitty --class scratchpad'"))
+
 
 -- System
 hl.bind("SUPER + p", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/power_menu.sh"))
@@ -16,9 +24,19 @@ hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/scre
 hl.bind("SUPER + ALT + W", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/wallpaper.sh"))
 hl.bind("SUPER + R", hl.dsp.exec_cmd("hyprctl reload"))
 hl.bind("SUPER + l", hl.dsp.exec_cmd("hyprlock"))
+hl.bind("SUPER + ALT + l", hl.dsp.exec_raw("clear_crashed_lockscreen"))
 hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + space", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+
+-- Window Groups (Tabs)
+hl.bind("SUPER + G", hl.dsp.group.toggle())
+hl.bind("SUPER + TAB", hl.dsp.group.next())
+hl.bind("SUPER + SHIFT + TAB", hl.dsp.group.prev())
+
+-- Special Workspace (Scratchpad)
+hl.bind("SUPER + U", hl.dsp.workspace.toggle_special("magic"))
+hl.bind("SUPER + SHIFT + U", hl.dsp.window.move({ workspace = "special:magic" }))
 
 
 -- Workspaces
@@ -32,8 +50,10 @@ hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Media keys
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("pamixer -i 5"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("pamixer -d 5"), { locked = true, repeating = true })
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("pamixer -t"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5%"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/volume_brightness_notify.sh volume_up"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/volume_brightness_notify.sh volume_down"), { locked = true, repeating = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/volume_brightness_notify.sh volume_mute"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/volume_brightness_notify.sh brightness_up"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/volume_brightness_notify.sh brightness_down"), { locked = true, repeating = true })
+
+

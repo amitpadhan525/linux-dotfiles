@@ -1,7 +1,7 @@
 # Hyprland & Waybar Environment Master Requirements & Configurations Guide
 # Location: ~/.config/hypr/requirements.txt
-# Generated: 2026-05-20
-# Purpose: Extremely detailed setup, configuration, and dependencies manual.
+# Generated: 2026-07-21
+# Purpose: Detailed setup, configuration, and dependencies manual.
 
 ================================================================================
 1. CORE DESKTOP PROCESSES & DETAILED DECORATIVE CONFIGURATIONS
@@ -9,12 +9,16 @@
 
 A. HYPRLAND COMPOSITOR (v0.55.0+)
    * Purpose: Wayland display server, window manager, and native compositor.
-   * Lua Engine Configuration Interface: Uses a custom Lua-based configurations parser
+   * Lua Engine Configuration Interface: Uses a custom Lua-based configuration parser
      (global namespace 'hl'). All window rules, keybindings, customizations, and
      environment settings are handled inside the Lua modular structure.
    * Required Window Rules (~/.config/hypr/conf/windowrules.lua):
      - Modal dialogues forced to tile: `hl.window_rule({ match = { modal = true }, tile = true })`
      - XWayland floating windows tiled: `hl.window_rule({ match = { xwayland = true, float = true }, tile = true })`
+     - Scratchpad class auto-floating: `hl.window_rule({ match = { class = "scratchpad" }, float = true, workspace = "special:scratchpad" })`
+     - Smart Gaps borderless single window: `hl.window_rule({ match = { workspace = "w[tv1]", float = false }, border_size = 0, rounding = 0 })`
+   * Required Workspace Rules (~/.config/hypr/conf/workspaces.lua):
+     - Smart Gaps inner/outer gap removal: `hl.workspace_rule({ workspace = "w[tv1]", gaps_in = 0, gaps_out = 0 })`
    * Reload Command: Triggers instant, seamless configuration reloading at runtime via the Lua engine:
      - `SUPER + R` (recompiles and applies keybindings, workspace maps, and layout trees).
 
@@ -28,38 +32,46 @@ B. WAYBAR STATUS BAR (v0.10+)
      - Uses Vanilla CSS utilizing glassmorphism and tailormade color gradients.
      - Blinking recorder styling class `#custom-recording` utilizing keyframe animations to pulse between semi-transparent and bright solid red borders.
 
-C. ROFI UTILITY FOR WAYLAND
-   * Purpose: Menu selector, interactive prompt launcher, and custom text input fields.
+C. ROFI UTILITY FOR WAYLAND & CLIPBOARD INTERFACE
+   * Purpose: Menu selector, interactive prompt launcher, and custom clipboard viewer.
    * Native Package Requirement: Must use wayland-native rofi (e.g., `rofi-lbonn-wayland-git`) to support clipboard interaction and correct cursor tracking under Hyprland.
-   * Rofi Configurations (~/.config/rofi/simple.rasi):
-     - Employs a premium dark aesthetic with rich HSL/RGB colors matching the desktop system's purple/blue color highlights.
+   * Rofi Configurations:
+     - Main Launcher (~/.config/rofi/simple.rasi): Employs a premium dark aesthetic with neon teal highlights (#00ffb3).
+     - Dedicated Clipboard Theme (~/.config/rofi/clipboard.rasi): Single-column 850px wide layout with disabled icons, optimized for previewing multi-line clipboard text and code snippets.
      - Dynamic Compact overrides: Start menu is resized dynamically to a width of 450px with a single column and 3 compact lines using:
        `-theme-str 'window { width: 450px; } listview { columns: 1; lines: 3; }'`
-     - Dynamic Name Input override: The save-as name input box completely disables the options selection area to function exclusively as a clean, single-line text input modal utilizing:
-       `-theme-str 'listview { enabled: false; } window { width: 500px; }'`
 
-D. KITTY TERMINAL EMULATOR
+D. CLIPBOARD MANAGER (cliphist)
+   * Purpose: Persistent Wayland clipboard manager storing text, code snippets, and image history.
+   * Daemon Script (~/.config/hypr/scripts/clipboard-daemon.sh):
+     - Watches standard clipboard text/images (`wl-paste --watch cliphist store`) and primary mouse selection.
+     - Autostarted via `conf/autostart.lua`.
+   * Keybinding (<kbd>SUPER + V</kbd>):
+     - Triggers `cliphist list | rofi -dmenu -p '📋 Clipboard' -theme ~/.config/rofi/clipboard.rasi | cliphist decode | wl-copy`.
+   * Storage: Persisted on disk across system reboots at `~/.cache/cliphist/db` (capacity: 750 items).
+
+E. KITTY TERMINAL EMULATOR
    * Purpose: Native GPU-accelerated terminal emulator.
    * Requirements:
      - Font family: `JetBrainsMono Nerd Font` for accurate display of icons and developer syntax.
      - Font size: Bold 12pt default.
 
-E. HYPRLOCK LOCK SCREEN
+F. HYPRLOCK LOCK SCREEN
    * Purpose: Desktop lock screen utility.
    * Styling Configurations (~/.config/hypr/hyprlock.conf):
      - Customized clock spacing using tight Pango text padding markup.
      - Password text input dots size optimized to perfectly match system aesthetic constraints.
      - Integrated a dynamic glassmorphic battery status capsule driven by a custom monitoring shell script (`~/.config/hypr/scripts/battery.sh`).
 
-F. HYPRPAPER WALLPAPER DAEMON
+G. HYPRPAPER WALLPAPER DAEMON
    * Purpose: Native utility to pre-load and swap desktop screen wallpaper canvases.
    * Requirements: Requires `~/.config/hypr/hyprpaper.conf` to preload background images on compositor startup.
 
-G. DUNST NOTIFICATION DAEMON (v1.13+)
+H. DUNST NOTIFICATION DAEMON (v1.13+)
    * Purpose: Lightweight, highly customizable notification daemon.
    * Note: Active notification daemon (replaces `mako` and `swaync`). Autostarted inside `conf/autostart.lua`.
 
-H. POLICYKIT (POLKIT) AUTHENTICATION AGENT (hyprpolkitagent)
+I. POLICYKIT (POLKIT) AUTHENTICATION AGENT (hyprpolkitagent)
    * Purpose: Handles privilege elevation requests for GUI applications.
    * Note: Active authentication agent is `hyprpolkitagent`. Autostarted inside `conf/autostart.lua`.
 
@@ -70,31 +82,27 @@ H. POLICYKIT (POLKIT) AUTHENTICATION AGENT (hyprpolkitagent)
 A. WF-RECORDER (Arch: `sudo pacman -S wf-recorder`)
    * Purpose: Native Wayland screen capture utility that pipes the Hyprland screencopy buffers directly into containerized video streams.
    * Crucial Process Management: Must be closed strictly using the standard SIGINT signal (`kill -2 <PID>`). Terminating using SIGKILL (`kill -9`) corrupts the MP4 container wrapper and leaves the recorded video corrupted and unplayable.
-   * Multi-Mode Operation:
-     - Fullscreen Recording: Captures the whole output screen: `wf-recorder -f <SAVE_PATH>`
-     - Area/Region Recording: Selects coordinate rectangles: `wf-recorder -g "<GEOMETRY>" -f <SAVE_PATH>`
 
 B. SLURP (Arch: `sudo pacman -S slurp`)
    * Purpose: Desktop region selector that outputs Wayland coordinates (`X,Y WxH`).
-   * Requirements: Pipes the geometry directly into `wf-recorder -g` and outputs exit code 1 if selection is cancelled by pressing ESC.
 
 C. GRIM (Arch: `sudo pacman -S grim`)
    * Purpose: Direct Wayland screenshot capture utility.
 
 D. LIBNOTIFY / NOTIFY-SEND (Arch: `sudo pacman -S libnotify`)
-   * Purpose: Standard desktop notification system. Send status notifications on start/stop and provides click-action prompts and save paths.
+   * Purpose: Standard desktop notification system.
 
-E. WL-CLIPBOARD (Arch: `sudo pacman -S wl-clipboard`)
-   * Purpose: Command-line copy/paste utilities for Wayland (provides `wl-copy`). Used by screenshots to copy raw image data directly to system clipboard.
+E. WL-CLIPBOARD & CLIPHIST (Arch: `sudo pacman -S wl-clipboard cliphist`)
+   * Purpose: Command-line copy/paste utilities for Wayland and persistent clipboard history manager.
 
 F. PAMIXER (Arch: `sudo pacman -S pamixer`)
-   * Purpose: Command-line volume mixer for PulseAudio/PipeWire. Used by keybindings to control sound level and muting.
+   * Purpose: Command-line volume mixer for PulseAudio/PipeWire.
 
 G. BRIGHTNESSCTL (Arch: `sudo pacman -S brightnessctl`)
-   * Purpose: Command-line tool to control device brightness. Used by keybindings to adjust monitor screen brightness.
+   * Purpose: Command-line tool to control device brightness.
 
 H. HYPRSUNSET (Arch: `sudo pacman -S hyprsunset`)
-   * Purpose: Blue light filter and color temperature tool for Hyprland, used to set temperature to 4500K dynamically.
+   * Purpose: Blue light filter and color temperature tool for Hyprland (4500K).
 
 ================================================================================
 3. SYSTEM TYPOGRAPHY REQUIREMENTS
@@ -106,7 +114,6 @@ A. JetBrainsMono Nerd Font
 
 B. Outfit Font Family
    * Usage: High-end UI widgets, custom overlays, notifications, and lock screen typography.
-   * Style: Sans-serif geometric font with premium spacing.
 
 C. Inter Font Family
    * Usage: Clean interface readability, fallback system stacks, and default rofi prompt labels.
@@ -117,50 +124,33 @@ C. Inter Font Family
 
 * Python 3.x is required as the core script runtime executor.
 * Core Helper: `recording_status.py` (~/.config/waybar/scripts/recording_status.py)
-  - Process Owner Strategy: Rather than relying on unreliable environmental user strings (`os.getenv("USER")`), it fetches the active User ID directly from the Linux Kernel via `os.getuid()` to dynamically monitor active `wf-recorder` processes.
-  - Duration Parser: Measures the active recording duration by comparing current epoch time with the creation/modification timestamp of the temporary file (`/tmp/wf-recorder.pid`):
-    `elapsed = int(time.time() - os.path.getmtime("/tmp/wf-recorder.pid"))`
-  - Output Interface: Serializes a formatted JSON dictionary directly to standard stdout output for Waybar:
-    `{"text": "●  REC  00:05", "class": "recording", "tooltip": "Recording active. Click to Stop."}`
-  - Pulsing Mechanism: Automatically triggers dot pulsing on and off by calculating: `elapsed % 2 == 0`.
-  - Auto-Hidden State: If `wf-recorder` is not running, it outputs `{"text": "", "class": "hidden"}` which instantly hides the Dynamic Island pill from Waybar completely.
+  - Fetches active User ID directly from the Linux Kernel via `os.getuid()` to dynamically monitor active `wf-recorder` processes.
+  - Measures duration by comparing epoch timestamp of `/tmp/wf-recorder.pid`.
 
 ================================================================================
 5. SYSTEM STATE FLOWS & SCRIPT INTEGRATIONS
 ================================================================================
 
 A. KEYBINDING TRIGGERS:
-   - When the user presses `SUPER + SHIFT + S` hotkey, `~/.config/hypr/scripts/screen_record.sh` is executed.
-
-B. SCREEN RECORDER CORE FLOW (screen_record.sh):
-   1. If `wf-recorder` is currently active:
-      * Gracefully shuts down `wf-recorder` (`kill -2`).
-      * Waits for the process to fully close and flush video buffers.
-      * Prompts the user to save as a custom name using an empty, compact Rofi text prompt.
-      * If user inputs a name, renames the output file to `Name.mp4`. If left empty or cancelled, defaults to saving with the timestamp `recording_YYYY-MM-DD_HH-MM-SS.mp4`.
-      * Cleans up all temporary PIDs.
-      * Fires the Waybar redraw trigger signal (`pkill -RTMIN+8 waybar`).
-      * Triggers notify-send with the final save path.
-   2. If `wf-recorder` is NOT currently active:
-      * Launches the compact Rofi menu with `Record Fullscreen` highlighted as the first choice.
-      * If `Record Fullscreen` is selected: Launches `wf-recorder -f` to capture the whole monitor.
-      * If `Record Area` is selected: Triggers `slurp` to let the user select a custom area, then launches `wf-recorder -g` to capture that specific region.
-      * Saves PID to `/tmp/wf-recorder.pid` and the filepath to `/tmp/wf-recorder.path`.
-      * Instantly refreshes Waybar (`pkill -RTMIN+8 waybar`) to display the dynamic recording indicator.
-      * Sends a desktop startup notification.
+   - `SUPER + SHIFT + S`: Executes `~/.config/hypr/scripts/screen_record.sh`
+   - `SUPER + V`: Opens Rofi Clipboard History (`cliphist list | rofi -dmenu ...`)
+   - `SUPER + U`: Toggles Special Workspace (Scratchpad)
+   - `SUPER + SHIFT + U`: Moves focused window to Scratchpad
+   - `SUPER + SHIFT + ENTER`: Toggles/launches Scratchpad Kitty terminal
 
 ================================================================================
 6. RESTORATION AND SETUP INSTRUCTIONS
 ================================================================================
 
 A. INSTALL ALL REQUIRED PACKAGES:
-   `sudo pacman -S hyprland waybar kitty hyprlock hyprpaper wf-recorder slurp grim libnotify ttf-jetbrains-mono-nerd rofi wl-clipboard pamixer brightnessctl hyprsunset dunst hyprpolkitagent`
+   `sudo pacman -S hyprland waybar kitty hyprlock hyprpaper wf-recorder slurp grim libnotify ttf-jetbrains-mono-nerd rofi wl-clipboard cliphist pamixer brightnessctl hyprsunset dunst hyprpolkitagent`
 
 B. ENSURE SCRIPTS ARE FULLY EXECUTABLE:
    `chmod +x ~/.config/hypr/scripts/screen_record.sh`
-   `chmod +x ~/.config/hypr/scripts/battery.sh`
+   `chmod +x ~/.config/hypr/scripts/battery-notification.sh`
+   `chmod +x ~/.config/hypr/scripts/device-notifier.sh`
+   `chmod +x ~/.config/hypr/scripts/clipboard-daemon.sh`
    `chmod +x ~/.config/waybar/scripts/recording_status.py`
 
-C. APPLY THE NEW LUA AND WAYBAR SCHEMES:
-   - Reload Hyprland configuration: Press `SUPER + R`
-   - Restart Waybar configuration: Run `killall waybar && waybar &` in terminal.
+C. APPLY THE LUA CONFIGURATION:
+   - Reload Hyprland configuration: Press `SUPER + R` (or run `hyprctl reload`)

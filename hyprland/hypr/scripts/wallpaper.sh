@@ -1,67 +1,116 @@
 #!/bin/bash
 # ----------------------------------------------------- 
-# Wallpaper launcher for hyprpaper v0.8.x (Dynamic)
+# Dual Wallpaper launcher (Desktop & Hyprlock) - Portable Dotfiles
 # ----------------------------------------------------- 
 
-DEFAULT_WALLPAPER="$HOME/.config/hypr/wallpapers/prime2.png"
-STATE_FILE="$HOME/.config/hypr/.current_wallpaper"
+DEFAULT_DESKTOP="\$HOME/.config/hypr/wallpapers/desktop_wallpaper.png"
+DEFAULT_LOCKSCREEN="\$HOME/.config/hypr/wallpapers/lockscreen_wallpaper.jpg"
+
+STATE_DESKTOP="$HOME/.config/hypr/.current_wallpaper"
+STATE_LOCKSCREEN="$HOME/.config/hypr/.current_lockscreen"
+
 CONF="$HOME/.config/hypr/hyprpaper.conf"
 LOG="$HOME/.config/hypr/logs/hyprpaper.log"
 
 exec > "$LOG" 2>&1
 echo "--- Wallpaper launcher started: $(date) ---"
 
-# 1. Determine active wallpaper path
-if [ -n "$1" ]; then
-    # Resolve relative paths to absolute paths
-    TARGET_WP=$(realpath "$1")
-    if [ -f "$TARGET_WP" ]; then
-        WALLPAPER="$TARGET_WP"
-        echo "$WALLPAPER" > "$STATE_FILE"
-    else
-        echo "ERROR: File $1 does not exist." >&2
-        exit 1
-    fi
-else
-    if [ -f "$STATE_FILE" ]; then
-        WALLPAPER=$(cat "$STATE_FILE")
-    else
-        WALLPAPER="$DEFAULT_WALLPAPER"
-    fi
+save_portable_path() {
+    local raw_path="$1"
+    local target_file="$2"
+    local abs_path
+    abs_path=$(realpath "$raw_path")
+    local portable_path="${abs_path/#$HOME/\$HOME}"
+    echo "$portable_path" > "$target_file"
+}
+
+# Handle CLI flags or positional arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --desktop|-d)
+            if [ -f "$2" ]; then save_portable_path "$2" "$STATE_DESKTOP"; shift; fi
+            ;;
+        --lockscreen|-l)
+            if [ -f "$2" ]; then save_portable_path "$2" "$STATE_LOCKSCREEN"; shift; fi
+            ;;
+        *)
+            if [ -z "$POS1" ]; then
+                POS1="$1"
+            elif [ -z "$POS2" ]; then
+                POS2="$1"
+            fi
+            ;;
+    esac
+    shift
+done
+
+if [ -n "$POS1" ] && [ -f "$POS1" ]; then
+    save_portable_path "$POS1" "$STATE_DESKTOP"
+fi
+if [ -n "$POS2" ] && [ -f "$POS2" ]; then
+    save_portable_path "$POS2" "$STATE_LOCKSCREEN"
 fi
 
-echo "Selected Wallpaper: $WALLPAPER"
+# 1. Read System Desktop Wallpaper
+if [ -f "$STATE_DESKTOP" ]; then
+    RAW_DESKTOP=$(cat "$STATE_DESKTOP" | tr -d '\r\n')
+    eval DESKTOP_WP="$RAW_DESKTOP"
+    if [ ! -f "$DESKTOP_WP" ]; then
+        eval DESKTOP_WP="$DEFAULT_DESKTOP"
+    fi
+else
+    eval DESKTOP_WP="$DEFAULT_DESKTOP"
+fi
 
-# 2. Update hyprpaper configuration dynamically
+if [ ! -f "$DESKTOP_WP" ]; then
+    if [ -f "$HOME/.config/hypr/wallpapers/lockscreen_wallpaper.jpg" ]; then
+        cp "$HOME/.config/hypr/wallpapers/lockscreen_wallpaper.jpg" "$HOME/.config/hypr/wallpapers/desktop_wallpaper.png"
+    elif [ -f "$HOME/Pictures/background/theme1/wallpaper/wallpaper.jpg" ]; then
+        cp "$HOME/Pictures/background/theme1/wallpaper/wallpaper.jpg" "$HOME/.config/hypr/wallpapers/desktop_wallpaper.png"
+    fi
+    eval DESKTOP_WP="$DEFAULT_DESKTOP"
+fi
+save_portable_path "$DESKTOP_WP" "$STATE_DESKTOP"
+
+# 2. Read Hyprlock Wallpaper
+if [ -f "$STATE_LOCKSCREEN" ]; then
+    RAW_LOCK=$(cat "$STATE_LOCKSCREEN" | tr -d '\r\n')
+    eval LOCK_WP="$RAW_LOCK"
+    if [ ! -f "$LOCK_WP" ]; then
+        eval LOCK_WP="$DEFAULT_LOCKSCREEN"
+        save_portable_path "$LOCK_WP" "$STATE_LOCKSCREEN"
+    fi
+else
+    eval LOCK_WP="$DEFAULT_LOCKSCREEN"
+    save_portable_path "$LOCK_WP" "$STATE_LOCKSCREEN"
+fi
+
+echo "Selected Desktop Wallpaper:  $DESKTOP_WP"
+echo "Selected Hyprlock Wallpaper: $LOCK_WP"
+
+# 3. Update hyprpaper configuration for Desktop
+DESKTOP_WP_PORTABLE="${DESKTOP_WP/#$HOME/\$HOME}"
 cat <<EOF > "$CONF"
-preload = $WALLPAPER
-wallpaper = eDP-1,$WALLPAPER
+wallpaper {
+    monitor = 
+    path = $DESKTOP_WP_PORTABLE
+}
 splash = false
 ipc = on
 EOF
 
-# 3. Update lockscreen wallpaper to match
-cp "$WALLPAPER" "$HOME/.config/hypr/wallpapers/lockscreen.png"
+# 4. Sync Hyprlock wallpaper file target
+if [ -f "$LOCK_WP" ] && [ "$LOCK_WP" != "$HOME/.config/hypr/wallpapers/lockscreen_wallpaper.jpg" ]; then
+    cp "$LOCK_WP" "$HOME/.config/hypr/wallpapers/lockscreen_wallpaper.jpg"
+fi
 
-# 4. Restart hyprpaper
+# 5. Restart hyprpaper
 killall -q hyprpaper
 while pgrep -x hyprpaper > /dev/null; do sleep 0.05; done
 
-SOCK="${XDG_RUNTIME_DIR}/hypr/${HYPRLAND_INSTANCE_SIGNATURE}/.hyprpaper.sock"
-rm -f "$SOCK"
+setsid /usr/bin/hyprpaper -c "$CONF" > "$HOME/.config/hypr/logs/hyprpaper_daemon.log" 2>&1 &
 
-# Start hyprpaper in background
-nohup hyprpaper -c "$CONF" >/dev/null 2>&1 &
-
-# Tight loop: apply wallpaper via IPC as soon as socket is alive
-for i in $(seq 1 100); do
-    result=$(hyprctl hyprpaper wallpaper "eDP-1,$WALLPAPER" 2>&1)
-    if [ -z "$result" ]; then
-        echo "Wallpaper set on attempt $i"
-        break
-    fi
-    sleep 0.05
-done
+sleep 0.2
 
 if pgrep -x hyprpaper > /dev/null; then
     echo "hyprpaper is running. Done."

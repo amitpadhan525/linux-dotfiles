@@ -1,0 +1,114 @@
+/*******************************************************************************
+ * ROFI — Clipboard Manager Theme
+ * Accent: Neon Teal #00ffb3 — wide single-column for clipboard history
+ *******************************************************************************/
+
+configuration {
+    show-icons:                 false;
+}
+
+* {
+    font:                        "JetBrainsMono Nerd Font Bold 11";
+
+    bg-base:                     #000000f5;
+    bg-alt:                      #ffffff14;
+    fg-main:                     #ffffffff;
+    fg-dim:                      #888888ff;
+    accent:                      #00ffb3ff;
+    accent-dim:                  #00ffb30a;
+    accent-mid:                  #00ffb3b3;
+    border-subtle:               #00ffb333;
+
+    background-color:            transparent;
+    text-color:                  @fg-main;
+}
+
+window {
+    transparency:                "real";
+    background-color:            @bg-base;
+    border:                      1px solid;
+    border-color:                @accent-mid;
+    border-radius:               16px;
+    width:                       850px;
+    location:                    center;
+    anchor:                      center;
+    cursor:                      "default";
+}
+
+mainbox {
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+    padding:                     20px;
+    spacing:                     14px;
+}
+
+inputbar {
+    background-color:            @bg-alt;
+    border:                      1px solid;
+    border-color:                @accent;
+    border-radius:               10px;
+    padding:                     10px 14px;
+    spacing:                     10px;
+    children:                    [ "prompt", "entry" ];
+    text-color:                  @fg-main;
+}
+
+prompt {
+    background-color:            transparent;
+    text-color:                  @accent;
+}
+
+entry {
+    background-color:            transparent;
+    text-color:                  @fg-main;
+    cursor:                      text;
+    placeholder:                 "Search clipboard history…";
+    placeholder-color:           @fg-dim;
+}
+
+listview {
+    background-color:            transparent;
+    columns:                     1;
+    lines:                       9;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    spacing:                     6px;
+    fixed-height:                false;
+}
+
+element {
+    background-color:            @accent-dim;
+    border:                      1px solid;
+    border-color:                @border-subtle;
+    border-radius:               8px;
+    padding:                     10px 14px;
+    cursor:                      pointer;
+    text-color:                  @fg-main;
+}
+
+element normal.normal {
+    background-color:            @accent-dim;
+    text-color:                  @fg-main;
+}
+
+element alternate.normal {
+    background-color:            @accent-dim;
+    text-color:                  @fg-main;
+}
+
+element selected.normal {
+    background-color:            @accent;
+    border-color:                @accent;
+    text-color:                  #000000ff;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}

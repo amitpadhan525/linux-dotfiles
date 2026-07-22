@@ -25,12 +25,8 @@ local function autostart()
     -- Run scripts directly (concurrency and single-instance locks are handled inside the scripts)
     hl.exec_cmd(home .. "/.config/hypr/scripts/battery-notification.sh &")
     hl.exec_cmd(home .. "/.config/hypr/scripts/device-notifier.sh &")
+    hl.exec_cmd(home .. "/.config/hypr/scripts/clipboard-daemon.sh &")
 end
 
 -- Run only once on the very first startup
 hl.on("hyprland.start", autostart)
-
--- On reload, restart hyprpaper via the script
-hl.on("config.reloaded", function()
-    hl.exec_cmd(home .. "/.config/hypr/scripts/wallpaper.sh &")
-end)

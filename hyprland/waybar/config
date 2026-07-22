@@ -10,7 +10,6 @@
     "modules-left": [],
     "modules-center": [
         "custom/recording",
-        "custom/volume_brightness_osd",
         "hyprland/workspaces",
         "custom/clock",
         "network",
@@ -31,15 +30,10 @@
     },
     "hyprland/workspaces": {
         "format": "{name}",
-        "on-click": "activate",
-        "sort-by-number": true,
+        "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"{name}\" })'",
         "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
-        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'"
-    },
-    "custom/volume_brightness_osd": {
-        "exec": "python3 $HOME/.config/waybar/scripts/volume_brightness_osd.py",
-        "return-type": "json",
-        "format": "{text}"
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
+        "sort-by-number": true
     },
     "custom/clock": {
         "exec": "python3 $HOME/.config/waybar/scripts/custom_clock.py",

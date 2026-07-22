@@ -1,12 +1,36 @@
 ---@diagnostic disable: undefined-global
+
+local function get_dynamic_colors()
+    local colors = {}
+    local path = (os.getenv("HOME") or "") .. "/.config/hypr/colors.conf"
+    local f = io.open(path, "r")
+    if f then
+        for line in f:lines() do
+            local k, v = line:match("^%s*%$([%w_]+)%s*=%s*(.-)%s*$")
+            if k and v then
+                colors[k] = v
+            end
+        end
+        f:close()
+    end
+    return colors
+end
+
+local dyn_colors = get_dynamic_colors()
+local accent_hex = dyn_colors.accent_hex or "00ffb3"
+local accent_two_hex = dyn_colors.accent_two_hex or "a7f3d0"
+
+local active_border = "rgba(" .. accent_hex .. "e6)"
+local inactive_border = "rgba(" .. accent_hex .. "20)"
+
 hl.config({
     general = {
         gaps_in = 1,
         gaps_out = 0,
         border_size = 1,
         col = {
-            active_border = "rgba(00ffb3b3)",
-            inactive_border = "rgba(00ffb318)",
+            active_border = active_border,
+            inactive_border = inactive_border,
         },
         resize_on_border = true,
         layout = "dwindle"
@@ -36,6 +60,13 @@ hl.config({
         vrr = 0,
         animate_manual_resizes = true,
         animate_mouse_windowdragging = true
+    },
+    group = {
+        groupbar = {
+            disable_when_only = true,
+            height = 20,
+            font_size = 10
+        }
     }
 })
 

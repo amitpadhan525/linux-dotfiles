@@ -10,7 +10,8 @@ alias grep='grep --color=auto'
 #PS1='[\u@\h \W]\$ '
 PS1='\[\e[1;32m\][\u@\h]\[\e[0m\] \[\e[1;34m\]\w\[\e[0m\] $ '
 
-alias conda-on='source $HOME/anaconda3/etc/profile.d/conda.sh && conda activate base'
+alias ds-env='source ~/venvs/ds-env/bin/activate'
+alias tf-env='source ~/venvs/tf-env/bin/activate'
 alias jupyterlab='source ~/venvs/ds-env/bin/activate && BROWSER=/usr/bin/brave python -m jupyter lab'
 alias vmware-start="sudo systemctl start vmware-networks vmware-usbarbitrator"
 

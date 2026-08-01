@@ -47,7 +47,7 @@ D. CLIPBOARD MANAGER (cliphist)
      - Watches standard clipboard text/images (`wl-paste --watch cliphist store`) and primary mouse selection.
      - Autostarted via `conf/autostart.lua`.
    * Keybinding (<kbd>SUPER + V</kbd>):
-     - Triggers `cliphist list | rofi -dmenu -p '📋 Clipboard' -theme ~/.config/rofi/clipboard.rasi | cliphist decode | wl-copy`.
+     - Triggers `cliphist list | rofi -dmenu -i -p '📋 Clipboard' -theme ~/.config/rofi/clipboard.rasi | cliphist decode | wl-copy`.
    * Storage: Persisted on disk across system reboots at `~/.cache/cliphist/db` (capacity: 750 items).
 
 E. KITTY TERMINAL EMULATOR

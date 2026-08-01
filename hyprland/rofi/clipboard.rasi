@@ -5,6 +5,7 @@
 
 configuration {
     show-icons:                 false;
+    case-sensitive:             false;
 }
 
 * {

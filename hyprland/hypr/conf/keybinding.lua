@@ -7,7 +7,7 @@ hl.bind("SUPER + E", hl.dsp.exec_cmd("thunar"))
 hl.bind("SUPER + Return", hl.dsp.exec_cmd("kitty --config " .. home .. "/.config/kitty/kitty.conf"))
 hl.bind("SUPER + D", hl.dsp.exec_cmd("rofi -show drun -theme " .. home .. "/.config/rofi/simple.rasi"))
 hl.bind("SUPER + W", hl.dsp.exec_cmd(home .. "/.config/waybar/scripts/cycle_waybar.sh"))
-hl.bind("SUPER + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu -p '📋 Clipboard' -theme " .. home .. "/.config/rofi/clipboard.rasi | cliphist decode | wl-copy"))
+hl.bind("SUPER + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu -i -p '📋 Clipboard' -theme " .. home .. "/.config/rofi/clipboard.rasi | cliphist decode | wl-copy"))
 
 
 -- Scratchpad (Special Workspace)

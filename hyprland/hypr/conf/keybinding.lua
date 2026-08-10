@@ -24,6 +24,8 @@ hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/scre
 hl.bind("SUPER + ALT + W", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/wallpaper.sh"))
 hl.bind("SUPER + R", hl.dsp.exec_cmd("hyprctl reload"))
 hl.bind("SUPER + l", hl.dsp.exec_cmd("hyprlock"))
+hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("hyprlock"), { locked = true })
+hl.bind("XF86PowerOff", hl.dsp.exec_cmd("hyprlock"), { locked = true })
 hl.bind("SUPER + ALT + l", hl.dsp.exec_raw("clear_crashed_lockscreen"))
 hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + F", hl.dsp.window.float({ action = "toggle" }))

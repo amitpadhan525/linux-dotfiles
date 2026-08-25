@@ -1,0 +1,33 @@
+[appearance]
+anim_curve_enter = 'OutCubic'
+anim_curve_exit = 'InCubic'
+anim_curve_transition = 'Bezier'
+anim_duration = 200
+anim_duration_fast = 100
+anim_duration_slow = 350
+animations_enabled = true
+radius_large = 12
+radius_medium = 8
+radius_small = 4
+transparency_enabled = true
+transparency_level = 1.0
+
+[general]
+dependency_startup_check = true
+font_family = ''
+icon_theme = 'default'
+remember_sort_per_folder = true
+show_hidden = false
+sort_ascending = true
+sort_by = 'name'
+theme = 'catppuccin-mocha'
+
+[sidebar]
+hidden_quick_access = []
+position = 'left'
+visible = true
+width = 200
+
+[window]
+button_layout = ':minimize,maximize,close'
+show_controls = false

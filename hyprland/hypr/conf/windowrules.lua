@@ -21,7 +21,7 @@ end
 -- ─────────────────────────────────────────────────────────────────────────────
 
 local forced_tiling_apps = {
-    "code", "Code", "thunar", "dolphin", "nautilus",
+    "code", "Code", "hyprfm", "HyprFM", "thunar", "dolphin", "nautilus",
     "org.gnome.Nautilus", "pcmanfm", "xdg-desktop-portal-gtk"
 }
 

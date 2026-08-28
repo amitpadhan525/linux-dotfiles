@@ -22,7 +22,7 @@ readonly CORE_WM=(
     "nwg-dock-hyprland" "nwg-look"
 )
 readonly MULTIMEDIA=(
-    "pipewire" "pipewire-pulse" "wireplumber" "pamixer" "pavucontrol" "libpulse"
+    "pipewire" "pipewire-pulse" "wireplumber" "pamixer" "pavucontrol" "libpulse" "playerctl"
 )
 readonly SYSTEM_UTILS=(
     "brightnessctl" "networkmanager" "nm-connection-editor" "blueman"
@@ -344,7 +344,7 @@ deploy_configs() {
             mkdir -p "$BACKUP_DIR"
         fi
         
-        local modules=("hypr" "waybar" "rofi" "kitty" "dunst" "mako" "nwg-dock-hyprland" "nwg-look" "gtk-3.0" "gtk-4.0" "xsettingsd" "systemd/user")
+        local modules=("hypr" "waybar" "rofi" "kitty" "dunst" "mako" "nwg-dock-hyprland" "nwg-look" "hyprfm" "gtk-3.0" "gtk-4.0" "xsettingsd" "systemd/user")
         local backed_up_count=0
         
         for mod in "${modules[@]}"; do
@@ -390,7 +390,7 @@ deploy_configs() {
         mkdir -p "$CONFIG_DIR"
     fi
     
-    local config_modules=("hypr" "waybar" "rofi" "kitty" "dunst" "mako" "nwg-dock-hyprland" "nwg-look" "gtk-3.0" "gtk-4.0" "xsettingsd" "systemd/user")
+    local config_modules=("hypr" "waybar" "rofi" "kitty" "dunst" "mako" "nwg-dock-hyprland" "nwg-look" "hyprfm" "gtk-3.0" "gtk-4.0" "xsettingsd" "systemd/user")
     
     for mod in "${config_modules[@]}"; do
         local source="$DOTFILES_DIR/hyprland/$mod"

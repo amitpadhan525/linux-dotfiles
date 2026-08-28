@@ -14,7 +14,7 @@ These are the fundamental building blocks of the desktop environment, responsibl
 | **Status Bar** | `waybar` | The aesthetic status bar displaying workspaces, active modules, and dynamic media islands. |
 | **App Menu** | `rofi-wayland` | Wayland-native keyboard-driven selection portal for menus, WiFi lists, and prompts. |
 | **Terminal** | `kitty` | Ultra-fast, GPU-accelerated terminal emulator displaying developer outputs. |
-| **File Manager** | `thunar` | Lightweight, robust GTK-based file explorer. |
+| **File Manager** | `hyprfm` / `thunar` | Fast modern file explorer (HyprFM tabbed/miller view) & Thunar fallback. |
 | **Notification (Active)**| `dunst` | Advanced notification daemon styled cohesive with the theme. |
 | **Notification (Alt)** | `mako` | Lightweight notification daemon designed explicitly for Wayland. |
 | **Desktop Dock** | `nwg-dock-hyprland` (AUR)| Custom CSS styled floating launcher dock. |
@@ -55,6 +55,7 @@ Astraeus implements modern Wayland audio pipelines utilizing Pipewire for modern
 | **Audio Server** | `pipewire` | Multimedia server managing physical hardware paths and low-latency digital signals. |
 | **Session Control**| `wireplumber` | Intelligent session manager handling policy routing and automatic device switching. |
 | **CLI Mixer** | `pamixer` | PulseAudio command-line volume controller used within custom keyboard bindings. |
+| **Media Controller**| `playerctl` | Command-line MPRIS media player controller used within playback keybindings. |
 | **GUI Control** | `pavucontrol` | Full graphical pulse control interface for complex audio management. |
 | **Integration** | `libpulse` | Compatibility library to ensure standard applications interface with Pipewire channels. |
 
@@ -118,6 +119,7 @@ sudo pacman -S --needed --noconfirm \
     pipewire-pulse \
     wireplumber \
     pamixer \
+    playerctl \
     pavucontrol \
     libpulse \
     brightnessctl \

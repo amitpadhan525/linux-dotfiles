@@ -6,6 +6,14 @@
 nohup.out
 **/nohup.out
 
+# Python cache
+__pycache__/
+*.py[cod]
+
+# HyprFM state and session files
+hyprland/hyprfm/*.json
+!hyprland/hyprfm/*.sample
+
 # Ignore backup archives
 *.zip
 *.tar.gz

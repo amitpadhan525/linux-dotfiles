@@ -23,3 +23,10 @@ hl.config({
         workspace_swipe_direction_lock = true,
     }
 })
+
+hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
+
+
+
+
+

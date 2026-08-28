@@ -5,8 +5,8 @@ local home = os.getenv("HOME")
 -- Function to run autostart apps only if they aren't already running
 local function autostart()
     -- Import environment variables to D-Bus and systemd before spawning any processes
-    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-    hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE QT_QPA_PLATFORMTHEME PATH")
+    hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE QT_QPA_PLATFORMTHEME PATH")
 
     -- wallpaper.sh works around a hyprpaper v0.8.x bug where config wallpaper= is ignored
     hl.exec_cmd(home .. "/.config/hypr/scripts/wallpaper.sh &")

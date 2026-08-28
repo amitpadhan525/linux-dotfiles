@@ -10,12 +10,15 @@ radius_large = 12
 radius_medium = 8
 radius_small = 4
 transparency_enabled = true
-transparency_level = 1.0
+transparency_level = 0.0
+
+[bookmarks]
+paths = []
 
 [general]
 dependency_startup_check = true
 font_family = ''
-icon_theme = 'default'
+icon_theme = 'Adwaita'
 remember_sort_per_folder = true
 show_hidden = false
 sort_ascending = true
@@ -26,7 +29,7 @@ theme = 'catppuccin-mocha'
 hidden_quick_access = []
 position = 'left'
 visible = true
-width = 200
+width = 250
 
 [window]
 button_layout = ':minimize,maximize,close'

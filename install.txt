@@ -47,7 +47,7 @@ manager, notifications, wallpaper tools, audio tools, clipboard helpers,
 fonts, and session services such as:
 
     hyprland hyprpaper hyprlock hyprsunset waybar rofi-wayland kitty thunar
-    dunst mako nwg-dock-hyprland nwg-look pipewire wireplumber pamixer
+    dunst mako nwg-dock-hyprland nwg-look pipewire wireplumber pamixer playerctl
     pavucontrol libpulse brightnessctl networkmanager nm-connection-editor
     blueman acpi upower slurp grim wf-recorder wl-clipboard jq python
     libnotify hyprpolkitagent gnome-keyring xsettingsd network-manager-applet
@@ -74,6 +74,7 @@ Typical config paths are:
     ~/.config/mako
     ~/.config/nwg-dock-hyprland
     ~/.config/nwg-look
+    ~/.config/hyprfm
     ~/.config/gtk-3.0
     ~/.config/gtk-4.0
     ~/.config/xsettingsd

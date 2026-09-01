@@ -14,9 +14,12 @@ __pycache__/
 hyprland/hyprfm/*.json
 !hyprland/hyprfm/*.sample
 
-# Ignore backup archives
+# Ignore backup and release archives
 *.zip
 *.tar.gz
 *.bak
 backups/
 backup/
+release/
+
+

@@ -19,4 +19,8 @@ hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("LIBVA_DRIVER_NAME", "radeonsi")
+hl.env("VDPAU_DRIVER", "radeonsi")
+hl.env("AMD_VULKAN_ICD", "RADV")
+
 

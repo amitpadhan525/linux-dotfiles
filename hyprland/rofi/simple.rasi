@@ -19,14 +19,14 @@ configuration {
     font:                        "JetBrainsMono Nerd Font Bold 12";
 
     /* ── Colour Tokens ── */
-    bg-base:                     #000000ff;    /* opaque background */
+    bg-base:                     #020e0af5;    /* opaque background */
     bg-alt:                      #ffffff14;    /* soft white sheen for search bar */
     fg-main:                     #ffffffff;   /* crisp white              */
-    fg-dim:                      #888888ff;    /* clean gray               */
-    accent:                      #00ffb3ff;    /* neon teal                */
-    accent-dim:                  #00ffb30a;    /* teal tint ~4%            */
-    accent-mid:                  #00ffb3b3;    /* teal tint ~70% (matching Dunst notification border) */
-    border-subtle:               #00ffb333;    /* teal border ~20%         */
+    fg-dim:                      #a7f3d099;    /* clean gray               */
+    accent:                      #34d399ff;    /* neon teal                */
+    accent-dim:                  #34d39912;    /* teal tint ~4%            */
+    accent-mid:                  #34d399b3;    /* teal tint ~70% (matching Dunst notification border) */
+    border-subtle:               #34d39933;    /* teal border ~20%         */
     urgent:                      #f38ba8ff;    /* red for urgent           */
 
     background-color:            transparent;
@@ -115,7 +115,8 @@ element alternate.normal {
 element selected.normal {
     background-color:            @accent;
     border-color:                @accent;
-    text-color:                  #000000ff;
+    text-color:                  #021a12ff;
+    border-color:                #6ee7b7ff;
 }
 
 element-icon {

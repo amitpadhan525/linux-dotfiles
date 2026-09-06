@@ -18,14 +18,14 @@ cat > "$THEME_FILE" << 'ROFI_THEME'
 * {
     font:                "JetBrainsMono Nerd Font Bold 12";
 
-    bg-base:             #000000ff;
+    bg-base:             #020e0af5;
     bg-alt:              #ffffff14;
     fg-main:             #ffffffff;
-    fg-dim:              #888888ff;
-    accent:              #00ffb3ff;
-    accent-dim:          #00ffb30a;
-    accent-mid:          #00ffb3b3;
-    border-subtle:       #00ffb333;
+    fg-dim:              #a7f3d099;
+    accent:              #34d399ff;
+    accent-dim:          #34d39912;
+    accent-mid:          #34d399b3;
+    border-subtle:       #34d39933;
     urgent:              #f38ba8ff;
 
     background-color:    transparent;
@@ -117,7 +117,7 @@ element alternate.normal {
 element selected.normal {
     background-color:    @accent;
     border-color:        @accent;
-    text-color:          #000000ff;
+    text-color:          #020e0af5;
 }
 
 element normal.urgent {
@@ -129,7 +129,7 @@ element normal.urgent {
 element selected.urgent {
     background-color:    @urgent;
     border-color:        @urgent;
-    text-color:          #000000ff;
+    text-color:          #020e0af5;
 }
 
 element-icon {
@@ -154,11 +154,11 @@ cat > "$PASS_THEME_FILE" << 'PASS_THEME'
 * {
     font:                "JetBrainsMono Nerd Font Bold 12";
 
-    bg-base:             #000000ff;
+    bg-base:             #020e0af5;
     bg-alt:              #ffffff14;
     fg-main:             #ffffffff;
-    fg-dim:              #888888ff;
-    accent:              #00ffb3ff;
+    fg-dim:              #a7f3d099;
+    accent:              #34d399ff;
 
     background-color:    transparent;
     text-color:          @fg-main;
@@ -168,7 +168,7 @@ window {
     transparency:        "real";
     background-color:    @bg-base;
     border:              1px solid;
-    border-color:        #00ffb3b3;
+    border-color:        #34d399b3;
     border-radius:       22px;
     width:               520px;
     cursor:              "default";

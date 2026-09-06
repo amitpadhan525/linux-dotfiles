@@ -4,12 +4,13 @@
 exec 9>/tmp/device-notifier-bash.lock
 flock -n 9 || exit 0
 
-# Redirect stdout and stderr to a log file for troubleshooting
+# Redirect stdout and stderr to a log file for troubleshooting (capped to prevent growth)
 log_path="$HOME/.config/hypr/logs/device-notifier.log"
 mkdir -p "$(dirname "$log_path")"
+[ -f "$log_path" ] && [ "$(wc -l < "$log_path" 2>/dev/null || echo 0)" -gt 300 ] && tail -n 100 "$log_path" > "$log_path.tmp" && mv "$log_path.tmp" "$log_path"
 exec >> "$log_path" 2>&1
 
-echo "[$(date +'%Y-%m-%d %H:%M:%S')] device-notifier (bash version) started. PATH=$PATH, DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS"
+echo "[$(date +'%Y-%m-%d %H:%M:%S')] device-notifier started."
 
 # Function to send notifications
 notify() {

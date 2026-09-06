@@ -9,12 +9,12 @@
     text-color:       #ffffff;
 
     /* ── colour tokens ── */
-    bg-base:          #00000073;       /* glass background, 45% opaque  */
-    accent:           #00ffb3ff;       /* neon teal, full opaque   */
-    accent-dim:       #00ffb30a;       /* teal tint  ~4%           */
-    accent-mid:       #00ffb32e;       /* teal tint ~18%           */
-    accent-hover:     #00ffb34d;       /* teal tint ~30%           */
-    border-subtle:    #00ffb333;       /* subtle border ~20%       */
+    bg-base:          #020e0ad9;       /* glass background, 45% opaque  */
+    accent:           #34d399ff;       /* neon teal, full opaque   */
+    accent-dim:       #34d39912;       /* teal tint  ~4%           */
+    accent-mid:       #34d3994d;       /* teal tint ~18%           */
+    accent-hover:     #34d39980;       /* teal tint ~30%           */
+    border-subtle:    #34d39933;       /* subtle border ~20%       */
 }
 
 window {
@@ -80,7 +80,7 @@ element alternate.normal {
 
 element selected.normal {
     background-color: @accent;
-    text-color:       #000000ff;
+    text-color:       #021a12ff;
     border:           1px solid;
     border-color:     @accent;
 }

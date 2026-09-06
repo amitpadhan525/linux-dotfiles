@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Prevent multiple concurrent screenshot instances / stacked slurp overlays
+exec 9>/tmp/named_screenshot.lock
+flock -n 9 || exit 0
+
+if pgrep -x slurp >/dev/null; then
+    exit 0
+fi
+
 SAVE_DIR="$HOME/Pictures/Screenshots"
 mkdir -p "$SAVE_DIR"
 TMPDIR="${TMPDIR:-/tmp}"
@@ -38,7 +46,7 @@ while true; do
     FINAL_PATH="$SAVE_DIR/${SAFE_NAME}.png"
     if [[ -e "$FINAL_PATH" ]]; then
         # File already exists, ask the user to rename or replace
-        CHOICE=$(echo -e "Replace\nRename" | rofi -dmenu -p "File is alrady exist" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 2; lines: 1; }' -i)
+        CHOICE=$(echo -e "Replace\nRename" | rofi -dmenu -p "File already exists" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 2; lines: 1; }' -i)
         
         if [[ "$CHOICE" == *"Replace"* ]]; then
             mv -f "$TMPFILE" "$FINAL_PATH"

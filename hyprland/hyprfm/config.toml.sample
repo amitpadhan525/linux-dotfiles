@@ -14,6 +14,11 @@
 # light/dark preference (catppuccin-latte / catppuccin-mocha).
 # theme = "catppuccin-mocha"
 
+# The pair the Dark Mode switch in Settings flips between. Point them at any
+# two themes; a script can also just rewrite "theme" above and HyprFM reloads.
+light_theme = "catppuccin-latte"
+dark_theme = "catppuccin-mocha"
+
 # Icon theme for file and folder icons (a directory name under
 # /usr/share/icons or ~/.icons). Toolbar and sidebar icons are built in.
 icon_theme = "Adwaita"
@@ -25,6 +30,11 @@ font_family = ""
 default_view = "grid"
 
 show_hidden = false
+
+# Right click anywhere on the address bar enters path edit mode with the
+# whole path selected, just like Ctrl+L. Left clicks on breadcrumb segments
+# still navigate.
+right_click_to_edit_path = true
 
 # Sort order: "name" | "size" | "modified" | "type"
 sort_by = "name"

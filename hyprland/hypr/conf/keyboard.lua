@@ -2,6 +2,8 @@
 hl.config({
     input = {
         kb_layout = "us",
+        repeat_rate = 50,
+        repeat_delay = 300,
         follow_mouse = 1,
         mouse_refocus = true,
         float_switch_override_focus = 0,

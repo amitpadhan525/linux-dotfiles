@@ -32,6 +32,7 @@ hl.bind("SUPER + SHIFT + Down", hl.dsp.window.move({ direction = "down" }))
 
 -- Window State & Control
 hl.bind("SUPER + Q", hl.dsp.window.close())
+hl.bind("SUPER + Escape", hl.dsp.exec_raw("kill"))
 hl.bind("SUPER + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + space", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 
@@ -63,9 +64,15 @@ for i = 1, 9 do
     hl.bind("SUPER + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
 end
 
+-- Move workspace across monitors
+hl.bind("SUPER + ALT + Left", hl.dsp.workspace.move({ monitor = "l" }))
+hl.bind("SUPER + ALT + Right", hl.dsp.workspace.move({ monitor = "r" }))
+
 -- Mouse bindings
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
+hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind("SUPER + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
 -- Media keys
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/volume_brightness_notify.sh volume_up"), { locked = true, repeating = true })

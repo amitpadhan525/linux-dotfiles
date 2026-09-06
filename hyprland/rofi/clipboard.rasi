@@ -11,14 +11,14 @@ configuration {
 * {
     font:                        "JetBrainsMono Nerd Font Bold 11";
 
-    bg-base:                     #000000f5;
+    bg-base:                     #020e0af5;
     bg-alt:                      #ffffff14;
     fg-main:                     #ffffffff;
-    fg-dim:                      #888888ff;
-    accent:                      #00ffb3ff;
-    accent-dim:                  #00ffb30a;
-    accent-mid:                  #00ffb3b3;
-    border-subtle:               #00ffb333;
+    fg-dim:                      #a7f3d099;
+    accent:                      #34d399ff;
+    accent-dim:                  #34d39912;
+    accent-mid:                  #34d399b3;
+    border-subtle:               #34d39933;
 
     background-color:            transparent;
     text-color:                  @fg-main;
@@ -102,7 +102,8 @@ element alternate.normal {
 element selected.normal {
     background-color:            @accent;
     border-color:                @accent;
-    text-color:                  #000000ff;
+    text-color:                  #021a12ff;
+    border-color:                #6ee7b7ff;
 }
 
 element-text {

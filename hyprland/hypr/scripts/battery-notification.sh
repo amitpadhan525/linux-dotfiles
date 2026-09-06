@@ -4,9 +4,12 @@
 exec 9>/tmp/battery-notification.lock
 flock -n 9 || exit 0
 
-# Redirect stdout and stderr to a log file
-exec >> "$HOME/.config/hypr/logs/battery-notification.log" 2>&1
-echo "[$(date +'%Y-%m-%d %H:%M:%S')] battery-notification started. PATH=$PATH, DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS"
+# Redirect stdout and stderr to a log file (capped to prevent growth)
+log_file="$HOME/.config/hypr/logs/battery-notification.log"
+mkdir -p "$(dirname "$log_file")"
+[ -f "$log_file" ] && [ "$(wc -l < "$log_file" 2>/dev/null || echo 0)" -gt 300 ] && tail -n 100 "$log_file" > "$log_file.tmp" && mv "$log_file.tmp" "$log_file"
+exec >> "$log_file" 2>&1
+echo "[$(date +'%Y-%m-%d %H:%M:%S')] battery-notification started."
 
 
 # Path to the battery info

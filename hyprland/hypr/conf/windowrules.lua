@@ -9,11 +9,17 @@ for i = 1, 6 do
 end
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- WINDOW RULES: FORCE FLOATING (Workspaces 7-9)
+-- WINDOW RULES: FORCE FLOATING (Workspaces 7-9 & Scrcpy / DeX)
 -- ─────────────────────────────────────────────────────────────────────────────
 
 for i = 7, 9 do
     hl.window_rule({ match = { workspace = tostring(i) }, float = true })
+end
+
+local forced_floating_apps = { "scrcpy", "Scrcpy" }
+for _, app in ipairs(forced_floating_apps) do
+    hl.window_rule({ match = { class = app }, float = true, size = "460 920", center = true })
+    hl.window_rule({ match = { initial_class = app }, float = true, size = "460 920", center = true })
 end
 
 -- ─────────────────────────────────────────────────────────────────────────────
@@ -96,6 +102,13 @@ local no_hdr_apps = { "mpv", "vlc", "steam_app_.*" }
 for _, app in ipairs(no_hdr_apps) do
     hl.window_rule({ match = { class = app }, no_auto_hdr = true })
 end
+
+-- Idle inhibit for media playback
+hl.window_rule({ match = { class = "mpv" }, idle_inhibit = "focus" })
+hl.window_rule({ match = { class = "vlc" }, idle_inhibit = "focus" })
+
+-- Picture-in-Picture (Sticky, floating, keep aspect ratio)
+hl.window_rule({ match = { title = "^(Picture-in-Picture)$" }, float = true, pin = true, keep_aspect_ratio = true })
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- SPECIAL WORKSPACE (SCRATCHPAD) & SMART GAPS

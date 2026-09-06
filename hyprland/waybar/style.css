@@ -1,6 +1,6 @@
 /* =========================================================================
-   WAYBAR GLASSMORPHIC THEME - SMOOTH LIQUID GLASS
-   High-fidelity 3D liquid gel capsule style with continuous smooth reflections
+   WAYBAR GLASSMORPHIC THEME - EMERALD MIST & LIQUID GLASS
+   Matched dynamically to the emerald mountain landscape wallpaper
    ========================================================================= */
 
 * {
@@ -22,43 +22,39 @@ window#waybar.daily {
     box-shadow: none;
 }
 
-/* Center capsule - Smooth 3D Liquid Glass Body */
+/* Center capsule - Smooth 3D Emerald Liquid Glass Body */
 window#waybar.daily .modules-center {
-    background-color: #000000; /* Pure black background */
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(0, 0, 0, 0.25) 75%, rgba(0, 255, 179, 0.12) 100%);
-    border: 1px solid rgba(0, 255, 179, 0.7); /* Matching notification border (#00ffb3b3) */
+    background-color: rgba(2, 14, 10, 0.88); /* Deep translucent forest black-green */
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.14) 0%, rgba(16, 185, 129, 0.06) 35%, rgba(0, 0, 0, 0.4) 75%, rgba(6, 78, 59, 0.45) 100%);
+    border: 1px solid rgba(52, 211, 153, 0.45); /* Soft glowing emerald border */
     border-radius: 22px;
     padding: 3px 10px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75), 0 0 10px rgba(0, 255, 179, 0.15); /* Stronger shadows & subtle outer glow */
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.85), 0 0 15px rgba(16, 185, 129, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
-
-
 /* ══════════════════════════════════════════════════════════
-   TOOLTIPS — Glossy Liquid Glass Tooltip
+   TOOLTIPS — Glossy Emerald Glass Tooltip
    ══════════════════════════════════════════════════════════ */
 
 tooltip {
-    background-color: #000000; /* Pure black background */
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.0) 45%, rgba(0, 0, 0, 0.35) 85%, rgba(0, 255, 179, 0.06) 100%);
-    border: 1px solid rgba(0, 255, 179, 0.7); /* Matching notification border (#00ffb3b3) */
+    background-color: rgba(2, 14, 10, 0.95);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.0) 45%, rgba(0, 0, 0, 0.45) 85%, rgba(16, 185, 129, 0.1) 100%);
+    border: 1px solid rgba(52, 211, 153, 0.55);
     border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75), 0 0 12px rgba(0, 255, 179, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85), 0 0 14px rgba(16, 185, 129, 0.25);
     padding: 10px 4px;
 }
 
 tooltip label {
-    color: #00ffb3;
+    color: #6ee7b7;
     font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 13px;
     font-weight: bold;
     padding: 4px 18px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 4px rgba(0, 255, 179, 0.5); /* Tightened glow for compression/screenshots */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 4px rgba(52, 211, 153, 0.5);
 }
 
 /* ── Common Module Glass Capsule Structure ── */
-/* Specular white top edge fading smoothly into a dark pool at the bottom */
-
 #network,
 #tray,
 #clock,
@@ -76,14 +72,14 @@ tooltip label {
 #custom-uptime,
 #bluetooth,
 #custom-recording {
-    background-color: rgba(0, 0, 0, 0.55); /* Increased background opacity for visibility */
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.15) 75%, rgba(255, 255, 255, 0.04) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.28); /* Sharper, more visible border */
+    background-color: rgba(4, 22, 16, 0.65);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(0, 0, 0, 0.2) 75%, rgba(16, 185, 129, 0.08) 100%);
+    border: 1px solid rgba(52, 211, 153, 0.25);
     border-radius: 14px;
     padding: 4px 14px;
     margin: 4px 3px;
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 #network:hover,
@@ -103,14 +99,12 @@ tooltip label {
 #custom-uptime:hover,
 #bluetooth:hover,
 #custom-recording:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(255, 255, 255, 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 255, 255, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.55);
+    background-color: rgba(6, 32, 23, 0.85);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.25) 70%, rgba(52, 211, 153, 0.2) 100%);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7), 0 0 12px rgba(52, 211, 153, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.55);
 }
 
-/* ── Clear, Sharp Module Colorways ── */
-
-/* Network, Battery, Pulseaudio, Backlight, Bluetooth, CPU, Memory, Disk, Temperature: Unified Neon Aqua-Teal */
+/* ── Unified Luminous Emerald/Mint Colorway ── */
 #network,
 #battery,
 #pulseaudio,
@@ -122,8 +116,8 @@ tooltip label {
 #custom-temperature,
 #clock,
 #custom-clock {
-    color: #00ffb3;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 4px rgba(0, 255, 179, 0.5); /* Tightened glow for maximum compression/screenshot legibility */
+    color: #6ee7b7;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 5px rgba(52, 211, 153, 0.45);
 }
 
 #network:hover,
@@ -137,27 +131,25 @@ tooltip label {
 #custom-temperature:hover,
 #clock:hover,
 #custom-clock:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 255, 179, 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 255, 179, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.55), inset 0 -2px 6px rgba(0, 255, 179, 0.25);
+    background-color: rgba(6, 32, 23, 0.85);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(52, 211, 153, 0.2) 100%);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7), 0 0 12px rgba(52, 211, 153, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.55), inset 0 -2px 6px rgba(16, 185, 129, 0.25);
     color: #ffffff;
 }
 
-
-
-/* Power Button: Rose Red */
+/* Power Button: Rose Red Accent */
 #custom-power {
     color: #fca5a5;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
 }
 #custom-power:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(252, 165, 165, 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(252, 165, 165, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.55), inset 0 -2px 6px rgba(252, 165, 165, 0.25);
+    background-color: rgba(30, 10, 10, 0.85);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(252, 165, 165, 0.2) 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7), 0 0 10px rgba(252, 165, 165, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.55);
     color: #ffffff;
 }
 
-/* Wifi Switcher & Uptime: Soft Gold */
+/* Wifi Switcher & Uptime: Soft Amber/Gold */
 #custom-wifi_switcher,
 #custom-uptime {
     color: #fde047;
@@ -165,9 +157,9 @@ tooltip label {
 }
 #custom-wifi_switcher:hover,
 #custom-uptime:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(253, 224, 71, 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(253, 224, 71, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.55), inset 0 -2px 6px rgba(253, 224, 71, 0.25);
+    background-color: rgba(28, 24, 8, 0.85);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(253, 224, 71, 0.2) 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7), 0 0 10px rgba(253, 224, 71, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.55);
     color: #ffffff;
 }
 
@@ -175,26 +167,27 @@ tooltip label {
 #tray {
     color: #ffffff;
 }
+
 /* ── Workspaces ── */
 #workspaces {
-    background-color: rgba(0, 0, 0, 0.55); /* Increased background opacity for visibility */
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 255, 179, 0.06) 100%);
-    border: 1px solid rgba(0, 255, 179, 0.4); /* Sharper border */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+    background-color: rgba(4, 22, 16, 0.65);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.2) 75%, rgba(16, 185, 129, 0.08) 100%);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     margin: 4px 3px;
     padding: 2px 6px;
     border-radius: 14px;
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 #workspaces:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 255, 179, 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 255, 179, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.55), inset 0 -2px 6px rgba(0, 255, 179, 0.25);
+    background-color: rgba(6, 32, 23, 0.85);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.25) 70%, rgba(52, 211, 153, 0.2) 100%);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7), 0 0 12px rgba(52, 211, 153, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.55);
 }
 #workspaces button {
     padding: 2px 10px;
     margin: 0 3px;
-    color: rgba(255, 255, 255, 0.75); /* Increased contrast from 0.55 */
+    color: rgba(167, 243, 208, 0.7);
     background: transparent;
     border-radius: 10px;
     transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -202,17 +195,17 @@ tooltip label {
     min-width: 24px;
 }
 #workspaces button:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(52, 211, 153, 0.2);
     color: #ffffff;
     padding: 2px 12px;
 }
 #workspaces button.active {
-    color: #010403;
-    background-color: rgba(0, 255, 179, 0.95); /* Fully solid active background */
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 0%, rgba(16, 185, 129, 0.6) 100%);
-    border: 1px solid rgba(0, 255, 179, 0.85); /* Sharper border */
+    color: #021a12;
+    background-color: #34d399;
+    background-image: linear-gradient(to bottom, #6ee7b7 0%, #10b981 100%);
+    border: 1px solid rgba(167, 243, 208, 0.9);
     padding: 2px 18px;
-    box-shadow: 0 0 14px rgba(0, 255, 179, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.6); /* Stronger active glow */
+    box-shadow: 0 0 14px rgba(52, 211, 153, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.7);
 }
 
 @keyframes ws-glow-daily {
@@ -227,7 +220,6 @@ tooltip label {
 }
 
 /* ── Functional Alerts & Blinking ── */
-
 #custom-temperature.hot,
 #custom-cpu.hot,
 #custom-memory.hot,
@@ -249,10 +241,10 @@ tooltip label {
 }
 
 #battery.charging {
-    background-color: rgba(34, 197, 94, 0.3); /* High visibility backgrounds */
-    color: #22c55e;
+    background-color: rgba(16, 185, 129, 0.3);
+    color: #6ee7b7;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
-    border-color: rgba(34, 197, 94, 0.55);
+    border-color: rgba(52, 211, 153, 0.55);
 }
 #battery.warning {
     background-color: rgba(245, 158, 11, 0.3);
@@ -298,18 +290,16 @@ tooltip label {
 
 /* ── Custom Volume/Brightness OSD Transitions ── */
 #custom-volume_brightness_osd {
-    background-color: rgba(0, 0, 0, 0.55); /* Increased background opacity */
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.15) 75%, rgba(255, 255, 255, 0.04) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.28); /* Sharper border */
+    background-color: rgba(4, 22, 16, 0.65);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.2) 75%, rgba(16, 185, 129, 0.08) 100%);
+    border: 1px solid rgba(52, 211, 153, 0.25);
     border-radius: 14px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 4px rgba(0, 255, 179, 0.5);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 5px rgba(52, 211, 153, 0.45);
     font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     
-    /* Native transitions - optimized to 0.2s for snappiness */
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     
-    /* Base Hidden State */
     opacity: 0;
     margin: 4px 0px;
     padding: 4px 0px;
@@ -322,8 +312,8 @@ tooltip label {
     opacity: 1;
     margin: 4px 3px;
     padding: 4px 14px;
-    border: 1px solid rgba(255, 255, 255, 0.28); /* Sharper border */
-    color: #00ffb3;
+    border: 1px solid rgba(52, 211, 153, 0.25);
+    color: #6ee7b7;
     font-size: 14px;
 }
 
@@ -337,9 +327,9 @@ tooltip label {
 }
 
 #custom-volume_brightness_osd:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 255, 179, 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 255, 179, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.55), inset 0 -2px 6px rgba(0, 255, 179, 0.25);
+    background-color: rgba(6, 32, 23, 0.85);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(52, 211, 153, 0.2) 100%);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7), 0 0 12px rgba(52, 211, 153, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.55), inset 0 -2px 6px rgba(16, 185, 129, 0.25);
     color: #ffffff;
 }
 

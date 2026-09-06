@@ -51,7 +51,7 @@ if pgrep -u "$USER" -x "wf-recorder" >/dev/null; then
             TARGET_PATH="$SAVE_DIR/${USER_NAME}.mp4"
             if [ -f "$TARGET_PATH" ]; then
                 # File already exists, ask the user to rename or replace
-                CHOICE=$(echo -e "Replace\nRename" | rofi -dmenu -p "File is alrady exist" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 2; lines: 1; }' -i)
+                CHOICE=$(echo -e "Replace\nRename" | rofi -dmenu -p "File already exists" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 2; lines: 1; }' -i)
                 
                 if [[ "$CHOICE" == *"Replace"* ]]; then
                     SAVED_PATH="$TARGET_PATH"

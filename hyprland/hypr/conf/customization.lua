@@ -17,8 +17,8 @@ local function get_dynamic_colors()
 end
 
 local dyn_colors = get_dynamic_colors()
-local accent_hex = dyn_colors.accent_hex or "00ffb3"
-local accent_two_hex = dyn_colors.accent_two_hex or "a7f3d0"
+local accent_hex = dyn_colors.accent_hex or "34d399"
+local accent_two_hex = dyn_colors.accent_two_hex or "6ee7b7"
 
 local active_border = "rgba(" .. accent_hex .. "e6)"
 local inactive_border = "rgba(" .. accent_hex .. "20)"
@@ -35,19 +35,23 @@ hl.config({
         resize_on_border = true,
         layout = "dwindle"
     },
+    render = {
+        direct_scanout = 1
+    },
     decoration = {
         rounding = 5,
         shadow = {
-            enabled = true,
-            range = 4,
-            render_power = 3,
-            color = "rgba(1a1a1aee)",
+            enabled = false
         },
         blur = {
             enabled = true,
-            size = 8,
-            passes = 2,
-            vibrancy = 0.1696
+            size = 6,
+            passes = 1,
+            vibrancy = 0.1696,
+            new_optimizations = true,
+            xray = true,
+            popups = true,
+            ignore_opacity = true
         }
     },
     animations = {
@@ -57,9 +61,11 @@ hl.config({
         disable_autoreload = false,
         force_default_wallpaper = 0,
         disable_hyprland_logo = true,
-        vrr = 0,
-        animate_manual_resizes = true,
-        animate_mouse_windowdragging = true
+        disable_splash_rendering = true,
+        vrr = 1,
+        middle_click_paste = false,
+        animate_manual_resizes = false,
+        animate_mouse_windowdragging = false
     },
     group = {
         groupbar = {
@@ -67,6 +73,10 @@ hl.config({
             height = 20,
             font_size = 10
         }
+    },
+    cursor = {
+        inactive_timeout = 3,
+        no_warps = true
     }
 })
 

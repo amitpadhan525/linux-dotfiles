@@ -2,6 +2,8 @@
 
 [⬇️ **Download Latest Release (.zip)**](https://github.com/amitpadhan525/linux-dotfiles/releases/latest/download/linux-dotfiles.zip)
 
+![Hyprland Desktop Preview](assets/preview.png)
+
 This repo has my dotfiles and simple scripts for Hyprland (Wayland). I use it on Arch Linux.
 
 I wrote this so I can set up my desktop fast on a new system. You can use it too, but be careful and read the steps.

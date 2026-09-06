@@ -1,11 +1,6 @@
 ## Linux dotfiles - simple setup
 
-<div align="center">
-
-[![Download Latest Release](https://img.shields.io/github/v/release/amitpadhan525/linux-dotfiles?color=00D26A&label=Download%20Latest%20Zip&logo=github&style=for-the-badge)](https://github.com/amitpadhan525/linux-dotfiles/releases/latest/download/linux-dotfiles.zip)
-[![Release Notes](https://img.shields.io/badge/Release-Notes-blue?style=for-the-badge&logo=github)](https://github.com/amitpadhan525/linux-dotfiles/releases/latest)
-
-</div>
+[⬇️ **Download Latest Release (.zip)**](https://github.com/amitpadhan525/linux-dotfiles/releases/latest/download/linux-dotfiles.zip)
 
 This repo has my dotfiles and simple scripts for Hyprland (Wayland). I use it on Arch Linux.
 

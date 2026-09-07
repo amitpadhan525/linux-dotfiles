@@ -12,6 +12,7 @@ I wrote this so I can set up my desktop fast on a new system. You can use it too
 - `hyprland/` - all configs for Hyprland, Waybar, rofi, kitty, and other apps
 - `install.sh` - script to install and link the configs
 - `update.sh` - script to update configs from the repo
+- `uninstall.sh` - script to remove symlinks and restore backups
 - `copy.sh` - helper to copy configs to this repo from your machine
 - `RESOURCES.md` - list of packages and other notes
 
@@ -39,6 +40,15 @@ To update your local configs from this repo:
 ```bash
 chmod +x update.sh
 ./update.sh
+```
+
+## Uninstall / Rollback
+
+To remove symlinks and restore backups:
+
+```bash
+chmod +x uninstall.sh
+./uninstall.sh
 ```
 
 ## What to customize

@@ -71,8 +71,8 @@ Astraeus integrates custom scripts to link components dynamically. To run these 
 
 Additionally, the following root-level utility scripts are provided:
 *   [copy.sh](copy.sh): Collects/syncs all active local system configurations into your repository.
-*   [push.sh](push.sh): Commits and pushes modifications to the GitHub remote repository.
 *   [update.sh](update.sh): Pulls the latest configurations from GitHub, redeploys links, and restarts service environments. It now anchors itself to the repository root automatically.
+*   [uninstall.sh](uninstall.sh): Removes managed symlinks and provides an automated rollback mechanism to restore configuration archives.
 
 ---
 

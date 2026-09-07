@@ -16,13 +16,16 @@ transparency_level = 0.0
 paths = []
 
 [general]
+dark_theme = 'catppuccin-mocha'
 dependency_startup_check = true
 font_family = ''
 icon_theme = 'Adwaita'
+light_theme = 'catppuccin-latte'
 remember_sort_per_folder = true
+right_click_to_edit_path = true
 show_hidden = false
 sort_ascending = true
-sort_by = 'name'
+sort_by = 'modified'
 theme = 'catppuccin-mocha'
 
 [sidebar]

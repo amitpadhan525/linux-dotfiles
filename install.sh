@@ -19,7 +19,7 @@ readonly BACKUP_DIR="$CONFIG_DIR/backups"
 readonly CORE_WM=(
     "hyprland" "hyprpaper" "hyprlock" "hyprsunset"
     "waybar" "rofi-wayland" "kitty" "mako" "dunst" "thunar"
-    "nwg-dock-hyprland" "nwg-look"
+    "nwg-dock-hyprland" "nwg-look" "hyprfm"
 )
 readonly MULTIMEDIA=(
     "pipewire" "pipewire-pulse" "wireplumber" "pamixer" "pavucontrol" "libpulse" "playerctl"

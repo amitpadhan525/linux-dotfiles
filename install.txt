@@ -94,5 +94,9 @@ review the keybindings in README.md if you want to customize the desktop.
 
 8. Roll back if needed
 
-If you want to undo the install, remove the symlinks and restore any backups
-you created from ~/.config/backups.
+If you want to undo the install and restore pre-installation backups:
+
+    chmod +x uninstall.sh
+    ./uninstall.sh
+
+You can also run with `--help` or `-d` (dry-run) to preview actions.

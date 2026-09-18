@@ -9,3 +9,5 @@
 	helper = !/usr/bin/gh auth git-credential
 [ip]
 	resolve = 4
+[safe]
+	directory = /home/amit/development/flutter

@@ -23,9 +23,13 @@ TMPFILE="$(mktemp "$TMPDIR/screenshot_XXXXXX.png")"
 grim -g "$GEOM" "$TMPFILE"
 
 # Instantly copy the image data to clipboard
+# Explicitly close FD 9 so the background wl-copy daemon does not inherit the lock
 if command -v wl-copy >/dev/null 2>&1; then
-    wl-copy -t image/png < "$TMPFILE"
+    wl-copy -t image/png 9>&- < "$TMPFILE"
 fi
+
+# Release the lock now that screen capture is complete so future screenshots are never blocked
+exec 9>&-
 
 while true; do
     FILENAME=$(rofi -dmenu -p "Save as (no extension):" -mesg "Leave blank to only copy" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'listview { lines: 0; } entry { placeholder: ""; }' < /dev/null)

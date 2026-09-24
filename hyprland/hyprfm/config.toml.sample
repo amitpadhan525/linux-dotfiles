@@ -21,7 +21,8 @@ dark_theme = "catppuccin-mocha"
 
 # Icon theme for file and folder icons (a directory name under
 # /usr/share/icons or ~/.icons). Toolbar and sidebar icons are built in.
-icon_theme = "Adwaita"
+# Empty follows the desktop's own icon theme.
+icon_theme = ""
 
 # UI font family. Empty = the desktop's UI font.
 font_family = ""
@@ -51,6 +52,10 @@ dependency_startup_check = true
 position = "left"
 width = 200
 visible = true
+# Fold the sidebar away when the window is narrower than this many pixels.
+# It stays toggleable by hand, and comes back when the window grows again.
+# 0 turns it off; anything else is clamped to 320-2000.
+auto_hide_width = 700
 # Quick-access entries to hide. Valid names:
 # "Home", "Recents", "Trash", "Network", "Pictures", "Downloads"
 hidden_quick_access = []
@@ -111,7 +116,8 @@ current_fraction = 0.5
 # `command` takes desktop-entry field codes (%f or %u = the item's path) and runs once
 # per selected item, from that item's folder. `types` limits where the entry
 # shows: "*" (default), "dir", an extension ("png"), or a MIME pattern
-# ("image/*", "text/plain").
+# ("image/*", "text/plain"). `shortcut` is optional: a Qt key sequence that runs
+# the action on the current selection without opening the menu.
 # [[context_menu.actions]]
 # name = "Optimize PNG"
 # command = "oxipng -o 4 %f"
@@ -120,6 +126,7 @@ current_fraction = 0.5
 # name = "Open in VS Code"
 # command = "code %f"
 # types = ["dir", "text/*"]
+# shortcut = "Ctrl+E"
 
 [shortcuts]
 # Override any shortcut with a Qt key sequence. Defaults:

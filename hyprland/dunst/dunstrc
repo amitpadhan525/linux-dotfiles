@@ -1,6 +1,6 @@
 # ----------------------------------------------------- 
 # Dunst configuration file
-# Styled to match Waybar, Hyprland & Catppuccin Theme
+# Glassmorphic Cyber Aesthetics (Hyprland + Waybar Theme)
 # ----------------------------------------------------- 
 
 [global]
@@ -9,51 +9,51 @@
     follow = none
 
     ### Geometry ###
-    width = (360, 480)
-    height = 120
+    width = (380, 520)
+    height = (0, 350)
     origin = top-right
-    offset = (24, 24)
+    offset = (20, 20)
     scale = 0
     notification_limit = 5
 
     ### Progress bar ###
     progress_bar = true
-    progress_bar_height = 8
+    progress_bar_height = 6
     progress_bar_frame_width = 0
-    progress_bar_min_width = 150
-    progress_bar_max_width = 300
-    progress_bar_corner_radius = 12
+    progress_bar_min_width = 160
+    progress_bar_max_width = 340
+    progress_bar_corner_radius = 3
     progress_bar_corners = all
 
     ### Icon ###
-    icon_corner_radius = 16
+    icon_corner_radius = 10
     icon_corners = all
     enable_recursive_icon_lookup = true
     icon_theme = Papirus-Dark
     icon_position = left
-    min_icon_size = 48
-    max_icon_size = 64
+    min_icon_size = 40
+    max_icon_size = 52
     text_icon_padding = 16
 
     ### History ###
     sticky_history = yes
-    history_length = 20
+    history_length = 25
 
-    ### Styling ###
-    separator_height = 3
-    padding = 20
-    horizontal_padding = 24
-    frame_width = 1
-    gap_size = 16
+    ### Styling & Glassmorphism ###
+    separator_height = 2
+    padding = 16
+    horizontal_padding = 20
+    frame_width = 2
+    gap_size = 12
     separator_color = frame
-    corner_radius = 22
+    corner_radius = 16
     corners = all
 
-    ### Text ###
+    ### Typography & Layout ###
     font = JetBrainsMono Nerd Font 10
     line_height = 4
     markup = full
-    format = "<span font_desc='JetBrainsMono Nerd Font ExtraBold 11'>%s</span>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#ffffff'>%b</span>"
+    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#cbd5e1'>%b</span>"
     alignment = left
     vertical_alignment = center
     show_age_threshold = 60
@@ -63,40 +63,51 @@
     hide_duplicate_count = false
     show_indicators = yes
 
-    ### Mouse ###
-    mouse_left_click = close_current
-    mouse_middle_click = do_action, close_current
+    ### Interactive Dmenu & Actions ###
+    dmenu = /usr/bin/rofi -dmenu -p "󰂚 Action:"
+
+    ### Mouse Actions ###
+    mouse_left_click = do_action, close_current
+    mouse_middle_click = context, close_current
     mouse_right_click = close_all
 
 [urgency_low]
-    # Muted Blue — matching Waybar / Hyprland low-urgency glass aesthetics
-    background = "#020e0a"
+    background = "#041410e6"
     foreground = "#89b4fa"
-    frame_color = "#89b4fab3"
+    frame_color = "#89b4fa"
     highlight = "#89b4fa"
-    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 14' foreground='#89b4fa'>󰂚  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#a6adc8'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 12' foreground='#bac2de'>%b</span>"
-    timeout = 5
+    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#89b4fa'>󰂚 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#cdd6f4'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#a6adc8'>%b</span>"
+    timeout = 6
     default_icon = dialog-information
 
 [urgency_normal]
-    # Neon Teal — matches the main Waybar capsule & Hyprland active border
-    background = "#020e0a"
+    background = "#041410e6"
     foreground = "#34d399"
-    frame_color = "#34d399b3"
+    frame_color = "#34d399"
     highlight = "#34d399"
-    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 14' foreground='#34d399'>󰂚  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 12' foreground='#a7f3d0'>%b</span>"
-    timeout = 5
+    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#34d399'>󰂚 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#a7f3d0'>%b</span>"
+    timeout = 8
     default_icon = dialog-information
 
 [urgency_critical]
-    # Rose Red — distinct critical alert styled as a vibrant glow capsule
-    background = "#020e0a"
+    background = "#1a080be6"
     foreground = "#f87171"
-    frame_color = "#f87171b3"
+    frame_color = "#f87171"
     highlight = "#f87171"
-    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 14' foreground='#f87171'>󰂛  </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#fca5a5'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 12' foreground='#ffffff'>%b</span>"
-    timeout = 10
+    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 14' foreground='#f87171'>󰂛 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#fca5a5'>%b</span>"
+    timeout = 15
     default_icon = dialog-warning
+
+[bluetooth_auth]
+    appname = "blueman*"
+    summary = "*Bluetooth*"
+    background = "#051d16f2"
+    foreground = "#6ee7b7"
+    frame_color = "#34d399"
+    highlight = "#34d399"
+    format = "<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 14' foreground='#34d399'>󰂯 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#a7f3d0'>%b</span>\n\n<span font_desc='JetBrainsMono Nerd Font Bold 9' foreground='#34d399'>󰌑 Click to Authorize / Pair</span>"
+    timeout = 60
+    urgency = critical
 
 [log_all]
     script = $HOME/.config/dunst/log-notifications.sh

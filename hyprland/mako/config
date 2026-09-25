@@ -1,1 +1,59 @@
+# ----------------------------------------------------- 
+# Mako Configuration File
+# Glassmorphic Neon Theme (Hyprland + Catppuccin / Emerald)
+# ----------------------------------------------------- 
+
+# Geometry & Layer
+width=420
+height=260
+anchor=top-right
+layer=overlay
+margin=20
+padding=16,20
+
+# Typography & Layout
+font=JetBrainsMono Nerd Font 10
+markup=1
+actions=1
+format=<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#34d399'>󰂚 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#a7f3d0'>%b</span>
+
+# Glassmorphism & Colors
+background-color=#020e0ae6
+text-color=#ffffff
+border-color=#34d399
+border-size=2
+border-radius=16
+progress-color=source #34d399
+
+# Icons
+icons=1
+max-icon-size=48
+icon-border-radius=12
+
+# History & Lifetime
+default-timeout=7000
+max-history=50
+sort=-time
+
+# Interactive Controls (Click once to invoke action & dismiss)
+on-button-left=invoke-default-action
+on-button-middle=dismiss-all
+on-button-right=dismiss
+on-touch=invoke-default-action
+
+[urgency=low]
+border-color=#89b4fa
+format=<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#89b4fa'>󰂚 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#cdd6f4'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#bac2de'>%b</span>
 default-timeout=5000
+
+[urgency=high]
+border-color=#f87171
+format=<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#f87171'>󰂛 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#fca5a5'>%b</span>
+default-timeout=15000
+
+[app-name=Bluetooth]
+background-color=#051e17f5
+border-color=#34d399
+border-size=2
+default-timeout=45000
+format=<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#34d399'>󰂯 %s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#ffffff'>%b</span>

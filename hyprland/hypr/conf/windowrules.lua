@@ -16,11 +16,14 @@ for i = 7, 9 do
     hl.window_rule({ match = { workspace = tostring(i) }, float = true })
 end
 
-local forced_floating_apps = { "scrcpy", "Scrcpy" }
+local forced_floating_apps = { "scrcpy", "Scrcpy", "blueman-manager", ".blueman-manager-wrapped", "blueman-assistant", "blueman-sendto", "blueman-services", "bluetooth-auth-dialog" }
 for _, app in ipairs(forced_floating_apps) do
-    hl.window_rule({ match = { class = app }, float = true, size = "460 920", center = true })
-    hl.window_rule({ match = { initial_class = app }, float = true, size = "460 920", center = true })
+    hl.window_rule({ match = { class = app }, float = true, center = true })
+    hl.window_rule({ match = { initial_class = app }, float = true, center = true })
 end
+hl.window_rule({ match = { class = "scrcpy" }, size = "460 920" })
+hl.window_rule({ match = { class = "Scrcpy" }, size = "460 920" })
+hl.window_rule({ match = { class = "blueman-manager" }, size = "700 500" })
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- TARGETED APP OVERRIDES: FORCE TILE BY CLASS
@@ -71,10 +74,12 @@ hl.window_rule({ match = { modal = true }, tile = true })
 hl.window_rule({ match = { xwayland = true, float = true }, tile = true })
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- LAYER RULES: DISABLED BLUR FOR DUNST NOTIFICATIONS
+-- LAYER RULES: GLASSMORPHIC BLUR FOR DUNST NOTIFICATIONS
 -- ─────────────────────────────────────────────────────────────────────────────
--- hl.layer_rule({ match = { namespace = "notifications" }, blur = true })
--- hl.layer_rule({ match = { namespace = "notifications" }, ignore_alpha = 0.1 })
+hl.layer_rule({ match = { namespace = "notifications" }, blur = true })
+hl.layer_rule({ match = { namespace = "notifications" }, ignore_alpha = 0.1 })
+hl.layer_rule({ match = { namespace = "mako" }, blur = true })
+hl.layer_rule({ match = { namespace = "mako" }, ignore_alpha = 0.1 })
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- LAYER RULES: DISABLED BLUR FOR ROFI

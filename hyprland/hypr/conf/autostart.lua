@@ -13,7 +13,7 @@ local function autostart()
 
     local system_apps = {
         { name = "waybar", path = "waybar" },
-        { name = "dunst", path = "dunst" },
+        { name = "mako", path = "mako" },
         { name = "nm-applet", path = "nm-applet" },
         { name = "hyprpolkitagent", path = "/usr/lib/hyprpolkitagent/hyprpolkitagent" }
     }

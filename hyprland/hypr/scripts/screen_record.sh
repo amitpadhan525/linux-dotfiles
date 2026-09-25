@@ -41,7 +41,7 @@ if pgrep -u "$USER" -x "wf-recorder" >/dev/null; then
         SAVED_PATH=""
         while true; do
             # Prompt user to enter a name for the video file using a super compact single-line Rofi input box (starts empty)
-            USER_NAME=$(echo "" | rofi -dmenu -p "Save as (empty for default)" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'listview { enabled: false; } window { width: 500px; }' -i)
+            USER_NAME=$(echo "" | rofi -dmenu -p "Save as (empty for default)" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'listview { enabled: false; } window { width: 500px; }' -i || true)
             
             if [ -z "$USER_NAME" ]; then
                 SAVED_PATH="$TEMP_PATH"
@@ -51,7 +51,7 @@ if pgrep -u "$USER" -x "wf-recorder" >/dev/null; then
             TARGET_PATH="$SAVE_DIR/${USER_NAME}.mp4"
             if [ -f "$TARGET_PATH" ]; then
                 # File already exists, ask the user to rename or replace
-                CHOICE=$(echo -e "Replace\nRename" | rofi -dmenu -p "File already exists" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 2; lines: 1; }' -i)
+                CHOICE=$(echo -e "Replace\nRename" | rofi -dmenu -p "File already exists" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 2; lines: 1; }' -i || true)
                 
                 if [[ "$CHOICE" == *"Replace"* ]]; then
                     SAVED_PATH="$TARGET_PATH"
@@ -82,7 +82,7 @@ fi
 # 3. Present Rofi menu to select recording mode in a beautiful compact pill format
 # Fullscreen is the first option and is selected by default
 OPTIONS="🖥️ Record Fullscreen\n📹 Record Area\n❌ Cancel"
-CHOICE=$(echo -e "$OPTIONS" | rofi -dmenu -p "Screen Recorder" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 1; lines: 3; }' -i)
+CHOICE=$(echo -e "$OPTIONS" | rofi -dmenu -p "Screen Recorder" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 1; lines: 3; }' -i || true)
 
 case "$CHOICE" in
     *"Record Fullscreen"*)

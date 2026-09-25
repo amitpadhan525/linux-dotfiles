@@ -32,7 +32,7 @@ fi
 exec 9>&-
 
 while true; do
-    FILENAME=$(rofi -dmenu -p "Save as (no extension):" -mesg "Leave blank to only copy" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'listview { lines: 0; } entry { placeholder: ""; }' < /dev/null)
+    FILENAME=$(rofi -dmenu -p "Save as (no extension):" -mesg "Leave blank to only copy" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'listview { lines: 0; } entry { placeholder: ""; }' < /dev/null || true)
     
     if [[ -z "${FILENAME:-}" ]]; then
         rm -f "$TMPFILE"
@@ -50,7 +50,7 @@ while true; do
     FINAL_PATH="$SAVE_DIR/${SAFE_NAME}.png"
     if [[ -e "$FINAL_PATH" ]]; then
         # File already exists, ask the user to rename or replace
-        CHOICE=$(echo -e "Replace\nRename" | rofi -dmenu -p "File already exists" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 2; lines: 1; }' -i)
+        CHOICE=$(echo -e "Replace\nRename" | rofi -dmenu -p "File already exists" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 2; lines: 1; }' -i || true)
         
         if [[ "$CHOICE" == *"Replace"* ]]; then
             mv -f "$TMPFILE" "$FINAL_PATH"

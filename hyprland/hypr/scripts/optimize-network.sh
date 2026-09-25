@@ -77,8 +77,8 @@ mkdir -p /etc/udev/rules.d
 cat << 'EOF' > /etc/udev/rules.d/99-usb-network-tethering.rules
 # Disable USB autosuspend for USB Tethering & USB Ethernet adapters
 # Matches: Android RNDIS, CDC-NCM, CDC-Ether, Apple iPhone (ipheth), Realtek USB
-ACTION=="add", SUBSYSTEM=="usb", ATTR{bInterfaceClass}=="02|e0|ff", ATTR{power/control}="on"
-ACTION=="add", SUBSYSTEM=="net", DRIVERS=="rndis_host|cdc_ether|cdc_ncm|cdc_mbim|ipheth|r8152|ax88179_178a", ATTR{tx_queue_len}="10000"
+ACTION=="add", SUBSYSTEM=="usb", ATTR{bInterfaceClass}=~"02|e0|ff", ATTR{power/control}="on"
+ACTION=="add", SUBSYSTEM=="net", DRIVERS=~"rndis_host|cdc_ether|cdc_ncm|cdc_mbim|ipheth|r8152|ax88179_178a", ATTR{tx_queue_len}="10000"
 ACTION=="add", SUBSYSTEM=="net", KERNEL=="usb*|enp*u*|enx*", ATTR{tx_queue_len}="10000"
 EOF
 

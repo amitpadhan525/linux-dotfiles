@@ -53,9 +53,8 @@ hl.bind("SUPER + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/named_screen
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screen_record.sh"))
 hl.bind("SUPER + ALT + W", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/wallpaper.sh"))
 hl.bind("SUPER + R", hl.dsp.exec_cmd("hyprctl reload"))
-hl.bind("SUPER + l", hl.dsp.exec_cmd("hyprlock"))
+hl.bind("SUPER + ALT + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("hyprlock"), { locked = true })
-hl.bind("SUPER + ALT + l", hl.dsp.exec_raw("clear_crashed_lockscreen"))
 
 -- Workspaces
 for i = 1, 9 do

@@ -45,8 +45,8 @@ hl.config({
         },
         blur = {
             enabled = true,
-            size = 6,
-            passes = 1,
+            size = 8,
+            passes = 2,
             vibrancy = 0.1696,
             new_optimizations = true,
             xray = true,

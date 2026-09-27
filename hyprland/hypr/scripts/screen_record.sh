@@ -79,10 +79,9 @@ if pgrep -u "$USER" -x "wf-recorder" >/dev/null; then
     exit 0
 fi
 
-# 3. Present Rofi menu to select recording mode in a beautiful compact pill format
-# Fullscreen is the first option and is selected by default
-OPTIONS="🖥️ Record Fullscreen\n📹 Record Area\n❌ Cancel"
-CHOICE=$(echo -e "$OPTIONS" | rofi -dmenu -p "Screen Recorder" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 1; lines: 3; }' -i || true)
+# 3. Present Rofi menu to select recording mode in a clean compact format without search bar or cancel button
+OPTIONS="🖥️  Record Fullscreen\n📹  Record Area"
+CHOICE=$(echo -e "$OPTIONS" | rofi -dmenu -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'mainbox { children: [ "listview" ]; padding: 16px; } window { width: 380px; border-radius: 18px; } listview { columns: 1; lines: 2; spacing: 8px; }' -i || true)
 
 case "$CHOICE" in
     *"Record Fullscreen"*)

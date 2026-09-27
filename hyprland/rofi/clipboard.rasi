@@ -11,7 +11,7 @@ configuration {
 * {
     font:                        "JetBrainsMono Nerd Font Bold 11";
 
-    bg-base:                     #020e0af5;
+    bg-base:                     #020e0aa6;
     bg-alt:                      #ffffff14;
     fg-main:                     #ffffffff;
     fg-dim:                      #a7f3d099;

@@ -14,47 +14,67 @@ case "$action" in
         pamixer -t
         ;;
     brightness_up)
-        brightnessctl set +5%
+        brightnessctl -q set +5%
         ;;
     brightness_down)
-        brightnessctl set 5%-
+        brightnessctl -q set 5%-
         ;;
 esac
+
+generate_bar() {
+    local val="${1:-0}"
+    local total=32
+    local filled=$(( (val * total + 50) / 100 ))
+    [ "$filled" -gt "$total" ] && filled="$total"
+    [ "$filled" -lt 0 ] && filled=0
+    local empty=$(( total - filled ))
+
+    local filled_bar=""
+    for ((i=0; i<filled; i++)); do filled_bar+="━"; done
+
+    local empty_bar=""
+    for ((i=0; i<empty; i++)); do empty_bar+="━"; done
+
+    echo "<span foreground=\"#34d399\">$filled_bar</span><span foreground=\"#1e4438\">$empty_bar</span>"
+}
 
 if [[ "$action" == volume_* ]]; then
     vol=$(pamixer --get-volume 2>/dev/null || echo "0")
     mute=$(pamixer --get-mute 2>/dev/null || echo "false")
 
     if [ "$mute" = "true" ]; then
-        icon="audio-volume-muted-symbolic"
-        text="Muted"
-        val=0
+        icon="󰝟"
+        title="$icon  Sound: Muted"
+        bar="<span foreground=\"#f87171\">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>"
     else
-        val=$vol
         if [ "$vol" -eq 0 ]; then
-            icon="audio-volume-muted-symbolic"
+            icon="󰝟"
         elif [ "$vol" -lt 30 ]; then
-            icon="audio-volume-low-symbolic"
+            icon="󰕿"
         elif [ "$vol" -lt 70 ]; then
-            icon="audio-volume-medium-symbolic"
+            icon="󰖀"
         else
-            icon="audio-volume-high-symbolic"
+            icon="󰕾"
         fi
-        text="${vol}%"
+        title="$icon  Sound: ${vol}%"
+        bar=$(generate_bar "$vol")
     fi
-    dunstify -h string:x-dunst-stack-tag:volume -h int:value:"$val" -i "$icon" "Volume: $text" -u low -t 1500
+
+    notify-send -a "OSD" -h string:x-canonical-private-synchronous:volume -h string:x-dunst-stack-tag:volume -t 2500 "$title" "$bar"
 
 elif [[ "$action" == brightness_* ]]; then
     bright_str=$(brightnessctl -m 2>/dev/null | cut -d, -f4 | tr -d '%')
     val=${bright_str:-0}
 
     if [ "$val" -lt 30 ]; then
-        icon="display-brightness-low-symbolic"
+        icon="󰃞"
     elif [ "$val" -lt 70 ]; then
-        icon="display-brightness-medium-symbolic"
+        icon="󰃟"
     else
-        icon="display-brightness-high-symbolic"
+        icon="󰃠"
     fi
+    title="$icon  Brightness: ${val}%"
+    bar=$(generate_bar "$val")
 
-    dunstify -h string:x-dunst-stack-tag:brightness -h int:value:"$val" -i "$icon" "Brightness: ${val}%" -u low -t 1500
+    notify-send -a "OSD" -h string:x-canonical-private-synchronous:brightness -h string:x-dunst-stack-tag:brightness -t 2500 "$title" "$bar"
 fi

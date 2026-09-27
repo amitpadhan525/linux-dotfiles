@@ -17,13 +17,16 @@ markup=1
 actions=1
 format=<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#34d399'>󰂚 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#a7f3d0'>%b</span>
 
-# Glassmorphism & Colors
-background-color=#020e0ae6
+# Glassmorphism & Colors (Translucent emerald glass)
+background-color=#020e0aa6
 text-color=#ffffff
-border-color=#34d399
-border-size=2
+border-color=#34d39966
+border-size=1
 border-radius=16
 progress-color=source #34d399
+
+# Sound Notification (Soft Glass Chime)
+# on-notify=exec pw-play /home/amit/.config/hypr/sounds/notification.wav
 
 # Icons
 icons=1
@@ -35,25 +38,39 @@ default-timeout=7000
 max-history=50
 sort=-time
 
-# Interactive Controls (Click once to invoke action & dismiss)
+# Interactive Controls
 on-button-left=invoke-default-action
 on-button-middle=dismiss-all
 on-button-right=dismiss
 on-touch=invoke-default-action
 
 [urgency=low]
-border-color=#89b4fa
+background-color=#020e0aa6
+border-color=#89b4fa66
 format=<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#89b4fa'>󰂚 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#cdd6f4'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#bac2de'>%b</span>
 default-timeout=5000
 
 [urgency=high]
-border-color=#f87171
+background-color=#020e0abf
+border-color=#f8717199
 format=<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#f87171'>󰂛 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#fca5a5'>%b</span>
 default-timeout=15000
 
 [app-name=Bluetooth]
-background-color=#051e17f5
-border-color=#34d399
-border-size=2
+background-color=#020e0aa6
+border-color=#34d39988
+border-size=1
 default-timeout=45000
 format=<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#34d399'>󰂯 %s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#ffffff'>%b</span>
+
+[app-name=OSD]
+width=420
+height=90
+padding=16,20
+background-color=#020e0aa6
+border-color=#34d39966
+border-size=1
+border-radius=16
+default-timeout=2500
+on-notify=none
+format=<b><span font_desc="JetBrainsMono Nerd Font Bold 12" foreground="#34d399">%s</span></b>\n<span font_desc="JetBrainsMono Nerd Font 12" foreground="#ffffff">%b</span>

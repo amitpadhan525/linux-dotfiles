@@ -32,6 +32,10 @@ default_view = "grid"
 
 show_hidden = false
 
+# Sort hidden files after the others (folders and files each keep their own
+# group) instead of letting the leading dot put them first.
+hidden_last = false
+
 # Right click anywhere on the address bar enters path edit mode with the
 # whole path selected, just like Ctrl+L. Left clicks on breadcrumb segments
 # still navigate.

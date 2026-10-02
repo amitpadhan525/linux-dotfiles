@@ -21,6 +21,7 @@ end
 -- ─────────────────────────────────────────────────────────────────────────────
 
 local forced_tiling_apps = {
+    "kitty", "Kitty",
     "code", "Code", "hyprfm", "HyprFM", "thunar", "dolphin", "nautilus",
     "org.gnome.Nautilus", "pcmanfm", "xdg-desktop-portal-gtk",
     "blueman-manager", ".blueman-manager-wrapped"
@@ -30,6 +31,10 @@ for _, app in ipairs(forced_tiling_apps) do
     hl.window_rule({ match = { class = app }, tile = true })
     hl.window_rule({ match = { initial_class = app }, tile = true })
 end
+
+-- Prevent kitty from opening maximized or fullscreen
+hl.window_rule({ match = { class = "kitty" }, suppress_event = "maximize fullscreen" })
+hl.window_rule({ match = { initial_class = "kitty" }, suppress_event = "maximize fullscreen" })
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- FILE DIALOG CATCH: by initial_title

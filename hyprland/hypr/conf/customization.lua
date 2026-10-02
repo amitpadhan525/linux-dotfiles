@@ -36,7 +36,7 @@ hl.config({
         layout = "dwindle"
     },
     render = {
-        direct_scanout = 1
+        direct_scanout = 0
     },
     decoration = {
         rounding = 5,
@@ -45,12 +45,12 @@ hl.config({
         },
         blur = {
             enabled = true,
-            size = 8,
-            passes = 2,
+            size = 5,
+            passes = 1,
             vibrancy = 0.1696,
             new_optimizations = true,
-            xray = true,
-            popups = true,
+            xray = false,
+            popups = false,
             ignore_opacity = true
         }
     },
@@ -58,11 +58,11 @@ hl.config({
         enabled = true
     },
     misc = {
+        vrr = 0,
         disable_autoreload = false,
         force_default_wallpaper = 0,
         disable_hyprland_logo = true,
         disable_splash_rendering = true,
-        vrr = 1,
         middle_click_paste = false,
         animate_manual_resizes = false,
         animate_mouse_windowdragging = false

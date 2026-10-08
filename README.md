@@ -1,13 +1,23 @@
 <div align="center">
-  # 🌌 Astraeus Hyprland
-  **A premium, high-performance, and modular Lua-orchestrated Wayland environment for Arch Linux.**
 
-  [![WM: Hyprland](https://img.shields.io/badge/WM-Hyprland--v0.55+-8839ef?style=for-the-badge&logo=archlinux&logoColor=white)](https://hyprland.org)
-  [![Bar: Waybar](https://img.shields.io/badge/Bar-Waybar--v0.10+-40a02b?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/Alexays/Waybar)
-  [![Launcher: Rofi](https://img.shields.io/badge/Launcher-Rofi--Wayland-df8e1d?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/davatorium/rofi)
-  [![Terminal: Kitty](https://img.shields.io/badge/Terminal-Kitty-d20f39?style=for-the-badge&logo=kitty&logoColor=white)](https://sw.kovidgoyal.net/kitty/)
-  [![Theme: Catppuccin Mocha](https://img.shields.io/badge/Theme-Catppuccin--Mocha-f5c2e7?style=for-the-badge)](https://github.com/catppuccin/catppuccin)
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+# 🌌 Astraeus Hyprland Dotfiles
+
+**A modern, high-performance, and aesthetic Hyprland (Wayland) desktop environment for Arch Linux.**
+
+[![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)](https://archlinux.org/)
+[![Hyprland](https://img.shields.io/badge/Hyprland_Lua-00A4DC?style=for-the-badge&logo=hyprland&logoColor=white)](https://hyprland.org/)
+[![Theme](https://img.shields.io/badge/Theme-Catppuccin_Mocha-CBA6F7?style=for-the-badge&logo=catppuccin&logoColor=white)](https://github.com/catppuccin/catppuccin)
+[![Shell](https://img.shields.io/badge/Shell-Bash%20%7C%20Lua%20%7C%20Python-4EAA25?style=for-the-badge)](https://www.gnu.org/software/bash/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-A6E3A1?style=for-the-badge)](LICENSE)
+
+<br/>
+
+[⬇️ **Download Latest Release (.zip)**](https://github.com/amitpadhan525/linux-dotfiles/releases/latest/download/linux-dotfiles.zip)
+
+<br/>
+
+![Hyprland Desktop Preview](assets/preview.png)
+
 </div>
 
 ---
@@ -35,273 +45,223 @@ The core motive is to eliminate the usual friction of building a custom Linux de
 
 ---
 
-## 🌟 Core Philosophy & Vision
+## ✨ Features
 
-Welcome to **Astraeus**, a meticulously engineered Linux dotfiles ecosystem. Astraeus is tailored specifically for power users, developers, and designers who refuse to compromise between **lightning-fast performance** and **premium desktop aesthetics**. 
-
-Unlike traditional dotfiles that rely on monolithic configurations, Astraeus introduces a programmatic, **Lua-based configuration layer** built on top of Hyprland v0.55+. This allows dynamic layout orchestration, robust shell safety traps, and custom system services that work together in perfect harmony.
-
-### ⚡ Key Architectural Highlights
-*   **🎨 Catppuccin Mocha Integration**: A highly cohesive, HSL-tailored color schema mapped across the entire graphical stack.
-*   **🧠 Programmatic Lua Configs**: Configs are split into independent modular structures (`environment`, `keybindings`, `windowrules`, `monitors`, `customization`), keeping your main loop pristine.
-*   **🛡️ Self-Healing & Stable**: Custom scripts feature process-level safety locks, PID monitors, and graceful hardware-interrupt handling to prevent system state leakage.
-*   **⌨️ Absolute Keyboard Mastery**: Navigate, manage audio/visual assets, control background utilities, and resize layouts seamlessly.
-
----
-
-## 📸 Desktop Showcase & Live Demos
-
-Get a visual preview of Astraeus in action! Below is a gallery of the system interfaces, status telemetry, and live recordings demonstrating the fluid desktop mechanics.
-
-### 🖼️ System Interfaces & Telemetry
-
-| 🌌 Main Homescreen | 🛠️ Modular Workspace Grid |
-| :---: | :---: |
-| ![Homescreen](./assets/homescreen.png) | ![Workspace Layout](./assets/workspace.png) |
-
-| 📊 Catppuccin Waybar Status Bar |
-| :---: |
-| ![Waybar Status Bar Layout](./assets/waybar.png) |
+- 🎨 **Catppuccin Mocha Palette**: Cohesive, gorgeous truecolor theme spanning Kitty, Waybar, Rofi, Dunst/Mako, GTK 3/4, nwg-dock, and Hyprlock.
+- ⚡ **Lua-Powered Hyprland (v0.55+)**: Clean, programmatic modular configuration layout (`autostart`, `keybinding`, `windowrules`, `monitors`, `workspaces`, `environment`, `keyboard`, `customization`).
+- 📊 **Dynamic Waybar**: Custom modular status bar with workspace indicators, media player, dynamic hardware telemetry (CPU, GPU, RAM, thermals), battery monitor, screen-time tracker, recording indicator, and interactive WiFi menu.
+- 🗂️ **HyprFM & Thunar Integration**: Modern tabbed file management with recents, bookmarks, and customizable color themes.
+- 📸 **Smart Screen Utilities**:
+  - **Interactive Area Screenshot** (`named_screenshot.sh`): Instant clipboard copy + optional Rofi naming prompt with duplicate detection and replace/rename dialog.
+  - **Screen Recording** (`screen_record.sh`): Seamless Wayland screen recording via `wf-recorder` with audio toggle and live Waybar status.
+  - **Wallpaper Switcher** (`wallpaper.sh`): Smooth wallpaper switching powered by `hyprpaper`.
+  - **Power Menu Hub** (`power_menu.py`): Python-driven Rofi menu with Lock, Suspend, Hibernate, Reboot, and Shutdown.
+  - **Night Shift** (`hyprsunset`): System-level blue-light filter toggling a warm 4500K tone.
+  - **Clipboard Daemon** (`cliphist`): Rofi-integrated clipboard history manager.
+- 🔋 **Power & System Management**:
+  - **Systemd Battery Monitor**: User service & timer (`battery-notify.service` / `.timer`) for automatic low-battery warnings.
+  - **CPU Power Profiles**: Shell aliases (`mode-saver`, `mode-bal`, `mode-perf`, `mode-get`) via `powerprofilesctl`.
+- 🚀 **Full Lifecycle Automation**: Robust scripts with error trapping, color-coded logging, dry-run support, and automatic backups.
+- 🔤 **Typography**: JetBrains Mono Nerd Font, Font Awesome, Inter, Outfit, and Noto Fonts.
 
 ---
 
-## ✨ Custom Superpowers (Unique Features)
-
-Astraeus goes far beyond aesthetic eye-candy. It includes a custom suite of high-efficiency utility engines designed to optimize your day-to-day workflow.
-
-### 🧠 1. Programmatic Vim-Key Window Snapping
-The window system features an intelligent dual-mode layout manager inside `~/.config/hypr/scripts/`:
-*   **Tiled Workspaces**: `Super + H/J/K/L` works as high-performance Vim-directional keys to jump focus across adjacent tiled applications.
-*   **Floating Workspaces**: When a workspace or window is floating, `Super + H/J/K/L` dynamically resizes and snaps the target window into perfect screen coordinates (upper-left, upper-right, bottom-left, bottom-right quadrants) in real time.
-
-### 🌐 2. WiFi Pulse Manager
-No more heavy, bloated GUI network tools. Waybar features a custom status integration linked to a high-speed **Rofi-based Network Manager**. Clicking the Waybar Wi-Fi module spawns an overlay that scans local Wi-Fi frequencies, prompts for credentials, and securely authenticates networks through `nmcli` and `gnome-keyring`.
-
-### ⏱️ 3. Screen Time Tracker
-Stay mindful of your productivity. A custom background service calculates active computer usage and presents real-time, daily accumulated metrics directly in your status bar as an elegant, non-intrusive dashboard module.
-
-### 📸 4. Named Region Screenshotter
-Triggered via `Super + S`, this script opens a dynamic coordinates picker (`slurp` + `grim`), freeze-frames the region, and opens an elegant custom single-line Rofi text prompt asking for a custom save name. It automatically:
-1.  Saves the snapshot with your custom name in `~/Pictures/Screenshots/`.
-2.  Bypasses the naming step if left empty (defaults to timestamping).
-3.  Copies the raw image buffer to the Wayland clipboard instantly.
-4.  Triggers a premium desktop notification displaying a clickable file link.
-
-### 🎥 5. Lossless Screen Recorder & Waybar Dynamic Island
-Pressing `Super + Shift + S` opens a premium record controller:
-*   **Robust Video Containers**: Recording runs via `wf-recorder` but is strictly terminated using **graceful SIGINT traps** (`kill -2`). This guarantees the video headers write correctly and prevents MP4 box corruption (unlike scripts that use `kill -9`).
-*   **Dynamic Island Integration**: On start, a custom Python monitor daemon (`recording_status.py`) detects the recording PID, tracks elapsed seconds, and updates Waybar dynamically by drawing a pulsing neon-red dynamic status pill. Clicking the status pill gracefully terminates recording and triggers a Rofi file-naming popup.
-
----
-
-## ⌨️ System Keyboard Bindings (The Grimoire)
-
-### 🚀 Application Shortcuts
-| Keybinding | Function | Core Action |
-| :--- | :--- | :--- |
-| `Super + Enter` | **Kitty Terminal** | Spawns a GPU-accelerated console terminal |
-| `Super + D` | **Rofi App Menu** | Launches search/launch application grid |
-| `Super + E` | **Thunar File Manager** | Opens modern GTK-based file explorer |
-| `Super + S` | **Astraeus Screenshot** | Activates naming region-based screen capture |
-| `Super + Shift + S` | **Astraeus Screen Recorder** | Opens recording options menu (Fullscreen/Region) |
-
-### 🛠️ Window & Grid Management
-| Keybinding | Function | Core Action |
-| :--- | :--- | :--- |
-| `Super + Q` | **Terminate Application** | Closes the active window with priority |
-| `Super + F` | **Toggle Floating Grid** | Switch window state between tiled/floating |
-| `Super + Space` | **Toggle Fullscreen Mode**| Expands window to fill the entire active display |
-| `Super + H/J/K/L` | **Focus / Snapping Map**| Move focus (tiled) or snap window to quadrant (floating) |
-| `Super + LMB` | **Interactive Window Move** | Hold key and left-click drag to float-reposition |
-| `Super + RMB` | **Interactive Window Resize**| Hold key and right-click drag to scale window size |
-| `Super + [1-9]` | **Workspace Switcher** | Instantly navigates to chosen virtual workspace (1-9) |
-| `Super + Shift + [1-9]` | **Workspace Move** | Transports active window block to target workspace |
-
-### 🔊 System & Telemetry Controls
-| Keybinding | Function | Core Action |
-| :--- | :--- | :--- |
-| `Super + W` | **Waybar Orchestration** | Force restarts, redraws, or toggles Waybar panels |
-| `Super + R` | **Hot-Reload Compositor** | Programmatically recompiles and reloads all Lua configs |
-| `Super + N` | **Night Shift (Blue Light)**| Toggles hardware-level blue light filtering (`hyprsunset`) |
-| `Super + Shift + L` | **Secure System Lock** | Launches lockscreen utilizing `hyprlock` |
-| `Volume Up/Down` | **System Audio Volume** | Modifies current volume level in steps of 5% |
-| `Volume Mute`| **System Audio Mute** | Instantly silences audio channels |
-| `Brightness Up/Down`| **Backlight Control** | Scales backlight panel voltage levels by 5% |
-
----
-
-## 📂 Architecture Overview
-
-The repository is modularized cleanly to support quick customization without breaking core system rules:
+## 🗂️ Repository Structure
 
 ```text
-.
-├── hyprland/
-│   ├── hypr/                 # Core Hyprland configuration (Lua environment)
-│   │   ├── conf/             # Segmented Lua setup blocks
-│   │   │   ├── autostart.lua     # Startup utilities and background daemons
-│   │   │   ├── keybinding.lua    # All system shortcuts and action definitions
-│   │   │   ├── windowrules.lua   # Programmatic window rules and layout mappings
-│   │   │   └── monitors.lua      # Display layouts and scaling settings
-│   │   ├── scripts/          # Workflow automation helpers (snapping, screenshots)
-│   │   ├── hyprland.lua      # Master configuration entry point
-│   │   ├── hyprlock.conf     # Secure glassmorphism lock screen
-│   │   └── hyprpaper.conf    # Multi-monitor background manager
-│   ├── waybar/               # Aesthetic status panel
-│   │   ├── scripts/          # Hardware telemetry, recording, and wifi helpers
-│   │   ├── config            # Waybar panel layout map
-│   │   └── style.css         # Glassmorphism and gradient styles
-│   ├── rofi/                 # Search panels and custom system menus
-│   ├── kitty/                # Kitty terminal color mapping and font sets
-│   ├── dunst/                # Dunst notification daemon customization (dunstrc)
-│   ├── mako/                 # Mako notification config fallback
-│   ├── nwg-dock-hyprland/    # macOS-style floating dock styling
-│   ├── nwg-look/             # GTK settings theme exporter setup
-│   ├── gtk-3.0/ & gtk-4.0/   # GTK 3 & GTK 4 visual theme specifications
-│   ├── xsettingsd/           # X11 settings daemon synchronization config
-│   ├── systemd/user/         # User systemd service & timer units (e.g. battery checks)
-│   ├── bash/                 # Shell rc and environment configurations (bashrc, bash_profile)
-│   └── git/                  # Personal git user parameters profile
-├── install.sh                # Premium CLI automated deployment installer
-└── RESOURCES.md              # In-depth package list and documentation manual
+linux-dotfiles/
+├── assets/                      # Desktop previews, screenshots, and visual assets
+├── hyprland/                    # Core configuration files for deployment
+│   ├── bash/                    # Shell configurations (.bashrc, .bash_profile) & power aliases
+│   ├── dunst/                   # Dunst notification daemon configuration and logging
+│   ├── git/                     # Global Git configuration (.gitconfig)
+│   ├── gtk-3.0/ & gtk-4.0/      # GTK theme presets, settings.ini, and bookmarks
+│   ├── hypr/                    # Hyprland Lua configuration modules & companion scripts
+│   │   ├── conf/                # Modular Lua configs (autostart, keybinding, windowrules, etc.)
+│   │   ├── scripts/             # System scripts (screenshots, recording, power menu, wallpaper)
+│   │   └── wallpapers/          # High-resolution desktop and lockscreen wallpapers
+│   ├── hyprfm/                  # HyprFM lightweight file manager settings & themes
+│   ├── kitty/                   # GPU-accelerated terminal emulator configuration
+│   ├── mako/                    # Alternative lightweight notification daemon config
+│   ├── nwg-dock-hyprland/       # Floating application dock layout and styling
+│   ├── nwg-look/                # GTK visual customization configuration
+│   ├── rofi/                    # App launcher, clipboard, and power menu themes
+│   ├── systemd/user/            # User systemd units (battery monitoring daemon & timer)
+│   ├── waybar/                  # Status bar configurations, Catppuccin CSS, and telemetry scripts
+│   └── xsettingsd/              # XWayland settings bridge configuration
+├── release/                     # Release archives (.zip)
+├── copy.sh                      # Pull active system configs back into repository
+├── install.sh                   # Interactive automated deployment script
+├── install.txt                  # Full offline package dependency list
+├── update.sh                    # Automated updater and configuration sync script
+├── uninstall.sh                 # Symlink removal and backup rollback utility
+├── RESOURCES.md                 # Complete blueprint and package dependency index
+└── LICENSE                      # MIT License
 ```
 
 ---
 
-## 🛠️ Quick Start & Installation
+## 🚀 Quick Start
 
-### 1. Pre-installation Sanity Checks
-Ensure your Arch Linux package manager databases are up to date and your system has development tools installed:
-
-```bash
-sudo pacman -Syu --noconfirm base-devel git
-```
-
-### 2. Standard Automated Installation
-Clone the repository, enter the directory, and trigger our custom truecolor shell installer. The script will securely back up your old configuration files to compressed archives, verify package dependencies, detect your AUR helper, and symlink configurations:
-
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/amitpadhan525/linux-dotfiles.git
 cd linux-dotfiles
+```
+
+### 2. Run the Installer
+```bash
 chmod +x install.sh
 ./install.sh
 ```
 
-### 3. Advanced Installer Options
-For system administrators or automation pipelines, the `install.sh` supports several command-line flags:
+> **Note**: The installation script will automatically verify your distribution (Arch Linux), check dependencies, create a compressed backup of your current setup in `~/.config/backups/`, and symlink all configurations into place.
 
+#### Installer Options
 ```bash
-# Display the gorgeous help menu
-./install.sh --help
+./install.sh [OPTIONS]
 
-# Non-interactive automated deployment (bypasses all confirmation queries)
-./install.sh -y
-
-# Deploy configurations and symlinks ONLY (skips packages installation)
-./install.sh --configs-only
-
-# Perform a safe dry-run execution simulation (does not modify disk files)
-./install.sh --dry-run
-
-# Clean slate deployment: Overwrite all existing configurations WITHOUT backing up
-./install.sh --no-backup
+  -y, --non-interactive   Execute without interactive prompts (auto-accept actions)
+  -n, --no-backup         Skip creating backup of existing configurations
+  -p, --packages-only     Install/update package dependencies only
+  -c, --configs-only      Deploy symbolic links for configurations only
+  -d, --dry-run           Simulate deployment without modifying disk
+  -f, --force             Overwrite configuration blocks and bypass sanity checks
+  -h, --help              Display help overview
 ```
 
-### 4. 🔒 Fail-Safe Backup Framework
-To prevent loss of your personal customized configurations, `install.sh` incorporates a professional **atomic archiving mechanism**:
-*   **Automatic Protection**: If a configuration folder (such as `~/.config/hypr`) already exists as a physical directory on your system, the script automatically packs it into a timestamped compressed backup: `~/.config/backups/astraeus_backup_<name>_<date>_<time>.tar.gz`.
-*   **Atomic Abort**: Because the script executes in strict mode (`set -euo pipefail`), if the `tar` command fails (due to lack of disk space, permissions, etc.), the script **aborts instantly** and **never** calls `rm -rf` on your active configuration files. Your files remain completely untouched.
+---
 
-### 5. ⚡ Hard Overwrite Execution
-If you are confident in your setup, wish to deploy instantly, and want to avoid generating backup files, you can explicitly bypass the backup cycle and completely clean-slate override your existing paths by adding the `--no-backup` (or `-n`) flag:
+## 🔄 Management & Maintenance
 
+### 🔁 Updating Configurations
+Pull the latest repository changes and re-deploy configurations:
 ```bash
-./install.sh --no-backup
-```
-*This command immediately clears existing config directories and establishes fresh symlinks pointing to Astraeus.*
-
-### 6. 🛠️ Manual Restoration (Rollback Guide)
-If you wish to restore your previous desktop configuration at any time, it can be achieved instantly in a few commands:
-
-1.  **Remove Astraeus Symlinks**:
-    ```bash
-    rm -rf ~/.config/{hypr,waybar,rofi,kitty,dunst,mako,nwg-dock-hyprland,nwg-look,gtk-3.0,gtk-4.0,xsettingsd} ~/.config/systemd/user ~/.bashrc ~/.bash_profile ~/.gitconfig
-    ```
-2.  **Unpack your archived backups**:
-    ```bash
-    # Extract your configuration backups directly back to the .config directory
-    for archive in ~/.config/backups/astraeus_backup_*.tar.gz; do
-        if [[ "$archive" == *bashrc* || "$archive" == *bash_profile* || "$archive" == *gitconfig* ]]; then
-            tar -xzf "$archive" -C ~/
-        else
-            tar -xzf "$archive" -C ~/.config/
-        fi
-    done
-    ```
-
-### 7. 🔄 Quick & Automated Updates
-If you have already installed Astraeus and want to sync your system with the latest configurations and files from the upstream repository, run the update utility:
-
-```bash
-chmod +x update.sh
 ./update.sh
 ```
+*Supports `-y` (non-interactive), `-p` (sync packages), `-n` (no-backup), `-f` (force), and `-d` (dry-run).*
 
-**Advanced Update Options**:
-*   `--packages` (or `-p`): Also verify and sync new package requirements.
-*   `--dry-run` (or `-d`): Perform a safe dry-run synchronization simulation.
-*   `--no-backup` (or `-n`): Overwrite configs without creating backup archives.
-*   `--non-interactive` (or `-y`): Automatically stash changes and pull updates without interactive prompts.
+### 📤 Syncing Local Changes
+To export your active system configs back into this repository:
+```bash
+./copy.sh
+```
 
-### 8. Post-installation Setup
-1.  **Monitor Setup**: Open `~/.config/hypr/conf/monitors.lua` and adjust your display resolutions, refresh rates, and scale factors.
-2.  **Display Manager Setup**: Log out of your current session and select the **Hyprland** option from your display manager (SDDM/GDM/LightDM).
-3.  **Start Coding**: Press `Super + Enter` to open Kitty and begin customizing!
+### 🗑️ Uninstalling & Rollback
+To remove managed symlinks and optionally restore previous configuration backups:
+```bash
+./uninstall.sh
+```
+*Options:*
+- `./uninstall.sh -r` : Automatically restore latest backups from `~/.config/backups/`.
+- `./uninstall.sh --purge-backups` : Remove symlinks and delete configuration backup archives.
 
 ---
 
-## 💻 Programmatic Configuration Example (Lua)
+## ⌨️ Essential Keybindings
 
-Astraeus harnesses Hyprland's modular **Lua configuration architecture** for clean programmatic control over window behavior. Here is a showcase snippet from `~/.config/hypr/conf/windowrules.lua` showing dynamic loops, table maps, and v0.55+ properties:
+The default `SUPER` modifier key is the **Windows / Super key**.
 
-```lua
----@diagnostic disable: undefined-global
+### 🚀 Applications & Launchers
+| Keybinding | Action |
+| :--- | :--- |
+| <kbd>SUPER</kbd> + <kbd>Return</kbd> | Open Kitty Terminal |
+| <kbd>SUPER</kbd> + <kbd>D</kbd> | Open Rofi Application Launcher |
+| <kbd>SUPER</kbd> + <kbd>E</kbd> | Open File Manager (`hyprfm`) |
+| <kbd>SUPER</kbd> + <kbd>Shift</kbd> + <kbd>E</kbd> | Open New File Manager Window |
+| <kbd>SUPER</kbd> + <kbd>V</kbd> | Open Clipboard Manager (`cliphist` + Rofi) |
+| <kbd>SUPER</kbd> + <kbd>P</kbd> | Open Power Menu |
+| <kbd>SUPER</kbd> + <kbd>L</kbd> | Lock Screen (`hyprlock` & automatic Lid Switch) |
+| <kbd>SUPER</kbd> + <kbd>Alt</kbd> + <kbd>L</kbd> | Clear Crashed Lockscreen |
+| <kbd>SUPER</kbd> + <kbd>N</kbd> | Toggle Night Shift (`hyprsunset` 4500K) |
+| <kbd>SUPER</kbd> + <kbd>W</kbd> | Cycle Waybar Layout |
+| <kbd>SUPER</kbd> + <kbd>Alt</kbd> + <kbd>W</kbd> | Cycle Wallpaper (`hyprpaper`) |
+| <kbd>SUPER</kbd> + <kbd>R</kbd> | Reload Hyprland Configuration (`hyprctl reload`) |
 
--- ─────────────────────────────────────────────────────────────────────────────
--- WINDOW RULES: FORCE TILING (Workspaces 1-6)
--- ─────────────────────────────────────────────────────────────────────────────
-for i = 1, 6 do
-    hl.window_rule({ match = { workspace = tostring(i) }, tile = true })
-end
+### 🪟 Window Control & Layout
+| Keybinding | Action |
+| :--- | :--- |
+| <kbd>SUPER</kbd> + <kbd>Q</kbd> | Close Focused Window |
+| <kbd>SUPER</kbd> + <kbd>Escape</kbd> | Force Kill Window |
+| <kbd>SUPER</kbd> + <kbd>F</kbd> | Toggle Floating Mode |
+| <kbd>SUPER</kbd> + <kbd>Space</kbd> | Toggle Fullscreen / Maximized |
+| <kbd>SUPER</kbd> + <kbd>G</kbd> | Toggle Tabbed Window Group |
+| <kbd>SUPER</kbd> + <kbd>Tab</kbd> | Next Window in Group |
+| <kbd>SUPER</kbd> + <kbd>Shift</kbd> + <kbd>Tab</kbd> | Previous Window in Group |
 
--- ─────────────────────────────────────────────────────────────────────────────
--- TARGETED APP OVERRIDES: FORCE TILE BY CLASS
--- ─────────────────────────────────────────────────────────────────────────────
-local forced_tiling_apps = {
-    "code", "Code", "thunar", "dolphin", "nautilus",
-    "org.gnome.Nautilus", "pcmanfm", "xdg-desktop-portal-gtk"
-}
+### 🧭 Navigation & Movement
+| Keybinding | Action |
+| :--- | :--- |
+| <kbd>SUPER</kbd> + <kbd>H</kbd> / <kbd>J</kbd> / <kbd>K</kbd> / <kbd>L</kbd> | Move Focus (Left / Down / Up / Right) |
+| <kbd>SUPER</kbd> + <kbd>Arrow Keys</kbd> | Move Focus (Left / Down / Up / Right) |
+| <kbd>SUPER</kbd> + <kbd>Shift</kbd> + <kbd>H</kbd> / <kbd>J</kbd> / <kbd>K</kbd> / <kbd>L</kbd> | Move / Swap Window Directionally |
+| <kbd>SUPER</kbd> + <kbd>Shift</kbd> + <kbd>Arrow Keys</kbd> | Move / Swap Window Directionally |
+| <kbd>SUPER</kbd> + <kbd>Alt</kbd> + <kbd>Left</kbd> / <kbd>Right</kbd> | Move Workspace to Left / Right Monitor |
+| <kbd>SUPER</kbd> + <kbd>1-9</kbd> | Switch to Workspace 1-9 |
+| <kbd>SUPER</kbd> + <kbd>Shift</kbd> + <kbd>1-9</kbd> | Move Window to Workspace 1-9 |
 
-for _, app in ipairs(forced_tiling_apps) do
-    hl.window_rule({ match = { class = app }, tile = true })
-end
+### 📌 Scratchpad (Special Workspace)
+| Keybinding | Action |
+| :--- | :--- |
+| <kbd>SUPER</kbd> + <kbd>U</kbd> | Toggle Scratchpad Workspace |
+| <kbd>SUPER</kbd> + <kbd>Shift</kbd> + <kbd>U</kbd> | Move Active Window to Scratchpad |
+| <kbd>SUPER</kbd> + <kbd>Shift</kbd> + <kbd>Return</kbd> | Spawn / Toggle Dedicated Scratchpad Terminal |
 
--- ─────────────────────────────────────────────────────────────────────────────
--- MODAL/POPUP DIALOGS: Force tile popups cleanly
--- ─────────────────────────────────────────────────────────────────────────────
-hl.window_rule({ match = { modal = true }, tile = true })
+### 📸 Media & Capture
+| Keybinding | Action |
+| :--- | :--- |
+| <kbd>SUPER</kbd> + <kbd>S</kbd> | Interactive Area Screenshot (Clipboard copy + Rofi Save dialog) |
+| <kbd>SUPER</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> | Screen Recording Toggle (`wf-recorder`) |
+| <kbd>XF86AudioRaiseVolume</kbd> / <kbd>LowerVolume</kbd> | Volume Up / Down with OSD |
+| <kbd>XF86AudioMute</kbd> | Mute / Unmute Audio |
+| <kbd>XF86MonBrightnessUp</kbd> / <kbd>Down</kbd> | Display Brightness Up / Down with OSD |
+| <kbd>XF86AudioPlay</kbd> / <kbd>Next</kbd> / <kbd>Prev</kbd> / <kbd>Stop</kbd> | Media Playback Control |
+
+### 🖱️ Mouse Bindings
+| Keybinding | Action |
+| :--- | :--- |
+| <kbd>SUPER</kbd> + <kbd>Left Click Drag</kbd> | Move / Drag Window |
+| <kbd>SUPER</kbd> + <kbd>Right Click Drag</kbd> | Resize Window |
+| <kbd>SUPER</kbd> + <kbd>Scroll Up</kbd> / <kbd>Down</kbd> | Switch to Next / Previous Workspace |
+
+---
+
+## ⚡ Shell Shortcuts & Power Profiles
+
+The managed [bashrc](hyprland/bash/bashrc) includes productivity aliases:
+
+```bash
+# CPU Power Profiles
+mode-get     # View current active power profile
+mode-saver   # Switch to Power Saver mode
+mode-bal     # Switch to Balanced mode
+mode-perf    # Switch to Performance mode
+
+# Virtualization Shortcuts
+ubuntu       # Launch Ubuntu 26 VM (QEMU KVM)
+kali         # Launch Kali Linux VM (QEMU KVM)
+metasploitable # Launch Metasploitable VM
+win11        # Launch Windows 11 VM
+
+# Python Environments
+ds-env       # Activate Data Science virtual environment
+tf-env       # Activate TensorFlow virtual environment
+jupyterlab   # Launch JupyterLab in Brave browser
 ```
 
 ---
 
-## 📜 License & Copyright
+## 🎨 Customization & Configuration
 
-This project is licensed under the terms of the **MIT License**. Check out [`LICENSE`](./LICENSE) for full details.
-
-Copyright (c) 2026 Amit Padhan.
+- **Keybindings & Rules**: Edit [keybinding.lua](hyprland/hypr/conf/keybinding.lua) and [windowrules.lua](hyprland/hypr/conf/windowrules.lua).
+- **Status Bar**: Configure modules in [config](hyprland/waybar/config) and theme styling in [style.css](hyprland/waybar/style.css).
+- **Wallpapers**: Add new wallpapers into [hyprland/hypr/wallpapers/](hyprland/hypr/wallpapers/).
+- **Terminal**: Customize colors, padding, and fonts in [kitty.conf](hyprland/kitty/kitty.conf).
+- **File Manager**: Adjust settings in [config.toml](hyprland/hyprfm/config.toml).
+- **Detailed Blueprint**: See [RESOURCES.md](RESOURCES.md) for package breakdowns, audio pipelines, typography guides, and manual setup commands.
 
 ---
 
-<div align="center">
-  <p>Crafted with ❤️ by <a href="https://github.com/amitpadhan525">Amit Padhan</a></p>
-</div>
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).

@@ -14,16 +14,16 @@ for f in /sys/class/hwmon/hwmon*/name; do
             celsius=$((raw / 1000))
 
             if (( celsius >= 80 )); then
-                icon=""; color="#f38ba8"
+                icon=""; color="#ffb86c" temp_class="hot"
             elif (( celsius >= 55 )); then
-                icon=""; color="#f9e2af"
+                icon=""; color="#8be9fd" temp_class="warm"
             else
-                icon=""; color="#a6e3a1"
+                icon=""; color="#50fa7b" temp_class="cool"
             fi
 
-            tooltip="<span color='#cba6f7'>${icon} CPU Temp: </span><span color='${color}'>${celsius}°C</span>"
-            printf '{"text":"%s %s°C","tooltip":"%s"}\n' \
-                "$icon" "$celsius" \
+            tooltip="<span color='#89b4fa'>${icon} CPU Temp: </span><span color='${color}'>${celsius}°C</span>"
+            printf '{"text":"%s %s°C","class":"%s","tooltip":"%s"}\n' \
+                "$icon" "$celsius" "$temp_class" \
                 "$(printf '%s' "$tooltip" | sed 's/"/\\"/g')"
             exit 0
         done

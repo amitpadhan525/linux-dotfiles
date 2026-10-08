@@ -19,26 +19,27 @@ readonly BACKUP_DIR="$CONFIG_DIR/backups"
 readonly CORE_WM=(
     "hyprland" "hyprpaper" "hyprlock" "hyprsunset"
     "waybar" "rofi-wayland" "kitty" "mako" "dunst" "thunar"
-    "nwg-dock-hyprland" "nwg-look"
+    "nwg-dock-hyprland" "nwg-look" "hyprfm"
 )
 readonly MULTIMEDIA=(
-    "pipewire" "pipewire-pulse" "wireplumber" "pamixer" "pavucontrol" "libpulse"
+    "pipewire" "pipewire-pulse" "wireplumber" "pamixer" "pavucontrol" "libpulse" "playerctl"
 )
 readonly SYSTEM_UTILS=(
     "brightnessctl" "networkmanager" "nm-connection-editor" "blueman"
     "acpi" "upower" "slurp" "grim" "wl-clipboard" "jq" "python" "libnotify"
 )
 readonly SESSION_SERVICES=(
-    "wf-recorder" "swaync" "network-manager-applet" "polkit-gnome"
+    "wf-recorder" "network-manager-applet"
 )
 readonly PORTAL_SERVICES=(
     "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk"
 )
 readonly DECO_TYPO=(
     "ttf-jetbrains-mono-nerd" "noto-fonts" "noto-fonts-emoji" "ttf-font-awesome"
+    "ttf-inter" "ttf-outfit"
 )
 readonly SYSTEM_INTEGRATION=(
-    "polkit-kde-agent" "gnome-keyring" "xsettingsd" "base-devel" "git"
+    "hyprpolkitagent" "gnome-keyring" "xsettingsd" "base-devel" "git"
 )
 
 # Combined Package List
@@ -343,7 +344,7 @@ deploy_configs() {
             mkdir -p "$BACKUP_DIR"
         fi
         
-        local modules=("hypr" "waybar" "rofi" "kitty" "dunst" "mako" "nwg-dock-hyprland" "nwg-look" "gtk-3.0" "gtk-4.0" "xsettingsd" "systemd/user")
+        local modules=("hypr" "waybar" "rofi" "kitty" "dunst" "mako" "nwg-dock-hyprland" "nwg-look" "hyprfm" "gtk-3.0" "gtk-4.0" "xsettingsd" "systemd/user")
         local backed_up_count=0
         
         for mod in "${modules[@]}"; do
@@ -389,7 +390,7 @@ deploy_configs() {
         mkdir -p "$CONFIG_DIR"
     fi
     
-    local config_modules=("hypr" "waybar" "rofi" "kitty" "dunst" "mako" "nwg-dock-hyprland" "nwg-look" "gtk-3.0" "gtk-4.0" "xsettingsd" "systemd/user")
+    local config_modules=("hypr" "waybar" "rofi" "kitty" "dunst" "mako" "nwg-dock-hyprland" "nwg-look" "hyprfm" "gtk-3.0" "gtk-4.0" "xsettingsd" "systemd/user")
     
     for mod in "${config_modules[@]}"; do
         local source="$DOTFILES_DIR/hyprland/$mod"

@@ -9,7 +9,7 @@ for i = 1, 6 do
 end
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- WINDOW RULES: FORCE FLOATING (Workspaces 7-9)
+-- WINDOW RULES: FORCE FLOATING (Workspaces 7-9 & Scrcpy / DeX)
 -- ─────────────────────────────────────────────────────────────────────────────
 
 for i = 7, 9 do
@@ -21,12 +21,14 @@ end
 -- ─────────────────────────────────────────────────────────────────────────────
 
 local forced_tiling_apps = {
-    "code", "Code", "thunar", "dolphin", "nautilus",
-    "org.gnome.Nautilus", "pcmanfm", "xdg-desktop-portal-gtk"
+    "code", "Code", "hyprfm", "HyprFM", "thunar", "dolphin", "nautilus",
+    "org.gnome.Nautilus", "pcmanfm", "xdg-desktop-portal-gtk",
+    "blueman-manager", ".blueman-manager-wrapped"
 }
 
 for _, app in ipairs(forced_tiling_apps) do
     hl.window_rule({ match = { class = app }, tile = true })
+    hl.window_rule({ match = { initial_class = app }, tile = true })
 end
 
 -- ─────────────────────────────────────────────────────────────────────────────
@@ -52,7 +54,7 @@ hl.window_rule({ match = { initial_class = "xdg-desktop-portal-gtk" }, tile = tr
 hl.window_rule({ match = { initial_class = "xdg-desktop-portal" }, tile = true })
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- MODAL/POPUP DIALOGS: force tile
+-- MODAL/POPUP DIALOGS: force tile (general)
 -- 'modal' prop catches GTK/Qt popups and dialogs natively in v0.55
 -- ─────────────────────────────────────────────────────────────────────────────
 
@@ -65,7 +67,75 @@ hl.window_rule({ match = { modal = true }, tile = true })
 hl.window_rule({ match = { xwayland = true, float = true }, tile = true })
 
 -- ─────────────────────────────────────────────────────────────────────────────
+-- FORCED FLOATING APPS: SCRCPY & AUTH/PAIRING DIALOGS ONLY
+-- ─────────────────────────────────────────────────────────────────────────────
+
+local forced_floating_apps = {
+    "scrcpy", "Scrcpy",
+    "blueman-assistant", "blueman-sendto", "blueman-services",
+    "bluetooth-auth-dialog"
+}
+
+for _, app in ipairs(forced_floating_apps) do
+    hl.window_rule({ match = { class = app }, float = true, center = true })
+    hl.window_rule({ match = { initial_class = app }, float = true, center = true })
+end
+
+-- Specific sizes for floating utilities
+hl.window_rule({ match = { class = "scrcpy" }, size = "460 920" })
+hl.window_rule({ match = { class = "Scrcpy" }, size = "460 920" })
+hl.window_rule({ match = { class = "blueman-assistant" }, size = "600 420" })
+hl.window_rule({ match = { class = "blueman-sendto" }, size = "500 360" })
+hl.window_rule({ match = { class = "blueman-services" }, size = "620 460" })
+
+-- ─────────────────────────────────────────────────────────────────────────────
 -- LAYER RULES: GLASSMORPHIC BLUR FOR DUNST NOTIFICATIONS
 -- ─────────────────────────────────────────────────────────────────────────────
-hl.layer_rule({ match = { namespace = "dunst" }, blur = true })
-hl.layer_rule({ match = { namespace = "dunst" }, ignore_alpha = 0.2 })
+hl.layer_rule({ match = { namespace = "notifications" }, blur = true })
+hl.layer_rule({ match = { namespace = "notifications" }, ignore_alpha = 0.1 })
+hl.layer_rule({ match = { namespace = "mako" }, blur = true })
+hl.layer_rule({ match = { namespace = "mako" }, ignore_alpha = 0.1 })
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- LAYER RULES: GLASSMORPHIC BLUR FOR ROFI (App Menu / Clipboard / Dialogs)
+-- ─────────────────────────────────────────────────────────────────────────────
+hl.layer_rule({ match = { namespace = "rofi" }, blur = true })
+hl.layer_rule({ match = { namespace = "rofi" }, ignore_alpha = 0.1 })
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- LAYER RULES: GLASSMORPHIC BLUR FOR WAYBAR
+-- ─────────────────────────────────────────────────────────────────────────────
+hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
+hl.layer_rule({ match = { namespace = "waybar" }, ignore_alpha = 0.01 })
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- LAYER RULES: GLASSMORPHIC BLUR FOR POWERMENU
+-- ─────────────────────────────────────────────────────────────────────────────
+hl.layer_rule({ match = { namespace = "powermenu" }, blur = true })
+hl.layer_rule({ match = { namespace = "powermenu" }, ignore_alpha = 0.02 })
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- HYPRLAND 0.56 WINDOW RULES ENHANCEMENTS
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Disable Auto-HDR for video players and steam games
+local no_hdr_apps = { "mpv", "vlc", "steam_app_.*" }
+for _, app in ipairs(no_hdr_apps) do
+    hl.window_rule({ match = { class = app }, no_auto_hdr = true })
+end
+
+-- Idle inhibit for media playback
+hl.window_rule({ match = { class = "mpv" }, idle_inhibit = "focus" })
+hl.window_rule({ match = { class = "vlc" }, idle_inhibit = "focus" })
+
+-- Picture-in-Picture (Sticky, floating, keep aspect ratio)
+hl.window_rule({ match = { title = "^(Picture-in-Picture)$" }, float = true, pin = true, keep_aspect_ratio = true })
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- SPECIAL WORKSPACE (SCRATCHPAD) & SMART GAPS
+-- ─────────────────────────────────────────────────────────────────────────────
+
+-- Auto-float and place windows with class 'scratchpad' into special workspace
+hl.window_rule({ match = { class = "scratchpad" }, float = true, workspace = "special:scratchpad" })
+
+-- Smart Gaps: Remove border and rounding when only 1 tiled window is present
+hl.window_rule({ match = { workspace = "w[tv1]", float = false }, border_size = 0, rounding = 0 })

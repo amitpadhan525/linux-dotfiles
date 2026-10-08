@@ -1,10 +1,25 @@
 # Ignore logs and state files
 *.log
+*.log.*
+**/logs/
 .night_mode_state
+nohup.out
+**/nohup.out
 
-# Ignore backup archives
+# Python cache
+__pycache__/
+*.py[cod]
+
+# HyprFM state and session files
+hyprland/hyprfm/*.json
+!hyprland/hyprfm/*.sample
+
+# Ignore backup and release archives
 *.zip
 *.tar.gz
 *.bak
 backups/
 backup/
+release/
+
+

@@ -90,6 +90,8 @@ check_env() {
         error "Fatal: Git is required to run the update utility."
         exit 1
     fi
+
+    cd "$DOTFILES_DIR"
 }
 
 sync_repo() {

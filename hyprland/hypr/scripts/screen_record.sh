@@ -38,15 +38,38 @@ if pgrep -u "$USER" -x "wf-recorder" >/dev/null; then
     pkill -RTMIN+8 waybar || true
     
     if [ -f "$TEMP_PATH" ]; then
-        # Prompt user to enter a name for the video file using a super compact single-line Rofi input box (starts empty)
-        USER_NAME=$(echo "" | rofi -dmenu -p "Save as (empty for default)" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'listview { enabled: false; } window { width: 500px; }' -i)
-        
-        if [ -n "$USER_NAME" ]; then
-            SAVED_PATH="$SAVE_DIR/${USER_NAME}.mp4"
-            mv "$TEMP_PATH" "$SAVED_PATH"
-        else
-            SAVED_PATH="$TEMP_PATH"
-        fi
+        SAVED_PATH=""
+        while true; do
+            # Prompt user to enter a name for the video file using a super compact single-line Rofi input box (starts empty)
+            USER_NAME=$(echo "" | rofi -dmenu -p "Save as (empty for default)" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'listview { enabled: false; } window { width: 500px; }' -i || true)
+            
+            if [ -z "$USER_NAME" ]; then
+                SAVED_PATH="$TEMP_PATH"
+                break
+            fi
+            
+            TARGET_PATH="$SAVE_DIR/${USER_NAME}.mp4"
+            if [ -f "$TARGET_PATH" ]; then
+                # File already exists, ask the user to rename or replace
+                CHOICE=$(echo -e "Replace\nRename" | rofi -dmenu -p "File already exists" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 2; lines: 1; }' -i || true)
+                
+                if [[ "$CHOICE" == *"Replace"* ]]; then
+                    SAVED_PATH="$TARGET_PATH"
+                    mv -f "$TEMP_PATH" "$SAVED_PATH"
+                    break
+                elif [[ "$CHOICE" == *"Rename"* ]]; then
+                    continue
+                else
+                    # User closed rofi, fallback to default temp file
+                    SAVED_PATH="$TEMP_PATH"
+                    break
+                fi
+            else
+                SAVED_PATH="$TARGET_PATH"
+                mv "$TEMP_PATH" "$SAVED_PATH"
+                break
+            fi
+        done
         
         notify-send -t 5000 "Recording Saved" "Video saved to:\n$SAVED_PATH"
     else
@@ -56,10 +79,9 @@ if pgrep -u "$USER" -x "wf-recorder" >/dev/null; then
     exit 0
 fi
 
-# 3. Present Rofi menu to select recording mode in a beautiful compact pill format
-# Fullscreen is the first option and is selected by default
-OPTIONS="🖥️ Record Fullscreen\n📹 Record Area\n❌ Cancel"
-CHOICE=$(echo -e "$OPTIONS" | rofi -dmenu -p "Screen Recorder" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 1; lines: 3; }' -i)
+# 3. Present Rofi menu to select recording mode in a clean compact format without search bar or cancel button
+OPTIONS="🖥️  Record Fullscreen\n📹  Record Area"
+CHOICE=$(echo -e "$OPTIONS" | rofi -dmenu -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'mainbox { children: [ "listview" ]; padding: 16px; } window { width: 380px; border-radius: 18px; } listview { columns: 1; lines: 2; spacing: 8px; }' -i || true)
 
 case "$CHOICE" in
     *"Record Fullscreen"*)

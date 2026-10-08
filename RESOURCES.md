@@ -14,7 +14,7 @@ These are the fundamental building blocks of the desktop environment, responsibl
 | **Status Bar** | `waybar` | The aesthetic status bar displaying workspaces, active modules, and dynamic media islands. |
 | **App Menu** | `rofi-wayland` | Wayland-native keyboard-driven selection portal for menus, WiFi lists, and prompts. |
 | **Terminal** | `kitty` | Ultra-fast, GPU-accelerated terminal emulator displaying developer outputs. |
-| **File Manager** | `thunar` | Lightweight, robust GTK-based file explorer. |
+| **File Manager** | `hyprfm` / `thunar` | Fast modern file explorer (HyprFM tabbed/miller view) & Thunar fallback. |
 | **Notification (Active)**| `dunst` | Advanced notification daemon styled cohesive with the theme. |
 | **Notification (Alt)** | `mako` | Lightweight notification daemon designed explicitly for Wayland. |
 | **Desktop Dock** | `nwg-dock-hyprland` (AUR)| Custom CSS styled floating launcher dock. |
@@ -55,6 +55,7 @@ Astraeus implements modern Wayland audio pipelines utilizing Pipewire for modern
 | **Audio Server** | `pipewire` | Multimedia server managing physical hardware paths and low-latency digital signals. |
 | **Session Control**| `wireplumber` | Intelligent session manager handling policy routing and automatic device switching. |
 | **CLI Mixer** | `pamixer` | PulseAudio command-line volume controller used within custom keyboard bindings. |
+| **Media Controller**| `playerctl` | Command-line MPRIS media player controller used within playback keybindings. |
 | **GUI Control** | `pavucontrol` | Full graphical pulse control interface for complex audio management. |
 | **Integration** | `libpulse` | Compatibility library to ensure standard applications interface with Pipewire channels. |
 
@@ -69,9 +70,9 @@ Astraeus integrates custom scripts to link components dynamically. To run these 
 *   **`jq`**: High-performance, lightweight command-line JSON processor. It formats the system outputs of Wayland and Hyprland IPC channels into parsed parameters.
 
 Additionally, the following root-level utility scripts are provided:
-*   [copy.sh](file:///home/amit/github/linux-dotfiles/copy.sh): Collects/syncs all active local system configurations into your repository.
-*   [push.sh](file:///home/amit/github/linux-dotfiles/push.sh): Commits and pushes modifications to the GitHub remote repository.
-*   [update.sh](file:///home/amit/github/linux-dotfiles/update.sh): Pulls the latest configurations from GitHub, redeploys links, and restarts service environments.
+*   [copy.sh](copy.sh): Collects/syncs all active local system configurations into your repository.
+*   [update.sh](update.sh): Pulls the latest configurations from GitHub, redeploys links, and restarts service environments. It now anchors itself to the repository root automatically.
+*   [uninstall.sh](uninstall.sh): Removes managed symlinks and provides an automated rollback mechanism to restore configuration archives.
 
 ---
 
@@ -82,8 +83,8 @@ Astraeus uses specific typography selections to ensure layout alignments, icon m
 *   **`ttf-jetbrains-mono-nerd`**: The primary monospaced system font. Used across Kitty, Waybar telemetry readouts, and standard console inputs. Includes thousands of developer icons.
 *   **`ttf-font-awesome`**: Provides graphical vector icon glyphs for core status bar modules.
 *   **`noto-fonts` & `noto-fonts-emoji`**: Crucial system-wide fallback fonts for general international characters and modern high-definition emoji symbols.
-*   **`Outfit`** (Sans-Serif): A geometric font family utilized within custom user widgets, notifications, and the lockscreen typography layouts.
-*   **`Inter`** (Sans-Serif): Premium fallback font optimized for high legibility on computer screens.
+*   **`ttf-outfit`** (AUR) / **`Outfit`**: A geometric font family utilized within custom user widgets, notifications, and the lockscreen typography layouts.
+*   **`ttf-inter`** (AUR) / **`Inter`**: Premium font optimized for high legibility on computer screens.
 
 ---
 
@@ -99,7 +100,7 @@ sudo pacman -Syu
 ```
 
 ### 2. Install Primary Official Packages
-Copy and execute this composite installation block to install all system dependencies:
+Before compiling or downloading AUR configurations, install all standard official dependencies:
 
 ```bash
 sudo pacman -S --needed --noconfirm \
@@ -115,25 +116,31 @@ sudo pacman -S --needed --noconfirm \
     dunst \
     nwg-look \
     pipewire \
+    pipewire-pulse \
     wireplumber \
     pamixer \
+    playerctl \
     pavucontrol \
     libpulse \
     brightnessctl \
     networkmanager \
     nm-connection-editor \
+    network-manager-applet \
     blueman \
     acpi \
     upower \
     slurp \
     grim \
+    wf-recorder \
     wl-clipboard \
     jq \
     python \
     libnotify \
-    polkit-kde-agent \
+    hyprpolkitagent \
     gnome-keyring \
     xsettingsd \
+    xdg-desktop-portal-hyprland \
+    xdg-desktop-portal-gtk \
     ttf-jetbrains-mono-nerd \
     noto-fonts \
     noto-fonts-emoji \
@@ -143,10 +150,10 @@ sudo pacman -S --needed --noconfirm \
 ```
 
 ### 3. Install AUR Packages
-Install the custom floating dock using your preferred AUR helper (e.g. `yay`):
+Install the custom floating dock and required system fonts using your preferred AUR helper (e.g. `yay`):
 
 ```bash
-yay -S --needed --noconfirm nwg-dock-hyprland
+yay -S --needed --noconfirm nwg-dock-hyprland ttf-inter ttf-outfit
 ```
 
 ### 4. Deploy Custom Shell & Python Permissions

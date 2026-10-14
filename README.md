@@ -239,6 +239,17 @@ jupyterlab   # Launch JupyterLab in Brave browser
 
 ---
 
+## 🎨 Recommended Display Manager Greeter: SDDM Themes
+
+Complete your aesthetic Arch Linux ricing setup with a matching greeter screen from the companion repository:
+
+[![SDDM Themes](https://github-readme-stats.vercel.app/api/pin/?username=amitpadhan525&repo=sddm-themes&theme=catppuccin_mocha)](https://github.com/amitpadhan525/sddm-themes)
+
+👉 **[amitpadhan525/sddm-themes](https://github.com/amitpadhan525/sddm-themes)** — A curated collection of modern, minimalist, and aesthetic SDDM login greeter themes featuring smooth animations, live clock, custom user avatars, responsive layouts, and matching Catppuccin color palettes.
+
+---
+
 ## 📜 License
 
 This project is licensed under the [MIT License](LICENSE).
+

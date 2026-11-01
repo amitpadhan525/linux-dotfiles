@@ -7,6 +7,7 @@
 [![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)](https://archlinux.org/)
 [![Hyprland](https://img.shields.io/badge/Hyprland_Lua-00A4DC?style=for-the-badge&logo=hyprland&logoColor=white)](https://hyprland.org/)
 [![Theme](https://img.shields.io/badge/Theme-Catppuccin_Mocha-CBA6F7?style=for-the-badge&logo=catppuccin&logoColor=white)](https://github.com/catppuccin/catppuccin)
+[![CI/CD Pipeline](https://github.com/amitpadhan525/linux-dotfiles/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/amitpadhan525/linux-dotfiles/actions/workflows/ci-cd.yml)
 [![Shell](https://img.shields.io/badge/Shell-Bash%20%7C%20Lua%20%7C%20Python-4EAA25?style=for-the-badge)](https://www.gnu.org/software/bash/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-A6E3A1?style=for-the-badge)](LICENSE)
 
@@ -47,6 +48,9 @@
 
 ```text
 linux-dotfiles/
+├── .github/
+│   ├── scripts/                 # Requirements validator, test suite, and versioning scripts
+│   └── workflows/ci-cd.yml      # CI/CD validation, Arch test suite, and automated release
 ├── assets/                      # Desktop previews, screenshots, and visual assets
 ├── hyprland/                    # Core configuration files for deployment
 │   ├── bash/                    # Shell configurations (.bashrc, .bash_profile) & power aliases

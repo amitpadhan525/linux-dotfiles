@@ -1,0 +1,159 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: 'Version bump type (auto, patch, minor, major) or explicit version (e.g. v2.1.0)'
+        required: false
+        default: 'auto'
+        type: string
+      dry_run:
+        description: 'Run CI tests only without publishing release'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  validate-requirements:
+    name: Validate Requirements & Code Integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify requirements and paths consistency
+        run: |
+          python3 .github/scripts/check-requirements.py
+
+      - name: Run ShellCheck on shell scripts
+        run: |
+          echo "Running ShellCheck on shell scripts..."
+          find . -type f -name "*.sh" -not -path "*/.git/*" -print0 | xargs -0 -r shellcheck -e SC1091 -e SC2034 || true
+
+  test-scripts:
+    name: Test Install & Update Scripts (Arch Linux)
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:base-devel
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare unprivileged test environment
+        run: |
+          pacman -Syu --noconfirm git python sudo
+          useradd -m testuser
+          echo "testuser ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/testuser
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          chown -R testuser:testuser "$GITHUB_WORKSPACE"
+
+      - name: Run script functional tests as unprivileged user
+        run: |
+          su testuser -c "git config --global --add safe.directory '$GITHUB_WORKSPACE'"
+          su testuser -c "bash .github/scripts/test-scripts.sh"
+
+  release:
+    name: Bump Version & Create GitHub Release
+    needs: [ validate-requirements, test-scripts ]
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Determine next version
+        id: versioning
+        run: |
+          BUMP_INPUT="${{ github.event.inputs.bump_type }}"
+          if [ -z "$BUMP_INPUT" ] || [ "$BUMP_INPUT" = "auto" ]; then
+              NEXT_TAG=$(bash .github/scripts/get-next-version.sh)
+          else
+              NEXT_TAG=$(bash .github/scripts/get-next-version.sh "$BUMP_INPUT")
+          fi
+          echo "Next release version: $NEXT_TAG"
+          echo "tag=$NEXT_TAG" >> "$GITHUB_OUTPUT"
+
+          # Check if tag already exists on remote
+          if git rev-parse "$NEXT_TAG" >/dev/null 2>&1; then
+              echo "Tag $NEXT_TAG already exists. Exiting release job gracefully."
+              echo "skip_release=true" >> "$GITHUB_OUTPUT"
+          else
+              echo "skip_release=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate Changelog & Release Archives
+        if: steps.versioning.outputs.skip_release != 'true'
+        run: |
+          TAG="${{ steps.versioning.outputs.tag }}"
+          PREV_TAG=$(git tag -l "v[0-9]*.[0-9]*.[0-9]*" | sort -V | tail -n 1 || echo "")
+          
+          mkdir -p dist
+
+          echo "Generating release archives for $TAG..."
+          git archive --format=zip --prefix="linux-dotfiles-${TAG}/" --output="dist/linux-dotfiles-${TAG}.zip" HEAD
+          git archive --format=tar.gz --prefix="linux-dotfiles-${TAG}/" --output="dist/linux-dotfiles-${TAG}.tar.gz" HEAD
+
+          cd dist
+          sha256sum "linux-dotfiles-${TAG}.zip" "linux-dotfiles-${TAG}.tar.gz" > "checksums.txt"
+          cd ..
+
+          echo "## 🌌 Astraeus Hyprland Release ${TAG}" > RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "Automated release tested and published via CI/CD pipeline." >> RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "### 📦 What's Changed" >> RELEASE_NOTES.md
+          if [ -n "$PREV_TAG" ]; then
+              git log "${PREV_TAG}..HEAD" --pretty=format:"* %s ([%h](https://github.com/${{ github.repository }}/commit/%H))" >> RELEASE_NOTES.md
+          else
+              git log -n 15 --pretty=format:"* %s ([%h](https://github.com/${{ github.repository }}/commit/%H))" >> RELEASE_NOTES.md
+          fi
+          echo "" >> RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "### 🔒 Checksums (SHA-256)" >> RELEASE_NOTES.md
+          echo '```' >> RELEASE_NOTES.md
+          cat dist/checksums.txt >> RELEASE_NOTES.md
+          echo '```' >> RELEASE_NOTES.md
+
+      - name: Push Git Tag
+        if: steps.versioning.outputs.skip_release != 'true'
+        run: |
+          TAG="${{ steps.versioning.outputs.tag }}"
+          git tag -a "$TAG" -m "Release $TAG"
+          git push origin "$TAG"
+
+      - name: Publish GitHub Release
+        if: steps.versioning.outputs.skip_release != 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.versioning.outputs.tag }}
+          name: "Release ${{ steps.versioning.outputs.tag }}"
+          body_path: RELEASE_NOTES.md
+          draft: false
+          prerelease: false
+          files: |
+            dist/*.zip
+            dist/*.tar.gz
+            dist/checksums.txt

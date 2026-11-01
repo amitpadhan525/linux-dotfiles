@@ -104,7 +104,7 @@ sync_repo() {
         if [ "$NON_INTERACTIVE" = "true" ]; then
             info "Non-interactive mode: Stashing local modifications automatically..."
             if [ "$DRY_RUN" = "false" ]; then
-                git stash -u
+                git stash -u 2>/dev/null || true
             fi
         else
             read -p "  Would you like to stash your local changes? (Y/n): " -n 1 -r
@@ -115,7 +115,7 @@ sync_repo() {
             else
                 info "Stashing local changes..."
                 if [ "$DRY_RUN" = "false" ]; then
-                    git stash -u
+                    git stash -u 2>/dev/null || true
                 fi
             fi
         fi
@@ -124,21 +124,26 @@ sync_repo() {
     # Fetch updates from origin
     info "Fetching updates from GitHub repository..."
     if [ "$DRY_RUN" = "false" ]; then
-        git fetch origin main
+        if ! git fetch origin main 2>/dev/null; then
+            warn "Unable to fetch from origin/main (network offline or unreachable). Continuing with local commit."
+        fi
     else
         debug "Would run: git fetch origin main"
     fi
 
     local current_branch
     current_branch=$(git rev-parse --abbrev-ref HEAD)
+    if [ "$current_branch" = "HEAD" ]; then
+        current_branch="main"
+    fi
     
     # Check if local is behind remote
     local local_sha remote_sha base_sha
     local_sha=$(git rev-parse HEAD)
     
     if [ "$DRY_RUN" = "false" ]; then
-        remote_sha=$(git rev-parse "origin/main")
-        base_sha=$(git merge-base HEAD "origin/main")
+        remote_sha=$(git rev-parse "origin/main" 2>/dev/null || echo "$local_sha")
+        base_sha=$(git merge-base HEAD "$remote_sha" 2>/dev/null || echo "$local_sha")
     else
         remote_sha="$local_sha"
         base_sha="$local_sha"

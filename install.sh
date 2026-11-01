@@ -193,34 +193,42 @@ check_env() {
     done
     
     if [ "$connected" = "false" ]; then
-        error "Fatal: No active internet connection detected."
-        error "Please connect to a network and re-run the script."
-        exit 1
-    fi
-    success "Internet connection verified."
-
-    # 4. Check for pacman lock
-    if [ -f /var/lib/pacman/db.lck ]; then
-        warn "Warning: Pacman database lock detected (/var/lib/pacman/db.lck)."
-        if [ "$FORCE" = "true" ]; then
-            info "Force flag enabled. Removing pacman lock..."
-            if [ "$DRY_RUN" = "false" ]; then
-                sudo rm /var/lib/pacman/db.lck
-            fi
+        if [ "$DRY_RUN" = "true" ] || [ "$CONFIGS_ONLY" = "true" ] || [ "$FORCE" = "true" ]; then
+            warn "No active internet connection detected. Continuing ($([ "$DRY_RUN" = "true" ] && echo "--dry-run" || echo "--configs-only/--force"))."
         else
-            error "Fatal: Pacman is currently locked by another process."
-            error "Please close other package managers and release the lock, or run with --force."
+            error "Fatal: No active internet connection detected."
+            error "Please connect to a network and re-run the script."
             exit 1
         fi
+    else
+        success "Internet connection verified."
     fi
-    
-    # 5. Acquire sudo privileges once before starting the banner flow
-    info "Requesting sudo permissions for system package management..."
-    if [ "$DRY_RUN" = "false" ]; then
-        sudo -v
-        keep_sudo_alive
+
+    # 4. Check for pacman lock & 5. Acquire sudo
+    if [ "$CONFIGS_ONLY" = "false" ]; then
+        if [ -f /var/lib/pacman/db.lck ]; then
+            warn "Warning: Pacman database lock detected (/var/lib/pacman/db.lck)."
+            if [ "$FORCE" = "true" ]; then
+                info "Force flag enabled. Removing pacman lock..."
+                if [ "$DRY_RUN" = "false" ]; then
+                    sudo rm -f /var/lib/pacman/db.lck
+                fi
+            else
+                error "Fatal: Pacman is currently locked by another process."
+                error "Please close other package managers and release the lock, or run with --force."
+                exit 1
+            fi
+        fi
+        
+        info "Requesting sudo permissions for system package management..."
+        if [ "$DRY_RUN" = "false" ]; then
+            sudo -v
+            keep_sudo_alive
+        fi
+        success "Administrative privileges acquired and locked."
+    else
+        info "Skipping pacman database lock check and sudo elevation (configs-only mode)."
     fi
-    success "Administrative privileges acquired and locked."
 }
 
 detect_aur_helper() {

@@ -56,18 +56,19 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Prepare unprivileged test environment
         run: |
           pacman -Syu --noconfirm git python sudo
           useradd -m testuser
           echo "testuser ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/testuser
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --system --add safe.directory "*"
           chown -R testuser:testuser "$GITHUB_WORKSPACE"
 
       - name: Run script functional tests as unprivileged user
         run: |
-          su testuser -c "git config --global --add safe.directory '$GITHUB_WORKSPACE'"
           su testuser -c "bash .github/scripts/test-scripts.sh"
 
   release:

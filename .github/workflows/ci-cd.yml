@@ -51,6 +51,9 @@ jobs:
     container:
       image: archlinux:base-devel
     steps:
+      - name: Install Git for checkout
+        run: pacman -Sy --noconfirm git
+
       - name: Checkout repository
         uses: actions/checkout@v4
 

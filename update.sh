@@ -131,12 +131,6 @@ sync_repo() {
         debug "Would run: git fetch origin main"
     fi
 
-    local current_branch
-    current_branch=$(git rev-parse --abbrev-ref HEAD)
-    if [ "$current_branch" = "HEAD" ]; then
-        current_branch="main"
-    fi
-    
     # Check if local is behind remote
     local local_sha remote_sha base_sha
     local_sha=$(git rev-parse HEAD)
@@ -167,9 +161,9 @@ sync_repo() {
     elif [ "$local_sha" = "$base_sha" ]; then
         info "New updates detected! Pulling latest changes..."
         if [ "$DRY_RUN" = "false" ]; then
-            git pull origin "$current_branch"
+            git pull --ff-only origin main
         else
-            debug "Would run: git pull origin $current_branch"
+            debug "Would run: git pull --ff-only origin main"
         fi
         success "Local repository updated successfully."
     else

@@ -21,3 +21,12 @@ accent  = "#89b4fa"  # selection, focus ring, links
 success = "#a6e3a1"  # completed operations
 warning = "#f9e2af"  # warnings
 error   = "#f38ba8"  # errors, destructive actions
+
+# ANSI colours 0-15 of the built-in terminal: black, red, green, yellow, blue,
+# magenta, cyan, white, then the bright versions. All 16 or none; without
+# them the terminal uses its default palette.
+[terminal]
+palette = [
+    "#45475a", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#f5c2e7", "#94e2d5", "#a6adc8",
+    "#585b70", "#f37799", "#89d88b", "#ebd391", "#74a8fc", "#f2aede", "#6bd7ca", "#bac2de",
+]

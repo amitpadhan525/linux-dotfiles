@@ -24,11 +24,17 @@ dark_theme = "catppuccin-mocha"
 # Empty follows the desktop's own icon theme.
 icon_theme = ""
 
+# Reload icons when the selected local icon theme is updated.
+auto_refresh_icons = true
+
 # UI font family. Empty = the desktop's UI font.
 font_family = ""
 
 # View for new tabs: "grid" | "detailed" | "miller"
 default_view = "grid"
+
+# Split view orientation when opening a folder in split: "vertical" | "horizontal"
+split_orientation = "vertical"
 
 show_hidden = false
 
@@ -41,6 +47,14 @@ hidden_last = false
 # still navigate.
 right_click_to_edit_path = true
 
+# Open folders with a single click in the grid and details views. Files still
+# open on double-click; Ctrl/Shift+click still selects.
+single_click_opens_folders = false
+
+# Open in Terminal (menu and shortcut) uses the terminal panel at the bottom
+# of the window instead of $TERMINAL. The panel itself toggles with F4.
+builtin_terminal = false
+
 # Sort order: "name" | "size" | "modified" | "type"
 sort_by = "name"
 sort_ascending = true
@@ -50,6 +64,20 @@ remember_sort_per_folder = true
 
 # Warn at startup when a tool HyprFM uses (gvfs, ffmpeg, bat, pdftoppm…) is missing.
 dependency_startup_check = true
+
+[terminal]
+# The built-in terminal (F4). Empty font_family: the desktop's monospace
+# font (GNOME's monospace-font-name); font_size 0: its size. Ligatures draw "->", "!=", "=>" as one
+# symbol in fonts that have them (Fira Code, JetBrains Mono, Maple Mono).
+# Its background follows [appearance] transparency, like the file view.
+font_family = ""
+font_size = 0
+ligatures = false
+# block, bar or underline. Programs can still change it (vim's insert mode).
+cursor_style = "block"
+cursor_blink = true
+# Lines of history kept above the screen (up to 1000000).
+scrollback_lines = 10000
 
 [sidebar]
 # "left" | "right"
@@ -115,6 +143,13 @@ current_fraction = 0.5
 # and choose "Rename" to set one in-app.
 # names = { "~/Projects" = "Work" }
 
+[saved_splits]
+# Saved split views. Reopen both panes of a split layout with one click.
+# Each entry: name, primary_path, secondary_path, orientation ("vertical"|"horizontal").
+# splits = [
+#     { name = "Code + Notes", primary_path = "~/Code", secondary_path = "~/Notes", orientation = "vertical" }
+# ]
+
 [context_menu]
 # Extra entries at the bottom of a file's or folder's right-click menu.
 # `command` takes desktop-entry field codes (%f or %u = the item's path) and runs once
@@ -166,10 +201,14 @@ current_fraction = 0.5
 # path_bar          = "Ctrl+L"
 # toggle_sidebar    = "F9"
 # split_view        = "F3"
+# toggle_terminal   = "F4"
 # focus_next_pane   = "F6"
 # focus_previous_pane = "Shift+F6"
 # focus_left_pane   = "Ctrl+Alt+Left"
 # focus_right_pane  = "Ctrl+Alt+Right"
+# focus_up_pane     = "Ctrl+Alt+Up"
+# focus_down_pane   = "Ctrl+Alt+Down"
+# toggle_split_orientation = "Ctrl+Shift+O"
 # grid_view         = "Ctrl+1"
 # miller_view       = "Ctrl+2"
 # detailed_view     = "Ctrl+3"

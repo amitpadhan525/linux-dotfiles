@@ -28,6 +28,21 @@ hl.config({
 
 hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
 
+-- Disable companion ELAN mouse interface (prevents palm touches bypassing disable_while_typing)
+hl.device({
+    name = "elan071a:00-04f3:30fd-mouse",
+    enabled = false,
+})
+
+-- Explicitly enforce disable_while_typing on the touchpad device
+hl.device({
+    name = "elan071a:00-04f3:30fd-touchpad",
+    disable_while_typing = true,
+    natural_scroll = true,
+    tap_to_click = true,
+})
+
+
 
 
 

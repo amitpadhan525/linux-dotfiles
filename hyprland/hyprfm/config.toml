@@ -9,30 +9,44 @@ animations_enabled = true
 radius_large = 12
 radius_medium = 8
 radius_small = 4
-transparency_enabled = true
+transparency_enabled = false
 transparency_level = 0.0
 
 [bookmarks]
 paths = []
 
 [general]
+auto_refresh_icons = true
+builtin_terminal = false
 dark_theme = 'catppuccin-mocha'
 dependency_startup_check = true
 font_family = ''
+hidden_last = true
 icon_theme = 'Adwaita'
 light_theme = 'catppuccin-latte'
 remember_sort_per_folder = true
 right_click_to_edit_path = true
 show_hidden = false
+single_click_opens_folders = false
 sort_ascending = true
 sort_by = 'modified'
+split_orientation = 'vertical'
 theme = 'catppuccin-mocha'
 
 [sidebar]
+auto_hide_width = 700
 hidden_quick_access = []
 position = 'left'
 visible = true
 width = 250
+
+[terminal]
+cursor_blink = true
+cursor_style = 'block'
+font_family = ''
+font_size = 0.0
+ligatures = false
+scrollback_lines = 10000
 
 [window]
 button_layout = ':minimize,maximize,close'

@@ -1,8 +1,15 @@
 #!/bin/bash
 
-# Toggle behavior: if already open, close it and exit
-if pgrep -f "rofi.*󰤨  Wi-Fi" >/dev/null; then
-    pkill -f "rofi.*󰤨  Wi-Fi"
+# Toggle behavior: if rofi is already open, close it and exit cleanly
+if pgrep -f "rofi.*Wi-Fi" >/dev/null; then
+    pkill -f "rofi.*Wi-Fi"
+    exit 0
+fi
+
+# Avoid overlapping instances if clicked in rapid succession
+LOCK_FILE="/tmp/wifi_menu.lock"
+exec 200>"$LOCK_FILE"
+if ! flock -n 200; then
     exit 0
 fi
 
@@ -10,12 +17,13 @@ notify() {
     notify-send "Wi-Fi Menu" "$1"
 }
 
-# ── Write themes to temp files (avoids all shell quoting issues) ─────────────
-THEME_FILE=$(mktemp /tmp/wifi-rofi-XXXXXX.rasi)
-PASS_THEME_FILE=$(mktemp /tmp/wifi-pass-XXXXXX.rasi)
-trap 'rm -f "$THEME_FILE" "$PASS_THEME_FILE"' EXIT
+# ── Persistent theme files (avoids generating ~200 lines to disk on every click) ──
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/wifi-menu"
+mkdir -p "$CACHE_DIR"
+THEME_FILE="$CACHE_DIR/wifi-rofi.rasi"
+PASS_THEME_FILE="$CACHE_DIR/wifi-pass.rasi"
 
-# ── Main Wi-Fi list theme — glassmorphic emerald design ───────────────────────
+if [ ! -f "$THEME_FILE" ]; then
 cat > "$THEME_FILE" << 'ROFI_THEME'
 * {
     font:                "JetBrainsMono Nerd Font Bold 12";
@@ -150,8 +158,9 @@ element-text {
     horizontal-align:    0.0;
 }
 ROFI_THEME
+fi
 
-# ── Password dialog theme ────────────────────────────────────────────────────
+if [ ! -f "$PASS_THEME_FILE" ]; then
 cat > "$PASS_THEME_FILE" << 'PASS_THEME'
 * {
     font:                "JetBrainsMono Nerd Font Bold 12";
@@ -208,6 +217,7 @@ entry {
 
 listview { lines: 0; }
 PASS_THEME
+fi
 
 # ── Main logic ───────────────────────────────────────────────────────────────
 CURRENT_SSID=$(nmcli -t -f active,ssid dev wifi list --rescan no 2>/dev/null | grep '^yes' | cut -d: -f2)
@@ -222,35 +232,6 @@ else
     TOGGLE="󰖪  Enable Wi-Fi"
 fi
 
-get_networks() {
-    local rescan_mode="${1:-auto}"
-    nmcli -t -f IN-USE,SIGNAL,BARS,SSID,SECURITY dev wifi list --rescan "$rescan_mode" 2>/dev/null | \
-        sed 's/\\:/\x01/g' | \
-        awk -F: '
-        {
-            ssid = $4;
-            gsub(/\x01/, ":", ssid);
-            if (ssid == "" || ssid == "--") next;
-            if (!seen[ssid]++) {
-                bars = $3;
-                sec = $5;
-                for (i = 6; i <= NF; i++) sec = sec ":" $i;
-                gsub(/\x01/, ":", sec);
-                printf "%s  %s  (%s)\n", bars, ssid, sec;
-            }
-        }'
-}
-
-SAVED_CONNECTIONS=$(nmcli -g NAME connection show 2>/dev/null)
-WIFI_LIST=""
-
-if [ "$STATE" = "enabled" ]; then
-    WIFI_LIST=$(get_networks "auto")
-    if [ -z "$WIFI_LIST" ]; then
-        WIFI_LIST=$(get_networks "yes")
-    fi
-fi
-
 get_password() {
     local target_ssid="$1"
     rofi -dmenu -password -p "󰌋  Password for $target_ssid" -theme "$PASS_THEME_FILE" \
@@ -263,12 +244,72 @@ if [ -n "$CURRENT_SSID" ]; then
     OPTIONS="$TOGGLE\n$DISCONNECT\n󰑓  Rescan Networks\n󰢻  Open Connection Editor"
 fi
 
-if [ -n "$WIFI_LIST" ]; then
-    OPTIONS="$OPTIONS\n$WIFI_LIST"
-fi
+# ── Stream networks in real time into Rofi ──────────────────────────────────
+# 1. Shows actions and cached networks instantly (<0.05s).
+# 2. Streams newly discovered networks dynamically as hardware scan discovers them.
+stream_networks() {
+    # Send menu actions first
+    echo -e "$OPTIONS"
 
-# ── Run Rofi Directly & Reliably ─────────────────────────────────────────────
-CHOSEN=$(echo -e "$OPTIONS" | rofi -dmenu -i -p '󰤨  Wi-Fi' -theme "$THEME_FILE" -location 2 -xoffset 0 -yoffset 48)
+    if [ "$STATE" = "enabled" ]; then
+        local -A seen_ssids
+
+        # Step 1: Immediately emit cached networks (zero delay)
+        while IFS=$'\t' read -r bars ssid sec; do
+            [ -z "$ssid" ] && continue
+            if [ -z "${seen_ssids["$ssid"]}" ]; then
+                seen_ssids["$ssid"]=1
+                echo "$bars  $ssid  ($sec)"
+            fi
+        done < <(nmcli -t -f IN-USE,SIGNAL,BARS,SSID,SECURITY dev wifi list --rescan no 2>/dev/null | sed 's/\\:/\x01/g' | awk -F: '
+            {
+                bars = $3; ssid = $4; sec = $5;
+                for (i = 6; i <= NF; i++) sec = sec ":" $i;
+                gsub(/\x01/, ":", ssid);
+                gsub(/\x01/, ":", sec);
+                if (ssid != "" && ssid != "--") print bars "\t" ssid "\t" sec;
+            }')
+
+        # Step 2: Trigger hardware rescan and stream new networks as they appear
+        while IFS=$'\t' read -r bars ssid sec; do
+            [ -z "$ssid" ] && continue
+            if [ -z "${seen_ssids["$ssid"]}" ]; then
+                seen_ssids["$ssid"]=1
+                echo "$bars  $ssid  ($sec)"
+            fi
+        done < <(nmcli -t -f IN-USE,SIGNAL,BARS,SSID,SECURITY dev wifi list --rescan yes 2>/dev/null | sed 's/\\:/\x01/g' | awk -F: '
+            {
+                bars = $3; ssid = $4; sec = $5;
+                for (i = 6; i <= NF; i++) sec = sec ":" $i;
+                gsub(/\x01/, ":", ssid);
+                gsub(/\x01/, ":", sec);
+                if (ssid != "" && ssid != "--") print bars "\t" ssid "\t" sec;
+            }')
+
+        # Step 3: Keep rescanning periodically as long as Rofi remains open
+        while pgrep -f "rofi.*Wi-Fi" >/dev/null 2>&1; do
+            sleep 4
+            pgrep -f "rofi.*Wi-Fi" >/dev/null 2>&1 || break
+            while IFS=$'\t' read -r bars ssid sec; do
+                [ -z "$ssid" ] && continue
+                if [ -z "${seen_ssids["$ssid"]}" ]; then
+                    seen_ssids["$ssid"]=1
+                    echo "$bars  $ssid  ($sec)"
+                fi
+            done < <(nmcli -t -f IN-USE,SIGNAL,BARS,SSID,SECURITY dev wifi list --rescan yes 2>/dev/null | sed 's/\\:/\x01/g' | awk -F: '
+                {
+                    bars = $3; ssid = $4; sec = $5;
+                    for (i = 6; i <= NF; i++) sec = sec ":" $i;
+                    gsub(/\x01/, ":", ssid);
+                    gsub(/\x01/, ":", sec);
+                    if (ssid != "" && ssid != "--") print bars "\t" ssid "\t" sec;
+                }')
+        done
+    fi
+}
+
+# ── Run Rofi with Asynchronous Streaming ─────────────────────────────────────
+CHOSEN=$(stream_networks | rofi -dmenu -i -p '󰤨  Wi-Fi' -theme "$THEME_FILE" -location 2 -xoffset 0 -yoffset 48)
 
 if [ -z "$CHOSEN" ]; then
     exit 0
@@ -303,6 +344,9 @@ else
     SECURITY="${SECURITY%)}"
 
     if [ -z "$SSID" ]; then exit 0; fi
+
+    # Fetch saved connections lazily only after selection
+    SAVED_CONNECTIONS=$(nmcli -g NAME connection show 2>/dev/null)
 
     if echo "$SAVED_CONNECTIONS" | grep -Fxq "$SSID"; then
         notify "Connecting to saved network: $SSID"

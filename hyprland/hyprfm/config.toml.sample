@@ -42,6 +42,11 @@ show_hidden = false
 # group) instead of letting the leading dot put them first.
 hidden_last = false
 
+# Grid zoom sets a column count and the icons grow and shrink with the
+# window, instead of keeping their size and fitting as many columns as the
+# window allows.
+grid_fixed_columns = false
+
 # Right click anywhere on the address bar enters path edit mode with the
 # whole path selected, just like Ctrl+L. Left clicks on breadcrumb segments
 # still navigate.
@@ -144,8 +149,9 @@ current_fraction = 0.5
 # names = { "~/Projects" = "Work" }
 
 [saved_splits]
-# Saved split views. Reopen both panes of a split layout with one click.
+# Split bookmarks. Reopen both panes of a split layout with one click.
 # Each entry: name, primary_path, secondary_path, orientation ("vertical"|"horizontal").
+# Optional position is the zero-based index among all sidebar bookmarks.
 # splits = [
 #     { name = "Code + Notes", primary_path = "~/Code", secondary_path = "~/Notes", orientation = "vertical" }
 # ]

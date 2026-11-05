@@ -83,3 +83,6 @@ hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 hl.bind("XF86AudioStop", hl.dsp.exec_cmd("playerctl stop"), { locked = true })
 
+-- Workspace switching with mouse side buttons
+hl.bind("SUPER + mouse:275", hl.dsp.focus({ workspace = "e-1" })) -- Backward button
+hl.bind("SUPER + mouse:276", hl.dsp.focus({ workspace = "e+1" })) -- Forward button

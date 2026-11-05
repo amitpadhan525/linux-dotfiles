@@ -39,10 +39,13 @@ max-history=50
 sort=-time
 
 # Interactive Controls
-on-button-left=invoke-default-action
+on-button-left=dismiss
 on-button-middle=dismiss-all
 on-button-right=dismiss
-on-touch=invoke-default-action
+on-touch=dismiss
+
+[actionable]
+on-button-left=invoke-default-action
 
 [urgency=low]
 background-color=#020e0aa6
@@ -50,13 +53,21 @@ border-color=#89b4fa66
 format=<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#89b4fa'>󰂚 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#cdd6f4'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#bac2de'>%b</span>
 default-timeout=5000
 
-[urgency=high]
+[urgency=critical]
 background-color=#020e0abf
-border-color=#f8717199
+border-color=#f87171cc
+border-size=2
 format=<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#f87171'>󰂛 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#ffffff'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#fca5a5'>%b</span>
 default-timeout=15000
 
 [app-name=Bluetooth]
+background-color=#020e0aa6
+border-color=#34d39988
+border-size=1
+default-timeout=45000
+format=<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 13' foreground='#34d399'>󰂯 %s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#ffffff'>%b</span>
+
+[app-name=blueman]
 background-color=#020e0aa6
 border-color=#34d39988
 border-size=1

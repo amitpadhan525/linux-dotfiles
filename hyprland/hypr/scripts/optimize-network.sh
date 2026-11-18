@@ -38,7 +38,6 @@ net.ipv4.tcp_window_scaling = 1
 net.ipv4.tcp_timestamps = 1
 net.ipv4.tcp_sack = 1
 net.ipv4.tcp_dsack = 1
-net.ipv4.tcp_fack = 1
 net.core.netdev_max_backlog = 16384
 net.core.rmem_max = 16777216
 net.core.wmem_max = 16777216

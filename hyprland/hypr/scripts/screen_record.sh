@@ -83,6 +83,12 @@ fi
 OPTIONS="🖥️  Record Fullscreen\n📹  Record Area"
 CHOICE=$(echo -e "$OPTIONS" | rofi -dmenu -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'mainbox { children: [ "listview" ]; padding: 16px; } window { width: 380px; border-radius: 18px; } listview { columns: 1; lines: 2; spacing: 8px; }' -i || true)
 
+# Hardware-accelerated encoding using VA-API (Radeon iGPU / DRI)
+VAAPI_ARGS=()
+if [ -e "/dev/dri/renderD128" ]; then
+    VAAPI_ARGS=(-c h264_vaapi -d /dev/dri/renderD128)
+fi
+
 case "$CHOICE" in
     *"Record Fullscreen"*)
         # Prepare save directory and filename
@@ -91,7 +97,7 @@ case "$CHOICE" in
         FINAL_PATH="$SAVE_DIR/recording_$TIMESTAMP.mp4"
         
         # Start recording full screen
-        wf-recorder -f "$FINAL_PATH" >/dev/null 2>&1 &
+        wf-recorder "${VAAPI_ARGS[@]}" -f "$FINAL_PATH" >/dev/null 2>&1 &
         REC_PID=$!
         
         # Save PID and path for stopping later
@@ -124,7 +130,7 @@ case "$CHOICE" in
         FINAL_PATH="$SAVE_DIR/recording_$TIMESTAMP.mp4"
         
         # Start recording the selected area
-        wf-recorder -g "$GEOM" -f "$FINAL_PATH" >/dev/null 2>&1 &
+        wf-recorder "${VAAPI_ARGS[@]}" -g "$GEOM" -f "$FINAL_PATH" >/dev/null 2>&1 &
         REC_PID=$!
         
         # Save PID and path for stopping later

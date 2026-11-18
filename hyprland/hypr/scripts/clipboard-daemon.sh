@@ -9,5 +9,5 @@ fi
 wl-paste --type text --watch cliphist store &
 wl-paste --type image --watch cliphist store &
 
-# Watch primary selection (text selected/highlighted with mouse)
-wl-paste --primary --type text --watch cliphist store &
+# Primary selection (mouse selection) watching disabled to prevent clipboard history pollution
+# wl-paste --primary --type text --watch cliphist store &

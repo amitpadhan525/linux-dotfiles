@@ -36,7 +36,7 @@ hl.config({
         layout = "dwindle"
     },
     render = {
-        direct_scanout = 0
+        direct_scanout = 1
     },
     decoration = {
         rounding = 5,

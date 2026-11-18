@@ -50,6 +50,7 @@ hl.bind("SUPER + SHIFT + Return", hl.dsp.exec_cmd("bash -c 'hyprctl clients | gr
 hl.bind("SUPER + p", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/power_menu.sh"))
 hl.bind("SUPER + N", hl.dsp.exec_cmd("bash -c 'pgrep hyprsunset && pkill hyprsunset || hyprsunset --temperature 4500'"))
 hl.bind("SUPER + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/named_screenshot.sh"))
+hl.bind("Print", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/named_screenshot.sh"))
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/screen_record.sh"))
 hl.bind("SUPER + ALT + W", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/wallpaper.sh"))
 hl.bind("SUPER + R", hl.dsp.exec_cmd("hyprctl reload"))

@@ -22,21 +22,38 @@ CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/wifi-menu"
 mkdir -p "$CACHE_DIR"
 THEME_FILE="$CACHE_DIR/wifi-rofi.rasi"
 PASS_THEME_FILE="$CACHE_DIR/wifi-pass.rasi"
+COLOR_STAMP="$CACHE_DIR/color_stamp"
 
-if [ ! -f "$THEME_FILE" ]; then
-cat > "$THEME_FILE" << 'ROFI_THEME'
+# Load dynamic theme colors if available
+COLORS_FILE="$HOME/.config/hypr/colors.sh"
+if [ -f "$COLORS_FILE" ]; then
+    # shellcheck source=/dev/null
+    source "$COLORS_FILE"
+fi
+
+ACCENT_HEX="${accent:-#34d399}"
+BG_HEX="${bg_color:-#020e0a}"
+FG_DIM_HEX="${secondary_text:-#a7f3d0}"
+FAIL_HEX="${fail_color:-#f87171}"
+
+CURRENT_COLOR_SIG="${ACCENT_HEX}_${BG_HEX}_${FG_DIM_HEX}_${FAIL_HEX}"
+CACHED_COLOR_SIG=$(cat "$COLOR_STAMP" 2>/dev/null || true)
+
+if [ ! -f "$THEME_FILE" ] || [ ! -f "$PASS_THEME_FILE" ] || [ "$CURRENT_COLOR_SIG" != "$CACHED_COLOR_SIG" ]; then
+    echo "$CURRENT_COLOR_SIG" > "$COLOR_STAMP"
+    cat > "$THEME_FILE" << ROFI_THEME
 * {
     font:                "JetBrainsMono Nerd Font Bold 12";
 
-    bg-base:             #020e0aa6;
+    bg-base:             ${BG_HEX}a6;
     bg-alt:              #ffffff14;
     fg-main:             #ffffffff;
-    fg-dim:              #a7f3d099;
-    accent:              #34d399ff;
-    accent-dim:          #34d39912;
-    accent-mid:          #34d399b3;
-    border-subtle:       #34d39933;
-    urgent:              #f38ba8ff;
+    fg-dim:              ${FG_DIM_HEX}99;
+    accent:              ${ACCENT_HEX}ff;
+    accent-dim:          ${ACCENT_HEX}12;
+    accent-mid:          ${ACCENT_HEX}b3;
+    border-subtle:       ${ACCENT_HEX}33;
+    urgent:              ${FAIL_HEX}ff;
 
     background-color:    transparent;
     text-color:          @fg-main;
@@ -127,19 +144,19 @@ element alternate.normal {
 element selected.normal {
     background-color:    @accent;
     border-color:        @accent;
-    text-color:          #020e0af5;
+    text-color:          ${BG_HEX}f5;
 }
 
 element normal.urgent {
-    background-color:    #f38ba81a;
-    border-color:        #f38ba866;
+    background-color:    ${FAIL_HEX}1a;
+    border-color:        ${FAIL_HEX}66;
     text-color:          @urgent;
 }
 
 element selected.urgent {
     background-color:    @urgent;
     border-color:        @urgent;
-    text-color:          #020e0af5;
+    text-color:          ${BG_HEX}f5;
 }
 
 element-icon {
@@ -158,18 +175,16 @@ element-text {
     horizontal-align:    0.0;
 }
 ROFI_THEME
-fi
 
-if [ ! -f "$PASS_THEME_FILE" ]; then
-cat > "$PASS_THEME_FILE" << 'PASS_THEME'
+    cat > "$PASS_THEME_FILE" << PASS_THEME
 * {
     font:                "JetBrainsMono Nerd Font Bold 12";
 
-    bg-base:             #020e0aa6;
+    bg-base:             ${BG_HEX}a6;
     bg-alt:              #ffffff14;
     fg-main:             #ffffffff;
-    fg-dim:              #a7f3d099;
-    accent:              #34d399ff;
+    fg-dim:              ${FG_DIM_HEX}99;
+    accent:              ${ACCENT_HEX}ff;
 
     background-color:    transparent;
     text-color:          @fg-main;
@@ -179,7 +194,7 @@ window {
     transparency:        "real";
     background-color:    @bg-base;
     border:              1px solid;
-    border-color:        #34d399b3;
+    border-color:        ${ACCENT_HEX}b3;
     border-radius:       22px;
     width:               520px;
     cursor:              "default";

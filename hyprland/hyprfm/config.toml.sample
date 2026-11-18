@@ -89,6 +89,9 @@ scrollback_lines = 10000
 position = "left"
 width = 200
 visible = true
+# Top of the sidebar: "name" | "logo" | "button" (collapse button only) |
+# "none" (no header; the collapse button moves to the toolbar)
+header = "name"
 # Fold the sidebar away when the window is narrower than this many pixels.
 # It stays toggleable by hand, and comes back when the window grows again.
 # 0 turns it off; anything else is clamped to 320-2000.
@@ -143,7 +146,7 @@ current_fraction = 0.5
 
 [bookmarks]
 # Sidebar bookmarks. Unset = the XDG user folders that exist on this machine.
-# paths = ["~/Documents", "~/Downloads", "~/Pictures", "~/Projects"]
+# paths = ["~/Documents", "~/Music", "~/Videos", "~/Projects"]
 # Custom display names, keyed by an entry of paths. Right-click a bookmark
 # and choose "Rename" to set one in-app.
 # names = { "~/Projects" = "Work" }

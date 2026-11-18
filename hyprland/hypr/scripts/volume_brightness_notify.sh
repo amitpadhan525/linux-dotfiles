@@ -3,6 +3,17 @@
 # Notification OSD for Volume and Brightness
 action="$1"
 
+# Load dynamic theme colors if available
+COLORS_FILE="$HOME/.config/hypr/colors.sh"
+if [ -f "$COLORS_FILE" ]; then
+    # shellcheck source=/dev/null
+    source "$COLORS_FILE"
+fi
+
+ACCENT_COLOR="${accent:-#34d399}"
+EMPTY_COLOR="${secondary_text:-#1e4438}"
+FAIL_COLOR="${fail_color:-#f87171}"
+
 case "$action" in
     volume_up)
         pamixer -i 5
@@ -35,7 +46,7 @@ generate_bar() {
     local empty_bar=""
     for ((i=0; i<empty; i++)); do empty_bar+="━"; done
 
-    echo "<span foreground=\"#34d399\">$filled_bar</span><span foreground=\"#1e4438\">$empty_bar</span>"
+    echo "<span foreground=\"$ACCENT_COLOR\">$filled_bar</span><span foreground=\"$EMPTY_COLOR\">$empty_bar</span>"
 }
 
 if [[ "$action" == volume_* ]]; then
@@ -45,7 +56,7 @@ if [[ "$action" == volume_* ]]; then
     if [ "$mute" = "true" ]; then
         icon="󰝟"
         title="$icon  Sound: Muted"
-        bar="<span foreground=\"#f87171\">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>"
+        bar="<span foreground=\"$FAIL_COLOR\">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>"
     else
         if [ "$vol" -eq 0 ]; then
             icon="󰝟"

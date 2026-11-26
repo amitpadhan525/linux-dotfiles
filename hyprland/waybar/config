@@ -3,7 +3,7 @@
     "layer": "top",
     "position": "top",
     "height": 40,
-    "margin-top": 0,
+    "margin-top": 4,
     "margin-left": 0,
     "margin-right": 0,
     "spacing": 0,
@@ -11,7 +11,7 @@
     "modules-center": [
         "custom/recording",
         "hyprland/workspaces",
-        "custom/clock",
+        "clock",
         "network",
         "custom/cpu",
         "custom/temperature",
@@ -20,28 +20,40 @@
     ],
     "modules-right": [],
     "custom/recording": {
-        "exec": "python3 $HOME/.config/waybar/scripts/recording_status.py",
+        "exec": "$HOME/.config/waybar/scripts/recording_status.sh",
         "return-type": "json",
         "format": "{}",
-        "interval": 1,
         "on-click": "$HOME/.config/hypr/scripts/screen_record.sh",
         "tooltip": true,
         "signal": 8
     },
     "hyprland/workspaces": {
         "format": "{name}",
-        "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"{name}\" })'",
-        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
-        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
         "sort-by-number": true
     },
-    "custom/clock": {
-        "exec": "python3 $HOME/.config/waybar/scripts/custom_clock.py",
-        "return-type": "json",
-        "interval": 1,
-        "on-click": "python3 $HOME/.config/waybar/scripts/custom_clock.py --toggle",
-        "tooltip": true,
-        "signal": 9
+    "clock": {
+        "format": "  {:%I:%M %p}",
+        "format-alt": "  {:%A, %d %m %Y}",
+        "tooltip-format": "<span color='#cba6f7'><big>{:%A, %d %B %Y}</big></span>\n<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#cba6f7'><b>{}</b></span>",
+                "days": "<span color='#cdd6f4'>{}</span>",
+                "weeks": "<span color='#6c7086'><b>W{:%V}</b></span>",
+                "weekdays": "<span color='#fde047'><b>{}</b></span>",
+                "today": "<span color='#34d399'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
     },
     "custom/temperature": {
         "exec": "$HOME/.config/waybar/scripts/cpu_temp.sh",
@@ -56,7 +68,7 @@
         "format-disconnected": "  Disconnected",
         "format-disabled": "  Disabled",
         "tooltip-format": "{ifname} via {gwaddr}",
-        "on-click": "$HOME/.config/waybar/scripts/wifi_menu.sh",
+        "on-click": "$HOME/.config/hypr/scripts/wifi_menu.sh",
         "on-click-right": "nm-connection-editor"
     },
     "battery": {
@@ -78,14 +90,14 @@
     },
     "custom/cpu": {
         "exec": "$HOME/.config/waybar/scripts/custom_cpu.sh",
-        "interval": 3,
+        "interval": 5,
         "format": "  {}",
         "return-type": "json",
         "tooltip": true
     },
     "custom/memory": {
         "exec": "$HOME/.config/waybar/scripts/custom_mem.sh",
-        "interval": 5,
+        "interval": 15,
         "format": "  {}",
         "return-type": "json",
         "tooltip": true

@@ -49,7 +49,7 @@ on-button-left=invoke-default-action
 
 [urgency=low]
 background-color=#020e0aa6
-border-color=#89b4fa66
+border-color=#34d39966
 format=<b><span font_desc='JetBrainsMono Nerd Font ExtraBold 12' foreground='#89b4fa'>󰂚 </span><span font_desc='JetBrainsMono Nerd Font ExtraBold 11' foreground='#cdd6f4'>%s</span></b>\n<span font_desc='JetBrainsMono Nerd Font 10' foreground='#bac2de'>%b</span>
 default-timeout=5000
 

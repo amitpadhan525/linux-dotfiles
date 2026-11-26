@@ -51,11 +51,10 @@ for _, t in ipairs(dialog_titles) do
 end
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- GTK FILE CHOOSER: by initial_class
+-- GTK FILE CHOOSER: by initial_class (non-GTK portals)
 -- NOTE: correct Lua prop is initial_class (snake_case), NOT initialClass
 -- ─────────────────────────────────────────────────────────────────────────────
 
-hl.window_rule({ match = { initial_class = "xdg-desktop-portal-gtk" }, tile = true })
 hl.window_rule({ match = { initial_class = "xdg-desktop-portal" }, tile = true })
 
 -- ─────────────────────────────────────────────────────────────────────────────
@@ -87,11 +86,18 @@ for _, app in ipairs(forced_floating_apps) do
 end
 
 -- Specific sizes for floating utilities
-hl.window_rule({ match = { class = "scrcpy" }, size = "460 920" })
-hl.window_rule({ match = { class = "Scrcpy" }, size = "460 920" })
-hl.window_rule({ match = { class = "blueman-assistant" }, size = "600 420" })
-hl.window_rule({ match = { class = "blueman-sendto" }, size = "500 360" })
-hl.window_rule({ match = { class = "blueman-services" }, size = "620 460" })
+local floating_sizes = {
+    scrcpy = "460 920",
+    Scrcpy = "460 920",
+    ["blueman-assistant"] = "600 420",
+    ["blueman-sendto"] = "500 360",
+    ["blueman-services"] = "620 460",
+}
+
+for app, sz in pairs(floating_sizes) do
+    hl.window_rule({ match = { class = app }, size = sz })
+    hl.window_rule({ match = { initial_class = app }, size = sz })
+end
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- LAYER RULES: GLASSMORPHIC BLUR FOR DUNST NOTIFICATIONS
@@ -111,7 +117,7 @@ hl.layer_rule({ match = { namespace = "rofi" }, ignore_alpha = 0.1 })
 -- LAYER RULES: GLASSMORPHIC BLUR FOR WAYBAR
 -- ─────────────────────────────────────────────────────────────────────────────
 hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
-hl.layer_rule({ match = { namespace = "waybar" }, ignore_alpha = 0.01 })
+hl.layer_rule({ match = { namespace = "waybar" }, ignore_alpha = 0.5 })
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- LAYER RULES: GLASSMORPHIC BLUR FOR POWERMENU

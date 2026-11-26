@@ -50,11 +50,18 @@ accent = colors['accent']
 accent_two = colors['accent_two']
 bg_color = colors['bg_color']
 text_color = colors['text_color']
-accent_rgba_dim = hex_to_rgba(accent, 0.05)
-accent_rgba_hover = hex_to_rgba(accent, 0.1)
+accent_rgba_dim = hex_to_rgba(accent, 0.03)
+accent_rgba_subtle = hex_to_rgba(accent, 0.06)
+accent_rgba_hover = hex_to_rgba(accent, 0.15)
+accent_rgba_hover_top = hex_to_rgba(accent, 0.22)
 accent_rgba_glow = hex_to_rgba(accent, 0.35)
+accent_rgba_soft_glow = hex_to_rgba(accent, 0.15)
+accent_rgba_border = hex_to_rgba(accent, 0.32)
+accent_rgba_strong = hex_to_rgba(accent, 0.4)
+accent_rgba_icon = hex_to_rgba(accent, 0.55)
+accent_rgba_text_glow = hex_to_rgba(accent, 0.6)
 bg_rgba_fullscreen = "rgba(0, 0, 0, 0.05)" # Low alpha to trigger full-screen blur
-bg_rgba_dialog = "rgba(0, 0, 0, 0.45)" # Matching Waybar's capsule transparency
+bg_rgba_dialog = hex_to_rgba(bg_color, 0.72)
 timer_border_color = hex_to_rgba(accent, 0.25)
 card_border_color = hex_to_rgba(accent, 0.15)
 accent_two_dim = hex_to_rgba(accent_two, 0.3)
@@ -73,10 +80,10 @@ CSS_TEMPLATE = f"""
 .powermenu-dialog {{
     background-color: {bg_rgba_dialog};
     background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.005));
-    border: 1px solid rgba(0, 255, 179, 0.32);
+    border: 1px solid {accent_rgba_border};
     border-radius: 24px;
     padding: 35px 50px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(0, 255, 179, 0.15);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px {accent_rgba_soft_glow};
 }}
 
 .powermenu-container {{
@@ -102,13 +109,13 @@ CSS_TEMPLATE = f"""
 }}
 
 .timer-box {{
-    background-color: rgba(0, 255, 179, 0.03);
-    background-image: linear-gradient(90deg, rgba(0, 255, 179, 0.15), rgba(0, 255, 179, 0.02));
-    border: 1px solid rgba(0, 255, 179, 0.4);
+    background-color: {accent_rgba_dim};
+    background-image: linear-gradient(90deg, {accent_rgba_hover}, {accent_rgba_dim});
+    border: 1px solid {accent_rgba_strong};
     border-radius: 30px;
     padding: 10px 24px;
     margin-bottom: 35px;
-    box-shadow: 0 0 20px rgba(0, 255, 179, 0.15);
+    box-shadow: 0 0 20px {accent_rgba_soft_glow};
 }}
 
 .timer-label {{
@@ -121,7 +128,7 @@ CSS_TEMPLATE = f"""
 .timer-highlight {{
     color: {accent};
     font-weight: 800;
-    text-shadow: 0 0 10px rgba(0, 255, 179, 0.6);
+    text-shadow: 0 0 10px {accent_rgba_text_glow};
 }}
 
 .cards-box {{
@@ -141,8 +148,8 @@ CSS_TEMPLATE = f"""
 }}
 
 .power-card:hover {{
-    background-color: rgba(0, 255, 179, 0.06);
-    background-image: linear-gradient(135deg, rgba(0, 255, 179, 0.22), rgba(0, 255, 179, 0.01));
+    background-color: {accent_rgba_subtle};
+    background-image: linear-gradient(135deg, {accent_rgba_hover_top}, {accent_rgba_dim});
     border-color: {accent};
     box-shadow: 0 0 35px {accent_rgba_glow};
     margin-top: 0px;
@@ -153,7 +160,7 @@ CSS_TEMPLATE = f"""
     font-family: 'JetBrainsMono Nerd Font', 'Outfit';
     font-size: 38px;
     font-weight: bold;
-    color: rgba(0, 255, 179, 0.55);
+    color: {accent_rgba_icon};
     margin-bottom: 12px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }}
@@ -292,7 +299,7 @@ class PowerMenuWindow(Gtk.Window):
             card_btn = Gtk.Button()
             card_btn.get_style_context().add_class("power-card")
             card_btn.set_relief(Gtk.ReliefStyle.NONE)
-            card_btn.connect("button-press-event", lambda w, e, cb=callback: cb() or True)
+            card_btn.connect("clicked", lambda w, cb=callback: cb())
 
             # Card inner layout
             card_inner = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)

@@ -18,7 +18,6 @@ end
 
 local dyn_colors = get_dynamic_colors()
 local accent_hex = dyn_colors.accent_hex or "34d399"
-local accent_two_hex = dyn_colors.accent_two_hex or "6ee7b7"
 
 local active_border = "rgba(" .. accent_hex .. "e6)"
 local inactive_border = "rgba(" .. accent_hex .. "20)"
@@ -36,7 +35,8 @@ hl.config({
         layout = "dwindle"
     },
     render = {
-        direct_scanout = 1
+        direct_scanout = 0,
+        cm_enabled = false
     },
     decoration = {
         rounding = 5,
@@ -49,7 +49,7 @@ hl.config({
             passes = 1,
             vibrancy = 0.1696,
             new_optimizations = true,
-            xray = false,
+            xray = true,
             popups = false,
             ignore_opacity = true
         }
@@ -81,12 +81,13 @@ hl.config({
 })
 
 hl.curve("myBezier", { type = "bezier", points = { {0.05, 0.9}, {0.1, 1.05} } })
+hl.curve("smoothLayer", { type = "bezier", points = { {0.16, 1.0}, {0.3, 1.0} } })
 
-hl.animation({ leaf = "windows", enabled = true, speed = 5, bezier = "myBezier" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 5, bezier = "myBezier" })
-hl.animation({ leaf = "layers", enabled = true, speed = 5, bezier = "myBezier" })
-hl.animation({ leaf = "layersOut", enabled = true, speed = 5, bezier = "myBezier" })
+hl.animation({ leaf = "windows", enabled = true, speed = 3, bezier = "myBezier" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 3, bezier = "myBezier" })
+hl.animation({ leaf = "layers", enabled = true, speed = 3, bezier = "smoothLayer", style = "fade" })
+hl.animation({ leaf = "layersOut", enabled = true, speed = 3, bezier = "smoothLayer", style = "fade" })
 hl.animation({ leaf = "border", enabled = true, speed = 10, bezier = "default" })
-hl.animation({ leaf = "borderangle", enabled = true, speed = 8, bezier = "default" })
-hl.animation({ leaf = "fade", enabled = true, speed = 5, bezier = "default" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 5, bezier = "myBezier", style = "slidefade 20%" })
+hl.animation({ leaf = "borderangle", enabled = false, speed = 8, bezier = "default" })
+hl.animation({ leaf = "fade", enabled = true, speed = 3, bezier = "default" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 4, bezier = "myBezier", style = "slidefade 20%" })

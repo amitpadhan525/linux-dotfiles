@@ -47,8 +47,14 @@ if pgrep -u "$USER" -x "wf-recorder" >/dev/null; then
                 SAVED_PATH="$TEMP_PATH"
                 break
             fi
-            
-            TARGET_PATH="$SAVE_DIR/${USER_NAME}.mp4"
+
+            SAFE_NAME="$(echo "$USER_NAME" | tr -cd '[:alnum:]._ -' | sed 's/^[ .-]*//;s/[ .-]*$//')"
+            if [ -z "$SAFE_NAME" ]; then
+                SAVED_PATH="$TEMP_PATH"
+                break
+            fi
+
+            TARGET_PATH="$SAVE_DIR/${SAFE_NAME}.mp4"
             if [ -f "$TARGET_PATH" ]; then
                 # File already exists, ask the user to rename or replace
                 CHOICE=$(echo -e "Replace\nRename" | rofi -dmenu -p "File already exists" -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'window { width: 450px; } listview { columns: 2; lines: 1; }' -i || true)
@@ -83,6 +89,17 @@ fi
 OPTIONS="🖥️  Record Fullscreen\n📹  Record Area"
 CHOICE=$(echo -e "$OPTIONS" | rofi -dmenu -theme "$HOME/.config/rofi/simple.rasi" -theme-str 'mainbox { children: [ "listview" ]; padding: 16px; } window { width: 380px; border-radius: 18px; } listview { columns: 1; lines: 2; spacing: 8px; }' -i || true)
 
+# Helper: refresh Waybar recording timer every 1s only while recording is active
+start_waybar_ticker() {
+    pkill -RTMIN+8 waybar || true
+    (
+        while [ -f "$PID_FILE" ]; do
+            sleep 1
+            [ -f "$PID_FILE" ] && pkill -RTMIN+8 waybar >/dev/null 2>&1 || true
+        done
+    ) >/dev/null 2>&1 &
+}
+
 # Hardware-accelerated encoding using VA-API (Radeon iGPU / DRI)
 VAAPI_ARGS=()
 if [ -e "/dev/dri/renderD128" ]; then
@@ -107,8 +124,8 @@ case "$CHOICE" in
         # Notify
         notify-send -t 4000 "Recording Started" "Recording full screen.\nClick the Waybar indicator or press SUPER+SHIFT+S to stop."
         
-        # Force refresh Waybar
-        pkill -RTMIN+8 waybar || true
+        # Start 1s Waybar timer ticker for duration of recording
+        start_waybar_ticker
         ;;
         
     *"Record Area"*)
@@ -118,7 +135,7 @@ case "$CHOICE" in
             exit 1
         fi
         
-        GEOM=$(slurp 2>/dev/null)
+        GEOM=$(slurp 2>/dev/null || true)
         if [ -z "$GEOM" ]; then
             notify-send "Recording Cancelled" "No area selected."
             exit 0
@@ -140,8 +157,8 @@ case "$CHOICE" in
         # Notify
         notify-send -t 4000 "Recording Started" "Recording selected area.\nClick the Waybar indicator or press SUPER+SHIFT+S to stop."
         
-        # Force refresh Waybar
-        pkill -RTMIN+8 waybar || true
+        # Start 1s Waybar timer ticker for duration of recording
+        start_waybar_ticker
         ;;
         
     *)

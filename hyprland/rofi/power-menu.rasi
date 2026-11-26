@@ -3,25 +3,19 @@
    Uses 8-digit hex (#rrggbbaa) — required for Rofi 2.0
    ──────────────────────────────────────────────────────────── */
 
+@import "colors.rasi"
+
 * {
     font:             "JetBrainsMono Nerd Font Bold 12";
     background-color: transparent;
-    text-color:       #ffffff;
-
-    /* ── colour tokens ── */
-    bg-base:          #020e0ad9;       /* glass background, 45% opaque  */
-    accent:           #34d399ff;       /* neon teal, full opaque   */
-    accent-dim:       #34d39912;       /* teal tint  ~4%           */
-    accent-mid:       #34d3994d;       /* teal tint ~18%           */
-    accent-hover:     #34d39980;       /* teal tint ~30%           */
-    border-subtle:    #34d39933;       /* subtle border ~20%       */
+    text-color:       @fg-main;
 }
 
 window {
     transparency:     "real";
-    background-color: @bg-base;
+    background-color: @bg-base-solid;
     border:           1px solid;
-    border-color:     @accent-mid;
+    border-color:     @accent-soft;
     border-radius:    22px;
     width:            220px;
     location:         center;
@@ -54,7 +48,7 @@ element {
     background-color: @accent-dim;
     border:           1px solid;
     border-color:     @border-subtle;
-    text-color:       #ffffff;
+    text-color:       @fg-main;
     border-radius:    8px;
     padding:          9px 14px;
     cursor:           pointer;
@@ -70,17 +64,17 @@ element-text {
 
 element normal.normal {
     background-color: @accent-dim;
-    text-color:       #ffffff;
+    text-color:       @fg-main;
 }
 
 element alternate.normal {
     background-color: @accent-dim;
-    text-color:       #ffffff;
+    text-color:       @fg-main;
 }
 
 element selected.normal {
     background-color: @accent;
-    text-color:       #021a12ff;
+    text-color:       @selected-fg;
     border:           1px solid;
     border-color:     @accent;
 }

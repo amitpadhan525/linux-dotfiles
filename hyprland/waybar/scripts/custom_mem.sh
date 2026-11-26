@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Load dynamic theme colors if available
+COLORS_FILE="$HOME/.config/hypr/colors.sh"
+if [ -f "$COLORS_FILE" ]; then
+    # shellcheck source=/dev/null
+    source "$COLORS_FILE"
+fi
+ACCENT_HEX="${accent:-#34d399}"
+FAIL_HEX="${fail_color:-#f87171}"
+
 # RAM
 mem_info=$(free -m)
 total=$(echo "$mem_info" | awk '/Mem:/ {print $2}')
@@ -19,10 +28,10 @@ zr_size=$(echo "$swap_info" | awk '$2=="partition" {printf "%.0f", $3/1073741824
 
 # RAM color & class
 if (( percentage >= 80 )); then
-    ram_color="#f87171"
+    ram_color="$FAIL_HEX"
     mem_class="hot"
 else
-    ram_color="#00ffb3"
+    ram_color="$ACCENT_HEX"
     mem_class="normal"
 fi
 
@@ -36,9 +45,9 @@ for i in "${!procs[@]}"; do
     mb=$(( rss / 1024 ))
     rank=$((i + 1))
 
-    if (( mb >= 500 )); then mb_color="#f87171"
+    if (( mb >= 500 )); then mb_color="$FAIL_HEX"
     elif (( mb >= 150 )); then mb_color="#fde047"
-    else mb_color="#00ffb3"; fi
+    else mb_color="$ACCENT_HEX"; fi
 
     if (( mb >= 1000 )); then
         gb10=$(( (mb * 10) / 1024 ))

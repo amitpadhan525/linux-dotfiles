@@ -24,6 +24,9 @@ case "$action" in
     volume_mute)
         pamixer -t
         ;;
+    mic_mute)
+        pamixer --default-source -t
+        ;;
     brightness_up)
         brightnessctl -q set +5%
         ;;
@@ -88,4 +91,16 @@ elif [[ "$action" == brightness_* ]]; then
     bar=$(generate_bar "$val")
 
     notify-send -a "OSD" -h string:x-canonical-private-synchronous:brightness -h string:x-dunst-stack-tag:brightness -t 2500 "$title" "$bar"
+
+elif [[ "$action" == "mic_mute" ]]; then
+    mute=$(pamixer --default-source --get-mute 2>/dev/null || echo "false")
+    if [ "$mute" = "true" ]; then
+        title="  Microphone: Muted"
+        bar="<span foreground=\"$FAIL_COLOR\">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>"
+    else
+        title="  Microphone: Unmuted"
+        bar="<span foreground=\"$ACCENT_COLOR\">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>"
+    fi
+
+    notify-send -a "OSD" -h string:x-canonical-private-synchronous:mic -h string:x-dunst-stack-tag:mic -t 2500 "$title" "$bar"
 fi

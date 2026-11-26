@@ -3,14 +3,19 @@
 # Dual Wallpaper launcher (Desktop & Hyprlock) - Portable Dotfiles
 # ----------------------------------------------------- 
 
-DEFAULT_DESKTOP="\$HOME/.config/hypr/wallpapers/desktop_wallpaper.png"
-DEFAULT_LOCKSCREEN="\$HOME/.config/hypr/wallpapers/lockscreen_wallpaper.jpg"
+DEFAULT_DESKTOP="$HOME/.config/hypr/wallpapers/desktop_wallpaper.png"
+DEFAULT_LOCKSCREEN="$HOME/.config/hypr/wallpapers/lockscreen_wallpaper.jpg"
 
 STATE_DESKTOP="$HOME/.config/hypr/.current_wallpaper"
 STATE_LOCKSCREEN="$HOME/.config/hypr/.current_lockscreen"
 
 CONF="$HOME/.config/hypr/hyprpaper.conf"
 LOG="$HOME/.config/hypr/logs/hyprpaper.log"
+
+expand_portable_path() {
+    local raw="$1"
+    echo "${raw/#\$HOME/$HOME}"
+}
 
 exec > "$LOG" 2>&1
 echo "--- Wallpaper launcher started: $(date) ---"
@@ -53,13 +58,13 @@ fi
 
 # 1. Read System Desktop Wallpaper
 if [ -f "$STATE_DESKTOP" ]; then
-    RAW_DESKTOP=$(cat "$STATE_DESKTOP" | tr -d '\r\n')
-    eval DESKTOP_WP="$RAW_DESKTOP"
+    RAW_DESKTOP=$(tr -d '\r\n' < "$STATE_DESKTOP")
+    DESKTOP_WP=$(expand_portable_path "$RAW_DESKTOP")
     if [ ! -f "$DESKTOP_WP" ]; then
-        eval DESKTOP_WP="$DEFAULT_DESKTOP"
+        DESKTOP_WP="$DEFAULT_DESKTOP"
     fi
 else
-    eval DESKTOP_WP="$DEFAULT_DESKTOP"
+    DESKTOP_WP="$DEFAULT_DESKTOP"
 fi
 
 if [ ! -f "$DESKTOP_WP" ]; then
@@ -68,20 +73,20 @@ if [ ! -f "$DESKTOP_WP" ]; then
     elif [ -f "$HOME/Pictures/background/theme1/wallpaper/wallpaper.jpg" ]; then
         cp "$HOME/Pictures/background/theme1/wallpaper/wallpaper.jpg" "$HOME/.config/hypr/wallpapers/desktop_wallpaper.png"
     fi
-    eval DESKTOP_WP="$DEFAULT_DESKTOP"
+    DESKTOP_WP="$DEFAULT_DESKTOP"
 fi
 save_portable_path "$DESKTOP_WP" "$STATE_DESKTOP"
 
 # 2. Read Hyprlock Wallpaper
 if [ -f "$STATE_LOCKSCREEN" ]; then
-    RAW_LOCK=$(cat "$STATE_LOCKSCREEN" | tr -d '\r\n')
-    eval LOCK_WP="$RAW_LOCK"
+    RAW_LOCK=$(tr -d '\r\n' < "$STATE_LOCKSCREEN")
+    LOCK_WP=$(expand_portable_path "$RAW_LOCK")
     if [ ! -f "$LOCK_WP" ]; then
-        eval LOCK_WP="$DEFAULT_LOCKSCREEN"
+        LOCK_WP="$DEFAULT_LOCKSCREEN"
         save_portable_path "$LOCK_WP" "$STATE_LOCKSCREEN"
     fi
 else
-    eval LOCK_WP="$DEFAULT_LOCKSCREEN"
+    LOCK_WP="$DEFAULT_LOCKSCREEN"
     save_portable_path "$LOCK_WP" "$STATE_LOCKSCREEN"
 fi
 
@@ -118,4 +123,6 @@ else
     echo "ERROR: hyprpaper failed to stay alive."
 fi
 
-date >> "$HOME/.config/hypr/logs/wallpaper_script.log"
+WLOG="$HOME/.config/hypr/logs/wallpaper_script.log"
+[ -f "$WLOG" ] && [ "$(wc -l < "$WLOG" 2>/dev/null || echo 0)" -gt 300 ] && tail -n 100 "$WLOG" > "$WLOG.tmp" && mv "$WLOG.tmp" "$WLOG"
+date >> "$WLOG"

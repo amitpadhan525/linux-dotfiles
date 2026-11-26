@@ -15,19 +15,10 @@ configuration {
     window-format:              "{w} · {c} · {t}";
 }
 
+@import "colors.rasi"
+
 * {
     font:                        "JetBrainsMono Nerd Font Bold 12";
-
-    /* ── Colour Tokens ── */
-    bg-base:                     #020e0aa6;    /* opaque background */
-    bg-alt:                      #ffffff14;    /* soft white sheen for search bar */
-    fg-main:                     #ffffffff;   /* crisp white              */
-    fg-dim:                      #a7f3d099;    /* clean gray               */
-    accent:                      #34d399ff;    /* neon teal                */
-    accent-dim:                  #34d39912;    /* teal tint ~4%            */
-    accent-mid:                  #34d399b3;    /* teal tint ~70% (matching Dunst notification border) */
-    border-subtle:               #34d39933;    /* teal border ~20%         */
-    urgent:                      #f38ba8ff;    /* red for urgent           */
 
     background-color:            transparent;
     text-color:                  @fg-main;
@@ -114,9 +105,8 @@ element alternate.normal {
 
 element selected.normal {
     background-color:            @accent;
-    border-color:                @accent;
-    text-color:                  #021a12ff;
-    border-color:                #6ee7b7ff;
+    border-color:                @accent-two;
+    text-color:                  @selected-fg;
 }
 
 element-icon {

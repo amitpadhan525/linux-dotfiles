@@ -61,15 +61,15 @@ F. HYPRLOCK LOCK SCREEN
    * Styling Configurations (~/.config/hypr/hyprlock.conf):
      - Customized clock spacing using tight Pango text padding markup.
      - Password text input dots size optimized to perfectly match system aesthetic constraints.
-     - Integrated a dynamic glassmorphic battery status capsule driven by a custom monitoring shell script (`~/.config/hypr/scripts/battery.sh`).
+     - Reads battery status directly from `/sys/class/power_supply/BAT0` (desktop notifications are handled by `~/.config/hypr/scripts/battery-notification.sh`).
 
 G. HYPRPAPER WALLPAPER DAEMON
    * Purpose: Native utility to pre-load and swap desktop screen wallpaper canvases.
    * Requirements: Requires `~/.config/hypr/hyprpaper.conf` to preload background images on compositor startup.
 
-H. DUNST NOTIFICATION DAEMON (v1.13+)
-   * Purpose: Lightweight, highly customizable notification daemon.
-   * Note: Active notification daemon (replaces `mako` and `swaync`). Autostarted inside `conf/autostart.lua`.
+H. MAKO NOTIFICATION DAEMON
+   * Purpose: Lightweight Wayland notification daemon.
+   * Note: Active notification daemon configured in `~/.config/mako/config` and autostarted inside `conf/autostart.lua`.
 
 I. POLICYKIT (POLKIT) AUTHENTICATION AGENT (hyprpolkitagent)
    * Purpose: Handles privilege elevation requests for GUI applications.
@@ -123,9 +123,8 @@ C. Inter Font Family
 ================================================================================
 
 * Python 3.x is required as the core script runtime executor.
-* Core Helper: `recording_status.py` (~/.config/waybar/scripts/recording_status.py)
-  - Fetches active User ID directly from the Linux Kernel via `os.getuid()` to dynamically monitor active `wf-recorder` processes.
-  - Measures duration by comparing epoch timestamp of `/tmp/wf-recorder.pid`.
+* Core Helper: `recording_status.sh` (~/.config/waybar/scripts/recording_status.sh)
+  - Lightweight bash script that monitors `/tmp/wf-recorder.pid` and formats elapsed recording duration via `kill -0` and `stat`.
 
 ================================================================================
 5. SYSTEM STATE FLOWS & SCRIPT INTEGRATIONS
@@ -143,14 +142,14 @@ A. KEYBINDING TRIGGERS:
 ================================================================================
 
 A. INSTALL ALL REQUIRED PACKAGES:
-   `sudo pacman -S hyprland waybar kitty hyprlock hyprpaper wf-recorder slurp grim libnotify ttf-jetbrains-mono-nerd rofi wl-clipboard cliphist pamixer brightnessctl hyprsunset dunst hyprpolkitagent`
+   `sudo pacman -S hyprland waybar kitty hyprlock hyprpaper wf-recorder slurp grim libnotify ttf-jetbrains-mono-nerd rofi wl-clipboard cliphist pamixer brightnessctl hyprsunset mako hyprpolkitagent`
 
 B. ENSURE SCRIPTS ARE FULLY EXECUTABLE:
    `chmod +x ~/.config/hypr/scripts/screen_record.sh`
    `chmod +x ~/.config/hypr/scripts/battery-notification.sh`
    `chmod +x ~/.config/hypr/scripts/device-notifier.sh`
    `chmod +x ~/.config/hypr/scripts/clipboard-daemon.sh`
-   `chmod +x ~/.config/waybar/scripts/recording_status.py`
+   `chmod +x ~/.config/waybar/scripts/recording_status.sh`
 
 C. APPLY THE LUA CONFIGURATION:
    - Reload Hyprland configuration: Press `SUPER + R` (or run `hyprctl reload`)

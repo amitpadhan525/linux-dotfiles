@@ -12,9 +12,7 @@ local function autostart()
     hl.exec_cmd(home .. "/.config/hypr/scripts/wallpaper.sh &")
 
     local system_apps = {
-        { name = "waybar", path = "waybar" },
         { name = "mako", path = "mako" },
-        { name = "nm-applet", path = "nm-applet" },
         { name = "hyprpolkitagent", path = "/usr/lib/hyprpolkitagent/hyprpolkitagent" }
     }
 
